@@ -1,8 +1,31 @@
-import Vue from "vue";
-import App from "./App.vue";
-
-Vue.config.productionTip = false;
-
-new Vue({
-  render: h => h(App)
-}).$mount("#app");
+export { default as TCButton } from '@/components/button/TC-Button.vue';
+export { default as TCCard } from '@/components/card/TC-Card.vue';
+export { default as TCCheckbox } from '@/components/checkbox/TC-Checkbox.vue';
+export { default as TCDivider } from '@/components/divider/TC-Divider.vue';
+export { default as TCHeader } from '@/components/header/TC-Header.vue';
+export { default as TCHeadline } from '@/components/headline/TC-Headline.vue';
+export { default as TCHero } from '@/components/hero/TC-Hero.vue';
+export { default as TCImage } from '@/components/image/TC-Image.vue';
+export { default as TCInput } from '@/components/input/TC-Input.vue';
+export { default as TCLink } from '@/components/link/TC-Link.vue';
+export { default as TCModal } from '@/components/modal/TC-Modal.vue';
+export { default as TCNavbarItem } from '@/components/navbar/TC-Navbar-Item.vue';
+export { default as TCNavbar } from '@/components/navbar/TC-Navbar.vue';
+export { default as TCPicker } from '@/components/picker/TC-Picker.vue';
+export { default as TCPreview } from '@/components/preview/TC-Preview.vue';
+export { default as TCProgress } from '@/components/progress/TC-Progress.vue';
+export { default as TCQuote } from '@/components/quote/TC-Quote.vue';
+export { default as TCRevealer } from '@/components/revealer/TC-Revealer.vue';
+export { default as TCScrollUp } from '@/components/scrollup/TC-Scroll-Up.vue';
+export { default as TCSegments } from '@/components/segments/TC-Segments.vue';
+export { default as TCSelect } from '@/components/select/TC-Select.vue';
+export { default as TCSidebarItem } from '@/components/sidebar/TC-Sidebar-Item.vue';
+export { default as TCSidebar } from '@/components/sidebar/TC-Sidebar.vue';
+export { default as TCSlider } from '@/components/slider/TC-Slider.vue';
+export { default as TCSpinner } from '@/components/spinner/TC-Spinner.vue';
+export { default as TCSwitch } from '@/components/switch/TC-Switch.vue';
+export { default as TCTabbarItem } from '@/components/tabbar/TC-Tabbar-Item.vue';
+export { default as TCTabbar } from '@/components/tabbar/TC-Tabbar.vue';
+export { default as TCTable } from '@/components/table/TC-Table.vue';
+export { default as TCTooltip } from '@/components/tooltip/TC-Tooltip.vue';
+export { default as TCGrid } from '@/components/_layout/grid/TC-Grid.vue';

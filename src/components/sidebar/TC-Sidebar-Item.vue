@@ -1,0 +1,49 @@
+<template>
+  <router-link :to="to" class="tc-sidebar--item" :class="{ active: active }">
+    <div class="icon"><i v-if="icon" :class="'ti-' + icon"></i></div>
+    <div class="name">{{ name }}</div>
+  </router-link>
+</template>
+<script lang="ts">
+import { Vue, Component, Prop } from 'vue-property-decorator';
+
+@Component
+export default class TCSidebarItem extends Vue {
+  @Prop({ default: '_blank' }) to!: string | object;
+  @Prop() name!: string;
+  @Prop() icon!: string;
+  @Prop() active!: boolean;
+}
+</script>
+<style lang="scss" scoped>
+@import '../../variables';
+.tc-sidebar--item {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  color: inherit;
+  opacity: 0.6;
+  transition: 0.2s ease-in-out;
+  padding: 5px {
+    right: 0;
+  }
+  cursor: pointer;
+  &:hover {
+    color: $primary;
+  }
+
+  &.active,
+  &.router-link-exact-active {
+    opacity: 1;
+    color: $primary;
+    border-right: 4px solid $primary;
+  }
+  display: flex;
+  .icon {
+    min-width: 30px;
+  }
+  .name {
+    white-space: nowrap;
+  }
+}
+</style>
