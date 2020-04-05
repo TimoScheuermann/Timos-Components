@@ -7,17 +7,15 @@
   </router-link>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop } from "vue-property-decorator";
 @Component
 export default class TCNavbarItem extends Vue {
-  @Prop({ default: '_blank' }) to!: string | object;
+  @Prop({ default: "_blank" }) to!: string | object;
   @Prop() name!: string;
   @Prop() icon!: string;
 }
 </script>
 <style lang="scss" scoped>
-@import '../../variables';
-
 .tc-navbar-item {
   color: inherit;
   display: block;
@@ -34,7 +32,7 @@ export default class TCNavbarItem extends Vue {
 
   &::after {
     position: absolute;
-    content: '';
+    content: "";
     bottom: -3px;
     height: 1px;
     left: 0;

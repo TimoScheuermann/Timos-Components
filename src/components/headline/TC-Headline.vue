@@ -13,7 +13,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop } from "vue-property-decorator";
 @Component
 export default class TCHeadline extends Vue {
   @Prop() title!: string;
@@ -21,7 +21,6 @@ export default class TCHeadline extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-@import '../../variables';
 .tc-headline {
   display: flex;
   padding: 0 20px;

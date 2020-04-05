@@ -16,7 +16,7 @@
       :class="{
         'tc-card--subtitle__withoutContent': !(
           usedSlots.includes('default') || usedSlots.includes('media')
-        ),
+        )
       }"
     >
       {{ subtitle }}
@@ -29,7 +29,7 @@
       :class="{
         'tc-card--content__hasMedia': usedSlots.includes('media'),
         'tc-card--content__hasTitle':
-          usedSlots.includes('title') || title || subtitle,
+          usedSlots.includes('title') || title || subtitle
       }"
       v-if="usedSlots.includes('default')"
     >
@@ -38,15 +38,15 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
-import TCButton from '../button/TC-Button.vue';
-import TCComponent from '../tccomponent.vue';
+import { Vue, Component, Prop } from "vue-property-decorator";
+import TCButton from "../button/TC-Button.vue";
+import TCComponent from "../tccomponent.vue";
 
 @Component({
   components: {
-    'tc-button': TCButton,
+    "tc-button": TCButton
   },
-  mixins: [TCComponent],
+  mixins: [TCComponent]
 })
 export default class TCCard extends Vue {
   @Prop() title!: string;
@@ -59,18 +59,16 @@ export default class TCCard extends Vue {
 
   get classes() {
     return {
-      'tc-card__frosted': this.frosted,
-      'tc-card__shadow': this.shadow,
-      'tc-card__rounded': this.rounded,
-      'tc-card__hover': this.hover,
-      'tc-card__dark': this.dark,
+      "tc-card__frosted": this.frosted,
+      "tc-card__shadow": this.shadow,
+      "tc-card__rounded": this.rounded,
+      "tc-card__hover": this.hover,
+      "tc-card__dark": this.dark
     };
   }
 }
 </script>
 <style lang="scss" scoped>
-@import '../../variables';
-@import '../../mixins';
 .fun {
   background: #000;
   color: #fff;

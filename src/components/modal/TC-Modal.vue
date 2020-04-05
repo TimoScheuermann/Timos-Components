@@ -26,12 +26,12 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
-import './swipe-events.js';
-import uuidVue from '../uuid.vue';
+import { Vue, Component, Prop, Watch } from "vue-property-decorator";
+import "./swipe-events.js";
+import uuidVue from "../uuid.vue";
 
 @Component({
-  mixins: [uuidVue],
+  mixins: [uuidVue]
 })
 export default class TCModal extends Vue {
   @Prop() title!: string;
@@ -41,13 +41,13 @@ export default class TCModal extends Vue {
   public bodyOverflowBefore: string | null = document.body.style.overflow;
   public uuid!: string;
   public opened: boolean = this.value;
-  public id: string = 'modal_' + this.uuid + '_head';
+  public id: string = "modal_" + this.uuid + "_head";
 
-  @Watch('value')
+  @Watch("value")
   changed(updated: any, old: any) {
     this.opened = updated;
     document.body.style.overflow = this.opened
-      ? 'hidden'
+      ? "hidden"
       : this.bodyOverflowBefore!;
     if (this.opened) {
       document.getElementById(this.id)!.focus();
@@ -55,7 +55,7 @@ export default class TCModal extends Vue {
   }
 
   mounted() {
-    document.getElementById(this.id)!.addEventListener('swiped-down', (e) => {
+    document.getElementById(this.id)!.addEventListener("swiped-down", e => {
       this.close();
     });
   }
@@ -65,13 +65,11 @@ export default class TCModal extends Vue {
     this.update();
   }
   update() {
-    this.$emit('input', this.opened);
+    this.$emit("input", this.opened);
   }
 }
 </script>
 <style lang="scss" scoped>
-@import '../../variables';
-
 .tc-modal {
   position: fixed;
   z-index: 1000;

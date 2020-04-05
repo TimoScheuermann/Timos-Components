@@ -5,18 +5,17 @@
   </router-link>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class TCSidebarItem extends Vue {
-  @Prop({ default: '_blank' }) to!: string | object;
+  @Prop({ default: "_blank" }) to!: string | object;
   @Prop() name!: string;
   @Prop() icon!: string;
   @Prop() active!: boolean;
 }
 </script>
 <style lang="scss" scoped>
-@import '../../variables';
 .tc-sidebar--item {
   display: flex;
   align-items: center;

@@ -14,22 +14,21 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
-import uuidVue from '../uuid.vue';
+import { Vue, Component, Prop } from "vue-property-decorator";
+import uuidVue from "../uuid.vue";
 @Component({
-  mixins: [uuidVue],
+  mixins: [uuidVue]
 })
 export default class TCSwitch extends Vue {
   @Prop({ default: false }) value!: boolean;
 
   toggled: boolean = this.value;
   updateVal() {
-    this.$emit('input', !this.toggled);
+    this.$emit("input", !this.toggled);
   }
 }
 </script>
 <style lang="scss" scoped>
-@import '../../variables';
 .tc-switch {
   user-select: none;
   $ballSize: 21;

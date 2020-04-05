@@ -11,7 +11,7 @@
       :for="'tc-checkbox_' + uuid"
       :class="{
         'tc-checkbox--label__left': position !== 'right',
-        'tc-checkbox--label__right': position === 'right',
+        'tc-checkbox--label__right': position === 'right'
       }"
     >
       <transition-group
@@ -50,10 +50,10 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
-import uuid from '../uuid.vue';
+import { Vue, Component, Prop } from "vue-property-decorator";
+import uuid from "../uuid.vue";
 @Component({
-  mixins: [uuid],
+  mixins: [uuid]
 })
 export default class TCCheckbox extends Vue {
   @Prop({ default: false }) value!: boolean;
@@ -64,7 +64,7 @@ export default class TCCheckbox extends Vue {
   @Prop() iconUnchecked!: string;
   @Prop() iconAnimation!: string;
 
-  public animations: string[] = ['scroll', 'spin', 'flip'];
+  public animations: string[] = ["scroll", "spin", "flip"];
   get animationName(): string {
     if (!this.iconAnimation) return this.animations[0];
     if (this.animations.includes(this.iconAnimation.toLowerCase())) {
@@ -83,14 +83,12 @@ export default class TCCheckbox extends Vue {
 
   checked: boolean = this.value;
   updateVal() {
-    this.$emit('input', !this.checked);
+    this.$emit("input", !this.checked);
   }
 }
 </script>
 <style lang="scss" scoped>
-@import '../../variables';
-
-@import '../tc-container';
+@import "../tc-container";
 
 .icon-flip-move {
   transition: all 0.4s ease-in-out;

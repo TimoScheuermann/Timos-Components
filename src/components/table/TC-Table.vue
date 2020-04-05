@@ -8,12 +8,11 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import { Vue, Component } from "vue-property-decorator";
 @Component
 export default class TCTable extends Vue {}
 </script>
 <style lang="scss" scoped>
-@import '../../variables';
 .tc-table {
   .tableWrapper {
     max-width: 100%;

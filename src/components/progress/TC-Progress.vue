@@ -29,7 +29,7 @@
           'stroke-width': ringWidth + 'px',
           'stroke-dasharray': dasharray,
           'stroke-dashoffset': dashoffset,
-          stroke: color,
+          stroke: color
         }"
         :cx="ringSize / 2"
         :cy="ringSize / 2"
@@ -39,12 +39,12 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop } from "vue-property-decorator";
 @Component
 export default class TCProgress extends Vue {
   @Prop({ default: 0 }) percent!: number;
   @Prop({ default: 4 }) barHeight!: number;
-  @Prop({ default: 'bar' }) type!: string;
+  @Prop({ default: "bar" }) type!: string;
   @Prop({ default: 70 }) ringSize!: number;
   @Prop({ default: 8 }) ringWidth!: number;
   @Prop() color!: string;
@@ -69,8 +69,6 @@ export default class TCProgress extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-@import '../../variables';
-
 .tc-progress {
   &.tc-progress__ring {
     svg {

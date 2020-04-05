@@ -8,7 +8,7 @@
       :class="{
         'tc-input__buttons': buttonsVisible(),
         'tc-input__icon': icon,
-        'tc-input__disabled': disabled,
+        'tc-input__disabled': disabled
       }"
     >
       <div
@@ -56,7 +56,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop } from "vue-property-decorator";
 @Component
 export default class TCInputNew extends Vue {
   @Prop() icon!: string;
@@ -66,7 +66,7 @@ export default class TCInputNew extends Vue {
   @Prop() type!: string;
   @Prop() value!: any;
   @Prop() accept!: string;
-  @Prop() autocomplete!: 'on' | 'off';
+  @Prop() autocomplete!: "on" | "off";
   @Prop() autofocus!: boolean;
   @Prop() disabled!: boolean;
   @Prop() form!: string;
@@ -79,22 +79,22 @@ export default class TCInputNew extends Vue {
   @Prop() required!: boolean;
   @Prop({ default: 1 }) step!: number;
 
-  innerValue: any = this.value || this.type === 'number' ? 0 : '';
+  innerValue: any = this.value || this.type === "number" ? 0 : "";
 
   inputMode(): string {
-    return this.type == 'number' ? 'numeric' : '';
+    return this.type == "number" ? "numeric" : "";
   }
   inputPattern(): string {
     if (this.pattern) return this.pattern;
-    return this.type == 'number' ? '[0-9]*' : '';
+    return this.type == "number" ? "[0-9]*" : "";
   }
   buttonsVisible(): boolean {
-    return this.buttons && this.type === 'number';
+    return this.buttons && this.type === "number";
   }
 
   get style(): any {
     return {
-      background: this.type === 'color' ? this.innerValue : undefined,
+      background: this.type === "color" ? this.innerValue : undefined
     };
   }
 
@@ -104,13 +104,12 @@ export default class TCInputNew extends Vue {
   }
 
   update() {
-    this.$emit('input', this.innerValue);
+    this.$emit("input", this.innerValue);
   }
 }
 </script>
 <style lang="scss" scoped>
-@import '../../variables';
-@import '../tc-container';
+@import "../tc-container";
 $size: 30px;
 .tc-input {
   display: inline-block;
@@ -166,7 +165,7 @@ $size: 30px;
           margin: 0;
         }
         /* Firefox */
-        input[type='number'] {
+        input[type="number"] {
           -moz-appearance: textfield;
         }
       }

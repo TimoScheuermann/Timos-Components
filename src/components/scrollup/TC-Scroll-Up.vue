@@ -12,7 +12,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 @Component
 export default class TCScrollUp extends Vue {
   @Prop({ default: "arrow-up" }) icon!: string;
-  public visible: boolean = false;
+  public visible = false;
 
   created() {
     document.onscroll = () => {

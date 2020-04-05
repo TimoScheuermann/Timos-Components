@@ -10,17 +10,14 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
-import TCComponent from '../tccomponent.vue';
+import { Vue, Component, Prop } from "vue-property-decorator";
+import TCComponent from "../tccomponent.vue";
 @Component({
-  mixins: [TCComponent],
+  mixins: [TCComponent]
 })
 export default class TCTabbar extends Vue {}
 </script>
 <style lang="scss" scoped>
-@import '../../mixins';
-@import '../../variables';
-
 .tc-tabbar {
   &.dark {
     @include backdrop-blur($color);

@@ -15,20 +15,20 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
-import uuidVue from '../uuid.vue';
+import { Vue, Component, Prop } from "vue-property-decorator";
+import uuidVue from "../uuid.vue";
 @Component({
-  mixins: [uuidVue],
+  mixins: [uuidVue]
 })
 export default class TCPicker extends Vue {
   @Prop() multiple!: boolean;
   @Prop() value!: any | any[];
-  @Prop() values: any | any[] = ['A', 'B', 'C', 1, true];
+  @Prop() values: any | any[] = ["A", "B", "C", 1, true];
 
   currentlySelected: any | any[] = this.value;
 
   update(): void {
-    this.$emit('input', this.currentlySelected);
+    this.$emit("input", this.currentlySelected);
   }
 
   get title(): string {
@@ -37,8 +37,7 @@ export default class TCPicker extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-@import '../../variables';
-@import '../tc-container';
+@import "../tc-container";
 
 .tc-picker {
   display: inline-block;
