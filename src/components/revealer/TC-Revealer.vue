@@ -18,25 +18,24 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop } from "vue-property-decorator";
 
-import TCHeadline from '../headline/TC-Headline.vue';
-import uuid from '../uuid.vue';
+import TCHeadline from "../headline/TC-Headline.vue";
+import uuid from "../uuid.vue";
 @Component({
   components: {
-    'tc-headline': TCHeadline,
+    "tc-headline": TCHeadline
   },
-  mixins: [uuid],
+  mixins: [uuid]
 })
 export default class TCRevealer extends Vue {
-  @Prop({ default: 'Revealer', type: String }) title!: string;
+  @Prop({ default: "Revealer", type: String }) title!: string;
   @Prop() icon!: string;
   uuid!: number;
-  id: string = 'tc-revealer_' + this.uuid;
+  id: string = "tc-revealer_" + this.uuid;
 }
 </script>
 <style lang="scss" scoped>
-@import '../../variables';
 .tc-revealer {
   & > input {
     display: none;

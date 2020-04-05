@@ -13,15 +13,14 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
-import TCComponent from '../tccomponent.vue';
+import { Vue, Component, Prop } from "vue-property-decorator";
+import TCComponent from "../tccomponent.vue";
 @Component({
-  mixins: [TCComponent],
+  mixins: [TCComponent]
 })
 export default class TCSidebar extends Vue {}
 </script>
 <style lang="scss" scoped>
-@import '../../variables';
 .tc-sidebar {
   background: $background;
   color: $color;

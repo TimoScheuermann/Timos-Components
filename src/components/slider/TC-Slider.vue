@@ -12,7 +12,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop } from "vue-property-decorator";
 @Component
 export default class TCSlider extends Vue {
   @Prop({ default: 0 }) min!: number;
@@ -24,12 +24,11 @@ export default class TCSlider extends Vue {
   public data: number = this.value;
 
   public updateVal() {
-    this.$emit('input', this.data);
+    this.$emit("input", this.data);
   }
 }
 </script>
 <style lang="scss" scoped>
-@import '../../variables';
 .tc-slider {
   display: flex;
   justify-content: center;

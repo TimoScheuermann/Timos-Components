@@ -18,9 +18,9 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
-import projects from '@/projects';
-import uuidVue from '../uuid.vue';
+import { Vue, Component, Prop } from "vue-property-decorator";
+import projects from "@/projects";
+import uuidVue from "../uuid.vue";
 
 @Component
 export default class TCImage extends Vue {
@@ -29,7 +29,6 @@ export default class TCImage extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-@import '../../variables';
 .tc-image {
   display: inline-block;
   user-select: none;

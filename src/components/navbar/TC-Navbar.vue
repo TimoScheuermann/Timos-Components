@@ -3,7 +3,7 @@
     class="tc-navbar"
     :class="{
       'tc-navbar__dark': dark,
-      'tc-navbar__light': !dark,
+      'tc-navbar__light': !dark
     }"
     :style="defaultStyle"
   >
@@ -34,10 +34,10 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Watch } from 'vue-property-decorator';
-import TCComponent from '../tccomponent.vue';
+import { Vue, Component, Watch } from "vue-property-decorator";
+import TCComponent from "../tccomponent.vue";
 @Component({
-  mixins: [TCComponent],
+  mixins: [TCComponent]
 })
 export default class TCNavbar extends Vue {
   expanded = false;
@@ -47,21 +47,18 @@ export default class TCNavbar extends Vue {
     this.expanded = !this.expanded;
   }
 
-  @Watch('expanded')
+  @Watch("expanded")
   expandedChanged(to: any, from: any) {
-    document.body.style.overflow = to ? 'hidden' : this.bodyOverflowBefore!;
+    document.body.style.overflow = to ? "hidden" : this.bodyOverflowBefore!;
   }
 
-  @Watch('$route.name')
+  @Watch("$route.name")
   routeChanged(to: string, from: string) {
     this.expanded = false;
   }
 }
 </script>
 <style lang="scss" scoped>
-@import '../../mixins';
-@import '../../variables';
-
 .tc-navbar {
   &,
   [tc-flex] {

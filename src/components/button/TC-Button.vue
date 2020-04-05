@@ -9,8 +9,8 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
-import TCComponent from '../tccomponent.vue';
+import { Vue, Component, Prop } from "vue-property-decorator";
+import TCComponent from "../tccomponent.vue";
 
 @Component
 export default class TCButton extends Vue {
@@ -21,17 +21,17 @@ export default class TCButton extends Vue {
   @Prop() disabled!: boolean;
   @Prop() variant!: string;
 
-  public variants: string[] = ['opaque', 'border', 'filled'];
+  public variants: string[] = ["opaque", "border", "filled"];
 
   public getClasses(): any {
     const classes: any = {
-      'tc-button__withoutName': this.icon && !name,
-      'tc-button__disabled': this.disabled,
+      "tc-button__withoutName": this.icon && !name,
+      "tc-button__disabled": this.disabled
     };
     if (!this.variant || !this.variants.includes(this.variant.toLowerCase())) {
-      classes['tc-button__border'] = true;
+      classes["tc-button__border"] = true;
     } else {
-      classes['tc-button__' + this.variant.toLowerCase()] = true;
+      classes["tc-button__" + this.variant.toLowerCase()] = true;
     }
 
     return classes;
@@ -39,18 +39,17 @@ export default class TCButton extends Vue {
 
   public clicked(event: Event): void {
     if (!this.disabled) {
-      this.$emit('click', event);
+      this.$emit("click", event);
       if (this.to) {
         this.$router.push(this.to);
       } else if (this.href) {
-        window.open(this.href, '_blank');
+        window.open(this.href, "_blank");
       }
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-@import '../../variables';
 .tc-button {
   display: inline-block;
   text-align: center;
@@ -88,7 +87,7 @@ export default class TCButton extends Vue {
     position: relative;
     &::before {
       transition: inherit;
-      content: '';
+      content: "";
       border-radius: 2px;
       z-index: -1;
       position: absolute;

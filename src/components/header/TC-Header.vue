@@ -7,7 +7,7 @@
         @click="clicked($event)"
       >
         <i class="ti-arrow-left"></i>
-        <span>{{ backName || 'back' }}</span>
+        <span>{{ backName || "back" }}</span>
       </div>
       <div class="tc-header--title__prestyled" v-if="title">{{ title }}</div>
       <div class="tc-header--title" v-else>
@@ -43,19 +43,19 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
-import TCComponent from '../tccomponent.vue';
-import uuidVue from '../uuid.vue';
-import TCCheckbox from '../checkbox/TC-Checkbox.vue';
+import { Vue, Component, Prop } from "vue-property-decorator";
+import TCComponent from "../tccomponent.vue";
+import uuidVue from "../uuid.vue";
+import TCCheckbox from "../checkbox/TC-Checkbox.vue";
 @Component({
   mixins: [TCComponent, uuidVue],
   components: {
-    'tc-checkbox': TCCheckbox,
-  },
+    "tc-checkbox": TCCheckbox
+  }
 })
 export default class TCHeader extends Vue {
   @Prop() title!: string;
-  @Prop({ default: 'fixed' }) variant!: 'fixed' | 'floating' | 'sticky';
+  @Prop({ default: "fixed" }) variant!: "fixed" | "floating" | "sticky";
   @Prop({ default: 0 }) top!: number;
   @Prop() backTo!: any;
   @Prop() backHref!: string;
@@ -69,24 +69,24 @@ export default class TCHeader extends Vue {
   public itemCard = false;
 
   mounted() {
-    window.addEventListener('resize', this.resize);
+    window.addEventListener("resize", this.resize);
     this.resize();
   }
 
   beforeDestroy() {
-    window.removeEventListener('resize', this.resize);
+    window.removeEventListener("resize", this.resize);
   }
 
   public clicked(event: any): void {
-    this.$emit('click', event);
+    this.$emit("click", event);
     if (this.backTo) this.$router.push(this.backTo);
-    else if (this.backHref) window.open(this.backHref, '_blank');
+    else if (this.backHref) window.open(this.backHref, "_blank");
   }
 
   public resize(): void {
     this.itemsOverflow = false;
     setTimeout(() => {
-      const element = document.getElementById('tc-header--item_' + this.uuid)!;
+      const element = document.getElementById("tc-header--item_" + this.uuid)!;
       this.itemsOverflow =
         element.scrollHeight > element.clientHeight ||
         element.scrollWidth > element.clientWidth;
@@ -95,33 +95,30 @@ export default class TCHeader extends Vue {
 
   getClasses() {
     return {
-      'tc-header__dark': this.dark,
-      'tc-header__light': !this.dark,
-      'tc-header__fixed': !(
-        this.variant == 'floating' || this.variant == 'sticky'
+      "tc-header__dark": this.dark,
+      "tc-header__light": !this.dark,
+      "tc-header__fixed": !(
+        this.variant == "floating" || this.variant == "sticky"
       ),
-      'tc-header__sticky': this.variant == 'sticky',
-      'tc-header__floating': this.variant == 'floating',
+      "tc-header__sticky": this.variant == "sticky",
+      "tc-header__floating": this.variant == "floating"
     };
   }
   getStyles() {
     const style = this.defaultStyle;
-    style.top = (this.variant === 'floating' ? 40 : 0) + +this.top + 'px';
+    style.top = (this.variant === "floating" ? 40 : 0) + +this.top + "px";
     return style;
   }
 
   getOverflowStyle() {
     const style = this.defaultStyle;
     style.top =
-      'calc(env(safe-area-inset-top) + ' + (+(+this.top) + 50) + 'px)';
+      "calc(env(safe-area-inset-top) + " + (+(+this.top) + 50) + "px)";
     return style;
   }
 }
 </script>
 <style lang="scss" scoped>
-@import '../../mixins';
-@import '../../variables';
-
 .tc-header {
   user-select: none;
   box-shadow: $shadow;

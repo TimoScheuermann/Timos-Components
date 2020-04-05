@@ -23,7 +23,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop } from "vue-property-decorator";
 @Component
 export default class TCSegments extends Vue {
   @Prop() segments!: string[];
@@ -37,18 +37,17 @@ export default class TCSegments extends Vue {
   getBackgroundStyle(): any {
     return {
       width: `calc(${100 / this.segments.length}% - 10px)`,
-      left: `calc(5px + 100% / ${this.segments.length} * ${this.currentlySelected})`,
+      left: `calc(5px + 100% / ${this.segments.length} * ${this.currentlySelected})`
     };
   }
   getItemsStyle(): any {
     return {
-      gridTemplateColumns: `repeat(${this.segments.length}, 1fr)`,
+      gridTemplateColumns: `repeat(${this.segments.length}, 1fr)`
     };
   }
 }
 </script>
 <style lang="scss" scoped>
-@import '../../variables';
 .icon-trans-move {
   transition: all 0.4s ease-in-out;
 }

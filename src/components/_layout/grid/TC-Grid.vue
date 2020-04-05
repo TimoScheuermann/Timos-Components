@@ -4,14 +4,14 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop } from "vue-property-decorator";
 @Component
 export default class TCGrid extends Vue {
-  @Prop({ default: '300' }) minWidth!: string;
+  @Prop({ default: "300" }) minWidth!: string;
   get style() {
     return {
-      'grid-template-columns':
-        'repeat(auto-fill, minmax(' + this.minWidth + 'px, 1fr))',
+      "grid-template-columns":
+        "repeat(auto-fill, minmax(" + this.minWidth + "px, 1fr))"
     };
   }
 }

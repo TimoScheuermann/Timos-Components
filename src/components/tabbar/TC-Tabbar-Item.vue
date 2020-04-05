@@ -5,16 +5,15 @@
   </router-link>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop } from "vue-property-decorator";
 @Component
 export default class TCTabbarItem extends Vue {
-  @Prop({ default: 'house', type: String }) icon!: string;
-  @Prop({ default: 'Home', type: String }) title!: string;
-  @Prop({ default: 'home', type: String }) routeName!: string;
+  @Prop({ default: "house", type: String }) icon!: string;
+  @Prop({ default: "Home", type: String }) title!: string;
+  @Prop({ default: "home", type: String }) routeName!: string;
 }
 </script>
 <style lang="scss" scoped>
-@import '../../variables';
 .tc-tabbar--item {
   flex: 1 1 0px;
   display: flex;

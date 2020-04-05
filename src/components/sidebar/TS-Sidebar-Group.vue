@@ -20,30 +20,29 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
-import uuidVue from '../uuid.vue';
-import TCDivider from '../divider/TC-Divider.vue';
+import { Vue, Component, Prop } from "vue-property-decorator";
+import uuidVue from "../uuid.vue";
+import TCDivider from "../divider/TC-Divider.vue";
 @Component({
   mixins: [uuidVue],
   components: {
-    'tc-divider': TCDivider,
-  },
+    "tc-divider": TCDivider
+  }
 })
 export default class TCSidebarGroup extends Vue {
   @Prop() name!: string;
   @Prop() icon!: string;
-  @Prop({ default: '300px' }) maxHeight!: string;
+  @Prop({ default: "300px" }) maxHeight!: string;
 
   public expanded = true;
   get maxheight(): {} {
     return {
-      'max-height': this.expanded ? this.maxHeight : '0px',
+      "max-height": this.expanded ? this.maxHeight : "0px"
     };
   }
 }
 </script>
 <style lang="scss" scoped>
-@import '../../variables';
 .tc-sidebar--group {
   padding: 5px 0;
   .header {

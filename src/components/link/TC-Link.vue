@@ -18,19 +18,18 @@
   /></a>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop } from "vue-property-decorator";
 @Component
 export default class TCLink extends Vue {
   @Prop() to!: any;
   @Prop() href!: string;
 
   public clicked(event: any): void {
-    this.$emit('click', event);
+    this.$emit("click", event);
   }
 }
 </script>
 <style lang="scss" scoped>
-@import '../../variables';
 .tc-link {
   color: $primary;
   cursor: pointer;
@@ -40,7 +39,7 @@ export default class TCLink extends Vue {
   &::after {
     transition: 0.2s ease-in-out;
     position: absolute;
-    content: '';
+    content: "";
     bottom: 0;
     width: 0%;
     height: 1px;

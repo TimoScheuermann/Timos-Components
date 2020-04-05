@@ -5,7 +5,7 @@
     class="tc-preview"
     :class="{
       'tc-preview__dark': dark,
-      'tc-preview__light': !dark,
+      'tc-preview__light': !dark
     }"
     :style="{ background: background }"
   >
@@ -25,19 +25,18 @@
   </router-link>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
-import TCComponent from '../tccomponent.vue';
+import { Vue, Component, Prop } from "vue-property-decorator";
+import TCComponent from "../tccomponent.vue";
 @Component({
-  mixins: [TCComponent],
+  mixins: [TCComponent]
 })
 export default class TCPreview extends Vue {
-  @Prop({ default: '_blank' }) to!: any;
-  @Prop({ default: 'DHBW Richie' }) title!: string;
+  @Prop({ default: "_blank" }) to!: any;
+  @Prop({ default: "DHBW Richie" }) title!: string;
   @Prop() titleBackground!: string;
 }
 </script>
 <style lang="scss" scoped>
-@import '../../variables';
 .tc-preview {
   position: relative;
   cursor: pointer;
