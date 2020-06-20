@@ -1,5 +1,5 @@
 <template>
-  <div class="tc-input">
+  <div class="tc-input" :class="{ 'tc-input__dark': dark }">
     <div v-if="title" class="tc-input--title">
       {{ title }}
     </div>
@@ -22,9 +22,15 @@
         <i class="ti" :class="'ti-' + icon" />
       </div>
       <div class="tc-input--input">
+        <label
+          v-if="type && type.toLowerCase() === 'file'"
+          :for="'tc-input_' + uuid"
+        >
+          {{ filePlaceholder }}
+        </label>
         <input
           v-model="innerValue"
-          :type="type || 'text'"
+          :type="type ? type.toLowerCase() : 'text'"
           :id="'tc-input_' + uuid"
           :inputmode="inputMode()"
           :style="style"
@@ -39,10 +45,13 @@
           :maxlength="maxlength"
           :min="min"
           :minlength="minlength"
+          :multiple="multiple"
           :readonly="readonly"
           :required="required"
           :step="step"
+          :ref="'tc-input_' + uuid"
           @input="update()"
+          @change="change"
         />
       </div>
       <div
@@ -57,9 +66,14 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
-@Component
-export default class TCInputNew extends Vue {
+import uuidVue from "../uuid.vue";
+@Component({
+  mixins: [uuidVue]
+})
+export default class TCInput extends Vue {
   @Prop() icon!: string;
+  @Prop() dark!: boolean;
+  @Prop({ default: "Choose File" }) filePlaceholder!: string;
   @Prop() title!: string;
   @Prop() buttons!: boolean;
   @Prop() placeholder!: string;
@@ -74,12 +88,13 @@ export default class TCInputNew extends Vue {
   @Prop() maxlength!: number;
   @Prop() min!: number | string;
   @Prop() minlength!: number;
+  @Prop() multiple!: boolean;
   @Prop() pattern!: string;
   @Prop() readonly!: boolean;
   @Prop() required!: boolean;
   @Prop({ default: 1 }) step!: number;
 
-  innerValue: any = this.value || this.type === "number" ? 0 : "";
+  innerValue: any = this.value || (this.type === "number" ? 0 : "");
 
   inputMode(): string {
     return this.type == "number" ? "numeric" : "";
@@ -106,10 +121,20 @@ export default class TCInputNew extends Vue {
   update() {
     this.$emit("input", this.innerValue);
   }
+  change(changeEvent: Event) {
+    this.$emit("change", changeEvent);
+    const target: HTMLInputElement = changeEvent.target as HTMLInputElement;
+    const fileList: FileList = target.files as FileList;
+    const reader = new FileReader();
+    reader.onload = loaded => {
+      const loadTarget = loaded.target as FileReader;
+      this.$emit("fileLoaded", loadTarget.result);
+    };
+    if (fileList && fileList.length > 0) reader.readAsText(fileList[0]);
+  }
 }
 </script>
 <style lang="scss" scoped>
-@import "../tc-container";
 $size: 30px;
 .tc-input {
   display: inline-block;
@@ -121,6 +146,27 @@ $size: 30px;
     font-weight: bold;
     opacity: 0.8;
     margin-bottom: 3px;
+  }
+
+  &.tc-input__dark {
+    .tc-input--title {
+      color: #fff;
+    }
+    .tc-input--container,
+    .tc-input--input input,
+    .tc-input--input label {
+      background: lighten($color, 20%);
+      color: #fff;
+    }
+    .tc-input--icon i {
+      border-color: rgba(#fff, 0.5);
+    }
+    .tc-input--container {
+      border-color: rgba(#fff, 0.01);
+      &:not(.tc-input__disabled):hover {
+        border-color: rgba(#fff, 0.4);
+      }
+    }
   }
 
   .tc-input--container {
@@ -138,7 +184,7 @@ $size: 30px;
 
     justify-content: center; // iOS Purpose
     align-items: center; // iOS Purpose
-    width: 250px;
+    min-width: 100px;
     max-width: 100%;
     grid-template-columns: 1fr;
     overflow: hidden;
@@ -210,7 +256,18 @@ $size: 30px;
   .tc-input--input {
     min-width: 100px;
     margin: 0 5px;
-    input {
+    label {
+      cursor: pointer;
+    }
+    input,
+    label {
+      &[type="file"] {
+        position: fixed;
+        top: -200px;
+        left: 0;
+        z-index: -1;
+        opacity: 0;
+      }
       font: inherit;
       font-family: inherit;
       width: 100%;

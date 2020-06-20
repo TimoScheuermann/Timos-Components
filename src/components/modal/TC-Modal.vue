@@ -1,5 +1,8 @@
 <template>
-  <div class="tc-modal" :class="{ 'tc-modal__opened': opened }">
+  <div
+    class="tc-modal"
+    :class="{ 'tc-modal__opened': opened, 'tc-modal__dark': dark }"
+  >
     <div class="tc-modal--background" @click="close()"></div>
     <div class="tc-modal--container">
       <div class="container--close" @click="close()">
@@ -37,10 +40,11 @@ export default class TCModal extends Vue {
   @Prop() title!: string;
   @Prop() subtitle!: string;
   @Prop() value!: boolean;
+  @Prop() dark!: boolean;
 
   public bodyOverflowBefore: string | null = document.body.style.overflow;
   public uuid!: string;
-  public opened: boolean = this.value;
+  public opened = this.value;
   public id: string = "modal_" + this.uuid + "_head";
 
   @Watch("value")
@@ -137,6 +141,12 @@ export default class TCModal extends Vue {
       right: 0;
       bottom: 0;
       background: rgba(0, 0, 0, 0.84);
+    }
+  }
+  &.tc-modal__dark {
+    .tc-modal--container {
+      background: $color;
+      color: #fff;
     }
   }
   .tc-modal--container {

@@ -1,115 +1,114 @@
 <template>
-  <div class="tc-image">
-    <div class="tc-image--small" @click="expanded = true">
-      <img :src="src" />
-    </div>
-    <div
-      class="tc-image--expanded"
-      @click="expanded = false"
-      :class="{ visible: expanded }"
-    >
-      <div class="tc-image--background">
-        <div class="background--close" @click="expanded = false">
-          <i class="ti-cross" />
-        </div>
-      </div>
-      <img :src="src" alt="" />
-    </div>
-  </div>
+  <img class="tc-image" :src="src" @click="expand()" />
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from "vue-property-decorator";
-import projects from "@/projects";
+import { Vue, Component, Prop, Watch } from "vue-property-decorator";
 import uuidVue from "../uuid.vue";
 
 @Component
 export default class TCImage extends Vue {
   @Prop() src!: string;
   expanded = false;
+
+  background: HTMLElement = document.createElement("div");
+  close: HTMLElement = document.createElement("div");
+  img: HTMLImageElement = document.createElement("img");
+
+  @Watch("src")
+  srcChanged(): void {
+    this.img.src = this.src;
+  }
+
+  mounted() {
+    this.background.setAttribute("class", "tc-image--expanded");
+    this.close.innerHTML = "<i class='ti-cross' />";
+    this.background.addEventListener("click", e => {
+      e.stopPropagation();
+      this.shrink();
+    });
+    this.close.addEventListener("click", () => {
+      this.shrink();
+    });
+    this.img.addEventListener("click", e => {
+      e.stopPropagation();
+    });
+    this.img.src = this.src;
+    this.background.appendChild(this.close);
+    this.background.appendChild(this.img);
+    document.body.appendChild(this.background);
+  }
+  beforeDestroy() {
+    document.body.removeChild(this.background);
+  }
+
+  public expand(e: MouseEvent) {
+    this.background.setAttribute("expanded", "");
+  }
+  public shrink() {
+    this.background.removeAttribute("expanded");
+  }
 }
 </script>
 <style lang="scss" scoped>
 .tc-image {
-  display: inline-block;
-  user-select: none;
+  cursor: zoom-in;
+}
+</style>
+<style lang="scss">
+.tc-image--expanded {
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(black, 0.75);
 
-  img,
-  video {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(0);
+  opacity: 0;
+
+  transition: opacity 0.4s ease-in-out;
+  &[expanded] {
+    transition: opacity 0.4s ease-in-out;
+    transform: scale(1);
+    opacity: 1;
+    img {
+      transform: scale(1);
+      border-radius: 0px;
+    }
+  }
+
+  div {
+    $size: 30px;
+    position: absolute;
+    right: $size;
+    top: $size;
+    width: $size;
+    height: $size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    background: #fafafa;
+    color: #111;
+    opacity: 0.6;
     cursor: pointer;
-  }
-
-  .tc-image--small {
-    display: inline-block;
-    img,
-    video {
-      max-width: calc(
-        100% - env(safe-area-inset-left) - env(safe-area-inset-right)
-      );
-      max-height: calc(
-        100% - env(safe-area-inset-top) - env(safe-area-inset-bottom)
-      );
-    }
-  }
-  .tc-image--expanded {
-    z-index: 10000;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    visibility: hidden;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    img,
-    video {
-      transition: 0.3s ease-in-out;
-      position: relative;
-      // max-width: 80vw;
-      // max-height: 80vh;
-      width: 100vw;
-      height: 100vh;
-      object-fit: contain;
-    }
-
-    &.visible {
-      .tc-image--background {
-        position: fixed;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        top: 50%;
-        width: 100vw;
-        height: 100vh;
-        background: #000;
-        .background--close {
-          height: 30px;
-          width: 30px;
-          position: fixed;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          right: calc(10px + env(safe-area-inset-right));
-          top: calc(10px + env(safe-area-inset-top));
-          background: inherit;
-          color: #fff;
-          cursor: pointer;
-          i {
-            opacity: 0.7;
-            transition: 0.2s ease-in-out;
-          }
-          &:hover {
-            i {
-              opacity: 1;
-            }
-          }
-        }
-      }
-      img,
-      video {
-        max-width: 100vw;
-        max-height: 100vh;
-      }
-
-      visibility: visible;
+    z-index: 1000;
+    transition: 0.2s ease-in-out;
+    &:hover {
       opacity: 1;
     }
+  }
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    transform: scale(0);
+    border-radius: 10000000px;
+    transition: 0.2s ease-in-out 0.3s;
+    box-shadow: $shadow;
   }
 }
 </style>

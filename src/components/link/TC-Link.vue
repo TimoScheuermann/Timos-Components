@@ -36,6 +36,7 @@ export default class TCLink extends Vue {
   transition: 0.2s ease-in-out;
   position: relative;
   margin: 0 2px;
+  text-align: center;
   &::after {
     transition: 0.2s ease-in-out;
     position: absolute;

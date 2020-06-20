@@ -5,7 +5,7 @@
       <label :for="'groupExpand_' + uuid">
         <div class="title"><i :class="'ti-' + icon"></i>{{ name }}</div>
         <div class="expander">
-          <i class="ti-arrow-right"></i>
+          <i class="ti-chevron-right"></i>
         </div>
       </label>
     </div>

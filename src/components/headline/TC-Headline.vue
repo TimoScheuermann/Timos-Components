@@ -1,5 +1,5 @@
 <template>
-  <div class="tc-headline">
+  <div class="tc-headline" :class="{ 'tc-headline__dark': dark }">
     <div class="tc-headline--title__prestyled" v-if="title">
       <i v-if="icon" :class="'ti-' + icon"></i>{{ title }}
     </div>
@@ -18,6 +18,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 export default class TCHeadline extends Vue {
   @Prop() title!: string;
   @Prop() icon!: string;
+  @Prop() dark!: boolean;
 }
 </script>
 <style lang="scss" scoped>
@@ -29,6 +30,9 @@ export default class TCHeadline extends Vue {
   align-items: center;
   flex-wrap: wrap;
   position: relative;
+  &.tc-headline__dark {
+    color: #fff;
+  }
   .tc-headline--bar {
     position: absolute;
     bottom: -5px;
@@ -58,6 +62,7 @@ export default class TCHeadline extends Vue {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     height: inherit;
   }
 }

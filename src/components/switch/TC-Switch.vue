@@ -14,7 +14,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from "vue-property-decorator";
+import { Vue, Component, Prop, Watch } from "vue-property-decorator";
 import uuidVue from "../uuid.vue";
 @Component({
   mixins: [uuidVue]
@@ -22,7 +22,13 @@ import uuidVue from "../uuid.vue";
 export default class TCSwitch extends Vue {
   @Prop({ default: false }) value!: boolean;
 
-  toggled: boolean = this.value;
+  @Watch("value")
+  public changed() {
+    this.toggled = this.value;
+  }
+
+  toggled = this.value;
+
   updateVal() {
     this.$emit("input", !this.toggled);
   }
@@ -52,7 +58,7 @@ export default class TCSwitch extends Vue {
       width: #{$ballSize * 2 + 4}px;
       height: #{$ballSize + 4}px;
       border-radius: #{$ballSize + 4}px;
-      background: $paragraph;
+      background: darken($paragraph, 5%);
       position: relative;
       transition: 0.2s ease-in;
 

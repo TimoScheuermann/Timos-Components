@@ -1,24 +1,25 @@
 // Main Colors
 $background: #fff;
-$background-rgb: 255, 255, 255;
 $paragraph: #f0f0f0;
-$paragraph-rgb: 240, 240, 240;
+
 $color: #111;
-$color-rgb: 17, 17, 17;
-
-// Implement Darkmode later
-$dark_background: #000;
-$dark_paragraph: #0f0f0f;
-$dark_paragraph-rgb: 15, 15, 15;
-$dark_color: #fff;
-
-// Hightlight Colors
+$background: #fff;
+$paragraph: #f0f0f0;
 $primary: #0088ff;
-$error: #fc5c65;
+$error: #ff4757;
+$success: #25ca49;
+$alarm: #f1c40f;
+
+$color_colors: (
+  primary: $primary,
+  error: $error,
+  success: $success,
+  alarm: $alarm,
+);
 
 // Media Queries
-$isMobile: 'only screen and(max-width: 850px)';
-$isDesktop: 'only screen and(min-width: 851px)';
+$isMobile: "only screen and(max-width: 850px)";
+$isDesktop: "only screen and(min-width: 851px)";
 
 // Mobile Support
 

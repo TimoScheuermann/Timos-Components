@@ -1,9 +1,10 @@
 <template>
   <div
     class="tc-navbar"
+    :id="id"
     :class="{
-      'tc-navbar__dark': dark,
-      'tc-navbar__light': !dark
+      'tc-navbar__dark': isDark,
+      'tc-navbar__light': !isDark
     }"
     :style="defaultStyle"
   >
@@ -34,17 +35,42 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Watch } from "vue-property-decorator";
+import { Vue, Component, Watch, Prop } from "vue-property-decorator";
 import TCComponent from "../tccomponent.vue";
+import uuidVue from "../uuid.vue";
+import TCAutoBackgroundMixin from "../TCAutoBackground.mixin.vue";
+
 @Component({
-  mixins: [TCComponent]
+  mixins: [TCComponent, uuidVue, TCAutoBackgroundMixin]
 })
 export default class TCNavbar extends Vue {
-  expanded = false;
-  bodyOverflowBefore: string | null = document.body.style.overflow;
+  @Prop() autoColor!: boolean;
+  _mounted!: any;
+  _destroyed!: any;
+  _routeChanged!: any;
+  uuid!: any;
+  dark: any;
+  isDark: any;
+  id = "tc-navbar_" + this.uuid;
+
+  public expanded = false;
+  public bodyOverflowBefore: string | null = document.body.style.overflow;
+
+  mounted() {
+    this._mounted();
+  }
+
+  destroyed() {
+    this._destroyed();
+  }
 
   public toggleExpander(): void {
     this.expanded = !this.expanded;
+  }
+
+  @Watch("dark")
+  updated() {
+    this.isDark = this.dark;
   }
 
   @Watch("expanded")
@@ -52,9 +78,10 @@ export default class TCNavbar extends Vue {
     document.body.style.overflow = to ? "hidden" : this.bodyOverflowBefore!;
   }
 
-  @Watch("$route.name")
+  @Watch("$route", { deep: true, immediate: true })
   routeChanged(to: string, from: string) {
     this.expanded = false;
+    this._routeChanged();
   }
 }
 </script>
@@ -77,6 +104,8 @@ export default class TCNavbar extends Vue {
   min-height: 50px;
   position: fixed;
   z-index: 10999;
+
+  transition: color 0.1s ease-in-out, background 0.3s ease-in-out;
 
   &.tc-navbar__dark {
     border-bottom: 1px solid rgba(#fff, 0.3);

@@ -21,7 +21,7 @@ export default class TCSlider extends Vue {
   @Prop() icon_start!: string;
   @Prop() icon_end!: string;
 
-  public data: number = this.value;
+  public data = this.value;
 
   public updateVal() {
     this.$emit("input", this.data);
@@ -30,7 +30,7 @@ export default class TCSlider extends Vue {
 </script>
 <style lang="scss" scoped>
 .tc-slider {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   i {
@@ -60,7 +60,7 @@ export default class TCSlider extends Vue {
       border-radius: $size;
       height: $size;
       background: $primary;
-      cursor: pointer;
+      cursor: grab;
     }
   }
 }

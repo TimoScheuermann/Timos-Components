@@ -27,21 +27,24 @@ export default class TCSidebarItem extends Vue {
     right: 0;
   }
   cursor: pointer;
-  &:hover {
+  &:hover,
+  &:focus {
     color: $primary;
+    outline: none;
   }
 
   &.active,
   &.router-link-exact-active {
+    // width: calc(100% - 8px);
     opacity: 1;
     color: $primary;
     border-right: 4px solid $primary;
   }
-  display: flex;
   .icon {
     min-width: 30px;
   }
   .name {
+    flex-grow: 1;
     white-space: nowrap;
   }
 }

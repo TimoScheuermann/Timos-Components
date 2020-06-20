@@ -1,5 +1,9 @@
 <template>
-  <router-link :to="{ name: routeName }" class="tc-tabbar--item">
+  <div class="tc-tabbar--item" v-if="!routeName">
+    <i :class="'ti-' + icon"></i>
+    <span>{{ title }}</span>
+  </div>
+  <router-link v-else :to="{ name: routeName }" class="tc-tabbar--item">
     <i :class="'ti-' + icon"></i>
     <span>{{ title }}</span>
   </router-link>
@@ -10,13 +14,14 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 export default class TCTabbarItem extends Vue {
   @Prop({ default: "house", type: String }) icon!: string;
   @Prop({ default: "Home", type: String }) title!: string;
-  @Prop({ default: "home", type: String }) routeName!: string;
+  @Prop() routeName!: string;
 }
 </script>
 <style lang="scss" scoped>
 .tc-tabbar--item {
   flex: 1 1 0px;
   display: flex;
+  user-select: none;
   @media only screen and(max-width: 800px) {
     flex-direction: column;
   }

@@ -58,6 +58,8 @@ export default class TCHero extends Vue {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: max-content;
+    max-width: 90vw;
   }
 }
 </style>

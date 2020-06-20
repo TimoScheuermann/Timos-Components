@@ -18,7 +18,7 @@
         detail: undefined
       };
 
-      const evt = document.createEvent("CustomEvent");
+      var evt = document.createEvent("CustomEvent");
       evt.initCustomEvent(
         event,
         params.bubbles,
@@ -35,27 +35,27 @@
   document.addEventListener("touchmove", handleTouchMove, false);
   document.addEventListener("touchend", handleTouchEnd, false);
 
-  let xDown = null;
-  let yDown = null;
-  let xDiff = null;
-  let yDiff = null;
-  let timeDown = null;
-  let startEl = null;
+  var xDown = null;
+  var yDown = null;
+  var xDiff = null;
+  var yDiff = null;
+  var timeDown = null;
+  var startEl = null;
 
   function handleTouchEnd(e) {
     // if the user released on a different target, cancel!
     if (startEl !== e.target) return;
 
-    const swipeThreshold = parseInt(
+    var swipeThreshold = parseInt(
       startEl.getAttribute("data-swipe-threshold") || "20",
       10
     ); // default 10px
-    const swipeTimeout = parseInt(
+    var swipeTimeout = parseInt(
       startEl.getAttribute("data-swipe-timeout") || "500",
       10
     ); // default 1000ms
-    const timeDiff = Date.now() - timeDown;
-    let eventType = "";
+    var timeDiff = Date.now() - timeDown;
+    var eventType = "";
 
     if (Math.abs(xDiff) > Math.abs(yDiff)) {
       // most significant
@@ -81,8 +81,6 @@
       startEl.dispatchEvent(
         new CustomEvent(eventType, { bubbles: true, cancelable: true })
       );
-
-      // if (console && console.log) console.log(eventType + ' fired on ' + startEl.tagName);
     }
 
     // reset values
@@ -107,8 +105,8 @@
   function handleTouchMove(e) {
     if (!xDown || !yDown) return;
 
-    const xUp = e.touches[0].clientX;
-    const yUp = e.touches[0].clientY;
+    var xUp = e.touches[0].clientX;
+    var yUp = e.touches[0].clientY;
 
     xDiff = xDown - xUp;
     yDiff = yDown - yUp;

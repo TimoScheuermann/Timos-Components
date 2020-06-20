@@ -1,5 +1,9 @@
 <template>
-  <div class="tc-spinner" :style="styleAttr">
+  <div
+    class="tc-spinner"
+    :class="{ 'tc-spinner__dark': dark }"
+    :style="styleAttr"
+  >
     <div v-for="(i, index) in Array(10)" :key="'s_' + index" />
   </div>
 </template>
@@ -8,6 +12,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 @Component
 export default class TCSpinner extends Vue {
   @Prop({ default: 30 }) size!: number;
+  @Prop() dark!: boolean;
   get styleAttr() {
     return {
       width: this.size + "px",
@@ -21,6 +26,9 @@ export default class TCSpinner extends Vue {
 .tc-spinner {
   position: relative;
   display: inline-block;
+  &.tc-spinner__dark {
+    color: #fff;
+  }
   div {
     &::after {
       content: "";

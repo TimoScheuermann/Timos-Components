@@ -6,7 +6,7 @@
     :class="{ toched: touched }"
   >
     <div class="tooltip" :class="'tooltip--' + getPosition()">
-      <div class="tooltip--content">Oh hey, whats up</div>
+      <div class="tooltip--content">{{ tooltip }}</div>
       <div class="arrow"></div>
     </div>
     <div class="content">
@@ -18,7 +18,8 @@
 import { Vue, Component, Prop } from "vue-property-decorator";
 @Component
 export default class TCTooltip extends Vue {
-  @Prop() position!: string;
+  @Prop({ default: "top" }) position!: string;
+  @Prop({ default: "Tooltip" }) tooltip!: string;
 
   touched = false;
 
@@ -49,11 +50,12 @@ export default class TCTooltip extends Vue {
       animation: anim 0.3s ease-in-out 0.3s both;
     }
   }
-
+  position: relative;
   .tooltip {
     visibility: hidden;
     z-index: 10;
     position: absolute;
+    // white-space: nowrap;
 
     &.tooltip--top {
       left: 50%;
@@ -105,10 +107,14 @@ export default class TCTooltip extends Vue {
     }
     .tooltip--content {
       background: $primary;
-      width: fit-content;
-      padding: 0 12px;
-      height: 24px;
-      line-height: 24px;
+      // width: fit-content;
+      padding: 1px 12px {
+        bottom: 3px;
+      }
+      text-align: center;
+      min-height: 20px;
+      font-size: 18px;
+      line-height: 20px;
       border-radius: $border-radius;
       color: #fff;
     }

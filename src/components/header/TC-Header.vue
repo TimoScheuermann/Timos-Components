@@ -1,12 +1,12 @@
 <template>
-  <div class="tc-header" :style="getStyles()" :class="getClasses()">
+  <div class="tc-header" :id="id" :style="styles" :class="classes">
     <div class="tc-header--head">
       <div
         v-if="backTo || backHref"
         class="tc-header--backButton"
         @click="clicked($event)"
       >
-        <i class="ti-arrow-left"></i>
+        <i class="ti-chevron-left"></i>
         <span>{{ backName || "back" }}</span>
       </div>
       <div class="tc-header--title__prestyled" v-if="title">{{ title }}</div>
@@ -25,8 +25,8 @@
     <div v-else class="tc-header--items__overflow">
       <tc-checkbox
         v-model="itemCard"
-        iconChecked="arrow-down"
-        iconUnchecked="arrow-up"
+        iconChecked="chevron-down"
+        iconUnchecked="chevron-up"
         iconAnimation="flip"
       />
     </div>
@@ -43,17 +43,28 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from "vue-property-decorator";
+import { Vue, Component, Prop, Watch } from "vue-property-decorator";
 import TCComponent from "../tccomponent.vue";
 import uuidVue from "../uuid.vue";
 import TCCheckbox from "../checkbox/TC-Checkbox.vue";
+import TCAutoBackgroundMixin from "../TCAutoBackground.mixin.vue";
 @Component({
-  mixins: [TCComponent, uuidVue],
+  mixins: [TCComponent, uuidVue, TCAutoBackgroundMixin],
   components: {
     "tc-checkbox": TCCheckbox
   }
 })
 export default class TCHeader extends Vue {
+  @Prop({ default: false }) autoColor!: boolean;
+  _mounted!: any;
+  _destroyed!: any;
+  _routeChanged!: any;
+  uuid!: any;
+  isDark!: any;
+  dark!: boolean;
+  defaultStyle!: any;
+  id: string = "tc-header_" + this.uuid;
+
   @Prop() title!: string;
   @Prop({ default: "fixed" }) variant!: "fixed" | "floating" | "sticky";
   @Prop({ default: 0 }) top!: number;
@@ -61,20 +72,36 @@ export default class TCHeader extends Vue {
   @Prop() backHref!: string;
   @Prop() backName!: string;
 
-  private uuid!: number;
-  private dark!: boolean;
-  private defaultStyle!: any;
-
   public itemsOverflow = false;
   public itemCard = false;
 
+  @Watch("dark")
+  dChanged() {
+    // console.error("Dark changed to", this.dark);
+    // console.log("Dark is", this.dark);
+    this.isDark = this.dark;
+  }
+  @Watch("isDark")
+  sdChanged(to: boolean, from: boolean) {
+    // console.error("isDark changed to", this.isDark);
+    // console.log("From: " + from + ", To:", to);
+    // console.log("Dark is", this.dark);
+  }
+
   mounted() {
+    this._mounted();
     window.addEventListener("resize", this.resize);
     this.resize();
   }
 
-  beforeDestroy() {
+  destroyed() {
+    this._destroyed();
     window.removeEventListener("resize", this.resize);
+  }
+
+  @Watch("$route", { deep: true, immediate: true })
+  routeChanged() {
+    this._routeChanged();
   }
 
   public clicked(event: any): void {
@@ -93,10 +120,10 @@ export default class TCHeader extends Vue {
     }, 100);
   }
 
-  getClasses() {
+  get classes() {
     return {
-      "tc-header__dark": this.dark,
-      "tc-header__light": !this.dark,
+      "tc-header__dark": this.isDark,
+      "tc-header__light": !this.isDark,
       "tc-header__fixed": !(
         this.variant == "floating" || this.variant == "sticky"
       ),
@@ -104,7 +131,7 @@ export default class TCHeader extends Vue {
       "tc-header__floating": this.variant == "floating"
     };
   }
-  getStyles() {
+  get styles() {
     const style = this.defaultStyle;
     style.top = (this.variant === "floating" ? 40 : 0) + +this.top + "px";
     return style;
@@ -129,6 +156,8 @@ export default class TCHeader extends Vue {
   justify-content: space-between;
   align-items: center;
   z-index: 999;
+
+  transition: color 0.1s ease-in-out, background 0.3s ease-in-out;
 
   &.tc-header__dark {
     &.tc-header__sticky,
@@ -165,6 +194,7 @@ export default class TCHeader extends Vue {
 
   .tc-header--head {
     display: inherit;
+    max-width: 100%;
 
     .tc-header--backButton {
       cursor: pointer;
@@ -173,6 +203,7 @@ export default class TCHeader extends Vue {
       display: flex;
       justify-content: center;
       align-items: center;
+      white-space: nowrap;
       i {
         margin-right: 5px;
       }
@@ -181,6 +212,8 @@ export default class TCHeader extends Vue {
     .tc-header--title__prestyled {
       font-weight: bold;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       font-size: 18px;
     }
   }

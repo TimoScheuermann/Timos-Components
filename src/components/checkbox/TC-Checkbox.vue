@@ -1,5 +1,5 @@
 <template>
-  <div class="tc-checkbox tc-container">
+  <div class="tc-checkbox" :class="{ 'tc-checkbox__dark': dark }">
     <input
       @input="updateVal()"
       v-model="checked"
@@ -31,7 +31,7 @@
         height="100"
         viewBox="0 0 100 100"
       >
-        <g id="border" fill="none" stroke="#000" stroke-width="10">
+        <g id="border" fill="none" stroke-width="10">
           <rect x="5" y="5" width="90" height="90" rx="10" fill="none" />
         </g>
         <path
@@ -50,7 +50,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from "vue-property-decorator";
+import { Vue, Component, Prop, Watch } from "vue-property-decorator";
 import uuid from "../uuid.vue";
 @Component({
   mixins: [uuid]
@@ -59,11 +59,18 @@ export default class TCCheckbox extends Vue {
   @Prop({ default: false }) value!: boolean;
   @Prop() title!: string;
   @Prop() color!: string;
+  @Prop() dark!: boolean;
   @Prop() position!: string;
   @Prop() iconChecked!: string;
   @Prop() iconUnchecked!: string;
   @Prop() iconAnimation!: string;
 
+  @Watch("value")
+  changed(): void {
+    this.checked = this.value;
+  }
+
+  public checked = this.value;
   public animations: string[] = ["scroll", "spin", "flip"];
   get animationName(): string {
     if (!this.iconAnimation) return this.animations[0];
@@ -81,15 +88,12 @@ export default class TCCheckbox extends Vue {
     return [this.checked ? this.iconChecked : this.iconUnchecked];
   }
 
-  checked: boolean = this.value;
   updateVal() {
     this.$emit("input", !this.checked);
   }
 }
 </script>
 <style lang="scss" scoped>
-@import "../tc-container";
-
 .icon-flip-move {
   transition: all 0.4s ease-in-out;
 }
@@ -155,6 +159,13 @@ export default class TCCheckbox extends Vue {
 }
 
 .tc-checkbox {
+  @include tc-container__light();
+  &__dark {
+    @include tc-container__dark();
+    input + label svg #border {
+      stroke: #fff;
+    }
+  }
   input {
     display: none;
   }
@@ -214,7 +225,7 @@ export default class TCCheckbox extends Vue {
         transition: all 0.5s ease-in-out;
       }
       #border {
-        stroke: {
+        stroke: #000 {
           dasharray: 343px;
           dashoffset: 0px;
         }

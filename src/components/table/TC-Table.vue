@@ -1,6 +1,6 @@
 <template>
-  <div class="tc-table">
-    <div class="tableWrapper">
+  <div class="tc-table" :class="{ 'tc-table__dark': dark }">
+    <div class="tc-table--wrapper">
       <table>
         <slot />
       </table>
@@ -8,13 +8,39 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component, Prop } from "vue-property-decorator";
 @Component
-export default class TCTable extends Vue {}
+export default class TCTable extends Vue {
+  @Prop() dark!: boolean;
+}
 </script>
 <style lang="scss" scoped>
 .tc-table {
-  .tableWrapper {
+  &.tc-table__dark {
+    .tc-table--wrapper {
+      table {
+        tr {
+          border-bottom-color: rgba(#fff, 0.2);
+          th,
+          td {
+            color: #fff;
+          }
+          th {
+            border-bottom-color: #fff;
+          }
+          &:hover {
+            &:not(:first-child) {
+              background: lighten($color, 10%);
+              td {
+                background: lighten($color, 10%);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .tc-table--wrapper {
     max-width: 100%;
     overflow-x: auto;
 
@@ -25,11 +51,14 @@ export default class TCTable extends Vue {}
 
       tr {
         transition: 0.2s ease;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         th,
         td {
+          transition: inherit;
           padding: 10px;
           transition: 0.2s ease;
           font-size: 16px !important;
+          color: $color;
         }
         th {
           border-bottom: 1px solid black;
@@ -37,19 +66,15 @@ export default class TCTable extends Vue {}
         td {
           white-space: nowrap;
         }
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        &:nth-child(ODD) {
-          td {
-            // background: $paragraph;
-          }
-        }
+
         &:hover {
           &:not(:first-child) {
-            box-shadow: $shadow;
+            // box-shadow: $shadow;
             transform: translateY(-5px);
-            background: $background;
+
+            background: $paragraph;
             td {
-              background: rgba($paragraph, 0.5);
+              background: $paragraph;
             }
           }
         }

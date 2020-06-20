@@ -1,5 +1,5 @@
 <template>
-  <div class="tc-quote">
+  <div class="tc-quote" :class="{ 'tc-quote__dark': dark }">
     <div class="tc-quote--content">
       <div v-if="title" class="tc-quote--title__prestyled">
         <i class="ti-quote-right"></i>
@@ -18,12 +18,20 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 @Component
 export default class TCQuote extends Vue {
   @Prop() title!: string;
+  @Prop() dark!: boolean;
 }
 </script>
 <style lang="scss" scoped>
 .tc-quote {
   background: $paragraph;
-
+  &.tc-quote__dark {
+    background: lighten($color, 20%);
+    .tc-quote--title__prestyled {
+      span {
+        color: #fff;
+      }
+    }
+  }
   border: {
     radius: 5px;
     left: 7px solid $primary;
