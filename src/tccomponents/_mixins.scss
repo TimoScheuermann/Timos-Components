@@ -1,0 +1,72 @@
+@mixin backdrop-blur($bdbColor) {
+  background: $bdbColor;
+  @supports (backdrop-filter: blur(50px)) {
+    background: rgba($bdbColor, 0.6);
+    backdrop-filter: blur(50px);
+  }
+}
+
+@mixin tc-container {
+  display: inline-block;
+  padding: 5px;
+  height: 20px;
+  margin: 3px;
+  user-select: none;
+  transition: 0.2s ease-in-out;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+@mixin tc-container__dark {
+  @include tc-container();
+  color: #fff;
+  background: lighten($color, 20%);
+  border-color: rgba(#fff, 0.01);
+  &:hover,
+  &:focus,
+  &:focus-within {
+    border-color: rgba(#fff, 0.4);
+  }
+}
+
+@mixin tc-container__light {
+  @include tc-container();
+  color: $color;
+  background: $paragraph;
+  border-radius: $border-radius;
+  &:hover,
+  &:focus,
+  &:focus-within {
+    border-color: rgba($color, 0.4);
+  }
+}
+
+@mixin tc-container--title {
+  text-align: left;
+  font-weight: bold;
+  opacity: 0.8;
+  margin-bottom: 3px;
+  margin-left: 3px;
+}
+
+@mixin custom-scrollbar__dark {
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+    position: absolute !important;
+    border-radius: 4px;
+    transition: 0.2s ease;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: lime;
+    border-radius: 4px;
+    transition: 0.2s ease;
+    &:hover {
+      background: #888;
+      transition: 0.2s ease;
+    }
+  }
+}
+
+@mixin custom-scrollbar__light {
+}

@@ -1,9 +1,10 @@
 module.exports = {
+  outputDir: process.env.TC_TARGET ? 'lib' : 'dist',
   css: {
     loaderOptions: {
       sass: {
         prependData:
-          "@import '@/components/_variables.scss';\n@import '@/components/_mixins.scss';"
+          "@import '@/tccomponents/_variables.scss';\n@import '@/tccomponents/_mixins.scss';"
       }
     }
   }
