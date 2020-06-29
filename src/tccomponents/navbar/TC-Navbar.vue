@@ -33,9 +33,11 @@
     </div>
   </div>
 </template>
+
 <script lang="ts">
-import { Vue, Component, Watch, Prop, Mixins } from "vue-property-decorator";
-import TCAutoBackground from "../TC-Auto-Background.mixin";
+import { Component, Watch, Mixins } from 'vue-property-decorator';
+import TCAutoBackground from '../TC-Auto-Background.mixin';
+import { Route } from 'vue-router';
 
 @Component
 export default class TCNavbar extends Mixins(TCAutoBackground) {
@@ -46,17 +48,20 @@ export default class TCNavbar extends Mixins(TCAutoBackground) {
     this.expanded = !this.expanded;
   }
 
-  @Watch("expanded")
-  expandedChanged(to: any, from: any) {
-    document.body.style.overflow = to ? "hidden" : this.bodyOverflowBefore!;
+  @Watch('expanded')
+  expandedChanged(to: Route): void {
+    document.body.style.overflow = to
+      ? 'hidden'
+      : this.bodyOverflowBefore || '';
   }
 
-  @Watch("$route", { deep: true, immediate: true })
-  closeExpander(to: string, from: string) {
+  @Watch('$route', { deep: true, immediate: true })
+  closeExpander(): void {
     this.expanded = false;
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .tc-navbar {
   &,

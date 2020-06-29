@@ -12,13 +12,14 @@
     </div>
   </div>
 </template>
+
 <script lang="ts">
-import { Vue, Component, Prop, Mixins } from "vue-property-decorator";
-import TCComponent from "../TC-Component.mixin";
+import { Component, Mixins } from 'vue-property-decorator';
+import TCComponent from '../TC-Component.mixin';
 
 @Component
 export default class TCSidebar extends Mixins(TCComponent) {
-  get styles() {
+  get styles(): Record<string, unknown> {
     return {
       color: this.color,
       background: this.background
@@ -26,11 +27,13 @@ export default class TCSidebar extends Mixins(TCComponent) {
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .tc-sidebar {
   background: $background;
   color: $color;
   box-shadow: $shadow;
+
   &.dark {
     background: $color;
     color: #fff;

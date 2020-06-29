@@ -11,9 +11,11 @@
     <i v-if="icon_end" id="r" :class="'ti-' + icon_end" />
   </div>
 </template>
+
 <script lang="ts">
-import { Vue, Component, Prop, Mixins } from "vue-property-decorator";
-import TCComponent from "../TC-Component.mixin";
+import { Component, Prop, Mixins, Watch } from 'vue-property-decorator';
+import TCComponent from '../TC-Component.mixin';
+
 @Component
 export default class TCSlider extends Mixins(TCComponent) {
   @Prop({ default: 0 }) min!: number;
@@ -24,11 +26,17 @@ export default class TCSlider extends Mixins(TCComponent) {
 
   public data = this.value;
 
-  public updateVal() {
-    this.$emit("input", this.data);
+  @Watch('value')
+  valueChanged(): void {
+    this.data = this.value;
+  }
+
+  public updateVal(): void {
+    this.$emit('input', this.data);
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .tc-slider {
   display: inline-flex;

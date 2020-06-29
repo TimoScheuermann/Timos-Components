@@ -13,14 +13,17 @@
     </div>
   </div>
 </template>
+
 <script lang="ts">
-import { Vue, Component, Prop, Mixins } from "vue-property-decorator";
-import TCComponent from "../TC-Component.mixin";
+import { Component, Prop, Mixins } from 'vue-property-decorator';
+import TCComponent from '../TC-Component.mixin';
+
 @Component
 export default class TCQuote extends Mixins(TCComponent) {
   @Prop() title!: string;
 }
 </script>
+
 <style lang="scss" scoped>
 .tc-quote {
   background: $paragraph;

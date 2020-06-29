@@ -28,50 +28,56 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-import { Vue, Component, Prop, Watch, Mixins } from "vue-property-decorator";
-import "./swipe-events.js";
-import TCComponent from "../TC-Component.mixin";
 
+<script lang="ts">
+import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
+import './swipe-events.js';
+import TCComponent from '../TC-Component.mixin';
+
+@Component
 export default class TCModal extends Mixins(TCComponent) {
-  @Prop({ default: "" }) title!: string;
-  @Prop({ default: "" }) subtitle!: string;
+  @Prop({ default: '' }) title!: string;
+  @Prop({ default: '' }) subtitle!: string;
   @Prop() value!: boolean;
 
-  public bodyOverflowBefore: string | null = document.body.style.overflow;
+  public bodyOverflowBefore: string = document.body.style.overflow;
   public opened = this.value;
 
   get id(): string {
-    return "tc-modal_" + this.uuid_ + "--head";
+    return 'tc-modal_' + this.uuid_ + '--head';
   }
 
-  @Watch("value")
-  changed(updated: any, old: any) {
-    console.log("Modal changed");
+  @Watch('value')
+  changed(updated: boolean): void {
     this.opened = updated;
     document.body.style.overflow = this.opened
-      ? "hidden"
-      : this.bodyOverflowBefore!;
+      ? 'hidden'
+      : this.bodyOverflowBefore;
     if (this.opened) {
-      document.getElementById(this.id)!.focus();
+      const elem: HTMLElement | null = document.getElementById(this.id);
+      if (elem) elem.focus();
     }
   }
 
-  mounted() {
-    document.getElementById(this.id)!.addEventListener("swiped-down", e => {
-      this.close();
-    });
+  mounted(): void {
+    const elem = document.getElementById(this.id);
+    if (elem) {
+      elem.addEventListener('swiped-down', () => {
+        this.close();
+      });
+    }
   }
 
-  close() {
+  public close(): void {
     this.opened = false;
     this.update();
   }
-  update() {
-    this.$emit("input", this.opened);
+  public update(): void {
+    this.$emit('input', this.opened);
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .tc-modal {
   position: fixed;

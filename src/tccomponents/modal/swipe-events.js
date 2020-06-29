@@ -15,7 +15,7 @@
       params = params || {
         bubbles: false,
         cancelable: false,
-        detail: undefined,
+        detail: undefined
       };
 
       const evt = document.createEvent('CustomEvent');

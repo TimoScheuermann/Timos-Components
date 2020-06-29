@@ -7,24 +7,27 @@
     <slot />
   </span>
 </template>
+
 <script lang="ts">
-import { Vue, Component, Prop, Mixins } from "vue-property-decorator";
-import TCComponent from "../TC-Component.mixin";
+import { Component, Prop, Mixins } from 'vue-property-decorator';
+import TCComponent from '../TC-Component.mixin';
+
 @Component
 export default class TCLink extends Mixins(TCComponent) {
-  @Prop() to!: any;
+  @Prop() to!: Record<string, unknown>;
   @Prop() href!: string;
 
-  public clicked(event: any): void {
+  public clicked(event: MouseEvent): void {
     if (this.to) {
       this.$router.push(this.to);
     } else if (this.href) {
-      window.open(this.href, "_blank");
+      window.open(this.href, '_blank');
     }
-    this.$emit("click", event);
+    this.$emit('click', event);
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .tc-link {
   color: $primary;
@@ -43,7 +46,7 @@ export default class TCLink extends Mixins(TCComponent) {
   &::after {
     transition: 0.2s ease-in-out;
     position: absolute;
-    content: "";
+    content: '';
     bottom: 0;
     width: 0%;
     height: 1px;

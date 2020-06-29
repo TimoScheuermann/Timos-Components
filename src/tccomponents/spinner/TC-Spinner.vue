@@ -7,22 +7,25 @@
     <div v-for="(i, index) in Array(10)" :key="'s_' + index" />
   </div>
 </template>
+
 <script lang="ts">
-import { Vue, Component, Prop, Mixins } from "vue-property-decorator";
-import TCComponent from "../TC-Component.mixin";
+import { Component, Prop, Mixins } from 'vue-property-decorator';
+import TCComponent from '../TC-Component.mixin';
+
 @Component
 export default class TCSpinner extends Mixins(TCComponent) {
   @Prop({ default: 30 }) size!: number;
 
-  get styleAttr() {
+  get styleAttr(): Record<string, unknown> {
     return {
-      width: this.size + "px",
-      height: this.size / 2 + "px",
-      "padding-top": this.size / 2 + "px"
+      width: this.size + 'px',
+      height: this.size / 2 + 'px',
+      'padding-top': this.size / 2 + 'px'
     };
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .tc-spinner {
   position: relative;
@@ -32,7 +35,7 @@ export default class TCSpinner extends Mixins(TCComponent) {
   }
   div {
     &::after {
-      content: "";
+      content: '';
       display: block;
       position: absolute;
       width: 5px;

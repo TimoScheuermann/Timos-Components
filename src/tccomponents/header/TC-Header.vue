@@ -7,7 +7,10 @@
         @click="clicked($event)"
       >
         <i class="ti-chevron-left"></i>
-        <span>{{ backName || "back" }}</span>
+        <span>{{ backName || 'back' }}</span>
+      </div>
+      <div class="tc-header--pre" v-if="$slots.pre">
+        <slot name="pre" />
       </div>
       <div class="tc-header--title__prestyled" v-if="title">{{ title }}</div>
       <div class="tc-header--title" v-else>
@@ -33,7 +36,7 @@
     <div
       v-if="itemsOverflow"
       class="tc-overflow-items"
-      :style="getOverflowStyle()"
+      :style="overflowStyles"
       :class="{ ...classes, 'tc-overflow-items__visible': itemCard }"
     >
       <div class="tc-overflow-items--container">
@@ -42,49 +45,51 @@
     </div>
   </div>
 </template>
+
 <script lang="ts">
-import { Vue, Component, Prop, Watch, Mixins } from "vue-property-decorator";
-import TCCheckbox from "../checkbox/TC-Checkbox.vue";
-import TCAutoBackground from "../TC-Auto-Background.mixin";
+import { Component, Prop, Mixins } from 'vue-property-decorator';
+import TCCheckbox from '../checkbox/TC-Checkbox.vue';
+import TCAutoBackground from '../TC-Auto-Background.mixin';
 
 @Component({
   components: {
-    "tc-checkbox": TCCheckbox
+    'tc-checkbox': TCCheckbox
   }
 })
 export default class TCHeader extends Mixins(TCAutoBackground) {
   @Prop() title!: string;
-  @Prop({ default: "fixed" }) variant!: "fixed" | "floating" | "sticky";
+  @Prop({ default: 'fixed' }) variant!: 'fixed' | 'floating' | 'sticky';
   @Prop({ default: 0 }) top!: number;
-  @Prop() backTo!: any;
+  @Prop() backTo!: Record<string, unknown>;
   @Prop() backHref!: string;
   @Prop() backName!: string;
 
   public itemsOverflow = false;
   public itemCard = false;
 
-  created() {
-    window.addEventListener("resize", this.resize);
+  created(): void {
+    window.addEventListener('resize', this.resize);
     this.resize();
   }
 
-  destroyed() {
-    window.removeEventListener("resize", this.resize);
-  }
-  get id(): string {
-    return "tc-header_" + this.uuid_;
+  destroyed(): void {
+    window.removeEventListener('resize', this.resize);
   }
 
-  public clicked(event: any): void {
-    this.$emit("click", event);
+  get id(): string {
+    return 'tc-header_' + this.uuid_;
+  }
+
+  public clicked(event: MouseEvent): void {
+    this.$emit('click', event);
     if (this.backTo) this.$router.push(this.backTo);
-    else if (this.backHref) window.open(this.backHref, "_blank");
+    else if (this.backHref) window.open(this.backHref, '_blank');
   }
 
   public resize(): void {
     this.itemsOverflow = false;
     setTimeout(() => {
-      const element = document.getElementById("tc-header--item-" + this.uuid_);
+      const element = document.getElementById('tc-header--item-' + this.uuid_);
       if (!element) return;
       this.itemsOverflow =
         element.scrollHeight > element.clientHeight ||
@@ -94,32 +99,38 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
 
   get classes() {
     return {
-      "tc-header__dark": this.dark_,
-      "tc-header__light": !this.dark_,
-      "tc-header__fixed": !(
-        this.variant == "floating" || this.variant == "sticky"
+      'tc-header__dark': this.dark_,
+      'tc-header__light': !this.dark_,
+      'tc-header__fixed': !(
+        this.variant == 'floating' || this.variant == 'sticky'
       ),
-      "tc-header__sticky": this.variant == "sticky",
-      "tc-header__floating": this.variant == "floating"
-    };
-  }
-  get styles() {
-    return {
-      color: this.color,
-      background: this.background,
-      top: (this.variant === "floating" ? 40 : 0) + +this.top + "px"
+      'tc-header__sticky': this.variant == 'sticky',
+      'tc-header__floating': this.variant == 'floating'
     };
   }
 
-  getOverflowStyle() {
+  get styles(): Record<string, string> {
     return {
       color: this.color,
       background: this.background,
-      top: "calc(env(safe-area-inset-top) + " + (+(+this.top) + 50) + "px)"
+      top: (this.variant === 'floating' ? 40 : 0) + +this.top + 'px'
+    };
+  }
+
+  get overflowStyles(): Record<string, string> {
+    return {
+      color: this.color,
+      background: this.background,
+      top: 'calc(env(safe-area-inset-top) + ' + (+(+this.top) + 50) + 'px)',
+      maxHeight:
+        'calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - ' +
+        (+(+this.top) + 50) +
+        'px)'
     };
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .tc-header {
   user-select: none;
@@ -172,6 +183,8 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
 
   .tc-header--head {
     display: inherit;
+    justify-content: center;
+    align-items: center;
     max-width: 100%;
 
     .tc-header--backButton {
@@ -185,6 +198,10 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
       i {
         margin-right: 5px;
       }
+    }
+    .tc-header--pre {
+      margin-right: 10px;
+      margin-left: calc(-5vw + 10px);
     }
 
     .tc-header--title__prestyled {
@@ -211,7 +228,7 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
   }
   .tc-header--items__overflow {
     display: flex;
-    overflow: visible;
+    overflow: auto;
     .tc-checkbox {
       background: none !important;
       border: none;
@@ -232,7 +249,7 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
     user-select: none;
     box-shadow: $shadow;
     border-radius: 0px 0px $border-radius $border-radius;
-    overflow: hidden;
+    overflow: auto;
     .tc-overflow-items--container {
       max-height: 0vh;
       transition: 0.5s ease-in-out;

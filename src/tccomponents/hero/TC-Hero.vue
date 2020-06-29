@@ -12,16 +12,16 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop, Mixins } from "vue-property-decorator";
-import TCHeadline from "@/components/tc/headline/TC-Headline.vue";
-import TCComponent from "../TC-Component.mixin";
+import { Component, Prop, Mixins } from 'vue-property-decorator';
+import TCComponent from '../TC-Component.mixin';
+
 @Component
 export default class TCHero extends Mixins(TCComponent) {
   @Prop({ default: 200 }) height!: string | number;
-  @Prop({ default: "px" }) unit!: string;
+  @Prop({ default: 'px' }) unit!: string;
   @Prop({ default: true }) hasFixedHeader!: boolean;
 
-  get styles() {
+  get styles(): Record<string, string> {
     return {
       background: this.background,
       color: this.color,
@@ -32,6 +32,7 @@ export default class TCHero extends Mixins(TCComponent) {
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .tc-hero {
   user-select: none;

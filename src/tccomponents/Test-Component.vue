@@ -9,9 +9,8 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Mixins } from "vue-property-decorator";
-import TCComponent from "./TC-Component.mixin";
-import TCAutoBackground from "./TC-Auto-Background.mixin";
+import { Component, Mixins } from 'vue-property-decorator';
+import TCAutoBackground from './TC-Auto-Background.mixin';
 @Component
 export default class TCTestComponent extends Mixins(TCAutoBackground) {}
 </script>

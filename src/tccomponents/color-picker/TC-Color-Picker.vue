@@ -41,39 +41,42 @@
     </tc-modal>
   </div>
 </template>
+
 <script lang="ts">
-import { Vue, Component, Prop, Watch, Mixins } from "vue-property-decorator";
-import TCModal from "../modal/TC-Modal.vue";
-import TCComponent from "../TC-Component.mixin";
+import { Component, Prop, Mixins } from 'vue-property-decorator';
+import TCModal from '../modal/TC-Modal.vue';
+import TCComponent from '../TC-Component.mixin';
 
 @Component({
   components: {
-    "tc-modal": TCModal
+    'tc-modal': TCModal
   }
 })
 export default class TCColorPicker extends Mixins(TCComponent) {
-  @Prop({ default: "Select a color" }) placeholder!: string;
+  @Prop({ default: 'Select a color' }) placeholder!: string;
 
   opened = true;
-  selected: string | undefined = "#08f";
+  selected: string | undefined = '#08f';
 
-  public copy(event: MouseEvent) {
+  public copy(event: MouseEvent): void {
     if (event.shiftKey) {
       event.stopPropagation();
-      console.log("COPY");
+      console.log('COPY');
     }
   }
 
-  public clear() {
-    console.log("CLEAR");
+  public clear(): void {
+    console.log('CLEAR');
     this.selected = undefined;
   }
-  public open() {
-    console.log("OPEN");
+
+  public open(): void {
+    console.log('OPEN');
     this.opened = true;
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .tc-color-picker {
   .tc-color-picker--modal {

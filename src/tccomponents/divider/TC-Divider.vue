@@ -22,20 +22,23 @@
     />
   </div>
 </template>
+
 <script lang="ts">
-import { Vue, Component, Prop, Mixins } from "vue-property-decorator";
-import TCComponent from "../TC-Component.mixin";
+import { Component, Prop, Mixins } from 'vue-property-decorator';
+import TCComponent from '../TC-Component.mixin';
+
 @Component
 export default class TCDivider extends Mixins(TCComponent) {
   @Prop() name!: string;
   @Prop() icon!: string;
   @Prop() position!: string;
 
-  get alignment() {
-    return this.position || "center";
+  get alignment(): string {
+    return this.position || 'center';
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .tc-divider {
   display: flex;

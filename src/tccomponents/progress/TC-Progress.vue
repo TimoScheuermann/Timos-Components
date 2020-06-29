@@ -38,17 +38,18 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop, Mixins } from "vue-property-decorator";
-import TCComponent from "../TC-Component.mixin";
+import { Component, Prop, Mixins } from 'vue-property-decorator';
+import TCComponent from '../TC-Component.mixin';
+
 @Component
 export default class TCProgress extends Mixins(TCComponent) {
   @Prop({ default: 0 }) percent!: number;
   @Prop({ default: 4 }) barHeight!: number;
-  @Prop({ default: "bar" }) type!: string;
+  @Prop({ default: 'bar' }) type!: string;
   @Prop({ default: 70 }) ringSize!: number;
   @Prop({ default: 8 }) ringWidth!: number;
 
-  getCircumference(): number {
+  get circumference(): number {
     return this.radius * 2 * Math.PI;
   }
 
@@ -57,16 +58,15 @@ export default class TCProgress extends Mixins(TCComponent) {
   }
 
   get dashoffset(): number {
-    return (
-      this.getCircumference() - (this.percent / 100) * this.getCircumference()
-    );
+    return this.circumference - (this.percent / 100) * this.circumference;
   }
 
   get dasharray(): string {
-    return `${this.getCircumference()} ${this.getCircumference()}`;
+    return `${this.circumference} ${this.circumference}`;
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .tc-progress {
   &.tc-progress__ring {

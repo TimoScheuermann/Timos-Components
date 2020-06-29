@@ -6,16 +6,19 @@
     <div class="tc-navbar-item--name">{{ name }}</div>
   </router-link>
 </template>
+
 <script lang="ts">
-import { Vue, Component, Prop, Mixins } from "vue-property-decorator";
-import TCComponent from "../TC-Component.mixin";
+import { Component, Prop, Mixins } from 'vue-property-decorator';
+import TCComponent from '../TC-Component.mixin';
+
 @Component
 export default class TCNavbarItem extends Mixins(TCComponent) {
-  @Prop({ default: "_blank" }) to!: string | object;
+  @Prop({ default: '_blank' }) to!: string | object;
   @Prop() name!: string;
   @Prop() icon!: string;
 }
 </script>
+
 <style lang="scss" scoped>
 .tc-navbar-item {
   color: inherit;
@@ -33,7 +36,7 @@ export default class TCNavbarItem extends Mixins(TCComponent) {
 
   &::after {
     position: absolute;
-    content: "";
+    content: '';
     bottom: -3px;
     height: 1px;
     left: 0;

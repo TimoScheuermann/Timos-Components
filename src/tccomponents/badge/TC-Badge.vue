@@ -6,43 +6,48 @@
     <slot />
   </div>
 </template>
+
 <script lang="ts">
-import { Vue, Component, Prop, Mixins } from "vue-property-decorator";
-import TCComponent from "../TC-Component.mixin";
+import { Component, Prop, Mixins } from 'vue-property-decorator';
+import TCComponent from '../TC-Component.mixin';
+
 @Component
 export default class TCBadge extends Mixins(TCComponent) {
   @Prop() value!: number | string;
   @Prop() max!: number;
   @Prop({ default: false }) showEmpty!: boolean;
-  @Prop({ default: "corner" }) position!: string;
+  @Prop({ default: 'corner' }) position!: string;
 
   get text(): string | number {
-    if (typeof +this.value === "number") {
+    if (typeof +this.value === 'number') {
       if (this.max) {
-        if (+this.value > this.max) return this.max + "+";
+        if (+this.value > this.max) return this.max + '+';
       }
     }
     return this.value;
   }
 
-  get badgeClass(): any {
-    const classes: any = {};
+  get badgeClass(): Record<string, unknown> {
+    const classes: Record<string, unknown> = {};
 
     classes[`tc-badge__${this.tccolor_}`] = true;
 
-    if (this.position === "behind") {
-      classes["tc-badge__behind"] = true;
+    if (this.position === 'behind') {
+      classes['tc-badge__behind'] = true;
+    } else if (this.position === 'inside') {
+      classes['tc-badge__inside'] = true;
     } else {
-      classes["tc-badge__corner"] = true;
+      classes['tc-badge__corner'] = true;
     }
     return classes;
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .tc-badge {
   position: relative;
-  display: inline-block;
+  display: block;
 
   .tc-badge--badge {
     position: absolute;
@@ -65,6 +70,11 @@ export default class TCBadge extends Mixins(TCComponent) {
       right: -5px;
       top: 50%;
       transform: translate(100%, -50%);
+    }
+    &.tc-badge__inside {
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
     }
 
     &.tc-badge__primary {

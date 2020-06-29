@@ -1,26 +1,41 @@
-import * as uuid from "uuid";
-import { Component, Prop, Vue } from "vue-property-decorator";
+import * as uuid from 'uuid';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
+const usedUUIDs: string[] = [];
 @Component
 export default class TCComponent extends Vue {
   @Prop({ default: false }) dark!: boolean;
-  @Prop({ default: "primary" }) tccolor!: string;
+  @Prop({ default: 'primary' }) tccolor!: string;
   @Prop() tcbackground!: string;
   @Prop() color!: string;
   @Prop() background!: string;
 
-  public uuid: any;
-  public colors: string[] = ["primary", "error", "alarm", "success"];
+  public uuid = '';
+  public colors: string[] = [
+    'primary',
+    'error',
+    'alarm',
+    'success',
+    'paragraph'
+  ];
 
-  beforeCreate() {
-    this.uuid = uuid.v4();
+  beforeMount(): void {
+    this.uuid = this.getUUID();
   }
 
-  get uuid_() {
-    return this.uuid;
+  private getUUID(): string {
+    let u = uuid.v4();
+    while (usedUUIDs.includes(u)) {
+      u = uuid.v4();
+    }
+    return u;
   }
 
-  get tccolor_() {
+  public get uuid_(): string {
+    return this.uuid || this.getUUID();
+  }
+
+  public get tccolor_(): string {
     if (this.color) return this.color;
     if (!this.tccolor || !this.colors.includes(this.tccolor.toLowerCase()))
       return this.colors[0];

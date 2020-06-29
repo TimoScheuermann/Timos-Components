@@ -6,13 +6,15 @@
     </div>
   </div>
 </template>
+
 <script lang="ts">
-import { Vue, Component, Prop, Watch, Mixins } from "vue-property-decorator";
-import TCAutoBackground from "../TC-Auto-Background.mixin";
+import { Component, Mixins } from 'vue-property-decorator';
+import TCAutoBackground from '../TC-Auto-Background.mixin';
 
 @Component
 export default class TCTabbar extends Mixins(TCAutoBackground) {}
 </script>
+
 <style lang="scss" scoped>
 .tc-tabbar {
   transition: color 0.1s ease-in-out, background 0.3s ease-in-out;

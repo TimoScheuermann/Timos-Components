@@ -8,18 +8,22 @@
     <span>{{ title }}</span>
   </router-link>
 </template>
+
 <script lang="ts">
-import { Vue, Component, Prop, Mixins } from "vue-property-decorator";
-import TCComponent from "../TC-Component.mixin";
+import { Component, Prop, Mixins } from 'vue-property-decorator';
+import TCComponent from '../TC-Component.mixin';
+
 @Component
 export default class TCTabbarItem extends Mixins(TCComponent) {
-  @Prop({ default: "house", type: String }) icon!: string;
-  @Prop({ default: "Home", type: String }) title!: string;
+  @Prop({ default: 'house', type: String }) icon!: string;
+  @Prop({ default: 'Home', type: String }) title!: string;
   @Prop() routeName!: string;
 }
 </script>
+
 <style lang="scss" scoped>
 .tc-tabbar--item {
+  text-decoration: none;
   flex: 1 1 0px;
   display: flex;
   user-select: none;

@@ -1,8 +1,8 @@
 @mixin backdrop-blur($bdbColor) {
   background: $bdbColor;
-  @supports (backdrop-filter: blur(50px)) {
-    background: rgba($bdbColor, 0.6);
-    backdrop-filter: blur(50px);
+  @supports (backdrop-filter: saturate(180%) blur(20px)) {
+    background: rgba($bdbColor, 0.5);
+    backdrop-filter: saturate(180%) blur(20px);
   }
 }
 
@@ -48,8 +48,8 @@
   margin-left: 3px;
 }
 
-@mixin custom-scrollbar__dark {
-  ::-webkit-scrollbar {
+@mixin custom-scrollbar {
+  &::-webkit-scrollbar {
     width: 4px;
     height: 4px;
     position: absolute !important;
@@ -57,16 +57,27 @@
     transition: 0.2s ease;
   }
 
-  ::-webkit-scrollbar-thumb {
-    background: lime;
-    border-radius: 4px;
+  &::-webkit-scrollbar-thumb {
     transition: 0.2s ease;
+    border-radius: 4px;
+  }
+}
+@mixin custom-scrollbar__dark {
+  @include custom-scrollbar();
+  &::-webkit-scrollbar-thumb {
+    background: #666;
     &:hover {
       background: #888;
-      transition: 0.2s ease;
     }
   }
 }
 
 @mixin custom-scrollbar__light {
+  @include custom-scrollbar();
+  &::-webkit-scrollbar-thumb {
+    background: #aaa;
+    &:hover {
+      background: #888;
+    }
+  }
 }

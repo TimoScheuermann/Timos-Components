@@ -2,34 +2,34 @@
   <img class="tc-image" :src="src" @click="expand()" />
 </template>
 <script lang="ts">
-import { Vue, Component, Prop, Watch, Mixins } from "vue-property-decorator";
-import TCComponent from "../TC-Component.mixin";
+import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
+import TCComponent from '../TC-Component.mixin';
 
 @Component
 export default class TCImage extends Mixins(TCComponent) {
   @Prop() src!: string;
-  expanded = false;
+  private expanded = false;
 
-  bgElement: HTMLElement = document.createElement("div");
-  close: HTMLElement = document.createElement("div");
-  img: HTMLImageElement = document.createElement("img");
+  private bgElement: HTMLElement = document.createElement('div');
+  private close: HTMLElement = document.createElement('div');
+  private img: HTMLImageElement = document.createElement('img');
 
-  @Watch("src")
+  @Watch('src')
   srcChanged(): void {
     this.img.src = this.src;
   }
 
-  mounted() {
-    this.bgElement.setAttribute("class", "tc-image--expanded");
+  mounted(): void {
+    this.bgElement.setAttribute('class', 'tc-image--expanded');
     this.close.innerHTML = "<i class='ti-cross' />";
-    this.bgElement.addEventListener("click", e => {
+    this.bgElement.addEventListener('click', e => {
       e.stopPropagation();
       this.shrink();
     });
-    this.close.addEventListener("click", () => {
+    this.close.addEventListener('click', () => {
       this.shrink();
     });
-    this.img.addEventListener("click", e => {
+    this.img.addEventListener('click', e => {
       e.stopPropagation();
     });
     this.img.src = this.src;
@@ -37,24 +37,27 @@ export default class TCImage extends Mixins(TCComponent) {
     this.bgElement.appendChild(this.img);
     document.body.appendChild(this.bgElement);
   }
-  beforeDestroy() {
+
+  beforeDestroy(): void {
     document.body.removeChild(this.bgElement);
   }
 
-  public expand(e: MouseEvent) {
-    this.bgElement.setAttribute("expanded", "");
+  public expand(): void {
+    this.bgElement.setAttribute('expanded', '');
   }
-  public shrink() {
-    this.bgElement.removeAttribute("expanded");
+
+  public shrink(): void {
+    this.bgElement.removeAttribute('expanded');
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .tc-image {
   cursor: zoom-in;
 }
 </style>
-<style lang="scss" scoped>
+<style lang="scss">
 .tc-image--expanded {
   position: fixed;
   z-index: 99999;

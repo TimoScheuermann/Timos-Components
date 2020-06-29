@@ -9,22 +9,24 @@
     </div>
   </div>
 </template>
+
 <script lang="ts">
-import { Vue, Component, Prop, Mixins } from "vue-property-decorator";
-import TCComponent from "../TC-Component.mixin";
+import { Component, Prop, Mixins } from 'vue-property-decorator';
+import TCComponent from '../TC-Component.mixin';
 
 @Component
 export default class TCTooltip extends Mixins(TCComponent) {
-  @Prop({ default: "top" }) position!: string;
-  @Prop({ default: "Tooltip" }) tooltip!: string;
+  @Prop({ default: 'top' }) position!: string;
+  @Prop({ default: 'Tooltip' }) tooltip!: string;
 
   getPosition(): string {
-    return ["top", "bottom", "left", "right"].includes(this.position)
+    return ['top', 'bottom', 'left', 'right'].includes(this.position)
       ? this.position
-      : "top";
+      : 'top';
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .tc-tooltip {
   cursor: help;

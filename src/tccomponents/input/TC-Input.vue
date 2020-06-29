@@ -1,5 +1,8 @@
 <template>
-  <div class="tc-input" :class="{ 'tc-input__dark': dark }">
+  <div
+    class="tc-input"
+    :class="{ 'tc-input__dark': dark, 'tc-input__frosted': frosted }"
+  >
     <div class="tc-input--head" v-if="title || tooltip">
       <div class="tc-input--title">
         {{ title }}
@@ -69,26 +72,27 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop, Mixins } from "vue-property-decorator";
-import TCComponent from "../TC-Component.mixin";
-import TCTooltip from "../tooltip/TC-Tooltip.vue";
+import { Prop, Mixins, Component } from 'vue-property-decorator';
+import TCComponent from '../TC-Component.mixin';
+import TCTooltip from '../tooltip/TC-Tooltip.vue';
 
 @Component({
   components: {
-    "tc-tooltip": TCTooltip
-  }
+    'tc-tooltip': TCTooltip
+  },
+  mixins: [TCComponent]
 })
 export default class TCInput extends Mixins(TCComponent) {
   @Prop() icon!: string;
-  @Prop({ default: "Choose File" }) filePlaceholder!: string;
+  @Prop({ default: 'Choose File' }) filePlaceholder!: string;
   @Prop() tooltip!: string;
   @Prop() title!: string;
   @Prop() buttons!: boolean;
   @Prop() placeholder!: string;
   @Prop() type!: string;
-  @Prop() value!: any;
+  @Prop() value!: string | number;
   @Prop() accept!: string;
-  @Prop() autocomplete!: "on" | "off";
+  @Prop() autocomplete!: 'on' | 'off';
   @Prop() autofocus!: boolean;
   @Prop() disabled!: boolean;
   @Prop() form!: string;
@@ -101,51 +105,58 @@ export default class TCInput extends Mixins(TCComponent) {
   @Prop() readonly!: boolean;
   @Prop() required!: boolean;
   @Prop({ default: 1 }) step!: number;
+  @Prop() frosted!: boolean;
 
   get id(): string {
-    return "tc-input_" + this.uuid_;
+    return 'tc-input_' + this.uuid;
   }
 
-  innerValue: any = this.value || (this.type === "number" ? 0 : "");
+  private innerValue: string | number =
+    this.value || (this.type === 'number' ? 0 : '');
 
   inputMode(): string {
-    return this.type == "number" ? "numeric" : "";
-  }
-  inputPattern(): string {
-    if (this.pattern) return this.pattern;
-    return this.type == "number" ? "[0-9]*" : "";
-  }
-  buttonsVisible(): boolean {
-    return this.buttons && this.type === "number";
+    return this.type == 'number' ? 'numeric' : '';
   }
 
-  get styles() {
+  inputPattern(): string {
+    if (this.pattern) return this.pattern;
+    return this.type == 'number' ? '[0-9]*' : '';
+  }
+
+  buttonsVisible(): boolean {
+    return this.buttons && this.type === 'number';
+  }
+
+  get styles(): Record<string, unknown> {
     return {
-      background: this.type === "color" ? this.innerValue : undefined
+      background: this.type === 'color' ? this.innerValue : undefined
     };
   }
 
-  changeVal(amount: number): void {
+  public changeVal(amount: number): void {
     this.innerValue = +this.innerValue + +amount * +this.step;
     this.update();
   }
 
-  update() {
-    this.$emit("input", this.innerValue);
+  public update(): void {
+    this.$emit('input', this.innerValue);
   }
-  change(changeEvent: Event) {
-    this.$emit("change", changeEvent);
+
+  public change(changeEvent: Event): void {
+    this.$emit('change', changeEvent);
     const target: HTMLInputElement = changeEvent.target as HTMLInputElement;
     const fileList: FileList = target.files as FileList;
     const reader = new FileReader();
     reader.onload = loaded => {
+      console.log('file loaded');
       const loadTarget = loaded.target as FileReader;
-      this.$emit("fileLoaded", loadTarget.result);
+      this.$emit('fileLoaded', loadTarget.result);
     };
     if (fileList && fileList.length > 0) reader.readAsText(fileList[0]);
   }
 }
 </script>
+
 <style lang="scss" scoped>
 $size: 30px;
 .tc-input {
@@ -173,16 +184,50 @@ $size: 30px;
     .tc-input--container,
     .tc-input--input input,
     .tc-input--input label {
-      background: lighten($color, 20%);
       color: #fff;
     }
     .tc-input--icon i {
       border-color: rgba(#fff, 0.5);
     }
     .tc-input--container {
+      background: lighten($color, 20%);
       border-color: rgba(#fff, 0.01);
       &:not(.tc-input__disabled):hover {
         border-color: rgba(#fff, 0.4);
+      }
+    }
+  }
+  &.tc-input__frosted {
+    .tc-input--container,
+    .tc-input--input input,
+    .tc-input--input label {
+      color: darken(#fff, 10%);
+    }
+    .tc-input--icon i {
+      border-color: rgba(#fff, 0.4);
+    }
+    .tc-input--container {
+      @include backdrop-blur(darken($paragraph, 10%));
+      color: #fff;
+      &:not(.tc-input__disabled):hover {
+        border-color: rgba(#fff, 0.4);
+      }
+    }
+    &.tc-input__dark {
+      .tc-input--container,
+      .tc-input--input input,
+      .tc-input--input label {
+        color: #fff;
+      }
+      .tc-input--icon i {
+        border-color: rgba(#fff, 0.4);
+      }
+      .tc-input--container {
+        @include backdrop-blur($color);
+        color: #fff;
+        &:not(.tc-input__disabled):hover {
+          border-color: rgba(#fff, 0.3);
+        }
       }
     }
   }
@@ -229,7 +274,7 @@ $size: 30px;
           margin: 0;
         }
         /* Firefox */
-        input[type="number"] {
+        input[type='number'] {
           -moz-appearance: textfield;
         }
       }
@@ -279,7 +324,7 @@ $size: 30px;
     }
     input,
     label {
-      &[type="file"] {
+      &[type='file'] {
         position: fixed;
         top: -200px;
         left: 0;
@@ -288,12 +333,16 @@ $size: 30px;
       }
       font: inherit;
       font-family: inherit;
+      &::placeholder {
+        color: inherit;
+        opacity: 0.8;
+      }
       width: 100%;
       height: 100%;
       display: inline-block;
       outline: none;
       border: none;
-      background: $paragraph;
+      background: transparent;
       -webkit-appearance: none;
     }
   }

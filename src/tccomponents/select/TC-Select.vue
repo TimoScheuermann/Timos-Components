@@ -63,23 +63,25 @@
     </div>
   </div>
 </template>
+
 <script lang="ts">
-import { Vue, Component, Prop, Watch, Mixins } from "vue-property-decorator";
-import TCComponent from "../TC-Component.mixin";
-import TCTooltip from "../tooltip/TC-Tooltip.vue";
+import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
+import TCComponent from '../TC-Component.mixin';
+import TCTooltip from '../tooltip/TC-Tooltip.vue';
+
 type TValues = string | number | boolean;
 
 @Component({
   components: {
-    "tc-tooltip": TCTooltip
+    'tc-tooltip': TCTooltip
   }
 })
 export default class TCSelect extends Mixins(TCComponent) {
   @Prop() title!: string;
   @Prop() tooltip!: string;
-  @Prop({ default: "list" }) icon!: string;
+  @Prop({ default: 'list' }) icon!: string;
   @Prop({ default: false }) multiple!: boolean;
-  @Prop({ default: "Select one" }) placeholder!: string;
+  @Prop({ default: 'Select one' }) placeholder!: string;
   @Prop() value!: TValues | TValues[];
   @Prop() values!: TValues[];
 
@@ -88,29 +90,29 @@ export default class TCSelect extends Mixins(TCComponent) {
     ? this.value
     : this.multiple
     ? []
-    : "";
+    : '';
   public innerValues: TValues[] = this.values ? this.values : [];
 
-  @Watch("values")
+  @Watch('values')
   valuesChanged(): void {
     this.innerValues = this.values ? this.values : [];
   }
 
-  @Watch("value")
+  @Watch('value')
   valueChanged(): void {
     this.innerValue = this.value;
   }
 
-  @Watch("innerValue")
+  @Watch('innerValue')
   update(): void {
-    this.$emit("input", this.innerValue);
+    this.$emit('input', this.innerValue);
   }
 
-  mounted() {
-    window.addEventListener("click", this.clicked);
+  mounted(): void {
+    window.addEventListener('click', this.clicked);
   }
-  beforeDestroy() {
-    window.removeEventListener("click", this.clicked);
+  beforeDestroy(): void {
+    window.removeEventListener('click', this.clicked);
   }
 
   public clicked(e: MouseEvent): void {
@@ -125,7 +127,7 @@ export default class TCSelect extends Mixins(TCComponent) {
   public toggle(value: TValues): void {
     if (!this.multiple) {
       if (this.isSelected(value)) {
-        this.innerValue = "";
+        this.innerValue = '';
       } else {
         this.innerValue = value;
         this.expanded = false;
@@ -149,19 +151,22 @@ export default class TCSelect extends Mixins(TCComponent) {
       return this.innerValue === value;
     }
   }
+
   get id() {
-    return "tc-select_" + this.uuid_;
+    return 'tc-select_' + this.uuid_;
   }
+
   get display() {
     if (this.multiple) {
       const vals: TValues[] = this.innerValue as TValues[];
       if (vals.length == 1) return vals[0];
-      else if (vals.length > 1) return vals.length + "x Items";
+      else if (vals.length > 1) return vals.length + 'x Items';
     }
     return this.innerValue;
   }
 }
 </script>
+
 <style lang="scss" scoped>
 // @supports (-webkit-touch-callout: none) { content: "ios"; }
 // @media (hover: hover) { content: "desktop"; }

@@ -15,6 +15,7 @@ $color_colors: (
   error: $error,
   success: $success,
   alarm: $alarm,
+  paragraph: darken($paragraph, 5%),
 );
 
 // Media Queries

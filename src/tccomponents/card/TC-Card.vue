@@ -40,14 +40,15 @@
     </div>
   </div>
 </template>
+
 <script lang="ts">
-import { Vue, Component, Prop, Mixins } from "vue-property-decorator";
-import TCButton from "../button/TC-Button.vue";
-import TCComponent from "../TC-Component.mixin";
+import { Component, Prop, Mixins } from 'vue-property-decorator';
+import TCButton from '../button/TC-Button.vue';
+import TCComponent from '../TC-Component.mixin';
 
 @Component({
   components: {
-    "tc-button": TCButton
+    'tc-button': TCButton
   }
 })
 export default class TCCard extends Mixins(TCComponent) {
@@ -62,17 +63,17 @@ export default class TCCard extends Mixins(TCComponent) {
     return Object.keys(this.$slots);
   }
 
-  get classes() {
+  get classes(): Record<string, boolean> {
     return {
-      "tc-card__frosted": this.frosted,
-      "tc-card__shadow": this.shadow,
-      "tc-card__rounded": this.rounded,
-      "tc-card__hover": this.hover,
-      "tc-card__dark": this.dark
+      'tc-card__frosted': this.frosted,
+      'tc-card__shadow': this.shadow,
+      'tc-card__rounded': this.rounded,
+      'tc-card__hover': this.hover,
+      'tc-card__dark': this.dark
     };
   }
 
-  get styles() {
+  get styles(): Record<string, string> {
     return {
       color: this.color,
       background: this.background
@@ -80,6 +81,7 @@ export default class TCCard extends Mixins(TCComponent) {
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .tc-card {
   background: $background;

@@ -23,24 +23,25 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop, Mixins } from "vue-property-decorator";
-import TCComponent from "../TC-Component.mixin";
+import { Component, Prop, Mixins } from 'vue-property-decorator';
+import TCComponent from '../TC-Component.mixin';
+
 @Component
 export default class TCSteps extends Mixins(TCComponent) {
   @Prop({ default: 0 }) step!: number;
 
   public steps: string[] = [
-    "Validation",
-    "Authentication",
-    "Confirmation",
-    "Welcome Home"
+    'Validation',
+    'Authentication',
+    'Confirmation',
+    'Welcome Home'
   ];
-  public descriptions: string[] = ["", "", "", "You're all set"];
+  public descriptions: string[] = ['', '', '', "You're all set"];
   public icons: (string | undefined)[] = [
     undefined,
     undefined,
     undefined,
-    "database"
+    'database'
   ];
 
   public data: {
@@ -123,7 +124,7 @@ export default class TCSteps extends Mixins(TCComponent) {
     position: relative;
     &::before,
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       background: currentColor;
       height: 2px;

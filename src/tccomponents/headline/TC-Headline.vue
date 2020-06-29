@@ -12,9 +12,10 @@
     <div class="tc-headline--bar"></div>
   </div>
 </template>
+
 <script lang="ts">
-import { Vue, Component, Prop, Mixins } from "vue-property-decorator";
-import TCComponent from "../TC-Component.mixin";
+import { Component, Prop, Mixins } from 'vue-property-decorator';
+import TCComponent from '../TC-Component.mixin';
 
 @Component
 export default class TCHeadline extends Mixins(TCComponent) {

@@ -32,19 +32,20 @@
     </div>
   </div>
 </template>
+
 <script lang="ts">
-import TCComponent from "../TC-Component.mixin";
-import { Mixins, Component, Prop, Watch } from "vue-property-decorator";
-import TCTooltip from "../tooltip/TC-Tooltip.vue";
+import TCComponent from '../TC-Component.mixin';
+import { Mixins, Component, Prop, Watch } from 'vue-property-decorator';
+import TCTooltip from '../tooltip/TC-Tooltip.vue';
 
 @Component({
   components: {
-    "tc-tooltip": TCTooltip
+    'tc-tooltip': TCTooltip
   }
 })
 export default class TCTextarea extends Mixins(TCComponent) {
-  @Prop({ default: "" }) value!: string;
-  @Prop({ default: "Title" }) title!: string;
+  @Prop({ default: '' }) value!: string;
+  @Prop({ default: 'Title' }) title!: string;
   @Prop() tooltip!: string;
 
   @Prop() autofocus!: boolean;
@@ -54,7 +55,7 @@ export default class TCTextarea extends Mixins(TCComponent) {
   @Prop() form!: string;
   @Prop() maxlength!: string;
   @Prop() name!: string;
-  @Prop({ default: "Enter text" }) placeholder!: string;
+  @Prop({ default: 'Enter text' }) placeholder!: string;
   @Prop() readonly!: boolean;
   @Prop() required!: boolean;
   @Prop({ default: 10 }) rows!: string;
@@ -62,16 +63,17 @@ export default class TCTextarea extends Mixins(TCComponent) {
 
   private innerValue: string = this.value;
 
-  @Watch("value")
-  valueChanged() {
+  @Watch('value')
+  valueChanged(): void {
     this.innerValue = this.value;
   }
 
-  innerValueChanged() {
-    this.$emit("input", this.innerValue);
+  innerValueChanged(): void {
+    this.$emit('input', this.innerValue);
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .tc-textarea {
   color: $color;

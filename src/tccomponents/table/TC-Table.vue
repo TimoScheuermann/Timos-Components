@@ -7,12 +7,15 @@
     </div>
   </div>
 </template>
+
 <script lang="ts">
-import { Vue, Component, Prop, Mixins } from "vue-property-decorator";
-import TCComponent from "../TC-Component.mixin";
+import { Component, Mixins } from 'vue-property-decorator';
+import TCComponent from '../TC-Component.mixin';
+
 @Component
 export default class TCTable extends Mixins(TCComponent) {}
 </script>
+
 <style lang="scss" scoped>
 .tc-table {
   &.tc-table__dark {

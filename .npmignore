@@ -8,6 +8,7 @@ public
 updateComponents.*
 vue.*
 *.lock
+_defaultComp
 dist
 
 # local env files

@@ -20,48 +20,51 @@
     </div>
   </div>
 </template>
+
 <script lang="ts">
-import { Vue, Component, Prop, Watch, Mixins } from "vue-property-decorator";
-import TCSwitch from "../switch/TC-Switch.vue";
-import TCComponent from "../TC-Component.mixin";
+import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
+import TCSwitch from '../switch/TC-Switch.vue';
+import TCComponent from '../TC-Component.mixin';
+
 @Component({
   components: {
-    "tc-switch": TCSwitch
+    'tc-switch': TCSwitch
   }
 })
 export default class TCListItem extends Mixins(TCComponent) {
   @Prop() title!: string;
   @Prop() icon!: string;
-  @Prop() to!: any;
+  @Prop() to!: Record<string, unknown>;
   @Prop() href!: string;
   @Prop({ default: false }) value!: boolean;
   @Prop({ default: false }) isSwitch!: boolean;
 
   public innerValue = this.value;
 
-  @Watch("value")
-  public changed() {
+  @Watch('value')
+  public changed(): void {
     this.innerValue = this.value;
   }
 
   public clicked(): void {
     if (!this.isSwitch) {
       if (this.to) {
-        if (typeof this.to == "string") {
+        if (typeof this.to == 'string') {
           this.$router.push({ name: this.to });
         } else {
           this.$router.push(this.to);
         }
       } else {
-        window.open(this.href, "_blank");
+        window.open(this.href, '_blank');
       }
     } else {
       this.innerValue = !this.innerValue;
-      this.$emit("input", this.innerValue);
+      this.$emit('input', this.innerValue);
     }
   }
 }
 </script>
+
 <style lang="scss" scoped>
 $size: 40px;
 
@@ -91,7 +94,7 @@ $size: 40px;
     .tc-list-item--container {
       &::after {
         position: absolute;
-        content: "";
+        content: '';
         z-index: 10;
         bottom: 0;
         right: 0;

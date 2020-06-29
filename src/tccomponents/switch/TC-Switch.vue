@@ -9,26 +9,29 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop, Watch, Mixins } from "vue-property-decorator";
-import TCComponent from "../TC-Component.mixin";
+import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
+import TCComponent from '../TC-Component.mixin';
 
 @Component
 export default class TCSwitch extends Mixins(TCComponent) {
   @Prop({ default: false }) value!: boolean;
 
-  public id = "tc-switch_" + this.uuid_;
+  get id(): string {
+    return 'tc-switch_' + this.uuid_;
+  }
   public toggled = this.value;
 
-  @Watch("value")
-  public changed() {
+  @Watch('value')
+  public changed(): void {
     this.toggled = this.value;
   }
 
-  updateVal() {
-    this.$emit("input", !this.toggled);
+  updateVal(): void {
+    this.$emit('input', !this.toggled);
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .tc-switch {
   user-select: none;

@@ -47,9 +47,10 @@
     </label>
   </div>
 </template>
+
 <script lang="ts">
-import { Vue, Component, Prop, Watch, Mixins } from "vue-property-decorator";
-import TCComponent from "../TC-Component.mixin";
+import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
+import TCComponent from '../TC-Component.mixin';
 
 @Component
 export default class TCCheckbox extends Mixins(TCComponent) {
@@ -60,13 +61,14 @@ export default class TCCheckbox extends Mixins(TCComponent) {
   @Prop() iconUnchecked!: string;
   @Prop() iconAnimation!: string;
 
-  @Watch("value")
-  changed(): void {
+  @Watch('value')
+  private changed(): void {
     this.checked = this.value;
   }
 
   public checked = this.value;
-  public animations: string[] = ["scroll", "spin", "flip"];
+  public animations: string[] = ['scroll', 'spin', 'flip'];
+
   get animationName(): string {
     if (!this.iconAnimation) return this.animations[0];
     if (this.animations.includes(this.iconAnimation.toLowerCase())) {
@@ -83,8 +85,8 @@ export default class TCCheckbox extends Mixins(TCComponent) {
     return [this.checked ? this.iconChecked : this.iconUnchecked];
   }
 
-  updateVal() {
-    this.$emit("input", !this.checked);
+  public updateVal(): void {
+    this.$emit('input', !this.checked);
   }
 }
 </script>
