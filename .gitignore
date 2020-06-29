@@ -3,6 +3,7 @@ node_modules
 /dist
 /lib
 
+update.cmd
 _defaultComp
 
 # local env files
