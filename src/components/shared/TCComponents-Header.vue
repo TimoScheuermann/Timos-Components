@@ -4,12 +4,12 @@
     :title="headerTitle"
     :variant="sidebarVisible && 'sticky'"
   >
-    <tc-button
+    <!-- <tc-button
       v-if="sidebarVisible"
       slot="pre"
       icon="assets/sidebar-alt.png"
       @click="toggleSidebar"
-    />
+    /> -->
     <template v-if="isDesigner">
       <tc-button
         @click="downloadFile"
