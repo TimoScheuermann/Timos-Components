@@ -46,6 +46,8 @@ export default class TCTable extends Mixins(TCComponent) {}
     max-width: 100%;
     overflow-x: auto;
 
+    @include custom-scrollbar__light();
+
     table {
       min-width: 100%;
       text-align: left;

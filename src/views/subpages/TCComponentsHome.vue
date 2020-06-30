@@ -1,10 +1,6 @@
 <template>
   <div class="tccomponents--home">
-    <tc-hero>
-      <img slot="background" src="assets/hero.png" id="bg" />
-      <img src="assets/banner.png" />
-      <h1 id="title">Components</h1>
-    </tc-hero>
+    <tccomponents-subpage-hero subtitle="Components" />
     <div content>
       <div class="hero-section" center>
         <div class="hero-tiles">
@@ -21,26 +17,22 @@
             <i class="ti-painting" />
           </span>
         </div>
-
         <h1>Component Library</h1>
         <p>
           A library of high-quality ready to use components that will help you
           speed up your development workflow.
         </p>
         <div>
-          <!-- <tc-button
-            :to="{
-              name: constants.projectRoutes.timos_components_getting_started
-            }"
+          <tc-button
+            :to="{ name: 'howto' }"
             variant="filled"
             icon="login"
             name="Getting started"
-          /> -->
+          />
           <tc-button
             :to="{ name: 'designer' }"
             icon="tools"
-            name="Component
-          Designer"
+            name="Component Designer"
           />
         </div>
       </div>
@@ -63,24 +55,26 @@
             :icon="comp.icon"
           />
         </tc-list>
-        <h1 class="tc-components-home--grid">{{ group.group }}</h1>
-        <tl-grid class="tc-components-home--grid" minWidth="200">
-          <router-link
-            v-for="comp in group.components"
-            :key="comp.name"
-            :to="{
-              name:
-                group.prefix + '-' + comp.name.toLowerCase().replace(' ', '-')
-            }"
-          >
-            <tc-card rounded="true">
-              <div class="details">
-                <tf-icon :icon="comp.icon" />
-                <span>{{ comp.name }}</span>
-              </div>
-            </tc-card>
-          </router-link>
-        </tl-grid>
+        <section class="tc-components-home--grid" :class="group.group">
+          <h1>{{ group.group }}</h1>
+          <tl-grid minWidth="200">
+            <router-link
+              v-for="comp in group.components"
+              :key="comp.name"
+              :to="{
+                name:
+                  group.prefix + '-' + comp.name.toLowerCase().replace(' ', '-')
+              }"
+            >
+              <tc-card :hover="true" rounded="true">
+                <div class="details">
+                  <tf-icon :icon="comp.icon" />
+                  <span>{{ comp.name }}</span>
+                </div>
+              </tc-card>
+            </router-link>
+          </tl-grid>
+        </section>
       </div>
     </div>
   </div>
@@ -89,7 +83,6 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
-import TCHero from '@/tccomponents/hero/TC-Hero.vue';
 import TCCard from '@/tccomponents/card/TC-Card.vue';
 import TCButton from '@/tccomponents/button/TC-Button.vue';
 import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
@@ -98,17 +91,18 @@ import TCListItem from '@/tccomponents/list/TC-List-Item.vue';
 import { TCComponentGroup } from '@/models/TCComponentGroup.model';
 import tcComponents from '@/components';
 import TFIcon from '@/tccomponents/_fundamental/icon/TF-Icon.vue';
+import TCComponentsSubpageHero from '@/components/shared/TCComponents-Subpage-Hero.vue';
 
 @Component({
   components: {
     'tc-headline': TCHeadline,
-    'tc-hero': TCHero,
     'tc-card': TCCard,
     'tc-button': TCButton,
     'tl-grid': TLGrid,
     'tc-list': TCList,
     'tc-list-item': TCListItem,
-    'tf-icon': TFIcon
+    'tf-icon': TFIcon,
+    'tccomponents-subpage-hero': TCComponentsSubpageHero
   }
 })
 export default class TCComponentsHome extends Vue {
@@ -119,17 +113,15 @@ export default class TCComponentsHome extends Vue {
 <style lang="scss" scoped>
 [content] {
   @media #{$isDesktop} {
-    padding-top: 10px;
+    padding: 10px 0;
     .themeSection {
       display: none;
     }
   }
   @media #{$isMobile} {
-    padding-top: 0px;
+    padding: 0 5vw;
+    padding-bottom: calc(50px + env(safe-area-inset-bottom));
   }
-}
-.tc-hero {
-  margin-top: calc(-50px - env(safe-area-inset-top));
 }
 .group-show-real {
   .tc-list {
@@ -151,7 +143,20 @@ export default class TCComponentsHome extends Vue {
   @media only screen and(max-width: 496px) {
     display: none;
   }
-  margin-bottom: 40px;
+  &.Layout,
+  &.Fundamentals {
+  }
+  background: lighten($paragraph, 3.5%);
+  border-radius: 20px;
+  margin: 30px 2.5vw;
+  padding: 30px 2.5vw {
+    bottom: 50px;
+  }
+
+  h1 {
+    margin-top: 0;
+    font-size: 2em;
+  }
 }
 a {
   text-decoration: none;
@@ -185,7 +190,9 @@ a {
 }
 .hero-section {
   margin-bottom: 30px;
-
+  h1 {
+    margin: 0;
+  }
   .hero-tiles {
     margin: 20px 0 {
       top: 40px;
@@ -196,6 +203,7 @@ a {
       3: '#26de81',
       4: '#2bcbba'
     );
+
     span {
       @each $i, $color in $colors {
         &:nth-child(#{$i}) {
@@ -218,12 +226,5 @@ a {
       }
     }
   }
-}
-img#bg {
-  filter: blur(7px);
-}
-h1#title {
-  margin: 0;
-  text-align: center;
 }
 </style>

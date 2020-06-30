@@ -31,7 +31,6 @@
 
 <script lang="ts">
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
-import './swipe-events.js';
 import TCComponent from '../TC-Component.mixin';
 
 @Component

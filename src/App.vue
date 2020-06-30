@@ -20,6 +20,7 @@
         :groups="tcComponents"
       />
       <div v-if="sidebarVisible" class="sidebar-footer" slot="sidebar-footer">
+        <img src="assets/text.svg" />
         {{ version }}
       </div>
 
@@ -132,6 +133,10 @@ body {
 .sidebar-footer {
   padding: 10px 0;
   color: #fff;
+  img {
+    max-height: 20px;
+    margin-right: 10px;
+  }
 }
 .sidebar-header {
   padding: 0 10px {

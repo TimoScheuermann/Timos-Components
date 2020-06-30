@@ -2,18 +2,18 @@
   "name": "tccomponents_vue",
   "version": "0.2.2",
   "private": false,
-  "main": "./lib/tccomponents.common.js",
-  "types": "./lib/tccomponents_vue.d.ts",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build-lib": "cross-env TC_TARGET=true vue-cli-service build --target lib --name tccomponents src/tccomponents_vue.ts",
     "lint": "vue-cli-service lint",
+    "build-lib": "cross-env TC_TARGET=true vue-cli-service build --target lib --name tccomponents src/tccomponents_vue.ts",
     "prepublish": "yarn build-lib"
   },
+  "main": "./lib/tccomponents.common.js",
   "dependencies": {
     "core-js": "^3.6.4",
     "node-sass": "^4.13.1",
+    "register-service-worker": "^1.7.1",
     "uuid": "^8.1.0",
     "vue": "^2.6.11",
     "vue-router": "^3.3.4",
@@ -24,6 +24,7 @@
     "@typescript-eslint/parser": "^2.26.0",
     "@vue/cli-plugin-babel": "^4.3.0",
     "@vue/cli-plugin-eslint": "^4.3.0",
+    "@vue/cli-plugin-pwa": "~4.4.0",
     "@vue/cli-plugin-typescript": "^4.3.0",
     "@vue/cli-service": "^4.3.0",
     "@vue/eslint-config-prettier": "^6.0.0",
@@ -60,5 +61,6 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "types": "./lib/tccomponents_vue.d.ts"
 }
