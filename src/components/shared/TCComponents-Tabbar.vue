@@ -1,5 +1,5 @@
 <template>
-  <tc-tabbar :autoBackground="true">
+  <tc-tabbar :key="$route.name" :dark="$route.name === 'designer'">
     <tc-tabbar-item routeName="home" />
     <tc-tabbar-item title="Designer" icon="tools" routeName="designer" />
     <tc-tabbar-item title="How to" icon="question-circle" routeName="howto" />

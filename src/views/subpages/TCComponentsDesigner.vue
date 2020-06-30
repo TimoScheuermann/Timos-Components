@@ -1,13 +1,10 @@
 <template>
-  <div subpage tc-dark-container class="tc-components-designer">
-    <tc-hero height="200" background="#000">
-      <div class="title">Designer</div>
-      <div class="icons">
-        <i class="ti-color-fan" />
-        <i class="ti-tools" />
-        <i class="ti-component" />
-      </div>
-    </tc-hero>
+  <div class="tc-components-designer">
+    <tccomponents-subpage-hero
+      :dark="true"
+      banner="assets/banner_white.svg"
+      subtitle="Designer"
+    />
 
     <div content>
       <tc-headline :dark="true" :title="selectedComponent && 'Properties'">
@@ -144,6 +141,7 @@ import { TCComponentGroup } from '@/models/TCComponentGroup.model';
 import { VueClass } from 'vue-class-component/lib/declarations';
 import IconSelect from '@/components/IconSelect.vue';
 import { EventBus } from '@/eventBus';
+import TCComponentsSubpageHero from '@/components/shared/TCComponents-Subpage-Hero.vue';
 
 @Component({
   components: {
@@ -156,7 +154,8 @@ import { EventBus } from '@/eventBus';
     'tc-icon-select': IconSelect,
     'tc-checkbox': TCCheckbox,
     'tc-grid': TCGrid,
-    'tc-textarea': TCTextarea
+    'tc-textarea': TCTextarea,
+    'tccomponents-subpage-hero': TCComponentsSubpageHero
   }
 })
 export default class TCComponentsDesigner extends Vue {
@@ -362,7 +361,7 @@ export default class TCComponentsDesigner extends Vue {
 <style lang="scss" scoped>
 [content] {
   background: #000;
-
+  min-height: 300px;
   overflow-x: hidden;
   padding-top: 0px;
 }
@@ -388,32 +387,6 @@ export default class TCComponentsDesigner extends Vue {
   }
   /deep/ .tc-card {
     animation: none !important;
-  }
-}
-
-.tc-hero {
-  color: #fff;
-  @media #{$isDesktop} {
-    padding-left: 45px;
-  }
-  .title {
-    text-align: center;
-    font-weight: bold;
-    font-size: 4em;
-  }
-  .icons {
-    opacity: 0.25;
-    font-size: 11em;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: block;
-    text-align: center;
-    padding-top: 50px;
-    i {
-      margin: 0 20px;
-    }
   }
 }
 

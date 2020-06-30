@@ -5,7 +5,7 @@
         <div
           v-for="(seg, index) in segments"
           :key="seg"
-          @click="currentlySelected = index"
+          @click="changeSelection(index)"
           class="item"
         >
           {{ seg }}
@@ -24,14 +24,25 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Mixins } from 'vue-property-decorator';
+import { Component, Prop, Mixins, Watch } from 'vue-property-decorator';
 import TCComponent from '../TC-Component.mixin';
 
 @Component
 export default class TCSegments extends Mixins(TCComponent) {
   @Prop() segments!: string[];
+  @Prop() value!: number;
 
-  public currentlySelected = 0;
+  public currentlySelected = this.value || 0;
+
+  @Watch('value')
+  valueChanged(): void {
+    if (this.value) this.currentlySelected = this.value;
+  }
+
+  public changeSelection(to: number): void {
+    this.currentlySelected = to;
+    this.$emit('input', to);
+  }
 
   get currentSegments(): string[] {
     return this.segments.filter((x, i) => i === this.currentlySelected);

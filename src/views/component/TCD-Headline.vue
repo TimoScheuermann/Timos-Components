@@ -1,14 +1,5 @@
 <template>
   <div>
-    <tc-headline title="Headline" />
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil ullam
-      eligendi ut, libero illo quam earum odit neque harum ex velit maiores
-      aliquam quae itaque placeat, natus accusamus error reprehenderit.
-    </p>
-    <tc-headline title="Slots" />
-    <h3>Default</h3>
-    <h3>Title</h3>
     <tc-headline title="Options" />
 
     <tl-grid minWidth="320">

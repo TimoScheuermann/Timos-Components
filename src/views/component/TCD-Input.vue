@@ -1,12 +1,5 @@
 <template>
   <div>
-    <tc-headline title="Inputs" />
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio iste
-      architecto recusandae fugit consequatur, vero, a odio ea nam hic provident
-      veritatis voluptates natus vel temporibus quasi eveniet, eaque rerum.
-    </p>
-
     <tc-headline title="Options" />
 
     <tl-grid minWidth="300">
@@ -100,6 +93,7 @@
         <tc-link>tc-color-selector</tc-link>.
       </p>
     </div>
+    <p><br /></p>
   </div>
 </template>
 <script lang="ts">

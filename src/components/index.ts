@@ -336,9 +336,16 @@ const tcComponents: TCComponentGroup[] = [
         icon: 'sidebar',
         api: [], // TODO:
         slots: [
-          // TODO:
           {
             name: 'default',
+            description: 'TODO:'
+          },
+          {
+            name: 'footer',
+            description: 'TODO:'
+          },
+          {
+            name: 'header',
             description: 'TODO:'
           }
         ]
@@ -452,13 +459,28 @@ const tcComponents: TCComponentGroup[] = [
               'Is called whenever the user changes the state of the modal'
           }
         ],
-        slots: [] // TODO:
+        slots: [
+          {
+            name: 'default',
+            description: 'TODO:'
+          },
+          {
+            name: 'header',
+            description: 'TODO:'
+          },
+          { name: 'buttons', description: 'TODO:' }
+        ]
       },
       {
         name: 'Tabbar',
         icon: 'tabbar',
         api: [], // TODO:
-        slots: [] // TODO:
+        slots: [
+          {
+            name: 'default',
+            description: 'TODO:'
+          }
+        ] // TODO:
       },
       {
         name: 'Table',
@@ -564,12 +586,6 @@ const tcComponents: TCComponentGroup[] = [
             default: 'transparent'
           }
         ],
-        slots: [] // TODO:
-      },
-      {
-        name: 'Revealer',
-        icon: 'cross',
-        api: [], // TODO:
         slots: [
           {
             name: 'background',
@@ -578,6 +594,17 @@ const tcComponents: TCComponentGroup[] = [
           {
             name: 'default',
             description: 'TODO:'
+          }
+        ] // TODO:
+      },
+      {
+        name: 'Revealer',
+        icon: 'cross',
+        api: [], // TODO:
+        slots: [
+          {
+            name: 'default',
+            description: 'TODO: content to be revealed'
           }
         ]
       },
@@ -650,7 +677,7 @@ const tcComponents: TCComponentGroup[] = [
       },
       {
         name: 'Header',
-        icon: 'bar',
+        icon: 'assets/header-alt.png',
         api: [
           {
             name: 'title',
@@ -736,7 +763,12 @@ const tcComponents: TCComponentGroup[] = [
         name: 'Segments',
         icon: 'segment',
         api: [], // TODO:
-        slots: [] // TODO:
+        slots: [
+          {
+            name: 'TODO:',
+            description: 'TODO:'
+          }
+        ] // TODO:
       },
       {
         name: 'Slider',
@@ -822,7 +854,7 @@ const tcComponents: TCComponentGroup[] = [
         name: 'Tooltip',
         icon: 'tooltip',
         api: [], // TODO:
-        slots: []
+        slots: [{ name: 'default', description: 'TODO:' }]
       },
       {
         name: 'List',
@@ -868,10 +900,25 @@ const tcComponents: TCComponentGroup[] = [
       {
         name: 'Sidebar',
         icon: 'assets/sidebar-alt.png',
-        // icon:
-        //   'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiB3aWR0aD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3QgZmlsbD0ibm9uZSIgaGVpZ2h0PSIxOCIgcng9IjIiIHJ5PSIyIiBzdHJva2U9IiMwMDAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIiB3aWR0aD0iMTgiIHg9IjMiIHk9IjMiLz48bGluZSBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIiB4MT0iOSIgeDI9IjkiIHkxPSIzIiB5Mj0iMjEiLz48L3N2Zz4=',
         api: [], // TODO:
-        slots: [] // TODO:
+        slots: [
+          {
+            name: 'default',
+            description: 'TODO:'
+          },
+          {
+            name: 'sidebar-header',
+            description: 'TODO:'
+          },
+          {
+            name: 'sidebar-content',
+            description: 'TODO:'
+          },
+          {
+            name: 'sidebar-footer',
+            description: 'TODO:'
+          }
+        ] // TODO:
       }
     ]
   }

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <tc-headline title="Revealer"></tc-headline>
     <tc-revealer>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum quos

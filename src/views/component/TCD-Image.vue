@@ -1,12 +1,5 @@
 <template>
   <div>
-    <tc-headline title="Image" />
-    <p>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam, quaerat
-      officiis id et doloremque provident amet dicta corrupti quam sit possimus
-      dolores. Vel repellat earum, cupiditate doloremque veritatis quas
-      architecto.
-    </p>
     <tc-headline title="Options" />
     <tl-grid>
       <portfolio-code-example>

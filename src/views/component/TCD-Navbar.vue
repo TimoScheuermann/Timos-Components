@@ -1,15 +1,5 @@
 <template>
   <div>
-    <tc-headline title="Navbar" />
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit nesciunt at
-      quisquam ipsam a quae ducimus eum, perferendis aliquid laudantium quo,
-      fugiat soluta provident. Eos vitae laboriosam molestias modi iure!
-    </p>
-    <tc-headline title="Slots" />
-    <h3>default</h3>
-    <h3>logo</h3>
-    <h3>actions</h3>
     <tc-headline title="Examples" />
 
     <tl-grid>

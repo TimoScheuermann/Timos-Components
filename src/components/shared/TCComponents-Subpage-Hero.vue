@@ -1,8 +1,13 @@
 <template>
   <tc-hero>
-    <img slot="background" src="assets/hero.png" id="bg" />
-    <div class="hero-content">
-      <img src="assets/banner.svg" />
+    <img
+      slot="background"
+      src="assets/hero.png"
+      :class="{ dark: dark }"
+      id="bg"
+    />
+    <div class="hero-content" :class="{ dark: dark }">
+      <img :src="banner" />
       <h1>{{ subtitle }}</h1>
     </div>
   </tc-hero>
@@ -19,31 +24,40 @@ import TCHero from '@/tccomponents/hero/TC-Hero.vue';
 })
 export default class TCComponentsSubpageHero extends Vue {
   @Prop() subtitle!: string;
+  @Prop({ default: 'assets/banner.svg' }) banner!: string;
+  @Prop() dark!: boolean;
 }
 </script>
 
 <style lang="scss" scoped>
 img#bg {
   filter: blur(7px);
+  &.dark {
+    filter: blur(7px) brightness(30%);
+  }
 }
 
 .tc-hero {
-  margin-top: calc(-50px - env(safe-area-inset-top));
+  @media #{$isDesktop} {
+    margin-top: calc(-50px - env(safe-area-inset-top));
+  }
 }
 
 .hero-content {
+  margin-top: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  @media #{$isMobile} {
-    transform: translateY(25%);
+  &.dark {
+    color: #fff;
   }
+
   img {
     max-width: 230px;
   }
   h1 {
-    margin: 0;
+    margin-top: 10px;
     text-align: center;
   }
 }

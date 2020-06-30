@@ -27,15 +27,17 @@ export default class TCTabbarItem extends Mixins(TCComponent) {
   flex: 1 1 0px;
   display: flex;
   user-select: none;
-  @media only screen and(max-width: 800px) {
+  @media only screen and(max-width: 650px) {
     flex-direction: column;
   }
-  @media only screen and(min-width: 801px) {
+  @media only screen and(min-width: 651px) {
     margin: 0 15px;
+    padding: 8px 0;
     i {
       margin-right: 10px;
     }
   }
+  justify-content: center;
   align-items: center;
   color: inherit;
   margin: 0 2.5px;

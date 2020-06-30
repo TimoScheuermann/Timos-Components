@@ -1,13 +1,5 @@
 <template>
   <div class="">
-    <tc-headline title="Default Tags" />
-
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae praesentium
-      odio, illo culpa cum laborum et placeat doloremque possimus ipsam quo. Nam
-      nobis saepe accusamus quam incidunt mollitia sint labore.
-    </p>
-
     <tc-headline title="Headings" />
 
     <h1>Heading 1</h1>

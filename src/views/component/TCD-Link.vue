@@ -1,14 +1,5 @@
 <template>
   <div>
-    <tc-headline title="Link" />
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non voluptas
-      esse harum vero debitis cum officia praesentium ullam culpa impedit
-      temporibus, recusandae fugit tenetur? Eveniet non inventore illum
-      asperiores dolor.
-    </p>
-    <tc-headline title="Slots" />
-    <h3>default</h3>
     <tc-headline title="Variants" />
     <tl-grid>
       <portfolio-code-example

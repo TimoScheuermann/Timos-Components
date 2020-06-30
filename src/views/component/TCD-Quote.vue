@@ -1,14 +1,5 @@
 <template>
   <div>
-    <tc-headline title="Quote" />
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem et vero
-      omnis odio natus, voluptatibus incidunt libero hic cumque, illum voluptas
-      temporibus repudiandae dicta quia rerum, fugit ut odit exercitationem?
-    </p>
-    <tc-headline title="Slots" />
-    <h3>default</h3>
-    <h3>header</h3>
     <tc-headline title="Variants" />
 
     <tl-grid minWidth="350">

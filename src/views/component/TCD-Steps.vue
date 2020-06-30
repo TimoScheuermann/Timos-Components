@@ -1,14 +1,5 @@
 <template>
   <div>
-    <tc-headline title="Steps" />
-
-    <p>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi
-      reprehenderit quaerat beatae nemo ad ipsa? Natus, neque. Nihil suscipit
-      aspernatur inventore, accusantium aperiam veniam iste quas quaerat velit?
-      Quas, dignissimos!
-    </p>
-
     <tc-steps></tc-steps>
   </div>
 </template>

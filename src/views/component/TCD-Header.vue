@@ -1,16 +1,5 @@
 <template>
   <div>
-    <tc-headline title="Header" />
-    <p>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem,
-      voluptates explicabo vero architecto magnam, maxime minus eveniet
-      provident repellat, dolore cupiditate saepe fugiat dolores? Veniam nihil
-      similique eos molestiae quaerat.
-    </p>
-    <tc-headline title="Slots" />
-    <h3>Default</h3>
-    <h3>Title</h3>
-
     <tc-headline title="Options" />
 
     <portfolio-code-example

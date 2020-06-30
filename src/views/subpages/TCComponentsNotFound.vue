@@ -10,4 +10,9 @@ import { Vue, Component } from 'vue-property-decorator';
 export default class TCComponentsNotFound extends Vue {}
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.tccomponents--notfound {
+  background: red;
+  height: 100vh;
+}
+</style>

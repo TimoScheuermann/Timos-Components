@@ -1,13 +1,5 @@
 <template>
   <div>
-    <tc-headline title="Checkbox" />
-    <p>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates
-      placeat ad ullam ipsum architecto mollitia repellendus, excepturi itaque
-      nisi distinctio eligendi praesentium sapiente qui harum consectetur enim
-      ipsa quidem impedit.
-    </p>
-
     <tc-headline title="Variants" />
 
     <tl-grid minWidth="320">

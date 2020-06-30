@@ -1,15 +1,5 @@
 <template>
   <div>
-    <tc-headline title="Modal" />
-    <p>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. A, dicta. Ipsa
-      reprehenderit, ab impedit nostrum magni, itaque dicta dolores dignissimos
-      ut iusto facere officiis dolorem. Suscipit odit odio ea. Illum.
-    </p>
-    <tc-headline title="Slots" />
-    <h3>default</h3>
-    <h3>header</h3>
-    <h3>buttons</h3>
     <tc-headline title="Example" />
 
     <tl-grid minWidth="350">

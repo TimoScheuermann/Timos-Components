@@ -1,8 +1,9 @@
 <template>
   <tc-header
-    :autoBackground="true"
     :title="headerTitle"
     :variant="sidebarVisible && 'sticky'"
+    :dark="$route.name === 'designer'"
+    :key="$route.name"
   >
     <!-- <tc-button
       v-if="sidebarVisible"

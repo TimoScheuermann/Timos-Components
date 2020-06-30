@@ -1,4 +1,4 @@
-import EmptyRouter from '@/views/EmptyRouter.vue';
+import TCComponentsDetails from '@/views/subpages/TCComponentsDetails.vue';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
@@ -46,7 +46,7 @@ const router = new VueRouter({
     {
       path: '/fundamental',
       redirect: { name: 'home' },
-      component: EmptyRouter,
+      component: TCComponentsDetails,
       children: [
         {
           path: 'Default Tags',
@@ -79,17 +79,21 @@ const router = new VueRouter({
         },
         {
           path: '*',
-          component: () => import('@/views/subpages/TCComponentsNotFound.vue'),
-          meta: {
-            title: prefix + 'Not Found'
-          }
+          redirect: { name: 'home' }
         }
+        // {
+        //   path: '*',
+        //   component: () => import('@/views/subpages/TCComponentsNotFound.vue'),
+        //   meta: {
+        //     title: prefix + 'Not Found'
+        //   }
+        // }
       ]
     },
     {
       path: '/component',
       redirect: { name: 'home' },
-      component: EmptyRouter,
+      component: TCComponentsDetails,
       children: [
         {
           path: 'Badge',
@@ -275,7 +279,7 @@ const router = new VueRouter({
     {
       path: '/layout',
       redirect: { name: 'home' },
-      component: EmptyRouter,
+      component: TCComponentsDetails,
       children: [
         {
           path: 'Grid',

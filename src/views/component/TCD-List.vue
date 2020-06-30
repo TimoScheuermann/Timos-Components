@@ -1,14 +1,5 @@
 <template>
   <div>
-    <tc-headline title="List" />
-
-    <p>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi
-      reprehenderit quaerat beatae nemo ad ipsa? Natus, neque. Nihil suscipit
-      aspernatur inventore, accusantium aperiam veniam iste quas quaerat velit?
-      Quas, dignissimos!
-    </p>
-
     <tl-grid minWidth="320">
       <tc-list title="Sample list">
         <tc-list-item title="Settings" icon="settings" />

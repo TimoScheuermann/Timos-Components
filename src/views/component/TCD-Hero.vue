@@ -1,18 +1,6 @@
 <template>
   <!-- eslint-disable -->
   <div>
-    <tc-headline title="Hero" />
-    <p>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque hic ab
-      laudantium voluptas. Maxime magnam, architecto corrupti dolores
-      perferendis inventore assumenda. Sapiente, culpa id. Accusamus quibusdam
-      recusandae dolore laudantium eaque!
-    </p>
-
-    <tc-headline title="Slots" />
-    <h3>background</h3>
-    <h3>default</h3>
-
     <tc-headline title="Options" />
 
     <portfolio-code-example
@@ -48,9 +36,14 @@
 import { Vue, Component } from 'vue-property-decorator';
 
 import PortfolioCodeExample from '@/components/CodeExample.vue';
+import TCHero from '@/tccomponents/hero/TC-Hero.vue';
+import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
+
 @Component({
   components: {
-    'portfolio-code-example': PortfolioCodeExample
+    'portfolio-code-example': PortfolioCodeExample,
+    'tc-headline': TCHeadline,
+    'tc-hero': TCHero
   }
 })
 export default class TCComponentsHero extends Vue {

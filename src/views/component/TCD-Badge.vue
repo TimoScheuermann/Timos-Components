@@ -1,14 +1,5 @@
 <template>
   <div>
-    <tc-headline title="Badge" />
-
-    <p>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi
-      reprehenderit quaerat beatae nemo ad ipsa? Natus, neque. Nihil suscipit
-      aspernatur inventore, accusantium aperiam veniam iste quas quaerat velit?
-      Quas, dignissimos!
-    </p>
-
     <tc-badge :value="10" tccolor="error">
       <tc-button name="Badge on Button"></tc-button>
     </tc-badge>

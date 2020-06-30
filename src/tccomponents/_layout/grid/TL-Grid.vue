@@ -10,10 +10,10 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 @Component
 export default class TLGrid extends Vue {
   @Prop({ default: '300' }) minWidth!: string;
-  @Prop({ default: 'auto-fill' }) arrangement!: string;
+  @Prop({ default: 'auto-fit' }) arrangement!: string;
 
   get arrange(): string {
-    if (this.arrangement !== 'auto-fit') return 'auto-fill';
+    if (this.arrangement !== 'auto-fill') return 'auto-fit';
     return this.arrangement;
   }
 

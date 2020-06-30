@@ -1,12 +1,5 @@
 <template>
   <div>
-    <tc-headline title="Divider" />
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus ab quos
-      similique nam vel fugiat quidem sit pariatur! Ut possimus, consequatur
-      velit dicta optio at tempore atque veniam fugiat nisi.
-    </p>
-
     <tc-headline title="Variants" />
 
     <tl-grid minWidth="320">

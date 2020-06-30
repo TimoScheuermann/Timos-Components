@@ -1,12 +1,5 @@
 <template>
   <div>
-    <tc-headline title="Progress" />
-    <p>
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime, dolorum
-      tempora facere reiciendis enim earum, aliquam, nesciunt laboriosam commodi
-      quaerat hic? Enim molestias pariatur corrupti architecto eaque magni
-      officiis veniam.
-    </p>
     <tc-headline title="Variants" />
 
     <tl-grid minWidth="350">

@@ -90,7 +90,7 @@ export default class App extends Vue {
   }
 
   private recheckSidebarVisible(): void {
-    this.sidebarVisible = window.matchMedia('(min-width: 750px)').matches;
+    this.sidebarVisible = window.matchMedia('(min-width: 851px)').matches;
   }
 
   @Watch('$route', { deep: true, immediate: true })
