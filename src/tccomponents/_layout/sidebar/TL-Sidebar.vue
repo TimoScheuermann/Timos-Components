@@ -90,6 +90,7 @@ export default class TLSidebar extends Mixins(TCComponent) {
 
   .tl-sidebar--sidebar {
     max-width: 225px;
+
     transition: all 0.4s ease-out;
     max-width: 225px;
     &.layout-sidebar__collapsed {

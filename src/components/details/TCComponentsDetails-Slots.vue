@@ -5,7 +5,6 @@
     v-if="component.slots.length > 0"
   >
     <h1>Slots</h1>
-    <p>{{ prefix }}</p>
 
     <tl-grid>
       <div>

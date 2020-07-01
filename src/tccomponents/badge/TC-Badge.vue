@@ -47,6 +47,7 @@ export default class TCBadge extends Mixins(TCComponent) {
 <style lang="scss" scoped>
 .tc-badge {
   position: relative;
+  user-select: none;
   display: block;
 
   .tc-badge--badge {

@@ -37,10 +37,11 @@ const router = new VueRouter({
     },
 
     {
-      path: '/demo',
-      name: 'demo',
-      beforeEnter(): void {
-        window.location.replace('https://timos.design');
+      path: '/demos',
+      name: 'demos',
+      component: () => import('@/views/subpages/TCComponentsDemos.vue'),
+      meta: {
+        title: prefix + 'Demos'
       }
     },
     {

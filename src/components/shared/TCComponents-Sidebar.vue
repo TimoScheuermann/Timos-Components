@@ -23,9 +23,9 @@
       </tc-badge>
       <tc-sidebar-item
         key="demo"
-        name="Demo"
+        name="Demos"
         icon="code"
-        :to="{ name: 'demo' }"
+        :to="{ name: 'demos' }"
       />
     </tc-sidebar-group>
 

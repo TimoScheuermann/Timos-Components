@@ -3,7 +3,7 @@
     <tc-tabbar-item routeName="home" />
     <tc-tabbar-item title="Designer" icon="tools" routeName="designer" />
     <tc-tabbar-item title="How to" icon="question-circle" routeName="howto" />
-    <tc-tabbar-item title="Demo" icon="code" routeName="demo" />
+    <tc-tabbar-item title="Demos" icon="code" routeName="demos" />
   </tc-tabbar>
 </template>
 

@@ -114,6 +114,10 @@ export default class TCCard extends Mixins(TCComponent) {
       box-shadow: $shadow-hover;
     }
   }
+  img,
+  video {
+    user-select: none;
+  }
 
   .tc-card--title__prestyled {
     padding: 20px 30px;
