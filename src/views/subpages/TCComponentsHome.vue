@@ -120,6 +120,7 @@ export default class TCComponentsHome extends Vue {
   }
   @media #{$isMobile} {
     padding: 0 5vw;
+
     padding-bottom: calc(50px + env(safe-area-inset-bottom));
   }
 }
@@ -143,9 +144,7 @@ export default class TCComponentsHome extends Vue {
   @media only screen and(max-width: 496px) {
     display: none;
   }
-  &.Layout,
-  &.Fundamentals {
-  }
+
   background: lighten($paragraph, 3.5%);
   border-radius: 20px;
   margin: 30px 2.5vw;

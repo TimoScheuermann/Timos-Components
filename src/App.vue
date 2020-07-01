@@ -8,6 +8,7 @@
       <div slot="sidebar-header" v-if="sidebarVisible" class="sidebar-header">
         <tc-input
           :frosted="true"
+          :dark="true"
           v-model="query"
           placeholder="Search"
           icon="lens"
@@ -119,6 +120,9 @@ body {
 }
 [content] {
   padding: 70px 5vw;
+  @media #{$isMobile} {
+    padding-bottom: calc(70px + env(safe-area-inset-bottom));
+  }
 }
 [subpage] {
   margin-top: -50px;
@@ -139,10 +143,9 @@ body {
   }
 }
 .sidebar-header {
-  padding: 0 10px {
-    top: 10px;
-  }
+  padding: 5px;
   .searchInput {
+    width: 173px;
     transform: translateX(0px);
 
     transition: transform 0.4s ease-out;

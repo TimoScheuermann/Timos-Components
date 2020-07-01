@@ -269,17 +269,41 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
     .tc-overflow-items--container {
       max-height: 0vh;
       transition: 0.5s ease-in-out;
-      transform: translateY(-30px);
-      padding: 0;
+      transform: translateY(-50px);
+      padding: 0px;
+      overflow: hidden;
+      [tc-header-line] {
+        transition: 0.4s ease-in-out;
+        padding: 0;
+        margin: 0;
+      }
       text-align: center;
       opacity: 0;
     }
     &.tc-overflow-items__visible {
       .tc-overflow-items--container {
         opacity: 1;
-        padding: 20px 0;
-        max-height: 100vh;
+        padding-bottom: 20px;
+        padding-top: 10px;
+        max-height: calc(100vh - 80px);
         transform: translateY(0px);
+        overflow: auto;
+        [tc-header-line]:not(:first-child) {
+          margin-top: 10px;
+          padding-top: 10px;
+          position: relative;
+          &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            opacity: 0.4;
+            border-radius: 5px;
+            background: currentColor;
+          }
+        }
       }
     }
 

@@ -48,6 +48,14 @@
       @input="update()"
       @change="change"
     />
+    <div
+      v-if="type === 'text' && innerValue.length > 0"
+      p
+      class="tc-input--indicator indicator__clear"
+      @click="clear()"
+    >
+      <i class="ti-cross" />
+    </div>
     <div v-if="buttons_" p class="tc-input--indicator indicator__button">
       <i class="ti-plus" />
     </div>
@@ -75,7 +83,7 @@ export default class TCInput extends Mixins(TCComponent) {
   @Prop() title!: string;
   @Prop() buttons!: boolean;
   @Prop() placeholder!: string;
-  @Prop() type!: string;
+  @Prop({ default: 'text' }) type!: string;
   @Prop() value!: string | number;
   @Prop() accept!: string;
   @Prop() autocomplete!: 'on' | 'off';
@@ -127,6 +135,10 @@ export default class TCInput extends Mixins(TCComponent) {
     };
   }
 
+  public clear() {
+    this.innerValue = '';
+    this.update();
+  }
   public changeVal(amount: number): void {
     this.innerValue = +this.innerValue + +amount * +this.step;
     this.update();
@@ -158,11 +170,12 @@ export default class TCInput extends Mixins(TCComponent) {
   @include tc-container__light();
   &.tc-input__frosted {
     @include backdrop-blur(darken($paragraph, 10%));
+    color: #fff;
   }
   &.tc-input__dark {
     @include tc-container__dark();
     &.tc-input__frosted {
-      @include backdrop-blur(lighten($color, 20%));
+      @include backdrop-blur(lighten($color, 10%));
     }
   }
   &.tc-input__fit-content {
@@ -199,6 +212,18 @@ export default class TCInput extends Mixins(TCComponent) {
       }
       &:active {
         filter: brightness(115%) drop-shadow(2px 4px 5px rgba(0, 0, 0, 0.1));
+      }
+    }
+    &.indicator__clear {
+      background: #333;
+      border-radius: 50px;
+      opacity: 0.3;
+      &:hover {
+        opacity: 0.5;
+      }
+      i {
+        color: #fff;
+        transform: scale(0.5);
       }
     }
     &.indicator__icon {

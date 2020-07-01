@@ -5,27 +5,26 @@
     :dark="$route.name === 'designer'"
     :key="$route.name"
   >
-    <!-- <tc-button
-      v-if="sidebarVisible"
-      slot="pre"
-      icon="assets/sidebar-alt.png"
-      @click="toggleSidebar"
-    /> -->
     <template v-if="isDesigner">
-      <tc-button
-        @click="downloadFile"
-        name="Save Configuration"
-        icon="download"
-        variant="filled"
-      />
-      <tc-input
-        accept=".tccomponent"
-        type="file"
-        icon="component"
-        filePlaceholder="Load Configuration"
-        @fileLoaded="fileLoaded"
-        :dark="true"
-      />
+      <div tc-header-line>
+        <tc-button
+          @click="downloadFile"
+          name="Save Configuration"
+          icon="download"
+          variant="filled"
+          class="save-config"
+        />
+      </div>
+      <div tc-header-line>
+        <tc-input
+          accept=".tccomponent"
+          type="file"
+          icon="component"
+          filePlaceholder="Load Configuration"
+          @fileLoaded="fileLoaded"
+          :dark="true"
+        />
+      </div>
     </template>
     <template v-if="isDetailView">
       <tc-button
@@ -95,4 +94,8 @@ export default class TCComponentsHeader extends Vue {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.save-config {
+  display: flex;
+}
+</style>
