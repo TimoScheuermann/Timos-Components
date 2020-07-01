@@ -1,5 +1,5 @@
 <template>
-  <div class="tc-header" :id="uuid_" :style="styles" :class="classes">
+  <div class="tc-header" :id="id" :style="styles" :class="classes">
     <div class="tc-header--head">
       <div
         v-if="backTo || backHref"
@@ -18,10 +18,12 @@
       </div>
     </div>
 
+    <div class="tc-header--sep"></div>
+
     <div
       v-if="!itemsOverflow"
       class="tc-header--items"
-      :id="'tc-header--item-' + uuid"
+      :id="'tc-header--item-' + uuid_"
     >
       <slot />
     </div>
@@ -47,7 +49,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Mixins } from 'vue-property-decorator';
+import { Component, Prop, Mixins, Watch } from 'vue-property-decorator';
 import TCCheckbox from '../checkbox/TC-Checkbox.vue';
 import TCAutoBackground from '../TC-Auto-Background.mixin';
 
@@ -70,6 +72,9 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
   created(): void {
     window.addEventListener('resize', this.resize);
     this.resize();
+    this.$nextTick(() => {
+      this.resize();
+    });
   }
 
   destroyed(): void {
@@ -86,11 +91,14 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
     else if (this.backHref) window.open(this.backHref, '_blank');
   }
 
+  @Watch('$slots.default', { deep: true, immediate: true })
+  @Watch('$route', { deep: true, immediate: true })
   public resize(): void {
     this.itemsOverflow = false;
     setTimeout(() => {
       const element = document.getElementById('tc-header--item-' + this.uuid_);
       if (!element) return;
+
       this.itemsOverflow =
         element.scrollHeight > element.clientHeight ||
         element.scrollWidth > element.clientWidth;
@@ -135,8 +143,7 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
 .tc-header {
   user-select: none;
   box-shadow: $shadow;
-  right: 0;
-  left: 0;
+
   min-height: 50px;
   display: flex;
   justify-content: space-between;
@@ -167,18 +174,27 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
   &.tc-header__sticky {
     position: sticky;
     padding: 0 5vw;
+    overflow: hidden;
   }
   &.tc-header__fixed {
     position: fixed;
+    right: 0;
+    left: 0;
     padding: 0 5vw {
       top: env(safe-area-inset-top);
     }
   }
   &.tc-header__floating {
     position: fixed;
+    right: 0;
+    left: 0;
     margin: 0 10vw;
     padding: 0 20px;
     border-radius: $border-radius;
+  }
+
+  .tc-header--sep {
+    flex-grow: 1;
   }
 
   .tc-header--head {

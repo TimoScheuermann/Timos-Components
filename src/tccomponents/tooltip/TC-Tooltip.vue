@@ -51,7 +51,7 @@ export default class TCTooltip extends Mixins(TCComponent) {
 
   .tooltip {
     visibility: hidden;
-    z-index: 10;
+    z-index: 200;
     position: absolute;
     // white-space: nowrap;
 
@@ -107,6 +107,10 @@ export default class TCTooltip extends Mixins(TCComponent) {
       background: $primary;
       // width: fit-content;
       width: max-content;
+      position: sticky;
+      right: 0;
+      font-weight: normal;
+      color: #fff;
       max-width: 300px;
 
       padding: 1px 12px {

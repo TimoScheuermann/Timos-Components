@@ -62,7 +62,7 @@ export default class TCComponentsHeader extends Vue {
   }
 
   get headerTitle(): string {
-    return (this.$route.meta.title || '').split('|').pop();
+    return (this.$route.meta.title || '').split(' | ').pop();
   }
 
   get isDesigner(): boolean {

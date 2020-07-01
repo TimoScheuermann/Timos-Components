@@ -163,6 +163,7 @@ export default class TCCheckbox extends Mixins(TCComponent) {
       stroke: #fff;
     }
   }
+  width: fit-content;
   input {
     display: none;
   }

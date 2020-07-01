@@ -71,6 +71,13 @@ const tcComponents: TCComponentGroup[] = [
             description: "Adds +/- Buttons (only for type='number')"
           },
           {
+            name: 'width',
+            type: 'string',
+            description: 'Determines the width of tc-input',
+            default: 'full',
+            parameters: 'full, fit-content'
+          },
+          {
             name: 'placeholder',
             type: 'string',
             description:

@@ -83,7 +83,11 @@
       </div>
     </div>
     <p><b>Example</b></p>
-    <tc-input :title="'Type: ' + currentType" :type="currentType" />
+    <tc-input
+      width="fit-content"
+      :title="'Type: ' + currentType"
+      :type="currentType"
+    />
     <div class="fyi" v-if="currentType === 'color'">
       <p>
         <b><i class="ti ti-i-circle" /> FYI</b>
@@ -145,6 +149,10 @@ export default class TCDInput extends Vue {
 }
 </script>
 <style lang="scss" scoped>
+.tc-input {
+  margin-top: 30px;
+}
+
 .fyi i {
   margin-right: 5px;
   color: #08f;

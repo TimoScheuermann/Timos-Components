@@ -56,10 +56,9 @@ export default class TFIcon extends Mixins(TCComponent) {
 span {
   width: 1em;
   height: 1em;
-
   img {
-    height: 100%;
-    width: 100%;
+    height: 1em;
+    width: 1em;
     object-fit: contain;
   }
 }

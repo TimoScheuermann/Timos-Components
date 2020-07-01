@@ -35,13 +35,19 @@ const router = new VueRouter({
         title: prefix + 'Getting Started'
       }
     },
-
     {
       path: '/demos',
       name: 'demos',
       component: () => import('@/views/subpages/TCComponentsDemos.vue'),
       meta: {
         title: prefix + 'Demos'
+      }
+    },
+    {
+      path: '/playground',
+      component: () => import('@/views/subpages/TCComponentsPlayground.vue'),
+      meta: {
+        title: prefix + 'Playground'
       }
     },
     {

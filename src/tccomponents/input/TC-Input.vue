@@ -1,90 +1,76 @@
 <template>
   <div
     class="tc-input"
-    :class="{ 'tc-input__dark': dark, 'tc-input__frosted': frosted }"
+    :class="{
+      'tc-input__dark': dark,
+      'tc-input__frosted': frosted,
+      'tc-input__fit-content': isFitContent
+    }"
   >
-    <div class="tc-input--head" v-if="title || tooltip">
-      <div class="tc-input--title">
-        {{ title }}
-      </div>
-      <div class="tc-input--tooltip" v-if="tooltip">
-        <tc-tooltip :tooltip="tooltip">
-          <i class="ti-question-circle" />
-        </tc-tooltip>
-      </div>
+    <div class="tc-input--title" v-if="title">{{ title }}</div>
+    <div class="tc-input--tooltip" v-if="tooltip">
+      <tc-tooltip :tooltip="tooltip">
+        <i class="ti-question-circle"></i>
+      </tc-tooltip>
     </div>
-    <div
-      class="tc-input--container"
-      :class="{
-        'tc-input__buttons': buttonsVisible(),
-        'tc-input__icon': icon,
-        'tc-input__disabled': disabled
-      }"
-    >
-      <div
-        class="tc-input--button"
-        @click="changeVal(-1)"
-        v-if="buttonsVisible()"
-      >
-        <i class="ti ti-minus" />
-      </div>
-      <div class="tc-input--icon" v-if="icon">
-        <i class="ti" :class="'ti-' + icon" />
-      </div>
-      <div class="tc-input--input">
-        <label v-if="type && type.toLowerCase() === 'file'" :for="id">
-          {{ filePlaceholder }}
-        </label>
-        <input
-          v-model="innerValue"
-          :type="type ? type.toLowerCase() : 'text'"
-          :id="id"
-          :inputmode="inputMode()"
-          :style="styles"
-          :placeholder="placeholder"
-          :pattern="inputPattern()"
-          :accept="accept"
-          :autocomplete="autocomplete"
-          :autofocus="autofocus"
-          :disabled="disabled"
-          :form="form"
-          :max="max"
-          :maxlength="maxlength"
-          :min="min"
-          :minlength="minlength"
-          :multiple="multiple"
-          :readonly="readonly"
-          :required="required"
-          :step="step"
-          :ref="id"
-          @input="update()"
-          @change="change"
-        />
-      </div>
-      <div
-        class="tc-input--button"
-        @click="changeVal(1)"
-        v-if="buttonsVisible()"
-      >
-        <i class="ti ti-plus" />
-      </div>
+    <div v-if="buttons_" m class="tc-input--indicator indicator__button">
+      <i class="ti-minus" />
+    </div>
+    <div v-if="icon" class="tc-input--indicator indicator__icon">
+      <tf-icon :icon="icon" />
+    </div>
+    <label v-if="type && type.toLowerCase() === 'file'" :for="id">
+      {{ filePlaceholder_ }}
+    </label>
+
+    <input
+      v-model="innerValue"
+      :type="type ? type.toLowerCase() : 'text'"
+      :id="id"
+      :inputmode="inputMode()"
+      :style="styles"
+      :placeholder="placeholder"
+      :pattern="inputPattern()"
+      :accept="accept"
+      :autocomplete="autocomplete"
+      :autofocus="autofocus"
+      :disabled="disabled"
+      :form="form"
+      :max="max"
+      :maxlength="maxlength"
+      :min="min"
+      :minlength="minlength"
+      :multiple="multiple"
+      :readonly="readonly"
+      :required="required"
+      :step="step"
+      :ref="id"
+      @input="update()"
+      @change="change"
+    />
+    <div v-if="buttons_" p class="tc-input--indicator indicator__button">
+      <i class="ti-plus" />
     </div>
   </div>
 </template>
+
 <script lang="ts">
 import { Prop, Mixins, Component } from 'vue-property-decorator';
 import TCComponent from '../TC-Component.mixin';
 import TCTooltip from '../tooltip/TC-Tooltip.vue';
+import TFIcon from '../_fundamental/icon/TF-Icon.vue';
 
 @Component({
   components: {
-    'tc-tooltip': TCTooltip
+    'tc-tooltip': TCTooltip,
+    'tf-icon': TFIcon
   },
   mixins: [TCComponent]
 })
 export default class TCInput extends Mixins(TCComponent) {
   @Prop() icon!: string;
-  @Prop({ default: 'Choose File' }) filePlaceholder!: string;
+  @Prop({ default: 'full' }) width!: string;
+  @Prop({ default: 'Choose a file' }) filePlaceholder!: string;
   @Prop() tooltip!: string;
   @Prop() title!: string;
   @Prop() buttons!: boolean;
@@ -110,7 +96,7 @@ export default class TCInput extends Mixins(TCComponent) {
   get id(): string {
     return 'tc-input_' + this.uuid;
   }
-
+  private fileList = '';
   private innerValue: string | number =
     this.value || (this.type === 'number' ? 0 : '');
 
@@ -123,7 +109,15 @@ export default class TCInput extends Mixins(TCComponent) {
     return this.type == 'number' ? '[0-9]*' : '';
   }
 
-  buttonsVisible(): boolean {
+  get filePlaceholder_(): string {
+    return this.fileList.length > 0 ? this.fileList : this.filePlaceholder;
+  }
+
+  get isFitContent(): boolean {
+    return this.width == 'fit-content';
+  }
+
+  get buttons_(): boolean {
     return this.buttons && this.type === 'number';
   }
 
@@ -146,9 +140,11 @@ export default class TCInput extends Mixins(TCComponent) {
     this.$emit('change', changeEvent);
     const target: HTMLInputElement = changeEvent.target as HTMLInputElement;
     const fileList: FileList = target.files as FileList;
+    this.fileList = Array.from(fileList)
+      .map(x => x.name)
+      .join(', ');
     const reader = new FileReader();
     reader.onload = loaded => {
-      console.log('file loaded');
       const loadTarget = loaded.target as FileReader;
       this.$emit('fileLoaded', loadTarget.result);
     };
@@ -158,192 +154,95 @@ export default class TCInput extends Mixins(TCComponent) {
 </script>
 
 <style lang="scss" scoped>
-$size: 30px;
 .tc-input {
-  display: inline-block;
-  max-width: 100%;
-  margin: 3px;
-
-  .tc-input--head {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    margin-bottom: 3px;
-
-    .tc-input--title {
-      @include tc-container--title();
-    }
-    .tc-input--tooltip {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-  }
-
-  &.tc-input__dark {
-    color: #fff;
-    .tc-input--container,
-    .tc-input--input input,
-    .tc-input--input label {
-      color: #fff;
-    }
-    .tc-input--icon i {
-      border-color: rgba(#fff, 0.5);
-    }
-    .tc-input--container {
-      background: lighten($color, 20%);
-      border-color: rgba(#fff, 0.01);
-      &:not(.tc-input__disabled):hover {
-        border-color: rgba(#fff, 0.4);
-      }
-    }
-  }
+  @include tc-container__light();
   &.tc-input__frosted {
-    .tc-input--container,
-    .tc-input--input input,
-    .tc-input--input label {
-      color: darken(#fff, 10%);
-    }
-    .tc-input--icon i {
-      border-color: rgba(#fff, 0.4);
-    }
-    .tc-input--container {
-      @include backdrop-blur(darken($paragraph, 10%));
-      color: #fff;
-      &:not(.tc-input__disabled):hover {
-        border-color: rgba(#fff, 0.4);
-      }
-    }
-    &.tc-input__dark {
-      .tc-input--container,
-      .tc-input--input input,
-      .tc-input--input label {
-        color: #fff;
-      }
-      .tc-input--icon i {
-        border-color: rgba(#fff, 0.4);
-      }
-      .tc-input--container {
-        @include backdrop-blur($color);
-        color: #fff;
-        &:not(.tc-input__disabled):hover {
-          border-color: rgba(#fff, 0.3);
-        }
-      }
+    @include backdrop-blur(darken($paragraph, 10%));
+  }
+  &.tc-input__dark {
+    @include tc-container__dark();
+    &.tc-input__frosted {
+      @include backdrop-blur(lighten($color, 20%));
     }
   }
-
-  .tc-input--container {
-    display: inline-grid;
-    grid-template-rows: $size;
-    background: $paragraph;
-    transition: 0.2s ease-in-out;
-
-    border: 1px solid rgba($color, 0.01) {
-      radius: $border-radius;
-    }
-    &:not(.tc-input__disabled):hover {
-      border-color: rgba($color, 0.4);
-    }
-
-    justify-content: center; // iOS Purpose
-    align-items: center; // iOS Purpose
-    min-width: 100px;
-    max-width: 100%;
-    grid-template-columns: 1fr;
+  &.tc-input__fit-content {
+    width: fit-content;
+  }
+  position: relative;
+  .tc-input--title {
+    @include tc-container--title();
+  }
+  .tc-input--tooltip {
+    @include tc-container--title();
     overflow: hidden;
-    &.tc-input__disabled {
-      opacity: 0.7;
-    }
-    &.tc-input__buttons {
-      grid-template-columns: $size 1fr $size;
-    }
-    &.tc-input__icon {
-      grid-template-columns: 33px 1fr 0px;
-    }
-    &.tc-input__icon.tc-input__buttons {
-      grid-template-columns: $size 33px 1fr $size;
-    }
-    &.tc-input__buttons {
-      .tc-input--input {
-        input {
-          text-align: center;
-        }
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-          -webkit-appearance: none;
-          margin: 0;
-        }
-        /* Firefox */
-        input[type='number'] {
-          -moz-appearance: textfield;
-        }
-      }
-    }
+    right: 5px;
   }
-
-  .tc-input--icon,
-  .tc-input--button {
+  .tc-input--indicator {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-    i {
-      text-align: center;
-      line-height: #{$size * 3 / 4};
-      width: #{$size * 3 / 4};
-      height: #{$size * 3 / 4};
+    &[m] {
+      margin-right: 5px;
     }
-  }
-
-  .tc-input--icon {
-    opacity: 0.7;
-    i {
-      border-right: 1px solid rgba($color, 0.5);
-      padding-right: 5px;
+    &[p] {
+      margin-left: 5px;
     }
-  }
-
-  .tc-input--button {
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
-
-    &:active {
-      filter: brightness(115%) drop-shadow(2px 4px 5px rgba(0, 0, 0, 0.1));
-    }
-    i {
-      color: #fff;
+    &.indicator__button {
       background: $primary;
+      width: 20px;
       border-radius: 3px;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.2s ease-in-out;
+      &:hover {
+        filter: brightness(115%);
+      }
+      &:active {
+        filter: brightness(115%) drop-shadow(2px 4px 5px rgba(0, 0, 0, 0.1));
+      }
+    }
+    &.indicator__icon {
+      @include tc-container--indicator__icon();
     }
   }
-  .tc-input--input {
-    min-width: 100px;
-    margin: 0 5px;
-    label {
-      cursor: pointer;
+  label,
+  input {
+    flex-grow: 1;
+  }
+  label {
+    cursor: pointer;
+  }
+  input {
+    background: transparent;
+    border: none;
+    outline: none;
+    font: inherit;
+    font-size: inherit;
+    color: inherit;
+    padding: 0;
+    display: block;
+    margin: 0;
+    width: auto;
+    min-width: 10px;
+
+    &::placeholder {
+      color: inherit;
+      opacity: 0.8;
     }
-    input,
-    label {
-      &[type='file'] {
-        position: fixed;
-        top: -200px;
-        left: 0;
-        z-index: -1;
-        opacity: 0;
-      }
-      font: inherit;
-      font-family: inherit;
-      &::placeholder {
-        color: inherit;
-        opacity: 0.8;
-      }
-      width: 100%;
-      height: 100%;
-      display: inline-block;
-      outline: none;
-      border: none;
-      background: transparent;
+    -webkit-appearance: none;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
       -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &[type='number'] {
+      text-align: center;
+      -moz-appearance: textfield;
+    }
+    &[type='file'] {
+      position: fixed;
+      top: -200px;
     }
   }
 }

@@ -1,64 +1,56 @@
 <template>
-  <div class="tc-select" :class="{ 'tc-select__dark': dark }">
-    <div class="tc-select--head" v-if="title || tooltip">
-      <div class="tc-select--title">
-        {{ title }}
-      </div>
-      <div class="tc-select--tooltip" v-if="tooltip">
-        <tc-tooltip :tooltip="tooltip">
-          <i class="ti-question-circle" />
-        </tc-tooltip>
-      </div>
+  <div
+    class="tc-select"
+    :class="{
+      'tc-select__dark': dark,
+      'tc-select__frosted': frosted,
+      'tc-select__fit-content': isFitContent
+    }"
+    :id="id"
+    @click="expanded = !expanded"
+  >
+    <div :id="id + 't'" class="tc-select--title" v-if="title">{{ title }}</div>
+    <div :id="id + 'tt'" class="tc-select--tooltip" v-if="tooltip">
+      <tc-tooltip :tooltip="tooltip">
+        <i class="ti-question-circle"></i>
+      </tc-tooltip>
+    </div>
+    <div
+      :id="id + 'i'"
+      v-if="icon"
+      class="tc-select--indicator indicator__icon"
+    >
+      <tf-icon :id="id + 'ii'" :icon="icon" />
+    </div>
+    <div :id="id + 's'" class="tc-select--selected" v-if="display">
+      {{ display }}
+    </div>
+    <div :id="id + 'p'" class="tc-select--placeholder" v-else>
+      {{ placeholder }}
     </div>
 
-    <label :for="id" @click.stop="expanded = !expanded">
-      <i v-if="icon" :class="'ti-' + icon" />
-      <span v-if="display">{{ display }}</span>
-      <span v-else class="tc-select__placeholder">{{ placeholder }}</span>
-    </label>
-    <select :id="id" :multiple="multiple" v-model="innerValue">
-      <optgroup :label="title">
-        <option v-for="v in innerValues" :key="v" :value="v">
-          {{ v }}
-        </option>
-      </optgroup>
-    </select>
     <div
-      :id="id + '_box'"
-      class="tc-select--custom"
-      :class="{ 'tc-select--custom__expanded': expanded }"
+      @click.stop
+      class="tc-select--container"
+      :class="{ container__expanded: expanded }"
     >
-      <div class="tc-select--title" :id="id + '_title'" v-if="title">
-        {{ title }}
+      <div class="container--head" v-if="title || placeholder">
+        {{ title || placeholder }}<span>--</span>
       </div>
-      <div
-        v-for="(v, index) in innerValues"
-        :key="v"
-        :id="id + '_' + index"
-        class="tc-select--option"
-        :class="{ 'tc-select--option__selected': isSelected(v) }"
-        @click="toggle(v)"
-      >
-        <div class="svg" :id="id + '_' + index">
-          <svg
-            :id="id + '_' + index"
-            width="20"
-            height="20"
-            viewBox="0 0 100 100"
+      <div class="container--items">
+        <template v-for="v in innerValues">
+          <div
+            class="container--items__icon"
+            :key="v + 'i'"
+            @click.stop="toggle(v)"
           >
-            <circle cx="50" cy="50" />
-            <path
-              d="M1550,970.667l14.167,14.167L1601,948l-36.833,36.833Z"
-              transform="translate(-1525 -915.917)"
-              fill="none"
-              stroke="#08f"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="10"
-            />
-          </svg>
-        </div>
-        <div :id="id + '_' + index" class="text">{{ v }}</div>
+            <i class="ti-dot" v-if="!isSelected(v)" />
+            <i class="ti-checkmark" v-else />
+          </div>
+          <div class="container--items__item" :key="v" @click.stop="toggle(v)">
+            {{ v }}
+          </div>
+        </template>
       </div>
     </div>
   </div>
@@ -68,17 +60,21 @@
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 import TCComponent from '../TC-Component.mixin';
 import TCTooltip from '../tooltip/TC-Tooltip.vue';
+import TFIcon from '../_fundamental/icon/TF-Icon.vue';
 
 type TValues = string | number | boolean;
 
 @Component({
   components: {
-    'tc-tooltip': TCTooltip
+    'tc-tooltip': TCTooltip,
+    'tf-icon': TFIcon
   }
 })
 export default class TCSelect extends Mixins(TCComponent) {
   @Prop() title!: string;
   @Prop() tooltip!: string;
+  @Prop() frosted!: boolean;
+  @Prop() width!: string;
   @Prop({ default: 'list' }) icon!: string;
   @Prop({ default: false }) multiple!: boolean;
   @Prop({ default: 'Select one' }) placeholder!: string;
@@ -106,6 +102,10 @@ export default class TCSelect extends Mixins(TCComponent) {
   @Watch('innerValue')
   update(): void {
     this.$emit('input', this.innerValue);
+  }
+
+  get isFitContent(): boolean {
+    return this.width == 'fit-content';
   }
 
   mounted(): void {
@@ -168,204 +168,130 @@ export default class TCSelect extends Mixins(TCComponent) {
 </script>
 
 <style lang="scss" scoped>
-// @supports (-webkit-touch-callout: none) { content: "ios"; }
-// @media (hover: hover) { content: "desktop"; }
-// @media (hover: none) { content: "mobile";  }
-
 .tc-select {
-  display: inline-block;
-  color: $color;
-  max-width: 100%;
-  select {
-    position: fixed;
-    top: -200px;
-  }
-
-  .tc-select--head {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    margin: 3px {
-      bottom: 0;
-    }
-
-    .tc-select--title {
-      @include tc-container--title();
-    }
-    .tc-select--tooltip {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+  @include tc-container__light();
+  .tc-select--container {
+    background: $paragraph;
+    color: $color;
+    @include custom-scrollbar__light();
+    .container--head {
+      @include backdrop-blur(darken($paragraph, 15%));
     }
   }
 
-  .tc-select--custom {
-    @media (hover: none) {
-      //display: none;
+  &.tc-select__frosted {
+    &,
+    .tc-select--container {
+      @include backdrop-blur(darken($paragraph, 15%));
     }
-    position: absolute;
-    z-index: 100;
-    @include backdrop-blur($paragraph);
-    border-radius: $border-radius;
-    padding: 5px;
-    min-width: 125px;
-    max-height: 0px;
+  }
+  &.tc-select__dark {
+    @include tc-container__dark();
+    .tc-select--container {
+      background: lighten($color, 10%);
+      color: #fff;
+      @include custom-scrollbar__dark();
+      .container--head {
+        @include backdrop-blur(lighten($color, 20%));
+      }
+    }
+    &.tc-select__frosted {
+      &,
+      .tc-select--container {
+        @include backdrop-blur(lighten($color, 10%));
+      }
+    }
+  }
+  &.tc-select__fit-content {
+    width: fit-content;
+  }
+  position: relative;
+  .tc-select--title {
+    @include tc-container--title();
+  }
+  .tc-select--tooltip {
+    @include tc-container--title();
     overflow: hidden;
-    transform: scale(0);
-    transition: 0.2s ease-in-out, max-height 0.5s ease-in-out;
-    &.tc-select--custom__expanded {
-      transform: scale(1);
-      max-height: 300px;
-      overflow: {
-        y: auto;
-        x: hidden;
-      }
-    }
-    &::-webkit-scrollbar {
-      width: 4px;
-      height: 4px;
-      position: absolute !important;
-      border-radius: 4px;
-      transition: 0.2s ease;
-    }
-
-    &::-webkit-scrollbar:hover {
-      width: 4px;
-    }
-
-    &::-webkit-scrollbar-track {
-      display: none;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      border-radius: 4px;
-      background: #888;
-      cursor: grabbing;
-    }
-
-    .tc-select--title {
-      position: sticky;
-      user-select: none;
-      top: -5px;
-      text-align: center;
-      background: lighten($paragraph, 4%);
-      margin: -5px {
-        bottom: 2px;
-      }
-      padding: 5px;
-      border-top: {
-        left-radius: inherit;
-        right-radius: inherit;
-      }
-      border-bottom: 1px solid currentColor;
-    }
-    .tc-select--option {
-      transition: 0.2s ease-in-out;
-      &:hover {
-        transform: translateX(10px) scale(1.05);
-      }
-      &.tc-select--option__selected {
-        color: #08f;
-        i {
-          transform: scale(0.8);
-        }
-        circle {
-          stroke-width: 0;
-          r: 0;
-          opacity: 0;
-        }
-        path {
-          stroke: {
-            dashoffset: 0px;
-          }
-          opacity: 1;
-          transition: all 0.5s ease-in-out;
-        }
-      }
-      user-select: none;
-      cursor: pointer;
-      display: grid;
-      padding-top: 2px;
-      grid-template-columns: 20px auto;
-      line-height: 25px;
-      i {
-        padding-top: 3px;
-      }
-
-      svg {
-        margin-top: 2px;
-        margin-bottom: -2px;
-        circle {
-          stroke-width: 1;
-          fill: #000;
-          stroke: #000;
-          r: 16;
-          transition: all 0.5s ease-in-out;
-        }
-        path {
-          stroke: {
-            dasharray: 168px;
-            dashoffset: 168px;
-          }
-          opacity: 0;
-          transition: all 0.5s ease-in-out, opacity 0.5s ease-in-out 0.2s;
-        }
-      }
-
-      width: 100%;
-      &:not(:last-child) {
-        .text {
-          border-bottom: 1px solid rgba($color, 0.2);
-        }
-      }
-    }
+    right: 5px;
   }
-
-  label {
-    @include tc-container__light();
-    text-align: center;
-    display: inline-flex;
+  .tc-select--indicator {
+    display: flex;
+    justify-content: center;
     align-items: center;
-    min-width: 80px;
-    max-width: 100%;
-    i {
-      padding-right: 7.5px;
-      margin-right: 7.5px;
-      border-right: 1px solid rgba($color, 0.5);
-    }
-    .tc-select__placeholder {
-      opacity: 0.6;
+    &.indicator__icon {
+      @include tc-container--indicator__icon();
     }
   }
+  .tc-select--placeholder {
+    opacity: 0.8;
+  }
+  .tc-select--container {
+    max-height: 0px;
+    transition: max-height 0.3s ease-in-out;
+    &.container__expanded {
+      max-height: 200px;
+    }
 
-  &__dark {
-    color: #fff;
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: column;
+    overflow: {
+      y: auto;
+      x: hidden;
+    }
+    border-radius: $border-radius;
 
-    label {
-      @include tc-container__dark();
-      i {
-        border-color: rgba(#fff, 0.5) !important;
+    box-shadow: $shadow;
+    height: auto;
+    max-width: 100vw;
+    width: fit-content;
+    z-index: 100;
+    .container--head {
+      width: 100%;
+      text-align: center;
+      padding: 5px;
+      font-weight: 500;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      span {
+        user-select: none;
+        opacity: 0;
+      }
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: currentColor;
+        opacity: 0.6;
       }
     }
-    .tc-select--custom {
-      @include backdrop-blur(lighten($color, 20%));
-      .tc-select--title {
-        background: lighten($color, 4%);
-        border-bottom-color: lighten($color, 50%);
+    .container--items {
+      margin: 5px 10px;
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      position: relative;
+      i {
+        line-height: 26px;
+        &.ti-checkmark {
+          font-size: 14px;
+        }
       }
-      .tc-select--option {
-        svg {
-          circle {
-            fill: rgba(#fff, 0.75);
-            stroke: rgba(#fff, 0.75);
-          }
-        }
-        .text {
-          color: rgba(#fff, 0.75);
-        }
-        &:not(:last-child) {
-          .text {
-            border-bottom-color: rgba(#fff, 0.2);
-          }
+      .container--items__item {
+        white-space: nowrap;
+        line-height: 26px;
+        transition: all 0.2s ease-in-out;
+        border-radius: $border-radius;
+        padding: 0 5px;
+        opacity: 0.7;
+        &:hover {
+          transform: scale(1.085);
+          opacity: 1;
         }
       }
     }

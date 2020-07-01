@@ -92,10 +92,16 @@ export default class TCTextarea extends Mixins(TCComponent) {
       bottom: 0;
     }
 
+    position: relative;
+
     .tc-textarea--title {
       @include tc-container--title();
     }
     .tc-textarea--tooltip {
+      @include tc-container--title();
+      position: absolute;
+      overflow: hidden;
+      right: 0;
       display: flex;
       justify-content: center;
       align-items: center;

@@ -24,6 +24,7 @@
             @click="showExamples"
           />
           <tc-select
+            inline
             :dark="true"
             placeholder="Component"
             v-model="selectedComponent"
@@ -32,45 +33,38 @@
         </div>
       </tc-headline>
 
-      <transition-group
-        name="options-trans"
-        class="tc-properties"
-        is="tc-grid"
-        :minWidth="175"
-      >
-        <tc-icon-select
-          v-for="api in iconAttributes"
-          :key="api.name"
-          :title="api.name"
-          v-model="data[api.name]"
-          :tooltip="api.description"
-        />
-        <tc-select
-          v-for="api in selectAttributes"
-          :dark="true"
-          :title="api.name"
-          :key="api.name"
-          :placeholder="api.name"
-          :values="api.selectValues"
-          v-model="data[api.name]"
-          :tooltip="api.description"
-        />
-        <tc-input
-          v-for="api in inputAttributes"
-          :dark="true"
-          :title="api.name"
-          :type="api.type === 'number' ? 'number' : 'text'"
-          :buttons="api.type === 'number'"
-          :key="api.name"
-          :placeholder="api.name"
-          v-model="data[api.name]"
-          :tooltip="api.description"
-        />
-      </transition-group>
+      <tl-grid class="tc-properties" :minWidth="175">
+        <div v-for="api in iconAttributes" :key="api.name">
+          <tc-icon-select
+            :tooltip="api.description"
+            :title="api.name"
+            v-model="data[api.name]"
+          />
+        </div>
+        <div v-for="api in selectAttributes" :key="api.name">
+          <tc-select
+            :tooltip="api.description"
+            :title="api.name"
+            :dark="true"
+            :values="api.selectValues"
+            v-model="data[api.name]"
+          />
+        </div>
+        <div v-for="api in inputAttributes" :key="api.name">
+          <tc-input
+            :tooltip="api.description"
+            :title="api.name"
+            :dark="true"
+            :type="api.type === 'number' ? 'number' : 'text'"
+            :buttons="api.type === 'number'"
+            v-model="data[api.name]"
+          />
+        </div>
+      </tl-grid>
 
       <div v-if="component && component.slots && component.slots.length > 0">
         <tc-headline :dark="true" title="Slots" />
-        <tc-grid>
+        <tl-grid class="tc-slots">
           <tc-textarea
             v-for="slot in component.slots"
             :key="slot.name"
@@ -79,7 +73,7 @@
             v-model="slots[slot.name]"
             :dark="true"
           />
-        </tc-grid>
+        </tl-grid>
       </div>
 
       <div v-if="component">
@@ -126,7 +120,7 @@ import TCScrollUp from '@/tccomponents/scrollup/TC-Scroll-Up.vue';
 import TCQuote from '@/tccomponents/quote/TC-Quote.vue';
 import { TCComponentApi } from '@/models/TCComponentApi.model';
 import TCSpinner from '@/tccomponents/spinner/TC-Spinner.vue';
-import TCGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
+import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
 import TCTextarea from '@/tccomponents/textarea/TC-Textarea.vue';
 import TCSegments from '@/tccomponents/segments/TC-Segments.vue';
 import TCSidebar from '@/tccomponents/sidebar/TC-Sidebar.vue';
@@ -153,7 +147,7 @@ import TCComponentsSubpageHero from '@/components/shared/TCComponents-Subpage-He
     'tc-button': TCButton,
     'tc-icon-select': IconSelect,
     'tc-checkbox': TCCheckbox,
-    'tc-grid': TCGrid,
+    'tl-grid': TLGrid,
     'tc-textarea': TCTextarea,
     'tccomponents-subpage-hero': TCComponentsSubpageHero
   }
@@ -163,7 +157,7 @@ export default class TCComponentsDesigner extends Vue {
     (x: TCComponentGroup) => x.group === 'Components'
   )[0].components;
 
-  public selectedComponent = '';
+  public selectedComponent = this.$store.getters.designerComponent;
   public copyHTMLText = 'Copy HTML Markup';
   public darkCanvas = true;
   public data: Record<string, unknown> = {};
@@ -200,11 +194,8 @@ export default class TCComponentsDesigner extends Vue {
   };
 
   mounted(): void {
-    const loadedComp: string = this.$store.getters.designerComponent;
-    if (loadedComp.length > 0) {
-      this.selectedComponent = loadedComp;
+    if (this.selectedComponent.length > 0) {
       this.$store.commit('updateDesignerComponent', '');
-      this.changed();
     }
 
     EventBus.$on('designer-downloadFile', this.downloadFile);
@@ -304,6 +295,7 @@ export default class TCComponentsDesigner extends Vue {
       element.appendChild(instance.$el);
     } catch (error) {
       //
+      // console.log('e', error);
     }
   }
 
@@ -362,12 +354,20 @@ export default class TCComponentsDesigner extends Vue {
 [content] {
   background: #000;
   min-height: 300px;
-  overflow-x: hidden;
   padding-top: 0px;
+}
+
+[inline] {
+  display: inline-flex !important;
 }
 
 [color-fff] {
   color: #fff;
+}
+
+.tc-properties,
+.tc-slots {
+  padding-top: 20px;
 }
 
 .designer-canvas {
@@ -375,7 +375,7 @@ export default class TCComponentsDesigner extends Vue {
   transition: all 0.2s ease-in-out;
   padding: 20px;
   border-radius: 5px;
-  overflow: hidden;
+  overflow: visible;
   text-align: center;
   max-width: 100%;
 

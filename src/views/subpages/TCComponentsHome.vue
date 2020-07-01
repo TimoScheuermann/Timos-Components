@@ -57,7 +57,7 @@
         </tc-list>
         <section class="tc-components-home--grid" :class="group.group">
           <h1>{{ group.group }}</h1>
-          <tl-grid minWidth="200">
+          <tl-grid minWidth="200" arrangement="auto-fill">
             <router-link
               v-for="comp in group.components"
               :key="comp.name"
@@ -192,6 +192,11 @@ a {
   margin-bottom: 30px;
   h1 {
     margin: 0;
+  }
+  div,
+  h1,
+  p {
+    text-align: center;
   }
   .hero-tiles {
     margin: 20px 0 {

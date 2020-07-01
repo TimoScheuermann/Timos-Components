@@ -5,7 +5,7 @@
     :class="{ 'tc-list-item__link': !isSwitch }"
   >
     <div class="tc-list-item--icon">
-      <i :class="'ti-' + icon"></i>
+      <tf-icon :icon="icon" />
     </div>
     <div class="tc-list-item--container">
       <div class="tc-list-item--title">
@@ -25,10 +25,12 @@
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 import TCSwitch from '../switch/TC-Switch.vue';
 import TCComponent from '../TC-Component.mixin';
+import TFIcon from '../_fundamental/icon/TF-Icon.vue';
 
 @Component({
   components: {
-    'tc-switch': TCSwitch
+    'tc-switch': TCSwitch,
+    'tf-icon': TFIcon
   }
 })
 export default class TCListItem extends Mixins(TCComponent) {
