@@ -7,12 +7,17 @@
     rounded="true"
   >
     <transition-group name="image-swap" class="slot-images" tag="div">
-      <img
+      <tc-image
         v-for="img in currentSlotTitle"
         :key="img"
         :src="img"
-        onerror="if (this.src != 'assets/wip.svg') this.src = 'assets/wip.svg';"
+        fallback="assets/wip.svg"
       />
+      <!--
+      </tc-image>
+      <img
+        onerror="if (this.src != 'assets/wip.svg') this.src = 'assets/wip.svg';"
+      /> -->
     </transition-group>
 
     <tc-segments v-model="currentSelection" :segments="segments">
@@ -35,13 +40,15 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 import { TCComponent } from '@/models/TCComponent.model';
 import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
 import TCSegments from '@/tccomponents/segments/TC-Segments.vue';
-import { TCCard } from '@/tccomponents_vue';
+import TCCard from '@/tccomponents/card/TC-Card.vue';
+import TCImage from '@/tccomponents/image/TC-Image.vue';
 
 @Component({
   components: {
     'tl-grid': TLGrid,
     'tc-segments': TCSegments,
-    'tc-card': TCCard
+    'tc-card': TCCard,
+    'tc-image': TCImage
   }
 })
 export default class TCComponentsDetailsSlots extends Vue {

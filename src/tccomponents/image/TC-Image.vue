@@ -1,5 +1,5 @@
 <template>
-  <img class="tc-image" :src="src" @click="expand()" />
+  <img class="tc-image" :src="innerSrc" @click="expand()" @error="error()" />
 </template>
 <script lang="ts">
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
@@ -8,7 +8,9 @@ import TCComponent from '../TC-Component.mixin';
 @Component
 export default class TCImage extends Mixins(TCComponent) {
   @Prop() src!: string;
+  @Prop() fallback!: string;
   private expanded = false;
+  private innerSrc = this.src;
 
   private bgElement: HTMLElement = document.createElement('div');
   private close: HTMLElement = document.createElement('div');
@@ -16,7 +18,17 @@ export default class TCImage extends Mixins(TCComponent) {
 
   @Watch('src')
   srcChanged(): void {
+    this.innerSrc = this.src;
     this.img.src = this.src;
+  }
+
+  error(): void {
+    if (this.fallback && this.fallback.length > 0) {
+      if (this.innerSrc !== this.fallback) {
+        this.innerSrc = this.fallback;
+        this.img.src = this.fallback;
+      }
+    }
   }
 
   mounted(): void {
@@ -65,8 +77,8 @@ export default class TCImage extends Mixins(TCComponent) {
   right: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(black, 0.75);
-
+  // background: rgba(black, 0.85);
+  @include backdrop-blur(rgba(black, 0.75));
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,8 +99,8 @@ export default class TCImage extends Mixins(TCComponent) {
   div {
     $size: 30px;
     position: absolute;
-    right: $size;
-    top: $size;
+    right: calc(#{$size} + env(safe-area-inset-right));
+    top: calc(#{$size} + env(safe-area-inset-top));
     width: $size;
     height: $size;
     display: flex;
@@ -111,7 +123,6 @@ export default class TCImage extends Mixins(TCComponent) {
     transform: scale(0);
     border-radius: 10000000px;
     transition: 0.2s ease-in-out 0.3s;
-    box-shadow: $shadow;
   }
 }
 </style>
