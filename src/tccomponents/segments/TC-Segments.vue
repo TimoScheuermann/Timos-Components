@@ -114,7 +114,7 @@ export default class TCSegments extends Mixins(TCComponent) {
       position: absolute;
       border-radius: 3px;
       width: 100%;
-      height: 25px;
+      height: calc(100% - 10px);
       top: 5px;
       transition: 0.2s ease-in-out;
       box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
@@ -127,9 +127,10 @@ export default class TCSegments extends Mixins(TCComponent) {
       .item {
         cursor: pointer;
         font-weight: 500;
-        height: 25px;
+        min-height: 25px;
         line-height: 25px;
         text-align: center;
+        // overflow: ;
       }
     }
   }

@@ -1,31 +1,33 @@
 <template>
-  <div
+  <tc-card
     class="tccomponents-details-slots"
     :key="component.name + component.icon"
     v-if="component.slots.length > 0"
+    title="Slots"
+    rounded="true"
   >
-    <h1>Slots</h1>
+    <transition-group name="image-swap" class="slot-images" tag="div">
+      <img
+        v-for="img in currentSlotTitle"
+        :key="img"
+        :src="img"
+        onerror="if (this.src != 'assets/wip.svg') this.src = 'assets/wip.svg';"
+      />
+    </transition-group>
 
-    <tl-grid>
-      <div>
-        <tc-segments v-model="currentSelection" :segments="segments">
-          <p v-for="slot in component.slots" :key="slot.name" :slot="slot.name">
-            {{ slot.description }}
-          </p>
-        </tc-segments>
-      </div>
-      <div class="slot-images">
-        <transition-group name="image-swap">
-          <img
-            v-for="img in currentSlotTitle"
-            :key="img"
-            :src="img"
-            onerror="if (this.src != 'assets/wip.svg') this.src = 'assets/wip.svg';"
-          />
-        </transition-group>
-      </div>
-    </tl-grid>
-  </div>
+    <tc-segments v-model="currentSelection" :segments="segments">
+      <h2
+        v-for="slot in component.slots"
+        :key="slot.name + 't'"
+        :slot="slot.name"
+      >
+        {{ slot.name }}
+      </h2>
+      <p v-for="slot in component.slots" :key="slot.name" :slot="slot.name">
+        {{ slot.description }}
+      </p>
+    </tc-segments>
+  </tc-card>
 </template>
 
 <script lang="ts">
@@ -33,11 +35,13 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 import { TCComponent } from '@/models/TCComponent.model';
 import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
 import TCSegments from '@/tccomponents/segments/TC-Segments.vue';
+import { TCCard } from '@/tccomponents_vue';
 
 @Component({
   components: {
     'tl-grid': TLGrid,
-    'tc-segments': TCSegments
+    'tc-segments': TCSegments,
+    'tc-card': TCCard
   }
 })
 export default class TCComponentsDetailsSlots extends Vue {
@@ -77,8 +81,10 @@ export default class TCComponentsDetailsSlots extends Vue {
   }
 }
 .slot-images {
-  min-height: 160px;
+  width: 100%;
+  min-height: 100px;
   position: relative;
+  margin-bottom: 10px;
 
   img {
     position: absolute;
@@ -86,6 +92,7 @@ export default class TCComponentsDetailsSlots extends Vue {
     height: 100%;
     object-fit: contain;
     object-position: center;
+    left: 0;
   }
 }
 

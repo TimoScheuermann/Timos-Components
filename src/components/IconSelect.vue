@@ -50,7 +50,6 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
-import icons from '@/icons';
 import { Icon } from '@/models/Icon.model';
 import TCTooltip from '@/tccomponents/tooltip/TC-Tooltip.vue';
 import TCComponent from '@/tccomponents/TC-Component.mixin';
@@ -65,7 +64,7 @@ type TValues = string | number | boolean;
   }
 })
 export default class IconSelect extends Mixins(TCComponent) {
-  public icons: Icon[] = icons;
+  public icons: Icon[] = this.$store.getters.icons;
   public query = '';
 
   @Prop() title!: string;

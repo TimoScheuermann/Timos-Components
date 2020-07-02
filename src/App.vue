@@ -39,6 +39,7 @@ import { Vue, Component, Watch } from 'vue-property-decorator';
 import { EventBus } from '@/eventBus';
 import { TCComponentGroup } from '@/models/TCComponentGroup.model';
 import tcComponents from '@/components';
+import { loadIcons } from '@/loadIcons';
 
 import TCInput from '@/tccomponents/input/TC-Input.vue';
 import TLSidebar from '@/tccomponents/_layout/sidebar/TL-Sidebar.vue';
@@ -78,6 +79,7 @@ export default class App extends Vue {
   }
 
   mounted() {
+    loadIcons();
     window.addEventListener('resize', this.recheckSidebarVisible);
     this.recheckSidebarVisible();
 
