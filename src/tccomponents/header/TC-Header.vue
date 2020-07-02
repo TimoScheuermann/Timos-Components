@@ -28,12 +28,21 @@
       <slot />
     </div>
     <div v-else class="tc-header--items__overflow">
-      <tc-checkbox
-        v-model="itemCard"
-        iconChecked="chevron-down"
-        iconUnchecked="chevron-up"
-        iconAnimation="flip"
-      />
+      <svg
+        @click="itemCard = !itemCard"
+        width="32"
+        height="32"
+        viewBox="0 0 32 32"
+      >
+        <path
+          :d="itemCard ? 'M3 16l13 5 13-5-13 5z' : 'M3 16l13-5 13 5-13-5z'"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="4"
+        />
+      </svg>
     </div>
     <div
       v-if="itemsOverflow"
@@ -50,14 +59,9 @@
 
 <script lang="ts">
 import { Component, Prop, Mixins, Watch } from 'vue-property-decorator';
-import TCCheckbox from '../checkbox/TC-Checkbox.vue';
 import TCAutoBackground from '../TC-Auto-Background.mixin';
 
-@Component({
-  components: {
-    'tc-checkbox': TCCheckbox
-  }
-})
+@Component
 export default class TCHeader extends Mixins(TCAutoBackground) {
   @Prop() title!: string;
   @Prop({ default: 'fixed' }) variant!: 'fixed' | 'floating' | 'sticky';
@@ -107,8 +111,8 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
 
   get classes() {
     return {
-      'tc-header__dark': this.dark_,
       'tc-header__light': !this.dark_,
+      'tc-header__dark': this.dark_,
       'tc-header__fixed': !(
         this.variant == 'floating' || this.variant == 'sticky'
       ),
@@ -245,16 +249,11 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
   .tc-header--items__overflow {
     display: flex;
     overflow: auto;
-    .tc-checkbox {
-      background: none !important;
-      border: none;
-      * {
-        overflow: visible;
-      }
-      /deep/ .icon {
-        color: $color;
-        transform: scaleX(2);
-        opacity: 0.6;
+
+    svg {
+      path {
+        opacity: 0.8;
+        transition: all 0.5s cubic-bezier(0.55, 1.93, 0.53, 0.59);
       }
     }
   }

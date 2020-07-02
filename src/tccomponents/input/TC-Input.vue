@@ -233,6 +233,7 @@ export default class TCInput extends Mixins(TCComponent) {
   label,
   input {
     flex-grow: 1;
+    white-space: nowrap;
   }
   label {
     cursor: pointer;
