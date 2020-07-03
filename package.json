@@ -10,6 +10,9 @@
     "prepublish": "yarn build-lib"
   },
   "main": "./lib/tccomponents.common.js",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "dependencies": {
     "core-js": "^3.6.4",
     "node-sass": "^4.13.1",
