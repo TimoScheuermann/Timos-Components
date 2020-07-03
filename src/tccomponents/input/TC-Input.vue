@@ -63,7 +63,7 @@
 </template>
 
 <script lang="ts">
-import { Prop, Mixins, Component } from 'vue-property-decorator';
+import { Prop, Mixins, Component, Watch } from 'vue-property-decorator';
 import TCComponent from '../TC-Component.mixin';
 import TCTooltip from '../tooltip/TC-Tooltip.vue';
 import TFIcon from '../_fundamental/icon/TF-Icon.vue';
@@ -107,6 +107,11 @@ export default class TCInput extends Mixins(TCComponent) {
   private fileList = '';
   private innerValue: string | number =
     this.value || (this.type === 'number' ? 0 : '');
+
+  @Watch('value')
+  valueChanged(): void {
+    this.innerValue = this.value || (this.type === 'number' ? 0 : '');
+  }
 
   inputMode(): string {
     return this.type == 'number' ? 'numeric' : '';
