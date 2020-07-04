@@ -98,7 +98,6 @@ export default class App extends Vue {
 
   @Watch('$route', { deep: true, immediate: true })
   routeChanged(): void {
-    document.title = this.$route.meta.title || 'TC Components';
     document.body.style.background =
       this.$route.name === 'designer' ? '#000' : '#fff';
   }
