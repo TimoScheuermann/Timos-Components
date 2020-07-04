@@ -1,6 +1,6 @@
 {
   "name": "tccomponents_vue",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -65,5 +65,19 @@
     "last 2 versions",
     "not dead"
   ],
-  "types": "./lib/tccomponents_vue.d.ts"
+  "types": "./lib/tccomponents_vue.d.ts",
+  "description": "## Project setup ``` yarn install ```",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TimoScheuermann/Timos-Components.git"
+  },
+  "author": "Timo Scheuermann",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TimoScheuermann/Timos-Components/issues"
+  },
+  "homepage": "https://components.timos.design"
 }
