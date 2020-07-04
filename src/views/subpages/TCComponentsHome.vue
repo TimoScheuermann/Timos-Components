@@ -68,7 +68,9 @@
             >
               <tc-card :hover="true" rounded="true">
                 <div class="details">
-                  <tf-icon :icon="comp.icon" />
+                  <div class="watermark">
+                    <tf-icon :icon="comp.icon" />
+                  </div>
                   <span>{{ comp.name }}</span>
                 </div>
               </tc-card>
@@ -165,14 +167,20 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    .watermark {
+      position: absolute;
+      opacity: 0.9;
 
-    .tf-icon {
-      font-size: 35px;
-      color: $error;
-      margin: -20px 0;
-      opacity: 0.7;
+      .tf-icon {
+        font-size: 35px;
+        color: $error;
+      }
     }
     span {
+      display: block;
+      text-align: right;
+      width: 100%;
+      white-space: nowrap;
       font-weight: bold;
       opacity: 0.8;
     }
