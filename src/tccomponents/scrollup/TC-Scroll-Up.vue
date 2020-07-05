@@ -48,8 +48,8 @@ $size: 50px;
   }
 
   position: fixed;
-  bottom: 10px;
-  right: 10px;
+  bottom: calc(10px + env(safe-area-inset-bottom));
+  right: calc(10px + env(safe-area-inset-right));
   width: $size;
   height: $size;
   border-radius: $size;

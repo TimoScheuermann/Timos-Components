@@ -157,9 +157,11 @@ export default class TCInput extends Mixins(TCComponent) {
     this.$emit('change', changeEvent);
     const target: HTMLInputElement = changeEvent.target as HTMLInputElement;
     const fileList: FileList = target.files as FileList;
-    this.fileList = Array.from(fileList)
-      .map(x => x.name)
-      .join(', ');
+    if (fileList) {
+      this.fileList = Array.from(fileList)
+        .map(x => x.name)
+        .join(', ');
+    }
     const reader = new FileReader();
     reader.onload = loaded => {
       const loadTarget = loaded.target as FileReader;

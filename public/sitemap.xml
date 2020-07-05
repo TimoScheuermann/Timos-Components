@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<urlset xmlns="http://www.google.com/schemas/sitemap/0.84" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+		<url>
+			<loc>https://components.timos.design/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/designer/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/howto/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/demos/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/fundamental/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/fundamental/Default%20Tags/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/fundamental/Colors/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/fundamental/Icons/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/fundamental/Auto%20Background/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Badge/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Button/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Card/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Checkbox/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Divider/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Header/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Headline/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Hero/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Image/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Input/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Link/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/List/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Modal/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Navbar/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Progress/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Quote/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Revealer/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Scroll%20Up/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Segments/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Select/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Sidebar/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Slider/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Spinner/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Steps/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Switch/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Tabbar/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Table/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/component/Tooltip/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/layout/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/layout/Grid/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/layout/Sidebar/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/layout/Modal/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+	</urlset>
+
