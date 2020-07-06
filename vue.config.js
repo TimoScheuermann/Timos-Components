@@ -2,7 +2,9 @@ module.exports = {
   outputDir: process.env.TC_TARGET ? 'lib' : 'dist',
   pwa: {
     manifestOptions: {
-      display: 'fullscreen'
+      display: 'fullscreen',
+      // eslint-disable-next-line @typescript-eslint/camelcase
+      start_url: '.'
     },
     name: 'TC Components',
     themeColor: '#f0f0f0',
@@ -12,7 +14,7 @@ module.exports = {
     iconPaths: {
       favicon32: 'pwa/favicon-32.png',
       favicon16: 'pwa/favicon-16.png',
-      appleTouchIcon: 'pwa/appleTouchIcon-152.png',
+      appleTouchIcon: 'pwa/splash/apple-icon-152.jpg',
       maskIcon: 'pwa/maskIcon.svg',
       msTileImage: 'pwa/msTileImage-144.png'
     }
