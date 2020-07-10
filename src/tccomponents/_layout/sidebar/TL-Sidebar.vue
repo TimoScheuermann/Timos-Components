@@ -181,6 +181,7 @@ export default class TLSidebar extends Mixins(TCComponent) {
     }
   }
   .tl-sidebar--content {
+    min-height: 100vh;
     overflow: auto;
   }
 }

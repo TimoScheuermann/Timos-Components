@@ -214,8 +214,11 @@ export default class App extends Vue {
 
   @Watch('$route', { deep: true, immediate: true })
   routeChanged(): void {
-    document.body.style.background =
-      this.$route.name === 'designer' ? '#000' : '#fff';
+    const elems = document.querySelectorAll('.tl-sidebar--content');
+    if (elems.length > 0) {
+      (elems[0] as HTMLElement).style.background =
+        this.$route.name === 'designer' ? '#000' : '#fff';
+    }
   }
 }
 </script>
@@ -244,12 +247,12 @@ html {
 [modal2] {
   z-index: 200000;
 }
-
-body,
+body {
+  margin: 0;
+}
 .tccomponents {
   background: $background;
   color: $color;
-  margin: 0;
 }
 [content] {
   padding: 70px 5vw;
