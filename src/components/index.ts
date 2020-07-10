@@ -894,6 +894,12 @@ const tcComponents: TCComponentGroup[] = [
     prefix: 'TL',
     components: [
       {
+        name: 'Modal',
+        icon: 'modal',
+        api: [], // TODO:
+        slots: [] // TODO: also assets
+      },
+      {
         name: 'Grid',
         icon: 'plus',
         api: [], // TODO:
@@ -927,7 +933,7 @@ const tcComponents: TCComponentGroup[] = [
           }
         ] // TODO:
       }
-    ]
+    ].sort((a, b) => a.name.localeCompare(b.name))
   }
 ];
 

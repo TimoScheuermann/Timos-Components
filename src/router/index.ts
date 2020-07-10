@@ -45,6 +45,7 @@ const router = new VueRouter({
     },
     {
       path: '/playground',
+      name: 'playground',
       component: () => import('@/views/subpages/TCComponentsPlayground.vue'),
       meta: {
         title: prefix + 'Playground'
@@ -293,6 +294,12 @@ const router = new VueRouter({
           name: 'TL-grid',
           component: () => import('@/views/layout/TLD-Grid.vue'),
           meta: { title: prefix + 'TL Grid' }
+        },
+        {
+          path: 'Modal',
+          name: 'TL-modal',
+          component: () => import('@/views/layout/TLD-Modal.vue'),
+          meta: { title: prefix + 'TL Modal' }
         },
         {
           path: 'Sidebar',

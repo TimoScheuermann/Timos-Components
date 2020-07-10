@@ -4,6 +4,12 @@
     <tc-tabbar-item title="Designer" icon="tools" routeName="designer" />
     <tc-tabbar-item title="How to" icon="question-circle" routeName="howto" />
     <tc-tabbar-item title="Demos" icon="code" routeName="demos" />
+    <tc-tabbar-item
+      v-if="showPlayground"
+      title="Playground"
+      icon="dots"
+      routeName="playground"
+    />
   </tc-tabbar>
 </template>
 
@@ -18,7 +24,11 @@ import TCTabbarItem from '@/tccomponents/tabbar/TC-Tabbar-Item.vue';
     'tc-tabbar-item': TCTabbarItem
   }
 })
-export default class TCComponentsTabbar extends Vue {}
+export default class TCComponentsTabbar extends Vue {
+  get showPlayground(): boolean {
+    return window.location.href.includes(':8080');
+  }
+}
 </script>
 
 <style lang="scss" scoped></style>

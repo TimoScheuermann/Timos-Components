@@ -32,4 +32,5 @@ export { default as TcTabbar } from '@/tccomponents/tabbar/TC-Tabbar.vue';
 export { default as TcTable } from '@/tccomponents/table/TC-Table.vue';
 export { default as TcTooltip } from '@/tccomponents/tooltip/TC-Tooltip.vue';
 export { default as TlGrid } from '@/tccomponents/_layout/grid/TL-Grid.vue';
+export { default as TlModal } from '@/tccomponents/_layout/modal/TL-Modal.vue';
 export { default as TlSidebar } from '@/tccomponents/_layout/sidebar/TL-Sidebar.vue';

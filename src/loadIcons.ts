@@ -3,7 +3,11 @@ import { Icon } from './models/Icon.model';
 
 export async function loadIcons(): Promise<void> {
   const xhr = new XMLHttpRequest(); // a new request
-  xhr.open('GET', 'https://icons.timos.design/resources/icons.json', true);
+  xhr.open(
+    'GET',
+    'https://raw.githubusercontent.com/TimoScheuermann/github-assets/master/Timos-Icons/icons.json',
+    true
+  );
   xhr.send(null);
   xhr.onload = () => {
     if (xhr.readyState === 4 && xhr.status === 200) {

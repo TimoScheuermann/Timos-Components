@@ -1,6 +1,7 @@
 export function isURL(test: string): boolean {
   if (test.startsWith('data:image/svg+xml;base64')) return true;
   if (test.startsWith('/')) return true;
+  if (test.startsWith('./')) return true;
   if (test.startsWith('assets')) return true;
   const pattern = new RegExp(
     '^(https?:\\/\\/)?' + // protocol

@@ -9,6 +9,7 @@ export default class TCComponent extends Vue {
   @Prop() tcbackground!: string;
   @Prop() color!: string;
   @Prop() background!: string;
+  @Prop({ default: false }) frosted!: boolean;
 
   public uuid = '';
   public colors: string[] = [

@@ -84,12 +84,12 @@ export default class TCCard extends Mixins(TCComponent) {
 
 <style lang="scss" scoped>
 .tc-card {
-  background: $background;
   text-align: center;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   color: $color;
+  background: $background;
 
   &.tc-card__frosted {
     @include backdrop-blur($background);

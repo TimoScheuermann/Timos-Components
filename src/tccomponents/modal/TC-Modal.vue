@@ -1,221 +1,206 @@
 <template>
-  <div
-    class="tc-modal"
-    :class="{ 'tc-modal__opened': opened, 'tc-modal__dark': dark }"
-  >
-    <div class="tc-modal--background" @click="close()"></div>
-    <div class="tc-modal--container">
-      <div class="container--close" @click="close()">
-        <i class="ti-cross" />
+  <div>
+    <div
+      class="tc-modal-background"
+      :class="{ show: opened, hide: !opened }"
+      @click="close"
+    />
+    <div
+      class="tc-modal"
+      :class="{
+        'tc-modal__dark': dark,
+        'tc-modal__frosted': frosted,
+        'tc-modal__opened': opened
+      }"
+      @click.prevent
+    >
+      <div
+        class="tc-modal--head"
+        :class="{ 'tc-modal--head__prestyled': !$slots.header }"
+      >
+        <div class="tc-modal--close" @click="close($event)">
+          <tf-icon icon="assets/cross-inverted.svg" />
+        </div>
+        <slot name="header" />
+        <template v-if="!$slots.header && (title || subtitle)">
+          <div class="tc-modal--title">{{ title }}</div>
+          <div class="tc-modal--subtitle">{{ subtitle }}</div>
+        </template>
       </div>
-      <div class="container--head" :id="id">
-        <div v-if="title" class="container--head--title__prestyled">
-          {{ title }}
-        </div>
-        <div v-else class="container--head--title">
-          <slot name="header" />
-        </div>
-        <div v-if="subtitle" class="container--head--subtitle__prestyled">
-          {{ subtitle }}
-        </div>
-      </div>
-      <div class="container--content">
+
+      <div
+        class="tc-modal--content"
+        :class="{ 'tc-modal--content__no-footer': !$slots.footer }"
+      >
         <slot />
       </div>
-      <div class="container--buttons">
-        <slot name="buttons" />
+      <div class="tc-modal--footer" v-if="$slots.footer">
+        <slot name="footer" />
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
+import { Component, Watch, Prop, Mixins } from 'vue-property-decorator';
+import TFIcon from '../_fundamental/icon/TF-Icon.vue';
 import TCComponent from '../TC-Component.mixin';
 
-@Component
-export default class TCModal extends Mixins(TCComponent) {
-  @Prop({ default: '' }) title!: string;
-  @Prop({ default: '' }) subtitle!: string;
-  @Prop() value!: boolean;
-
-  public bodyOverflowBefore: string = document.body.style.overflow;
-  public opened = this.value;
-
-  get id(): string {
-    return 'tc-modal_' + this.uuid_ + '--head';
+@Component({
+  components: {
+    'tf-icon': TFIcon
   }
+})
+export default class TCModal extends Mixins(TCComponent) {
+  @Prop() title!: string;
+  @Prop() subtitle!: string;
+
+  @Prop({ default: false }) value!: boolean;
+  public opened: boolean = this.value;
 
   @Watch('value')
-  changed(updated: boolean): void {
-    this.opened = updated;
-    document.body.style.overflow = this.opened
-      ? 'hidden'
-      : this.bodyOverflowBefore;
+  public valueChanged() {
+    this.opened = this.value;
+    document.body.classList.remove('tc-modal--opened');
     if (this.opened) {
-      const elem: HTMLElement | null = document.getElementById(this.id);
-      if (elem) elem.focus();
+      document.body.classList.add('tc-modal--opened');
     }
   }
 
-  mounted(): void {
-    const elem = document.getElementById(this.id);
-    if (elem) {
-      elem.addEventListener('swiped-down', () => {
-        this.close();
-      });
-    }
-  }
-
-  public close(): void {
+  public close(event: MouseEvent) {
     this.opened = false;
-    this.update();
-  }
-  public update(): void {
     this.$emit('input', this.opened);
+    this.$emit('close', event);
   }
 }
 </script>
-
+<style lang="scss">
+body.tc-modal--opened {
+  overflow: hidden;
+}
+</style>
 <style lang="scss" scoped>
+$time: 0.3s;
+.tc-modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000;
+  z-index: 1001;
+
+  &.hide {
+    transform: scale(0);
+    opacity: 0;
+    transition: opacity $time ease-in-out, 0s transform $time;
+  }
+  &.show {
+    transform: scale(1);
+    opacity: 0.2;
+    transition: opacity $time ease-in-out, 0s transform 0s;
+  }
+}
 .tc-modal {
   position: fixed;
-  z-index: 1000;
-  visibility: hidden;
-  &.tc-modal__opened {
-    visibility: visible;
-  }
+  z-index: 1002;
 
-  @media #{$isMobile} {
-    .tc-modal--container {
-      transition: transform 0.3s ease-in-out;
-      transform: translateY(100%);
-      max-height: calc(
-        100vh - 60px - env(safe-area-inset-top) - env(safe-area-inset-bottom)
-      );
-    }
+  overflow: auto;
+  transition: transform $time ease-in-out;
+  @media only screen and(min-width: 650px) {
+    top: 50%;
+    left: 50%;
+    border-radius: $border-radius;
+    transform: translate(-50%, -50%) scale(0);
     &.tc-modal__opened {
-      bottom: 0;
-      left: 0;
-      right: 0;
-
-      .tc-modal--container {
-        transform: translateY(0%);
-        border-top: {
-          left-radius: 10px;
-          right-radius: 10px;
-        }
-        .container--buttons {
-          .tc-button {
-            display: block;
-            margin: 10px 3px;
-          }
-        }
-      }
+      transform: translate(-50%, -50%) scale(1);
     }
+    max-height: 80vh;
+    max-width: calc(
+      100vw - env(safe-area-inset-left) - env(safe-area-inset-right) - 40px
+    );
   }
-
-  @media #{$isDesktop} {
-    .tc-modal--container {
-      position: fixed;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      transition: 0.2s ease-in-out;
+  @media only screen and(max-width: 649px) {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: {
+      left-radius: #{2 * $border-radius};
+      right-radius: #{2 * $border-radius};
     }
+    max-height: calc(100vh - env(safe-area-inset-top) - 60px);
+
+    transform: translateY(100%);
     &.tc-modal__opened {
-      .tc-modal--container {
-        transform: translate(-50%, -50%) scale(1);
-        max-height: 60vh;
-        max-width: 60vw;
-        border-radius: $border-radius;
-        .container--buttons {
-          .tc-button {
-            margin-top: 15px;
-          }
-        }
-      }
+      transform: translateY(0%);
+    }
+    .tc-modal--content.tc-modal--content__no-footer,
+    .tc-modal--footer {
+      padding-bottom: calc(30px + env(safe-area-inset-bottom));
     }
   }
-  &.tc-modal__opened {
-    .tc-modal--background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.84);
-    }
+
+  color: $color;
+  background: $background;
+  @include custom-scrollbar__light();
+  .tc-modal--head,
+  .tc-modal--footer {
+    @include backdrop-blur($background);
+  }
+
+  &.tc-modal__frosted {
+    @include backdrop-blur($background);
   }
   &.tc-modal__dark {
-    .tc-modal--container {
-      background: $color;
-      color: #fff;
+    @include custom-scrollbar__dark();
+    color: #fff;
+    background: lighten($color, 5%);
+    .tc-modal--head,
+    .tc-modal--footer {
+      @include backdrop-blur(lighten($color, 5%));
+    }
+
+    &.tc-modal__frosted {
+      @include backdrop-blur(lighten($color, 5%));
     }
   }
-  .tc-modal--container {
-    .container--close {
-      cursor: pointer;
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      opacity: 0.5;
-      &:hover {
-        opacity: 1;
-      }
-      @media #{$isMobile} {
-        // display: none;
-      }
-    }
 
-    display: grid;
-    grid-template-rows: auto minmax(0, 1fr) auto;
-    z-index: 1001;
-    background: $background;
-
-    padding: {
-      top: 10px;
-      right: calc(15px + env(safe-area-inset-right));
-      left: calc(15px + env(safe-area-inset-left));
-      bottom: calc(15px + env(safe-area-inset-bottom));
+  .tc-modal--close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5em;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: 0.2s ease-in-out;
+    &:hover {
+      opacity: 0.9;
     }
-    .container--head {
-      margin: 0 14px;
-      .container--head--title__prestyled,
-      .container--head--subtitle__prestyled {
-        text-align: center;
+  }
+
+  .tc-modal--head {
+    position: sticky;
+    padding: 20px 5vw;
+    top: 0;
+    &.tc-modal--head__prestyled {
+      text-align: center;
+      .tc-modal--title {
         font-weight: bold;
-      }
-      .container--head--title__prestyled {
         font-size: 1.5em;
       }
-      .container--head--subtitle__prestyled {
-        opacity: 0.7;
-        margin: 5px 0;
+      .tc-modal--subtitle {
+        font-weight: 500;
+        font-size: 18px;
       }
     }
-    .container--content {
-      padding: 20px 0;
-      overflow: {
-        y: auto;
-        x: visible;
-      }
-      &::-webkit-scrollbar {
-        display: none;
-      }
-      img,
-      video {
-        max-width: 100%;
-      }
-    }
-    .container--buttons {
-      @media #{$isMobile} {
-        .tc-button {
-          height: 30px;
-        }
-      }
-      text-align: center;
-    }
+  }
+  .tc-modal--content {
+    padding: 0 5vw;
+  }
+  .tc-modal--footer {
+    position: sticky;
+    bottom: 0;
+    padding: 20px 5vw;
   }
 }
 </style>
