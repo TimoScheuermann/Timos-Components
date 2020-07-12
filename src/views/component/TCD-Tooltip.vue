@@ -1,6 +1,6 @@
 <template>
   <div>
-    <tc-headline title="Tooltips" />
+    <h1>Tooltip</h1>
     <div class="container">
       <tc-tooltip>
         <tc-tooltip position="bottom">
@@ -21,13 +21,12 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
+
 import TCSpinner from '@/tccomponents/spinner/TC-Spinner.vue';
 import TCCard from '@/tccomponents/card/TC-Card.vue';
 import TCTooltip from '@/tccomponents/tooltip/TC-Tooltip.vue';
 @Component({
   components: {
-    'tc-headline': TCHeadline,
     'tc-spinner': TCSpinner,
     'tc-card': TCCard,
     'tc-tooltip': TCTooltip

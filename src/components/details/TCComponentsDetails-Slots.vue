@@ -5,33 +5,38 @@
     v-if="component.slots.length > 0"
     title="Slots"
     rounded="true"
+    :dark="$store.getters.dark"
   >
-    <transition-group name="image-swap" class="slot-images" tag="div">
-      <tc-image
-        v-for="img in currentSlotTitle"
-        :key="img"
-        :src="img"
-        fallback="assets/wip.svg"
-      />
-      <!--
-      </tc-image>
-      <img
-        onerror="if (this.src != 'assets/wip.svg') this.src = 'assets/wip.svg';"
-      /> -->
-    </transition-group>
+    <template v-if="component.slots.length > 1">
+      <transition-group name="image-swap" class="slot-images" tag="div">
+        <tc-image
+          v-for="img in currentSlotTitle"
+          :key="img"
+          :src="img"
+          fallback="assets/wip.svg"
+        />
+      </transition-group>
 
-    <tc-segments v-model="currentSelection" :segments="segments">
-      <h2
-        v-for="slot in component.slots"
-        :key="slot.name + 't'"
-        :slot="slot.name"
+      <tc-segments
+        v-model="currentSelection"
+        :segments="segments"
+        :dark="$store.getters.dark"
       >
-        {{ slot.name }}
-      </h2>
-      <p v-for="slot in component.slots" :key="slot.name" :slot="slot.name">
-        {{ slot.description }}
-      </p>
-    </tc-segments>
+        <h2
+          v-for="slot in component.slots"
+          :key="slot.name + 't'"
+          :slot="slot.name"
+        >
+          {{ slot.name }}
+        </h2>
+        <p v-for="slot in component.slots" :key="slot.name" :slot="slot.name">
+          {{ slot.description }}
+        </p>
+      </tc-segments>
+    </template>
+    <template v-else>
+      <h3>default</h3>
+    </template>
   </tc-card>
 </template>
 
@@ -76,7 +81,7 @@ export default class TCComponentsDetailsSlots extends Vue {
 <style lang="scss" scoped>
 .tccomponents-details-slots {
   animation: slide-in-top 0.4s ease-in-out 0.4s both;
-  margin-bottom: 40px;
+  margin-top: 30px;
 }
 
 @keyframes slide-in-top {

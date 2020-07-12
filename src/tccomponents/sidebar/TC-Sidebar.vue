@@ -35,8 +35,8 @@ export default class TCSidebar extends Mixins(TCComponent) {
   box-shadow: $shadow;
 
   &.dark {
-    background: $color;
-    color: #fff;
+    background: $background_dark;
+    color: $color_dark;
   }
   user-select: none;
   z-index: 1000;

@@ -1,7 +1,12 @@
 <template>
   <div class="portfolio--codeexample">
-    <tc-card :title="title" :shadow="false">
-      <tc-segments :segments="['Example', 'Code']">
+    <tc-card
+      :title="title"
+      :shadow="false"
+      rounded="true"
+      :dark="$store.getters.dark"
+    >
+      <tc-segments :segments="['Example', 'Code']" :dark="$store.getters.dark">
         <div id="Example" slot="Example">
           <slot />
         </div>
@@ -56,6 +61,12 @@ export default class PortfolioCodeExample extends Vue {
 </script>
 <style lang="scss" scoped>
 .portfolio--codeexample {
+  .tc-card {
+    background: $background;
+  }
+  .tc-card__dark {
+    background: $background_dark;
+  }
   &--code {
     text-align: left;
     &__inner {

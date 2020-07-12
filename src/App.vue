@@ -10,11 +10,8 @@
           style="width: 80%; margin-left: 10%"
           src="assets/banner.svg"
           alt=""
-        /><tc-button
-          name="Read more"
-          variant="filled"
-          @click="opened2 = true"
         />
+        <tc-button name="Read more" variant="filled" @click="opened2 = true" />
 
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus,
@@ -95,7 +92,10 @@
         </p>
       </tc-modal>
     </template>
-    <div class="tccomponents">
+    <div
+      class="tccomponents"
+      :class="{ dark: $store.getters.dark || $route.name === 'designer' }"
+    >
       <tl-sidebar
         sidebarBackgroundImage="https://images.unsplash.com/photo-1525183995014-bd94c0750cd5"
         :collapsed="collapsedSidebar"
@@ -138,7 +138,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Watch } from 'vue-property-decorator';
+import { Vue, Component } from 'vue-property-decorator';
 
 import { EventBus } from '@/eventBus';
 import { TCComponentGroup } from '@/models/TCComponentGroup.model';
@@ -211,15 +211,6 @@ export default class App extends Vue {
   private recheckSidebarVisible(): void {
     this.sidebarVisible = window.matchMedia('(min-width: 851px)').matches;
   }
-
-  @Watch('$route', { deep: true, immediate: true })
-  routeChanged(): void {
-    const elems = document.querySelectorAll('.tl-sidebar--content');
-    if (elems.length > 0) {
-      (elems[0] as HTMLElement).style.background =
-        this.$route.name === 'designer' ? '#000' : '#fff';
-    }
-  }
 }
 </script>
 
@@ -253,9 +244,13 @@ body {
 .tccomponents {
   background: $background;
   color: $color;
+  &.dark {
+    background: $background_dark;
+    color: $color_dark;
+  }
 }
 [content] {
-  padding: 70px 5vw;
+  padding: 2.5vw 5vw;
   @media #{$isMobile} {
     padding-bottom: calc(70px + env(safe-area-inset-bottom));
   }

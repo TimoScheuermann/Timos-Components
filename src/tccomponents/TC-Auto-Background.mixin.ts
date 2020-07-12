@@ -64,8 +64,8 @@ export default class TCAutoBackground extends Mixins(TCComponent) {
         return;
       }
       // console.log('Collides with nothing');
-      this.dark_ = this.dark;
     }
+    this.dark_ = this.dark;
   }
 
   private collidesWithAny(elements: HTMLElement[]): boolean {

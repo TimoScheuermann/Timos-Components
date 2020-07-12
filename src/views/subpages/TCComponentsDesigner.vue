@@ -352,7 +352,6 @@ export default class TCComponentsDesigner extends Vue {
 
 <style lang="scss" scoped>
 [content] {
-  background: #000;
   min-height: 300px;
   padding-top: 0px;
 }
@@ -371,7 +370,8 @@ export default class TCComponentsDesigner extends Vue {
 }
 
 .designer-canvas {
-  background: #fafafa;
+  background: $background;
+  color: $color;
   transition: all 0.2s ease-in-out;
   padding: 20px;
   border-radius: 5px;
@@ -380,7 +380,8 @@ export default class TCComponentsDesigner extends Vue {
   max-width: 100%;
 
   &__dark {
-    background: #000;
+    background: $background_dark;
+    color: $color_dark;
   }
   /deep/ .tc-header {
     position: relative !important;

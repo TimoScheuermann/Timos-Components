@@ -1,5 +1,4 @@
 <template>
-  <!-- // :style="defaultStyle" -->
   <div class="tc-tabbar" :id="uuid_" :class="{ dark: dark_, light: !dark_ }">
     <div class="items">
       <slot />
@@ -31,8 +30,8 @@ export default class TCTabbar extends Mixins(TCAutoBackground) {}
     bottom: env(safe-area-inset-bottom);
   }
   &.dark {
-    @include backdrop-blur($color);
-    color: #fff;
+    @include backdrop-blur($background_dark);
+    color: $color_dark;
   }
   &.light {
     @include backdrop-blur($background);

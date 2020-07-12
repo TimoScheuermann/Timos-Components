@@ -5,14 +5,14 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
+
 import PortfolioCodeExample from '@/components/CodeExample.vue';
 import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
 import TCSteps from '@/tccomponents/steps/TC-Steps.vue';
 @Component({
   components: {
     'portfolio-code-example': PortfolioCodeExample,
-    'tc-headline': TCHeadline,
+
     'tl-grid': TLGrid,
     'tc-steps': TCSteps
   }

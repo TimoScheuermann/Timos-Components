@@ -54,7 +54,7 @@
       class="tc-input--indicator indicator__clear"
       @click="clear()"
     >
-      <i class="ti-cross" />
+      <tf-icon icon="assets/cross-inverted.svg" />
     </div>
     <div v-if="buttons_" p class="tc-input--indicator indicator__button">
       <i class="ti-plus" />
@@ -210,6 +210,7 @@ export default class TCInput extends Mixins(TCComponent) {
     &.indicator__button {
       background: $primary;
       width: 20px;
+      height: 20px;
       border-radius: 3px;
       color: #fff;
       cursor: pointer;
@@ -222,15 +223,11 @@ export default class TCInput extends Mixins(TCComponent) {
       }
     }
     &.indicator__clear {
-      background: #333;
       border-radius: 50px;
       opacity: 0.3;
+      transition: 0.2s ease-in-out;
       &:hover {
         opacity: 0.5;
-      }
-      i {
-        color: #fff;
-        transform: scale(0.5);
       }
     }
     &.indicator__icon {

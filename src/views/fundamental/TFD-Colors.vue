@@ -13,12 +13,12 @@
     >
       <tl-grid minWidth="150">
         <tc-card
-          v-for="(c, index) in colors"
+          v-for="c in colors"
           :key="c.name"
           rounded="true"
           hover="true"
           :background="c.code"
-          :color="index > 2 || index === 0 ? '#fff' : '#000'"
+          :dark="!c.dark"
         >
           <b>{{ c.name }}</b>
         </tc-card>
@@ -39,10 +39,13 @@ import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
   }
 })
 export default class TFDColors extends Vue {
-  public colors: { name: string; code: string }[] = [
+  public colors: { name: string; code: string; dark?: boolean }[] = [
+    { name: 'background', code: '#f5f5f7', dark: true },
+    { name: 'background_dark', code: '#1f2024' },
+    { name: 'paragraph', code: '#fff', dark: true },
+    { name: 'paragraph_dark', code: '#28292d' },
     { name: 'color', code: '#111' },
-    { name: 'background', code: '#fff' },
-    { name: 'paragraph', code: '#f0f0f0' },
+    { name: 'color_dark', code: '#fff', dark: true },
     { name: 'primary', code: '#08f' },
     { name: 'error', code: '#ff4757' },
     { name: 'success', code: '#2ed573' },

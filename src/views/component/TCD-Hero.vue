@@ -1,7 +1,7 @@
 <template>
   <!-- eslint-disable -->
   <div>
-    <tc-headline title="Options" />
+    <h1>Options</h1>
 
     <portfolio-code-example
       title="Simple Hero Section without Image"
@@ -37,12 +37,11 @@ import { Vue, Component } from 'vue-property-decorator';
 
 import PortfolioCodeExample from '@/components/CodeExample.vue';
 import TCHero from '@/tccomponents/hero/TC-Hero.vue';
-import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
 
 @Component({
   components: {
     'portfolio-code-example': PortfolioCodeExample,
-    'tc-headline': TCHeadline,
+
     'tc-hero': TCHero
   }
 })

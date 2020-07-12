@@ -7,7 +7,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
+
 import TCButton from '@/tccomponents/button/TC-Button.vue';
 import PortfolioCodeExample from '@/components/CodeExample.vue';
 import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
@@ -16,7 +16,6 @@ import TCBadge from '@/tccomponents/badge/TC-Badge.vue';
 @Component({
   components: {
     'portfolio-code-example': PortfolioCodeExample,
-    'tc-headline': TCHeadline,
     'tc-button': TCButton,
     'tl-grid': TLGrid,
     'tc-badge': TCBadge

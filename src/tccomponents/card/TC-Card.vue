@@ -89,16 +89,16 @@ export default class TCCard extends Mixins(TCComponent) {
   display: flex;
   flex-direction: column;
   color: $color;
-  background: $background;
+  background: $paragraph;
 
   &.tc-card__frosted {
-    @include backdrop-blur($background);
+    @include backdrop-blur($paragraph);
   }
   &.tc-card__dark {
-    background: lighten($color, 5%);
-    color: #fff;
+    background: $paragraph_dark;
+    color: $color_dark;
     &.tc-card__frosted {
-      @include backdrop-blur(lighten($color, 5%));
+      @include backdrop-blur($paragraph_dark);
     }
   }
 

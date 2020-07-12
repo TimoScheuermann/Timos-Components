@@ -11,7 +11,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
+
 import PortfolioCodeExample from '@/components/CodeExample.vue';
 import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
 import TCList from '@/tccomponents/list/TC-List.vue';
@@ -19,7 +19,7 @@ import TCListItem from '@/tccomponents/list/TC-List-Item.vue';
 @Component({
   components: {
     'portfolio-code-example': PortfolioCodeExample,
-    'tc-headline': TCHeadline,
+
     'tl-grid': TLGrid,
     'tc-list': TCList,
     'tc-list-item': TCListItem

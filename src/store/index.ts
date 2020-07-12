@@ -6,6 +6,7 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
+    dark: false,
     designer: {
       component: ''
     },
@@ -17,6 +18,9 @@ const store = new Vuex.Store({
     },
     icons: (state: any): Icon[] => {
       return state.icons;
+    },
+    dark: (state: any): boolean => {
+      return state.dark;
     }
   },
   mutations: {
@@ -25,6 +29,12 @@ const store = new Vuex.Store({
     },
     updateIcons(state: any, icons: Icon[]) {
       state.icons = icons;
+    },
+    toggleDarkMode(state: any) {
+      state.dark = !state.dark;
+    },
+    setDarkMode(state: any, dark: boolean) {
+      state.dark = dark;
     }
   }
 });

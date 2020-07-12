@@ -1,6 +1,6 @@
 <template>
   <div>
-    <tc-headline title="Variants" />
+    <h1>Variants</h1>
 
     <tl-grid minWidth="320">
       <portfolio-code-example tag="tc-checkbox" title="Simple Checkbox">
@@ -34,7 +34,7 @@
       </portfolio-code-example>
     </tl-grid>
 
-    <tc-headline title="Options" />
+    <h1>Options</h1>
 
     <tl-grid>
       <portfolio-code-example
@@ -137,14 +137,14 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
+
 import TCCheckbox from '@/tccomponents/checkbox/TC-Checkbox.vue';
 import PortfolioCodeExample from '@/components/CodeExample.vue';
 import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
 @Component({
   components: {
     'portfolio-code-example': PortfolioCodeExample,
-    'tc-headline': TCHeadline,
+
     'tc-checkbox': TCCheckbox,
     'tl-grid': TLGrid
   }

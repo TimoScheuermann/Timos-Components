@@ -63,6 +63,21 @@ export default class TCNavbar extends Mixins(TCAutoBackground) {
 </script>
 
 <style lang="scss" scoped>
+@mixin tc-navbar($c, $bg) {
+  border-bottom: 1px solid rgba($c, 0.3);
+  @include backdrop-blur($bg);
+  color: $c;
+  .tc-navbar--items {
+    @media #{$isMobile} {
+      background: rgba($bg, 0.3);
+
+      &.tc-navbar--items__expanded {
+        background: rgba($bg, 1);
+      }
+    }
+  }
+}
+
 .tc-navbar {
   &,
   [tc-flex] {
@@ -85,34 +100,10 @@ export default class TCNavbar extends Mixins(TCAutoBackground) {
   transition: color 0.1s ease-in-out, background 0.3s ease-in-out;
 
   &.tc-navbar__dark {
-    border-bottom: 1px solid rgba(#fff, 0.3);
-    @include backdrop-blur($color);
-    color: #fff;
-
-    .tc-navbar--items {
-      @media #{$isMobile} {
-        background: rgba($color, 0.3);
-
-        &.tc-navbar--items__expanded {
-          background: rgba($color, 1);
-        }
-      }
-    }
+    @include tc-navbar($color_dark, $background_dark);
   }
   &.tc-navbar__light {
-    border-bottom: 1px solid rgba($color, 0.2);
-    @include backdrop-blur($background);
-    color: $color;
-
-    .tc-navbar--items {
-      @media #{$isMobile} {
-        background: rgba($background, 0.3);
-
-        &.tc-navbar--items__expanded {
-          background: rgba($background, 1);
-        }
-      }
-    }
+    @include tc-navbar($color, $background);
   }
   .tc-navbar--expander,
   .tc-navbar--logo,

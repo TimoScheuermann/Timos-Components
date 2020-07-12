@@ -8,7 +8,8 @@
         minus.
       </p>
       <tc-revealer title="Revealer inside" icon="share" />
-      <tc-headline title="Hallo" />
+
+      <h2>Hello</h2>
       <p>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere, ut
         laboriosam temporibus illum modi asperiores ab ratione dolore
@@ -23,11 +24,10 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
+
 import TCRevealer from '@/tccomponents/revealer/TC-Revealer.vue';
 @Component({
   components: {
-    'tc-headline': TCHeadline,
     'tc-revealer': TCRevealer
   }
 })

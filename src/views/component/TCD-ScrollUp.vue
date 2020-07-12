@@ -1,6 +1,6 @@
 <template>
   <div>
-    <tc-headline title="Scroll Up"></tc-headline>
+    <h1>Scroll Up</h1>
     <tc-scroll-up />
     <tc-scroll-up icon="double-chevron-up" />
     <tc-scroll-up icon="house" />
@@ -9,11 +9,10 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
+
 import TCScrollUp from '@/tccomponents/scrollup/TC-Scroll-Up.vue';
 @Component({
   components: {
-    'tc-headline': TCHeadline,
     'tc-scroll-up': TCScrollUp
   }
 })

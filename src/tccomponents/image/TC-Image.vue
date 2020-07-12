@@ -77,8 +77,8 @@ export default class TCImage extends Mixins(TCComponent) {
   right: 0;
   width: 100vw;
   height: 100vh;
-  // background: rgba(black, 0.85);
-  @include backdrop-blur(rgba(black, 0.75));
+  background: rgba(black, 0.85);
+  // @include backdrop-blur(rgba(black, 0.75));
   display: flex;
   justify-content: center;
   align-items: center;

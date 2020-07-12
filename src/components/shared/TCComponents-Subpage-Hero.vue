@@ -3,10 +3,10 @@
     <img
       slot="background"
       src="assets/hero.png"
-      :class="{ dark: dark }"
+      :class="{ dark: dark || $store.getters.dark }"
       id="bg"
     />
-    <div class="hero-content" :class="{ dark: dark }">
+    <div class="hero-content" :class="{ dark: dark || $store.getters.dark }">
       <img :src="banner" />
       <h1>{{ subtitle }}</h1>
     </div>
@@ -49,14 +49,16 @@ img#bg {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  color: $color;
   &.dark {
-    color: #fff;
+    color: $color_dark;
   }
 
   img {
     max-width: 230px;
   }
   h1 {
+    color: inherit;
     margin-top: 10px;
     text-align: center;
   }

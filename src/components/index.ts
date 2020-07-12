@@ -61,6 +61,18 @@ const tcComponents: TCComponentGroup[] = [
             parameters: "Timo's Icons"
           },
           {
+            default: false,
+            name: 'frosted',
+            type: 'boolean',
+            description: ''
+          },
+          {
+            default: false,
+            name: 'dark',
+            type: 'boolean',
+            description: ''
+          },
+          {
             name: 'title',
             type: 'string',
             description: 'Sets a prestyled title on top of the input field'
@@ -832,6 +844,12 @@ const tcComponents: TCComponentGroup[] = [
             description: ''
           },
           { default: false, name: 'dark', type: 'boolean', description: '' },
+          {
+            default: false,
+            name: 'frosted',
+            type: 'boolean',
+            description: ''
+          },
           {
             default: false,
             name: 'multiple',

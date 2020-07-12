@@ -90,18 +90,19 @@ export default class TCSegments extends Mixins(TCComponent) {
 
   &.tc-segments--dark {
     .header {
-      background: $color;
-      color: #fff;
+      background: lighten($background_dark, 10%);
+      color: $color_dark;
       .background {
-        background: rgba(#fff, 0.2);
+        background: $paragraph_dark;
       }
     }
   }
 
   .header {
-    background: $paragraph;
+    background: darken($background, 5%);
+    color: $color;
     .background {
-      background: $background;
+      background: $paragraph;
     }
     padding: 5px;
     border-radius: $border-radius;
@@ -116,7 +117,7 @@ export default class TCSegments extends Mixins(TCComponent) {
       width: 100%;
       height: calc(100% - 10px);
       top: 5px;
-      transition: 0.2s ease-in-out;
+      transition: left 0.2s ease-in-out;
       box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
     }
     .items {

@@ -22,19 +22,19 @@ export default class TCTable extends Mixins(TCComponent) {}
     .tc-table--wrapper {
       table {
         tr {
-          border-bottom-color: rgba(#fff, 0.2);
+          border-bottom-color: rgba($color_dark, 0.2);
           th,
           td {
-            color: #fff;
+            color: $color_dark;
           }
           th {
-            border-bottom-color: #fff;
+            border-bottom-color: $color_dark;
           }
           &:hover {
             &:not(:first-child) {
-              background: lighten($color, 10%);
+              background: $background_dark;
               td {
-                background: lighten($color, 10%);
+                background: $background_dark;
               }
             }
           }
@@ -73,12 +73,10 @@ export default class TCTable extends Mixins(TCComponent) {}
 
         &:hover {
           &:not(:first-child) {
-            // box-shadow: $shadow;
             transform: translateY(-5px);
-
-            background: $paragraph;
+            background: $background;
             td {
-              background: $paragraph;
+              background: $background;
             }
           }
         }

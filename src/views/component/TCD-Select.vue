@@ -1,16 +1,15 @@
 <template>
   <div>
-    <tc-headline title="Select" />
+    <h1>Select</h1>
     <tc-select />
   </div>
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
+
 import TCSelect from '@/tccomponents/select/TC-Select.vue';
 @Component({
   components: {
-    'tc-headline': TCHeadline,
     'tc-select': TCSelect
   }
 })

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <tc-headline title="Segments" />
+    <h1>Segments</h1>
     <tc-segments
       v-for="(i, index) in Array(2)"
       :key="index"
@@ -40,12 +40,11 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
+
 import TCSegments from '@/tccomponents/segments/TC-Segments.vue';
 import TCCard from '@/tccomponents/card/TC-Card.vue';
 @Component({
   components: {
-    'tc-headline': TCHeadline,
     'tc-segments': TCSegments,
     'tc-card': TCCard
   }

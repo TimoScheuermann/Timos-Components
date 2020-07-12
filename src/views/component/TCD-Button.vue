@@ -1,6 +1,6 @@
 <template>
   <div>
-    <tc-headline title="Variants" />
+    <h1>Variants</h1>
 
     <tl-grid minWidth="320">
       <portfolio-code-example
@@ -22,7 +22,7 @@
       </portfolio-code-example>
     </tl-grid>
 
-    <tc-headline title="Colors" />
+    <h1>Colors</h1>
     <tl-grid minWidth="320">
       <portfolio-code-example
         v-for="color in colors"
@@ -50,14 +50,13 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
+
 import TCButton from '@/tccomponents/button/TC-Button.vue';
 import PortfolioCodeExample from '@/components/CodeExample.vue';
 import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
 @Component({
   components: {
     'portfolio-code-example': PortfolioCodeExample,
-    'tc-headline': TCHeadline,
     'tc-button': TCButton,
     'tl-grid': TLGrid
   }

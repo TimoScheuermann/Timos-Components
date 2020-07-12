@@ -1,6 +1,6 @@
 <template>
   <div>
-    <tc-headline title="Variants" />
+    <h1>Variants</h1>
 
     <tl-grid minWidth="350">
       <portfolio-code-example
@@ -25,7 +25,7 @@
       </tc-card>
     </tl-grid>
 
-    <tc-headline title="Different Colors" />
+    <h1>Different Colors</h1>
     <tl-grid minWidth="300">
       <portfolio-code-example
         tag="tc-progress"
@@ -56,7 +56,7 @@
       </portfolio-code-example>
     </tl-grid>
 
-    <tc-headline title="Changeing ringSize/Width" />
+    <h1>Changeing ringSize/ringWidth</h1>
     <tl-grid minWidth="350">
       <portfolio-code-example
         title="ringWidth"
@@ -81,7 +81,7 @@
       </portfolio-code-example>
     </tl-grid>
 
-    <tc-headline title="Different barHeight" />
+    <h1>Different barHeight</h1>
     <tl-grid minWidth="350">
       <portfolio-code-example
         title="10"
@@ -102,14 +102,13 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
+
 import TCProgress from '@/tccomponents/progress/TC-Progress.vue';
 import PortfolioCodeExample from '@/components/CodeExample.vue';
 import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
 import TCCard from '@/tccomponents/card/TC-Card.vue';
 @Component({
   components: {
-    'tc-headline': TCHeadline,
     'tc-progress': TCProgress,
     'portfolio-code-example': PortfolioCodeExample,
     'tl-grid': TLGrid,

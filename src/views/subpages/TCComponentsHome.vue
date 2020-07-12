@@ -2,7 +2,7 @@
   <div class="tccomponents--home">
     <tccomponents-subpage-hero subtitle="Components" />
     <div content>
-      <div class="hero-section" center>
+      <tc-card hero :shadow="false" :dark="$store.getters.dark" rounded="true">
         <div class="hero-tiles">
           <span>
             <i class="ti-card" />
@@ -35,7 +35,7 @@
             name="Component Designer"
           />
         </div>
-      </div>
+      </tc-card>
 
       <div
         v-for="group in tcComponents"
@@ -43,7 +43,11 @@
         class="group-show-real"
         :id="'show-real_' + group.group"
       >
-        <tc-list class="tc-components-home--list" :title="group.group">
+        <tc-list
+          class="tc-components-home--list"
+          :dark="$store.getters.dark"
+          :title="group.group"
+        >
           <tc-list-item
             v-for="comp in group.components"
             :key="comp.name"
@@ -66,7 +70,7 @@
                   group.prefix + '-' + comp.name.toLowerCase().replace(' ', '-')
               }"
             >
-              <tc-card :hover="true" rounded="true">
+              <tc-card :dark="$store.getters.dark" :hover="true" rounded="true">
                 <div class="details">
                   <div class="watermark">
                     <tf-icon :icon="comp.icon" />
@@ -113,23 +117,7 @@ export default class TCComponentsHome extends Vue {
 </script>
 
 <style lang="scss" scoped>
-[content] {
-  @media #{$isDesktop} {
-    padding: 10px 0;
-    .themeSection {
-      display: none;
-    }
-  }
-  @media #{$isMobile} {
-    padding: 0 5vw;
-
-    padding-bottom: calc(50px + env(safe-area-inset-bottom));
-  }
-}
 .group-show-real {
-  .tc-list {
-    margin-bottom: 20px;
-  }
   @media only screen and(min-width: 497px) {
     &#show-real_Fundementals {
       display: none;
@@ -141,21 +129,15 @@ export default class TCComponentsHome extends Vue {
   @media only screen and(min-width: 497px) {
     display: none;
   }
+  margin-top: 30px;
 }
 .tc-components-home--grid {
   @media only screen and(max-width: 496px) {
     display: none;
   }
 
-  background: lighten($paragraph, 3.5%);
-  border-radius: 20px;
-  margin: 30px 2.5vw;
-  padding: 30px 2.5vw {
-    bottom: 50px;
-  }
-
   h1 {
-    margin-top: 0;
+    margin-top: 30px;
     font-size: 2em;
   }
 }
@@ -195,8 +177,7 @@ a {
     max-width: 400px;
   }
 }
-.hero-section {
-  margin-bottom: 30px;
+.tc-card[hero] {
   h1 {
     margin: 0;
   }
@@ -206,9 +187,7 @@ a {
     text-align: center;
   }
   .hero-tiles {
-    margin: 20px 0 {
-      top: 40px;
-    }
+    margin-bottom: 20px;
     $colors: (
       1: '#eb3b5a',
       2: '#45aaf2',

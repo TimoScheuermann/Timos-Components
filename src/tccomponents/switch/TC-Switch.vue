@@ -1,5 +1,5 @@
 <template>
-  <div class="tc-switch">
+  <div class="tc-switch" :class="{ 'tc-switch__dark': dark }">
     <input @input="updateVal()" type="checkbox" :id="id" v-model="toggled" />
     <label :for="id">
       <div class="container">
@@ -50,13 +50,16 @@ export default class TCSwitch extends Mixins(TCComponent) {
       }
     }
   }
+  &.tc-switch__dark label .container {
+    background: lighten($paragraph_dark, 10%);
+  }
   label {
     cursor: pointer;
     .container {
       width: #{$ballSize * 2 + 4}px;
       height: #{$ballSize + 4}px;
       border-radius: #{$ballSize + 4}px;
-      background: darken($paragraph, 5%);
+      background: darken($paragraph, 10%);
       position: relative;
       transition: 0.2s ease-in;
 

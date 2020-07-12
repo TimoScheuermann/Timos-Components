@@ -80,6 +80,19 @@ body.tc-modal--opened {
 }
 </style>
 <style lang="scss" scoped>
+@mixin tc-modal($c, $bg) {
+  color: $c;
+  background: $bg;
+  .tc-modal--head,
+  .tc-modal--footer {
+    @include backdrop-blur($bg);
+  }
+
+  &.tc-modal__frosted {
+    @include backdrop-blur($bg);
+  }
+}
+
 $time: 0.3s;
 .tc-modal-background {
   position: fixed;
@@ -140,29 +153,12 @@ $time: 0.3s;
     }
   }
 
-  color: $color;
-  background: $background;
   @include custom-scrollbar__light();
-  .tc-modal--head,
-  .tc-modal--footer {
-    @include backdrop-blur($background);
-  }
+  @include tc-modal($color, $background);
 
-  &.tc-modal__frosted {
-    @include backdrop-blur($background);
-  }
   &.tc-modal__dark {
     @include custom-scrollbar__dark();
-    color: #fff;
-    background: lighten($color, 5%);
-    .tc-modal--head,
-    .tc-modal--footer {
-      @include backdrop-blur(lighten($color, 5%));
-    }
-
-    &.tc-modal__frosted {
-      @include backdrop-blur(lighten($color, 5%));
-    }
+    @include tc-modal($color_dark, $background_dark);
   }
 
   .tc-modal--close {

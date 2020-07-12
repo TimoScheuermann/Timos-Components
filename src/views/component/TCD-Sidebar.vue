@@ -1,15 +1,13 @@
 <template>
   <div>
-    <tc-headline title="Sidebar"></tc-headline>
+    <h1>Sidebar</h1>
   </div>
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
+
 @Component({
-  components: {
-    'tc-headline': TCHeadline
-  }
+  components: {}
 })
 export default class TCDSidebar extends Vue {}
 </script>

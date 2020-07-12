@@ -30,6 +30,7 @@ export { default as TcSwitch } from '@/tccomponents/switch/TC-Switch.vue';
 export { default as TcTabbarItem } from '@/tccomponents/tabbar/TC-Tabbar-Item.vue';
 export { default as TcTabbar } from '@/tccomponents/tabbar/TC-Tabbar.vue';
 export { default as TcTable } from '@/tccomponents/table/TC-Table.vue';
+export { default as TcTextArea } from '@/tccomponents/textarea/TC-Textarea.vue';
 export { default as TcTooltip } from '@/tccomponents/tooltip/TC-Tooltip.vue';
 export { default as TlGrid } from '@/tccomponents/_layout/grid/TL-Grid.vue';
 export { default as TlModal } from '@/tccomponents/_layout/modal/TL-Modal.vue';

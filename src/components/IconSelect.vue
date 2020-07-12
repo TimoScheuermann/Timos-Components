@@ -175,7 +175,7 @@ export default class IconSelect extends Mixins(TCComponent) {
     @include tc-container__dark();
     .tc-select--container {
       background: lighten($color, 10%);
-      color: #fff;
+      color: $color_dark;
       @include custom-scrollbar__dark();
       .container--head {
         @include backdrop-blur(lighten($color, 20%));

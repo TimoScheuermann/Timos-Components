@@ -168,37 +168,37 @@ export default class TCSelect extends Mixins(TCComponent) {
 </script>
 
 <style lang="scss" scoped>
+@mixin tc-select--container($c, $bg) {
+  background: $bg;
+  color: $c;
+  .container--head {
+    @include backdrop-blur(darken($bg, 10%));
+  }
+}
+
 .tc-select {
   @include tc-container__light();
   .tc-select--container {
-    background: $paragraph;
-    color: $color;
     @include custom-scrollbar__light();
-    .container--head {
-      @include backdrop-blur(darken($paragraph, 15%));
-    }
+    @include tc-select--container($color, $paragraph);
   }
 
   &.tc-select__frosted {
     &,
     .tc-select--container {
-      @include backdrop-blur(darken($paragraph, 15%));
+      @include backdrop-blur(darken($paragraph, 10%));
     }
   }
   &.tc-select__dark {
     @include tc-container__dark();
     .tc-select--container {
-      background: lighten($color, 10%);
-      color: #fff;
       @include custom-scrollbar__dark();
-      .container--head {
-        @include backdrop-blur(lighten($color, 20%));
-      }
+      @include tc-select--container($color_dark, $paragraph_dark);
     }
     &.tc-select__frosted {
       &,
       .tc-select--container {
-        @include backdrop-blur(lighten($color, 10%));
+        @include backdrop-blur(lighten($paragraph_dark, 10%));
       }
     }
   }

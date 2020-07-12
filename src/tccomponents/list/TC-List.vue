@@ -25,11 +25,11 @@ export default class TCList extends Mixins(TCComponent) {
   padding: 5px;
   border-radius: $border-radius;
   &.tc-list__dark {
-    background: $color;
-    color: $background;
+    color: $color_dark;
+    background: $paragraph_dark;
   }
   &.tc-list__light {
-    background: lighten($paragraph, 3%);
+    background: $paragraph;
     color: $color;
   }
   .tc-list--title {

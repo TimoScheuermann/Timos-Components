@@ -1,6 +1,6 @@
 <template>
   <div>
-    <tc-headline title="Examples" />
+    <h1>Examples</h1>
 
     <tl-grid>
       <portfolio-code-example
@@ -28,7 +28,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
+
 import PortfolioCodeExample from '@/components/CodeExample.vue';
 import TCNavbar from '@/tccomponents/navbar/TC-Navbar.vue';
 import TCNavbarItem from '@/tccomponents/navbar/TC-Navbar-Item.vue';
@@ -36,7 +36,7 @@ import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
 @Component({
   components: {
     'portfolio-code-example': PortfolioCodeExample,
-    'tc-headline': TCHeadline,
+
     'tc-navbar': TCNavbar,
     'tc-navbar-item': TCNavbarItem,
     'tl-grid': TLGrid

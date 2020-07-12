@@ -1,16 +1,15 @@
 <template>
   <div>
-    <tc-headline title="Slider"></tc-headline>
+    <h1>Slider</h1>
     <tc-slider />
   </div>
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
+
 import TCSlider from '@/tccomponents/slider/TC-Slider.vue';
 @Component({
   components: {
-    'tc-headline': TCHeadline,
     'tc-slider': TCSlider
   }
 })

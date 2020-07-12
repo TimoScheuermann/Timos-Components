@@ -1,6 +1,6 @@
 <template>
   <div>
-    <tc-headline title="Options" />
+    <h1>Options</h1>
 
     <portfolio-code-example
       title="Only Title"
@@ -70,7 +70,7 @@
       </tc-header>
     </portfolio-code-example>
 
-    <tc-headline title="Variants" />
+    <h1>Variants</h1>
     <portfolio-code-example
       title="Fixed / Sticky"
       tag="tc-header"
@@ -98,7 +98,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
+
 import TCHeader from '@/tccomponents/header/TC-Header.vue';
 
 import TCButton from '@/tccomponents/button/TC-Button.vue';
@@ -107,7 +107,7 @@ import PortfolioCodeExample from '@/components/CodeExample.vue';
 @Component({
   components: {
     'portfolio-code-example': PortfolioCodeExample,
-    'tc-headline': TCHeadline,
+
     'tc-header': TCHeader,
     'tc-button': TCButton,
     'tc-segments': TCSegments

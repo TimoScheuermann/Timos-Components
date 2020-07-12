@@ -159,12 +159,12 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
   &.tc-header__dark {
     &.tc-header__sticky,
     &.tc-header__fixed {
-      border-bottom: 1px solid rgba(#fff, 0.3);
+      border-bottom: 1px solid rgba($color_dark, 0.3);
     }
-    @include backdrop-blur($color);
-    color: #fff;
+    @include backdrop-blur($background_dark);
+    color: $color_dark;
     .tc-header--items__overflow .tc-checkbox /deep/ .icon {
-      color: #fff;
+      color: $color_dark;
     }
   }
   &.tc-header__light {
@@ -325,39 +325,15 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
     }
 
     &.tc-header__dark {
-      background: $color;
-      color: #fff;
+      background: $background_dark;
+      color: $color_dark;
     }
     &.tc-header__light {
       background: $background;
       color: $color;
     }
-    &::-webkit-scrollbar {
-      width: 4px;
-      height: 4px;
-      position: absolute !important;
-      border-radius: 4px;
-      transition: 0.2s ease;
-    }
 
-    &::-webkit-scrollbar:hover {
-      width: 4px;
-    }
-
-    &::-webkit-scrollbar-track {
-      display: none;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: #666;
-      border-radius: 4px;
-      transition: 0.2s ease;
-      &:hover {
-        background: #888;
-        transition: 0.2s ease;
-        cursor: grabbing;
-      }
-    }
+    @include custom-scrollbar__dark();
   }
 }
 

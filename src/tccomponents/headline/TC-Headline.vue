@@ -35,7 +35,7 @@ export default class TCHeadline extends Mixins(TCComponent) {
   position: relative;
   color: $color;
   &__dark {
-    color: #fff;
+    color: $color_dark;
   }
   .tc-headline--bar {
     position: absolute;

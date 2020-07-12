@@ -79,7 +79,7 @@ export default class TCTextarea extends Mixins(TCComponent) {
   color: $color;
 
   &.tc-textarea__dark {
-    color: #fff;
+    color: $color_dark;
     textarea {
       @include tc-container__dark();
     }
@@ -107,13 +107,9 @@ export default class TCTextarea extends Mixins(TCComponent) {
       align-items: center;
     }
   }
-  .tc-textarea--footer {
-    //
-  }
 
   textarea {
     color: inherit;
-
     @include tc-container__light();
     outline: none;
     font: inherit;

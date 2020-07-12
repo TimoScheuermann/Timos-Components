@@ -1,6 +1,6 @@
 <template>
   <div>
-    <tc-headline title="Options" />
+    <h1>Options</h1>
 
     <tl-grid minWidth="300">
       <portfolio-code-example title="Simple Text Input" tag="tc-input">
@@ -68,7 +68,8 @@
       </portfolio-code-example>
     </tl-grid>
 
-    <tc-headline title="Types" />
+    <h1>Types</h1>
+
     <p>You can assign the following input types to TC-Input</p>
 
     <div class="inputTypes">
@@ -102,7 +103,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
+
 import TCInput from '@/tccomponents/input/TC-Input.vue';
 import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
 import PortfolioCodeExample from '@/components/CodeExample.vue';
@@ -110,7 +111,7 @@ import TCLink from '@/tccomponents/link/TC-Link.vue';
 @Component({
   components: {
     'portfolio-code-example': PortfolioCodeExample,
-    'tc-headline': TCHeadline,
+
     'tc-input': TCInput,
     'tl-grid': TLGrid,
     'tc-link': TCLink

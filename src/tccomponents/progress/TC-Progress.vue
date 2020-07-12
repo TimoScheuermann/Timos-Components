@@ -8,7 +8,7 @@
     <div
       class="tc-progress--bar"
       :style="{ width: percent + '%', background: color }"
-    ></div>
+    />
   </div>
   <div v-else class="tc-progress tc-progress__ring">
     <svg

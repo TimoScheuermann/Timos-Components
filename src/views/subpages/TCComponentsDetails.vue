@@ -2,6 +2,7 @@
   <div class="tccomponents--details" v-if="component">
     <tccomponents-details-hero :component="component" />
     <!-- <p>{{ component }}</p> -->
+
     <transition name="slither">
       <div :key="component.name + component.icon" content>
         <router-view :component="component" />
@@ -66,7 +67,6 @@ export default class TCComponentsDetails extends Vue {
 }
 
 [content] {
-  padding-top: 2.5vw;
   @media #{$isDesktop} {
     width: calc(
       100vw - 10vw - env(safe-area-inset-left) - env(safe-area-inset-right) -

@@ -2,7 +2,7 @@
   <tc-header
     :title="headerTitle"
     :variant="sidebarVisible && 'sticky'"
-    :dark="$route.name === 'designer'"
+    :dark="$store.state.dark || $route.name === 'designer'"
     :key="$route.name"
   >
     <template v-if="isDesigner">
@@ -26,6 +26,12 @@
         />
       </div>
     </template>
+    <template v-if="!isDesigner">
+      <div class="darkmode" :class="{ dark: headerSwitch }">
+        <tc-switch v-model="headerSwitch" @input="darkModeChanged" />
+        <span t>Dark</span>
+      </div>
+    </template>
     <template v-if="isDetailView">
       <tc-button
         name="Open in Designer"
@@ -45,16 +51,19 @@ import { EventBus } from '@/eventBus';
 import TCHeader from '@/tccomponents/header/TC-Header.vue';
 import TCButton from '@/tccomponents/button/TC-Button.vue';
 import TCInput from '@/tccomponents/input/TC-Input.vue';
+import TCSwitch from '@/tccomponents/switch/TC-Switch.vue';
 
 @Component({
   components: {
     'tc-header': TCHeader,
     'tc-button': TCButton,
-    'tc-input': TCInput
+    'tc-input': TCInput,
+    'tc-switch': TCSwitch
   }
 })
 export default class TCComponentsHeader extends Vue {
   @Prop() sidebarVisible!: boolean;
+  public headerSwitch: boolean = this.$store.getters.dark;
 
   get routeName(): string {
     return this.$route.name || '';
@@ -91,11 +100,34 @@ export default class TCComponentsHeader extends Vue {
   public fileLoaded(content: string): void {
     EventBus.$emit('designer-fileLoaded', content);
   }
+
+  public darkModeChanged() {
+    this.$store.commit('setDarkMode', this.headerSwitch);
+    this.$forceUpdate();
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-.save-config {
+.save-config,
+.darkmode {
   display: flex;
+}
+.darkmode {
+  justify-content: center;
+  align-items: center;
+  margin: 3px;
+  border-radius: $border-radius;
+  background: $paragraph;
+  &.dark {
+    background: $paragraph_dark;
+  }
+  span[t] {
+    font-weight: 500;
+    margin: {
+      left: 10px;
+      right: 10px;
+    }
+  }
 }
 </style>

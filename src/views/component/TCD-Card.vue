@@ -1,6 +1,6 @@
 <template>
   <div>
-    <tc-headline title="Options" />
+    <h1>Options</h1>
 
     <tl-grid minWidth="320">
       <portfolio-code-example
@@ -61,7 +61,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
+
 import TCCard from '@/tccomponents/card/TC-Card.vue';
 import PortfolioCodeExample from '@/components/CodeExample.vue';
 import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
@@ -70,7 +70,7 @@ import TCImage from '@/tccomponents/image/TC-Image.vue';
 @Component({
   components: {
     'portfolio-code-example': PortfolioCodeExample,
-    'tc-headline': TCHeadline,
+
     'tc-card': TCCard,
     'tl-grid': TLGrid,
     'tc-image': TCImage

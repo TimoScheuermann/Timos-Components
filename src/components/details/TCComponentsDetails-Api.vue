@@ -37,3 +37,8 @@ export default class TCComponentsDetailsApi extends Vue {
   @Prop() component!: TCComponent;
 }
 </script>
+<style lang="scss" scoped>
+.tccomponents-details-api {
+  margin-top: 30px;
+}
+</style>

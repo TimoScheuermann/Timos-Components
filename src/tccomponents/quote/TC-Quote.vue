@@ -26,10 +26,11 @@ export default class TCQuote extends Mixins(TCComponent) {
 
 <style lang="scss" scoped>
 .tc-quote {
-  background: $paragraph;
+  color: $color;
+  background: darken($background, 5%);
   &.tc-quote__dark {
-    background: lighten($color, 20%);
-    color: #fff;
+    color: $color_dark;
+    background: lighten($background_dark, 5%);
   }
   border: {
     radius: 5px;
