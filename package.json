@@ -1,6 +1,6 @@
 {
   "name": "tccomponents_vue",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -9,7 +9,7 @@
     "build-lib": "cross-env TC_TARGET=true vue-cli-service build --target lib --name tccomponents_vue src/tccomponents_vue.ts",
     "prepublish": "yarn build-lib"
   },
-  "main": "./lib/tccomponents.common.js",
+  "main": "./lib/tccomponents_vue.common.js",
   "dependencies": {
     "core-js": "^3.6.5",
     "node-sass": "^4.14.1",
