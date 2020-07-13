@@ -19,7 +19,7 @@
         :class="{ 'tc-modal--head__prestyled': !$slots.header }"
       >
         <div class="tc-modal--close" @click="close($event)">
-          <tf-icon icon="assets/cross-inverted.svg" />
+          <tf-icon icon="cross-inverted" />
         </div>
         <slot name="header" />
         <template v-if="!$slots.header && (title || subtitle)">

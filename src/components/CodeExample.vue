@@ -62,10 +62,10 @@ export default class PortfolioCodeExample extends Vue {
 <style lang="scss" scoped>
 .portfolio--codeexample {
   .tc-card {
-    background: $background;
+    // background: $background;
   }
   .tc-card__dark {
-    background: $background_dark;
+    // background: $background_dark;
   }
   &--code {
     text-align: left;

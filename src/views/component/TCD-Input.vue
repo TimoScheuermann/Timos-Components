@@ -150,10 +150,6 @@ export default class TCDInput extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-.tc-input {
-  margin-top: 30px;
-}
-
 .fyi i {
   margin-right: 5px;
   color: #08f;

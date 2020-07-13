@@ -4,7 +4,8 @@
     :class="{
       'tc-input__dark': dark,
       'tc-input__frosted': frosted,
-      'tc-input__fit-content': isFitContent
+      'tc-input__fit-content': isFitContent,
+      'tc-input__hasHead': title || tooltip
     }"
   >
     <div class="tc-input--title" v-if="title">{{ title }}</div>
@@ -54,7 +55,7 @@
       class="tc-input--indicator indicator__clear"
       @click="clear()"
     >
-      <tf-icon icon="assets/cross-inverted.svg" />
+      <tf-icon icon="cross-inverted" />
     </div>
     <div v-if="buttons_" p class="tc-input--indicator indicator__button">
       <i class="ti-plus" />
@@ -187,6 +188,9 @@ export default class TCInput extends Mixins(TCComponent) {
   }
   &.tc-input__fit-content {
     width: fit-content;
+  }
+  &.tc-input__hasHead {
+    margin-top: 30px;
   }
   position: relative;
   .tc-input--title {

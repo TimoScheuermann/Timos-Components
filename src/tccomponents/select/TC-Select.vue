@@ -206,6 +206,7 @@ export default class TCSelect extends Mixins(TCComponent) {
     width: fit-content;
   }
   position: relative;
+  user-select: none;
   .tc-select--title {
     @include tc-container--title();
   }

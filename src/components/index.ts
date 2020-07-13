@@ -930,7 +930,7 @@ const tcComponents: TCComponentGroup[] = [
       },
       {
         name: 'Sidebar',
-        icon: 'assets/sidebar-alt.png',
+        icon: 'sidebar-alt',
         api: [], // TODO:
         slots: [
           {

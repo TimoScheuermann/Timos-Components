@@ -26,10 +26,10 @@
   }
 }
 @mixin tc-container__dark {
-  @include tc-container($color_dark, $paragraph_dark);
+  @include tc-container($color_dark, lighten($paragraph_dark, 5%));
 }
 @mixin tc-container__light {
-  @include tc-container($color, $paragraph);
+  @include tc-container($color, darken($paragraph, 5%));
 }
 
 @mixin tc-container--title {
