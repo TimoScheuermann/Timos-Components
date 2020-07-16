@@ -47,6 +47,11 @@ export default class TCComponentsDemos extends Vue {
       name: 'Investing Collectors',
       thumbnail: 'assets/demos/investing-collectors.png',
       url: 'http://wip-investing-collectors.netlify.app'
+    },
+    {
+      name: "Timo's Newsroom",
+      thumbnail: 'https://newsroom.timos.design/pwa/maskIcon.svg',
+      url: 'http://newsroom.timos.design'
     }
   ];
 }
@@ -63,6 +68,9 @@ export default class TCComponentsDemos extends Vue {
   a {
     color: $color;
     text-decoration: none;
+  }
+  img {
+    max-height: 150px;
   }
 }
 </style>
