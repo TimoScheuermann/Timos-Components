@@ -1,5 +1,11 @@
 <template>
-  <div class="tc-textarea" :class="{ 'tc-textarea__dark': dark }">
+  <div
+    class="tc-textarea"
+    :class="{
+      'tc-textarea__dark': dark,
+      'tc-textarea__hasHead': title || tooltip
+    }"
+  >
     <div class="tc-textarea--head" v-if="title || tooltip">
       <div class="tc-textarea--title">
         {{ title }}
@@ -83,6 +89,10 @@ export default class TCTextarea extends Mixins(TCComponent) {
     textarea {
       @include tc-container__dark();
     }
+  }
+
+  &.tc-input__hasHead {
+    margin-top: 30px;
   }
 
   .tc-textarea--head {
