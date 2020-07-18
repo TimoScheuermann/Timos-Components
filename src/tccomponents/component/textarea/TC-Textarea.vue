@@ -2,9 +2,11 @@
   <div
     class="tc-textarea"
     :class="{
+      'tc-textarea__frosted': frosted,
       'tc-textarea__dark': dark,
       'tc-textarea__hasHead': title || tooltip
     }"
+    :style="{ color: tccolor_ }"
   >
     <div class="tc-textarea--head" v-if="title || tooltip">
       <div class="tc-textarea--title">
@@ -51,7 +53,7 @@ import TCTooltip from '@/tccomponents/component/tooltip/TC-Tooltip.vue';
 })
 export default class TCTextarea extends Mixins(TCComponent) {
   @Prop({ default: '' }) value!: string;
-  @Prop({ default: 'Title' }) title!: string;
+  @Prop() title!: string;
   @Prop() tooltip!: string;
 
   @Prop() autofocus!: boolean;
@@ -83,15 +85,26 @@ export default class TCTextarea extends Mixins(TCComponent) {
 <style lang="scss" scoped>
 .tc-textarea {
   color: $color;
+  textarea {
+    @include tc-container__light();
+    @include custom-scrollbar__light();
+  }
+  &.tc-textarea__frosted textarea {
+    @include backdrop-blur($paragraph);
+  }
 
   &.tc-textarea__dark {
     color: $color_dark;
     textarea {
       @include tc-container__dark();
+      @include custom-scrollbar__dark();
+    }
+    &.tc-textarea__frosted textarea {
+      @include backdrop-blur($paragraph_dark);
     }
   }
 
-  &.tc-input__hasHead {
+  &.tc-textarea__hasHead {
     margin-top: 30px;
   }
 
@@ -120,15 +133,17 @@ export default class TCTextarea extends Mixins(TCComponent) {
 
   textarea {
     color: inherit;
-    @include tc-container__light();
     outline: none;
     font: inherit;
-    background: inherit;
     width: calc(100% - 20px);
     min-height: 100px;
     transition: 0.2s ease-in-out;
-    height: fit-content;
+    height: auto;
     resize: none;
+    &::placeholder {
+      color: inherit;
+      opacity: 0.6;
+    }
   }
 }
 </style>

@@ -1046,6 +1046,37 @@ const tcComponents: TCComponentGroup[] = [
           }
         ], // TODO:
         slots: [] // TODO:
+      },
+      {
+        name: 'Textarea',
+        icon: 'pencil',
+        api: [
+          apiDark,
+          apiFrosted,
+          apiColor,
+          { name: 'value', type: 'string', description: '' },
+          { name: 'title', type: 'string', description: '' },
+          { name: 'tooltip', type: 'string', description: '' },
+
+          { name: 'autofocus', type: 'boolean', description: '' },
+          { name: 'cols', type: 'number', description: '' },
+          { name: 'dirname', type: 'string', description: '' },
+          { name: 'disabled', type: 'boolean', description: '' },
+          { name: 'form', type: 'string', description: '' },
+          { name: 'maxlength', type: 'string', description: '' },
+          { name: 'name', type: 'string', description: '' },
+          {
+            name: 'placeholder',
+            type: 'string',
+            description: '',
+            default: 'Enter text'
+          },
+          { name: 'readonly', type: 'boolean', description: '' },
+          { name: 'required', type: 'boolean', description: '' },
+          { name: 'rows', type: 'string', description: '', default: 10 },
+          { name: 'wrap', type: 'string', description: '' }
+        ], // TODO:
+        slots: []
       }
     ].sort((a, b) => a.name.localeCompare(b.name))
   },

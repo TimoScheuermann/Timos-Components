@@ -278,6 +278,12 @@ const router = new VueRouter({
           meta: { title: prefix + 'TC Tooltip' }
         },
         {
+          path: 'Textarea',
+          name: 'TC-textarea',
+          component: () => import('@/views/component/TCD-Textarea.vue'),
+          meta: { title: prefix + 'TC Textarea' }
+        },
+        {
           path: '',
           redirect: { name: 'home' }
         },
