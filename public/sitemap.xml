@@ -61,6 +61,12 @@
 		</url>
 
 		<url>
+			<loc>https://components.timos.design/component/Avatar/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
 			<loc>https://components.timos.design/component/Badge/</loc>
 			<changefreq>daily</changefreq>
 			<priority>1</priority>
@@ -248,6 +254,12 @@
 
 		<url>
 			<loc>https://components.timos.design/layout/Modal/</loc>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
+		</url>
+
+		<url>
+			<loc>https://components.timos.design/layout/Flow/</loc>
 			<changefreq>daily</changefreq>
 			<priority>1</priority>
 		</url>

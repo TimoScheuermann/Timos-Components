@@ -18,8 +18,8 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import { TCComponent } from '@/models/TCComponent.model';
-import TCHero from '@/tccomponents/hero/TC-Hero.vue';
-import TFIcon from '@/tccomponents/_fundamental/icon/TF-Icon.vue';
+import TCHero from '@/tccomponents/component/hero/TC-Hero.vue';
+import TFIcon from '@/tccomponents/fundamental/icon/TF-Icon.vue';
 
 @Component({
   components: {

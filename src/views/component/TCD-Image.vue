@@ -11,8 +11,8 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-import TCImage from '@/tccomponents/image/TC-Image.vue';
-import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
+import TCImage from '@/tccomponents/component/image/TC-Image.vue';
+import TLGrid from '@/tccomponents/layout/grid/TL-Grid.vue';
 import PortfolioCodeExample from '@/components/CodeExample.vue';
 @Component({
   components: {

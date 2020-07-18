@@ -5,7 +5,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
+import TCHeadline from '@/tccomponents/component/headline/TC-Headline.vue';
 @Component({
   components: {
     'tc-headline': TCHeadline

@@ -35,10 +35,10 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-import TCButton from '@/tccomponents/button/TC-Button.vue';
-import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
+import TCButton from '@/tccomponents/component/button/TC-Button.vue';
+import TLGrid from '@/tccomponents/layout/grid/TL-Grid.vue';
 import PortfolioCodeExample from '@/components/CodeExample.vue';
-import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
+import TCHeadline from '@/tccomponents/component/headline/TC-Headline.vue';
 
 @Component({
   components: {

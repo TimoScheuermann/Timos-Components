@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import TCHero from '@/tccomponents/hero/TC-Hero.vue';
+import TCHero from '@/tccomponents/component/hero/TC-Hero.vue';
 
 @Component({
   components: {

@@ -31,12 +31,12 @@
 
     <tc-sidebar-group
       v-for="group in groups"
-      :key="group.group"
+      :key="'sidebar-group' + group.group"
       :name="group.group"
     >
       <tc-sidebar-item
         v-for="comp in group.components"
-        :key="comp.name"
+        :key="'sidebar-item' + comp.name"
         :name="comp.name"
         :icon="comp.icon"
         :to="{
@@ -51,9 +51,9 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import { TCComponentGroup } from '@/models/TCComponentGroup.model';
 
-import TCSidebarGroup from '@/tccomponents/sidebar/TC-Sidebar-Group.vue';
-import TCSidebarItem from '@/tccomponents/sidebar/TC-Sidebar-Item.vue';
-import TCBadge from '@/tccomponents/badge/TC-Badge.vue';
+import TCSidebarGroup from '@/tccomponents/component/sidebar/TC-Sidebar-Group.vue';
+import TCSidebarItem from '@/tccomponents/component/sidebar/TC-Sidebar-Item.vue';
+import TCBadge from '@/tccomponents/component/badge/TC-Badge.vue';
 
 @Component({
   components: {

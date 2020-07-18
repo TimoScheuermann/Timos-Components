@@ -18,8 +18,8 @@
 import { Vue, Component } from 'vue-property-decorator';
 
 import TCComponentsSubpageHero from '@/components/shared/TCComponents-Subpage-Hero.vue';
-import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
-import TCCard from '@/tccomponents/card/TC-Card.vue';
+import TLGrid from '@/tccomponents/layout/grid/TL-Grid.vue';
+import TCCard from '@/tccomponents/component/card/TC-Card.vue';
 import BigHeading from '@/components/BigHeading.vue';
 
 @Component({

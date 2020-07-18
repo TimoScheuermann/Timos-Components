@@ -64,9 +64,9 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-import TCDivider from '@/tccomponents/divider/TC-Divider.vue';
+import TCDivider from '@/tccomponents/component/divider/TC-Divider.vue';
 import PortfolioCodeExample from '@/components/CodeExample.vue';
-import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
+import TLGrid from '@/tccomponents/layout/grid/TL-Grid.vue';
 @Component({
   components: {
     'portfolio-code-example': PortfolioCodeExample,

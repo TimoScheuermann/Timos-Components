@@ -7,8 +7,8 @@
 import { Vue, Component } from 'vue-property-decorator';
 
 import PortfolioCodeExample from '@/components/CodeExample.vue';
-import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
-import TCSteps from '@/tccomponents/steps/TC-Steps.vue';
+import TLGrid from '@/tccomponents/layout/grid/TL-Grid.vue';
+import TCSteps from '@/tccomponents/component/steps/TC-Steps.vue';
 @Component({
   components: {
     'portfolio-code-example': PortfolioCodeExample,

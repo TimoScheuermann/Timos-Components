@@ -138,9 +138,9 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-import TCCheckbox from '@/tccomponents/checkbox/TC-Checkbox.vue';
+import TCCheckbox from '@/tccomponents/component/checkbox/TC-Checkbox.vue';
 import PortfolioCodeExample from '@/components/CodeExample.vue';
-import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
+import TLGrid from '@/tccomponents/layout/grid/TL-Grid.vue';
 @Component({
   components: {
     'portfolio-code-example': PortfolioCodeExample,

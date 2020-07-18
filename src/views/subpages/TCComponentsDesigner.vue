@@ -97,45 +97,46 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Watch } from 'vue-property-decorator';
-import TCHeader from '@/tccomponents/header/TC-Header.vue';
+import TCHeader from '@/tccomponents/component/header/TC-Header.vue';
 
 import tcComponents from '@/components';
-import TCHero from '@/tccomponents/hero/TC-Hero.vue';
-import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
-import TCSelect from '@/tccomponents/select/TC-Select.vue';
+import TCHero from '@/tccomponents/component/hero/TC-Hero.vue';
+import TCHeadline from '@/tccomponents/component/headline/TC-Headline.vue';
+import TCSelect from '@/tccomponents/component/select/TC-Select.vue';
 import { TCComponent } from '@/models/TCComponent.model';
-import TCInput from '@/tccomponents/input/TC-Input.vue';
-import TCButton from '@/tccomponents/button/TC-Button.vue';
-import TCCard from '@/tccomponents/card/TC-Card.vue';
-import TCCheckbox from '@/tccomponents/checkbox/TC-Checkbox.vue';
-import TCDivider from '@/tccomponents/divider/TC-Divider.vue';
-import TCImage from '@/tccomponents/image/TC-Image.vue';
-import TCLink from '@/tccomponents/link/TC-Link.vue';
-import TCList from '@/tccomponents/list/TC-List.vue';
-import TCModal from '@/tccomponents/modal/TC-Modal.vue';
-import TCNavbar from '@/tccomponents/navbar/TC-Navbar.vue';
-import TCProgress from '@/tccomponents/progress/TC-Progress.vue';
-import TCRevealer from '@/tccomponents/revealer/TC-Revealer.vue';
-import TCScrollUp from '@/tccomponents/scrollup/TC-Scroll-Up.vue';
-import TCQuote from '@/tccomponents/quote/TC-Quote.vue';
+import TCInput from '@/tccomponents/component/input/TC-Input.vue';
+import TCButton from '@/tccomponents/component/button/TC-Button.vue';
+import TCCard from '@/tccomponents/component/card/TC-Card.vue';
+import TCCheckbox from '@/tccomponents/component/checkbox/TC-Checkbox.vue';
+import TCDivider from '@/tccomponents/component/divider/TC-Divider.vue';
+import TCImage from '@/tccomponents/component/image/TC-Image.vue';
+import TCLink from '@/tccomponents/component/link/TC-Link.vue';
+import TCList from '@/tccomponents/component/list/TC-List.vue';
+import TCModal from '@/tccomponents/component/modal/TC-Modal.vue';
+import TCNavbar from '@/tccomponents/component/navbar/TC-Navbar.vue';
+import TCProgress from '@/tccomponents/component/progress/TC-Progress.vue';
+import TCRevealer from '@/tccomponents/component/revealer/TC-Revealer.vue';
+import TCScrollUp from '@/tccomponents/component/scrollup/TC-Scroll-Up.vue';
+import TCQuote from '@/tccomponents/component/quote/TC-Quote.vue';
 import { TCComponentApi } from '@/models/TCComponentApi.model';
-import TCSpinner from '@/tccomponents/spinner/TC-Spinner.vue';
-import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
-import TCTextarea from '@/tccomponents/textarea/TC-Textarea.vue';
-import TCSegments from '@/tccomponents/segments/TC-Segments.vue';
-import TCSidebar from '@/tccomponents/sidebar/TC-Sidebar.vue';
-import TCSlider from '@/tccomponents/slider/TC-Slider.vue';
-import TCSteps from '@/tccomponents/steps/TC-Steps.vue';
-import TCSwitch from '@/tccomponents/switch/TC-Switch.vue';
-import TCTabbar from '@/tccomponents/tabbar/TC-Tabbar.vue';
-import TCTable from '@/tccomponents/table/TC-Table.vue';
-import TCTooltip from '@/tccomponents/tooltip/TC-Tooltip.vue';
-import TCBadge from '@/tccomponents/badge/TC-Badge.vue';
+import TCSpinner from '@/tccomponents/component/spinner/TC-Spinner.vue';
+import TLGrid from '@/tccomponents/layout/grid/TL-Grid.vue';
+import TCTextarea from '@/tccomponents/component/textarea/TC-Textarea.vue';
+import TCSegments from '@/tccomponents/component/segments/TC-Segments.vue';
+import TCSidebar from '@/tccomponents/component/sidebar/TC-Sidebar.vue';
+import TCSlider from '@/tccomponents/component/slider/TC-Slider.vue';
+import TCSteps from '@/tccomponents/component/steps/TC-Steps.vue';
+import TCSwitch from '@/tccomponents/component/switch/TC-Switch.vue';
+import TCTabbar from '@/tccomponents/component/tabbar/TC-Tabbar.vue';
+import TCTable from '@/tccomponents/component/table/TC-Table.vue';
+import TCTooltip from '@/tccomponents/component/tooltip/TC-Tooltip.vue';
+import TCBadge from '@/tccomponents/component/badge/TC-Badge.vue';
 import { TCComponentGroup } from '@/models/TCComponentGroup.model';
 import { VueClass } from 'vue-class-component/lib/declarations';
 import IconSelect from '@/components/IconSelect.vue';
 import { EventBus } from '@/eventBus';
 import TCComponentsSubpageHero from '@/components/shared/TCComponents-Subpage-Hero.vue';
+import TCAvatar from '@/tccomponents/component/avatar/TC-Avatar.vue';
 
 @Component({
   components: {
@@ -190,7 +191,8 @@ export default class TCComponentsDesigner extends Vue {
     Switch: TCSwitch,
     Tabbar: TCTabbar,
     Table: TCTable,
-    Tooltip: TCTooltip
+    Tooltip: TCTooltip,
+    Avatar: TCAvatar
   };
 
   mounted(): void {

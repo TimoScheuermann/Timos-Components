@@ -35,9 +35,9 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-import TCQuote from '@/tccomponents/quote/TC-Quote.vue';
-import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
-import TCButton from '@/tccomponents/button/TC-Button.vue';
+import TCQuote from '@/tccomponents/component/quote/TC-Quote.vue';
+import TLGrid from '@/tccomponents/layout/grid/TL-Grid.vue';
+import TCButton from '@/tccomponents/component/button/TC-Button.vue';
 import PortfolioCodeExample from '@/components/CodeExample.vue';
 @Component({
   components: {

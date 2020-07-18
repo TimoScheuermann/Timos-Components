@@ -99,10 +99,10 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-import TCHeader from '@/tccomponents/header/TC-Header.vue';
+import TCHeader from '@/tccomponents/component/header/TC-Header.vue';
 
-import TCButton from '@/tccomponents/button/TC-Button.vue';
-import TCSegments from '@/tccomponents/segments/TC-Segments.vue';
+import TCButton from '@/tccomponents/component/button/TC-Button.vue';
+import TCSegments from '@/tccomponents/component/segments/TC-Segments.vue';
 import PortfolioCodeExample from '@/components/CodeExample.vue';
 @Component({
   components: {

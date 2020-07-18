@@ -4,13 +4,13 @@
     <tc-scroll-up />
     <tc-scroll-up icon="double-chevron-up" />
     <tc-scroll-up icon="house" />
-    <tc-scroll-up icon="heart" />
+    <tc-scroll-up background="#fff" color="red" icon="heart" />
   </div>
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-import TCScrollUp from '@/tccomponents/scrollup/TC-Scroll-Up.vue';
+import TCScrollUp from '@/tccomponents/component/scrollup/TC-Scroll-Up.vue';
 @Component({
   components: {
     'tc-scroll-up': TCScrollUp

@@ -36,7 +36,7 @@
 import { Vue, Component } from 'vue-property-decorator';
 
 import PortfolioCodeExample from '@/components/CodeExample.vue';
-import TCHero from '@/tccomponents/hero/TC-Hero.vue';
+import TCHero from '@/tccomponents/component/hero/TC-Hero.vue';
 
 @Component({
   components: {

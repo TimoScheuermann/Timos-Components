@@ -28,9 +28,9 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
-import TCCard from '@/tccomponents/card/TC-Card.vue';
-import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
+import TCHeadline from '@/tccomponents/component/headline/TC-Headline.vue';
+import TCCard from '@/tccomponents/component/card/TC-Card.vue';
+import TLGrid from '@/tccomponents/layout/grid/TL-Grid.vue';
 @Component({
   components: {
     'tc-headline': TCHeadline,

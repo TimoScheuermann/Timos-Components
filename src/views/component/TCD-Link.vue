@@ -43,8 +43,8 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-import TCLink from '@/tccomponents/link/TC-Link.vue';
-import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
+import TCLink from '@/tccomponents/component/link/TC-Link.vue';
+import TLGrid from '@/tccomponents/layout/grid/TL-Grid.vue';
 import PortfolioCodeExample from '@/components/CodeExample.vue';
 @Component({
   components: {

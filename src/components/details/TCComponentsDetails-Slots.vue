@@ -43,10 +43,10 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import { TCComponent } from '@/models/TCComponent.model';
-import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
-import TCSegments from '@/tccomponents/segments/TC-Segments.vue';
-import TCCard from '@/tccomponents/card/TC-Card.vue';
-import TCImage from '@/tccomponents/image/TC-Image.vue';
+import TLGrid from '@/tccomponents/layout/grid/TL-Grid.vue';
+import TCSegments from '@/tccomponents/component/segments/TC-Segments.vue';
+import TCCard from '@/tccomponents/component/card/TC-Card.vue';
+import TCImage from '@/tccomponents/component/image/TC-Image.vue';
 
 @Component({
   components: {

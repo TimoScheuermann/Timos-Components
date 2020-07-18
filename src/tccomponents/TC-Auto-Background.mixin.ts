@@ -119,10 +119,6 @@ export default class TCAutoBackground extends Mixins(TCComponent) {
       this.updateContainerList('dark');
       this.updateContainerList('light');
       this.handleScroll();
-      // console.log('List updated!', [
-      //   ...this.darkContainer,
-      //   ...this.lightContainer
-      // ]);
     });
   }
 

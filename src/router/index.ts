@@ -110,6 +110,12 @@ const router = new VueRouter({
           meta: { title: prefix + 'TC Badge' }
         },
         {
+          path: 'Avatar',
+          name: 'TC-avatar',
+          component: () => import('@/views/component/TCD-Avatar.vue'),
+          meta: { title: prefix + 'TC Avatar' }
+        },
+        {
           path: 'Button',
           name: 'TC-button',
           component: () => import('@/views/component/TCD-Button.vue'),
@@ -306,6 +312,12 @@ const router = new VueRouter({
           name: 'TL-sidebar',
           component: () => import('@/views/layout/TLD-Sidebar.vue'),
           meta: { title: prefix + 'TL Sidebar' }
+        },
+        {
+          path: 'Flow',
+          name: 'TL-flow',
+          component: () => import('@/views/layout/TLD-Flow.vue'),
+          meta: { title: prefix + 'TL Flow' }
         },
         {
           path: '',

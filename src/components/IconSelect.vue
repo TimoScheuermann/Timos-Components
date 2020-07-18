@@ -51,9 +51,9 @@
 <script lang="ts">
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 import { Icon } from '@/models/Icon.model';
-import TCTooltip from '@/tccomponents/tooltip/TC-Tooltip.vue';
+import TCTooltip from '@/tccomponents/component/tooltip/TC-Tooltip.vue';
 import TCComponent from '@/tccomponents/TC-Component.mixin';
-import TFIcon from '@/tccomponents/_fundamental/icon/TF-Icon.vue';
+import TFIcon from '@/tccomponents/fundamental/icon/TF-Icon.vue';
 
 type TValues = string | number | boolean;
 
@@ -164,7 +164,6 @@ export default class IconSelect extends Mixins(TCComponent) {
       @include backdrop-blur(darken($paragraph, 15%));
     }
   }
-
   &.tc-select__frosted {
     &,
     .tc-select--container {
@@ -191,6 +190,7 @@ export default class IconSelect extends Mixins(TCComponent) {
   &.tc-select__fit-content {
     width: fit-content;
   }
+  margin-top: 30px !important;
   position: relative;
   .tc-select--title {
     @include tc-container--title();

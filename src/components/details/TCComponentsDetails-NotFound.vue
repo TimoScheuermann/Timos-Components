@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TCButton from '@/tccomponents/button/TC-Button.vue';
+import TCButton from '@/tccomponents/component/button/TC-Button.vue';
 
 @Component({
   components: {

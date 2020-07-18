@@ -1,140 +1,39 @@
 <template>
-  <tl-modal :value="opened" :submodal="opened2">
-    <template slot="modal">
-      <tc-modal
-        v-model="opened"
-        title="Install as PWA"
-        subtitle="Make Timo's Components available offline"
-      >
-        <img
-          style="width: 80%; margin-left: 10%"
-          src="assets/banner.svg"
-          alt=""
-        />
-        <tc-button name="Read more" variant="filled" @click="opened2 = true" />
-
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus,
-          dicta perferendis? Sed possimus quae aperiam ea deleniti. Quasi dolor
-          porro voluptatum doloremque veniam saepe molestias. Ad aliquam quo
-          assumenda facilis.
-        </p>
-        <h1>Modals sind doch was schönes</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus,
-          dicta perferendis? Sed possimus quae aperiam ea deleniti. Quasi dolor
-          porro voluptatum doloremque veniam saepe molestias. Ad aliquam quo
-          assumenda facilis.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus,
-          dicta perferendis? Sed possimus quae aperiam ea deleniti. Quasi dolor
-          porro voluptatum doloremque veniam saepe molestias. Ad aliquam quo
-          assumenda facilis.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus,
-          dicta perferendis? Sed possimus quae aperiam ea deleniti. Quasi dolor
-          porro voluptatum doloremque veniam saepe molestias. Ad aliquam quo
-          assumenda facilis.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus,
-          dicta perferendis? Sed possimus quae aperiam ea deleniti. Quasi dolor
-          porro voluptatum doloremque veniam saepe molestias. Ad aliquam quo
-          assumenda facilis.
-        </p>
-      </tc-modal>
-    </template>
-
-    <template slot="submodal">
-      <tc-modal
-        modal2
-        v-model="opened2"
-        title="Install as PWA"
-        subtitle="Make Timo's Components available offline"
-      >
-        <img
-          style="width: 80%; margin-left: 10%"
-          src="assets/banner.svg"
-          alt=""
-        />
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus,
-          dicta perferendis? Sed possimus quae aperiam ea deleniti. Quasi dolor
-          porro voluptatum doloremque veniam saepe molestias. Ad aliquam quo
-          assumenda facilis.
-        </p>
-        <h1>Modals sind doch was schönes</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus,
-          dicta perferendis? Sed possimus quae aperiam ea deleniti. Quasi dolor
-          porro voluptatum doloremque veniam saepe molestias. Ad aliquam quo
-          assumenda facilis.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus,
-          dicta perferendis? Sed possimus quae aperiam ea deleniti. Quasi dolor
-          porro voluptatum doloremque veniam saepe molestias. Ad aliquam quo
-          assumenda facilis.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus,
-          dicta perferendis? Sed possimus quae aperiam ea deleniti. Quasi dolor
-          porro voluptatum doloremque veniam saepe molestias. Ad aliquam quo
-          assumenda facilis.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus,
-          dicta perferendis? Sed possimus quae aperiam ea deleniti. Quasi dolor
-          porro voluptatum doloremque veniam saepe molestias. Ad aliquam quo
-          assumenda facilis.
-        </p>
-      </tc-modal>
-    </template>
-    <div
-      class="tccomponents"
-      :class="{ dark: $store.getters.dark || $route.name === 'designer' }"
+  <div
+    class="tccomponents"
+    :class="{ dark: $store.getters.dark || $route.name === 'designer' }"
+  >
+    <tl-sidebar
+      sidebarBackgroundImage="https://images.unsplash.com/photo-1525183995014-bd94c0750cd5"
+      :collapsed="collapsedSidebar"
+      :blurred="true"
     >
-      <tl-sidebar
-        sidebarBackgroundImage="https://images.unsplash.com/photo-1525183995014-bd94c0750cd5"
-        :collapsed="collapsedSidebar"
-        :blurred="true"
-      >
-        <div slot="sidebar-header" v-if="sidebarVisible" class="sidebar-header">
-          <tc-input
-            :frosted="true"
-            :dark="true"
-            v-model="query"
-            placeholder="Search"
-            icon="lens"
-            :class="{ searchInput: true, hiddenSearch: collapsedSidebar }"
-          />
-        </div>
-        <tccomponents-sidebar
-          v-if="sidebarVisible"
-          slot="sidebar-content"
-          :groups="tcComponents"
+      <div slot="sidebar-header" v-if="sidebarVisible" class="sidebar-header">
+        <tc-input
+          :frosted="true"
+          :dark="true"
+          v-model="query"
+          placeholder="Search"
+          icon="lens"
+          :class="{ searchInput: true, hiddenSearch: collapsedSidebar }"
         />
-        <div v-if="sidebarVisible" class="sidebar-footer" slot="sidebar-footer">
-          <img src="assets/text.svg" />
-          {{ version }}
-        </div>
+      </div>
+      <tccomponents-sidebar
+        v-if="sidebarVisible"
+        slot="sidebar-content"
+        :groups="tcComponents"
+      />
+      <div v-if="sidebarVisible" class="sidebar-footer" slot="sidebar-footer">
+        <img src="assets/text.svg" />
+        {{ version }}
+      </div>
 
-        <tccomponents-header :sidebarVisible="sidebarVisible" />
-        <router-view />
-        <tc-button
-          v-if="isLocal"
-          name="open modal"
-          variant="filled"
-          @click="opened = true"
-          modal
-        />
-      </tl-sidebar>
+      <tccomponents-header :sidebarVisible="sidebarVisible" />
+      <router-view />
+    </tl-sidebar>
 
-      <tccomponents-tabbar v-if="!sidebarVisible" />
-    </div>
-  </tl-modal>
+    <tccomponents-tabbar v-if="!sidebarVisible" />
+  </div>
 </template>
 
 <script lang="ts">
@@ -145,25 +44,18 @@ import { TCComponentGroup } from '@/models/TCComponentGroup.model';
 import tcComponents from '@/components';
 import { loadIcons } from '@/loadIcons';
 
-import TCInput from '@/tccomponents/input/TC-Input.vue';
-import TLSidebar from '@/tccomponents/_layout/sidebar/TL-Sidebar.vue';
+import TCInput from '@/tccomponents/component/input/TC-Input.vue';
+import TLSidebar from '@/tccomponents/layout/sidebar/TL-Sidebar.vue';
 import TCComponentsSidebar from '@/components/shared/TCComponents-Sidebar.vue';
 import TCComponentsTabbar from '@/components/shared/TCComponents-Tabbar.vue';
 import TCComponentsHeader from '@/components/shared/TCComponents-Header.vue';
-import TLModal from './tccomponents/_layout/modal/TL-Modal.vue';
-import TCModal from './tccomponents/modal/TC-Modal.vue';
-import TCButton from './tccomponents/button/TC-Button.vue';
-
 @Component({
   components: {
     'tc-input': TCInput,
     'tl-sidebar': TLSidebar,
     'tccomponents-sidebar': TCComponentsSidebar,
     'tccomponents-tabbar': TCComponentsTabbar,
-    'tccomponents-header': TCComponentsHeader,
-    'tl-modal': TLModal,
-    'tc-modal': TCModal,
-    'tc-button': TCButton
+    'tccomponents-header': TCComponentsHeader
   }
 })
 export default class App extends Vue {
@@ -172,10 +64,6 @@ export default class App extends Vue {
   public sidebarVisible = true;
   public opened = false;
   public opened2 = false;
-
-  get isLocal(): boolean {
-    return window.location.href.includes(':8080');
-  }
 
   get tcComponents(): TCComponentGroup[] {
     return tcComponents
@@ -224,20 +112,6 @@ html {
   -webkit-font-smoothing: antialiased;
 }
 
-[modal] {
-  position: fixed;
-  @media #{$isDesktop} {
-    left: 220px;
-    bottom: 20px;
-  }
-  @media #{$isMobile} {
-    left: 20px;
-    bottom: 100px;
-  }
-}
-[modal2] {
-  z-index: 200000;
-}
 body {
   margin: 0;
 }

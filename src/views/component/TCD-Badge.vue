@@ -1,24 +1,28 @@
 <template>
   <div>
-    <tc-badge :value="10" tccolor="error">
-      <tc-button name="Badge on Button"></tc-button>
-    </tc-badge>
+    <tl-flow>
+      <tc-badge :value="10" tccolor="error">
+        <tc-button name="Badge on Button" />
+      </tc-badge>
+    </tl-flow>
   </div>
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-import TCButton from '@/tccomponents/button/TC-Button.vue';
+import TCButton from '@/tccomponents/component/button/TC-Button.vue';
 import PortfolioCodeExample from '@/components/CodeExample.vue';
-import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
-import TCBadge from '@/tccomponents/badge/TC-Badge.vue';
+import TLGrid from '@/tccomponents/layout/grid/TL-Grid.vue';
+import TCBadge from '@/tccomponents/component/badge/TC-Badge.vue';
+import TLFlow from '@/tccomponents/layout/flow/TL-Flow.vue';
 
 @Component({
   components: {
     'portfolio-code-example': PortfolioCodeExample,
     'tc-button': TCButton,
     'tl-grid': TLGrid,
-    'tc-badge': TCBadge
+    'tc-badge': TCBadge,
+    'tl-flow': TLFlow
   }
 })
 export default class TCDBadge extends Vue {

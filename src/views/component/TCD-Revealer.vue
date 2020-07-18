@@ -25,7 +25,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-import TCRevealer from '@/tccomponents/revealer/TC-Revealer.vue';
+import TCRevealer from '@/tccomponents/component/revealer/TC-Revealer.vue';
 @Component({
   components: {
     'tc-revealer': TCRevealer

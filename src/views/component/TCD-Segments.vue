@@ -41,8 +41,8 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-import TCSegments from '@/tccomponents/segments/TC-Segments.vue';
-import TCCard from '@/tccomponents/card/TC-Card.vue';
+import TCSegments from '@/tccomponents/component/segments/TC-Segments.vue';
+import TCCard from '@/tccomponents/component/card/TC-Card.vue';
 @Component({
   components: {
     'tc-segments': TCSegments,

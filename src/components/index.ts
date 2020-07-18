@@ -2,17 +2,40 @@ import { TCComponentApi } from '@/models/TCComponentApi.model';
 import { TCComponentGroup } from '@/models/TCComponentGroup.model';
 
 const tccolors = 'primary, error, alarm, success';
+const apiAutoBackground: TCComponentApi = {
+  name: 'autoBackground',
+  type: 'boolean',
+  default: ' false',
+  description:
+    "Toggles automatically between dark and light whenever the element intersects with an element which has 'tc-dark-container' or 'tc-light-container' attribute in it"
+};
+const apiDark: TCComponentApi = {
+  name: 'dark',
+  type: 'boolean',
+  description: 'Toggles darkmode on or off'
+};
+const apiFrosted: TCComponentApi = {
+  name: 'frosted',
+  type: 'boolean',
+  description: 'Determines if the element should have a frosted appearance'
+};
+const apiColor: TCComponentApi = {
+  name: 'color',
+  type: 'string',
+  description: 'Default font color'
+};
 
-const tcComponentApi: TCComponentApi[] = [
-  { name: 'dark', type: 'boolean', description: 'Toggles darkmode on or off' },
-  { name: 'color', type: 'string', description: 'Default font color' },
-  {
-    name: 'background',
-    type: 'string',
-    description: 'Default background color'
-  }
-];
-
+const apiBackground: TCComponentApi = {
+  name: 'background',
+  type: 'string',
+  description: 'Default background color'
+};
+const apiIcon: TCComponentApi = {
+  name: 'icon',
+  type: 'String',
+  description: 'Icon to be displayed',
+  parameters: "Timo's Icons"
+};
 const tcComponents: TCComponentGroup[] = [
   {
     group: 'Fundamentals',
@@ -54,24 +77,9 @@ const tcComponents: TCComponentGroup[] = [
         name: 'Input',
         icon: 'input',
         api: [
-          {
-            name: 'icon',
-            type: 'string',
-            description: 'Adds an Icon in front of the input field',
-            parameters: "Timo's Icons"
-          },
-          {
-            default: false,
-            name: 'frosted',
-            type: 'boolean',
-            description: ''
-          },
-          {
-            default: false,
-            name: 'dark',
-            type: 'boolean',
-            description: ''
-          },
+          apiIcon,
+          apiFrosted,
+          apiDark,
           {
             name: 'title',
             type: 'string',
@@ -232,12 +240,6 @@ const tcComponents: TCComponentGroup[] = [
             type: 'string'
           },
           {
-            name: 'frosted',
-            type: 'boolean',
-            description:
-              'Determines if the card should have a frosted appearance'
-          },
-          {
             name: 'shadow',
             type: 'boolean',
             default: 'true',
@@ -253,7 +255,10 @@ const tcComponents: TCComponentGroup[] = [
             name: 'hover',
             type: 'boolean'
           },
-          ...tcComponentApi
+          apiDark,
+          apiFrosted,
+          apiColor,
+          apiBackground
         ],
         slots: [
           {
@@ -280,28 +285,15 @@ const tcComponents: TCComponentGroup[] = [
             description: 'Text to be displayed'
           },
           {
-            name: 'icon',
-            type: 'String',
-            description: 'Icon to be displayed',
-            parameters: "Timo's Icons"
-          },
-          {
             name: 'position',
             type: 'String',
             description: 'Name/Icon Position',
             parameters: 'left, center, right',
             default: 'center'
           },
-          {
-            name: 'color',
-            type: 'String',
-            description: 'Determines the color of TC-Divider'
-          },
-          {
-            name: 'dark',
-            type: 'boolean',
-            description: 'Toggles darkmode on or off'
-          }
+          apiIcon,
+          apiColor,
+          apiDark
         ],
         slots: []
       },
@@ -321,12 +313,7 @@ const tcComponents: TCComponentGroup[] = [
             type: 'function',
             description: 'Is triggered, when ever a button is clicked'
           },
-          {
-            name: 'icon',
-            type: 'string',
-            description: 'Icon to be displayed',
-            parameters: "Timo's Icons"
-          },
+          apiIcon,
           {
             name: 'disabled',
             type: 'boolean',
@@ -385,11 +372,7 @@ const tcComponents: TCComponentGroup[] = [
             parameters: 'left, right',
             default: 'left'
           },
-          {
-            name: 'dark',
-            type: 'boolean',
-            description: 'Toggles darkmode on or off'
-          },
+          apiDark,
           {
             name: 'iconChecked',
             type: 'string',
@@ -409,12 +392,7 @@ const tcComponents: TCComponentGroup[] = [
             parameters: 'step, spin, flip',
             default: 'step'
           },
-          {
-            name: 'color',
-            type: 'string',
-            description: 'Determines the color of the checkmark',
-            default: '#0088ff'
-          },
+          { ...apiColor, default: '#08f' },
           {
             name: 'value',
             type: 'boolean',
@@ -454,6 +432,8 @@ const tcComponents: TCComponentGroup[] = [
         name: 'Modal',
         icon: 'modal',
         api: [
+          apiDark,
+          apiFrosted,
           {
             name: 'title',
             type: 'string',
@@ -472,10 +452,9 @@ const tcComponents: TCComponentGroup[] = [
           },
           { name: 'v-model', type: 'boolean', description: '' },
           {
-            name: '@input',
+            name: '@close',
             type: 'function',
-            description:
-              'Is called whenever the user changes the state of the modal'
+            description: 'Is called whenever the user closes the modal'
           }
         ],
         slots: [
@@ -493,13 +472,35 @@ const tcComponents: TCComponentGroup[] = [
       {
         name: 'Tabbar',
         icon: 'tabbar',
-        api: [], // TODO:
+        api: [apiDark, apiAutoBackground],
+        children: [
+          {
+            name: 'tabbar-item',
+            icon: 'heart',
+            api: [
+              { ...apiIcon, default: 'house' },
+              {
+                name: 'title',
+                default: 'Home',
+                type: 'string',
+                description: 'Name to be displayed'
+              },
+              {
+                name: 'routeName',
+                default: 'home',
+                type: 'string',
+                description: 'Name of route to direct'
+              }
+            ],
+            slots: []
+          }
+        ],
         slots: [
           {
             name: 'default',
             description: 'TODO:'
           }
-        ] // TODO:
+        ]
       },
       {
         name: 'Table',
@@ -515,13 +516,7 @@ const tcComponents: TCComponentGroup[] = [
       {
         name: 'Scroll Up',
         icon: 'chevron-up',
-        api: [
-          {
-            name: 'src',
-            description: 'Source to image, video, gif to be displayed',
-            type: 'string'
-          }
-        ], // TODO:
+        api: [apiColor, apiBackground, apiIcon], // TODO:
         slots: []
       },
       {
@@ -531,6 +526,12 @@ const tcComponents: TCComponentGroup[] = [
           {
             name: 'src',
             description: 'Source to image, video, gif to be displayed',
+            type: 'string'
+          },
+          {
+            name: 'fallback',
+            description:
+              "Fallback source to different image, video, gif if src couldn't be resolved",
             type: 'string'
           }
         ],
@@ -563,16 +564,18 @@ const tcComponents: TCComponentGroup[] = [
         api: [
           {
             name: 'size',
-            description: 'Determines the size of the spinner',
+            description: 'Determines the size of the spinner (in px)',
             type: 'number',
-            default: 30
+            default: 50
           },
           {
-            name: 'dark',
-            description: 'Toggles darkmode on or off',
-            type: 'boolean',
-            default: false
-          }
+            name: 'variant',
+            description: 'Determines the variant used',
+            type: 'string',
+            parameters: 'bars, dots, dots-breath, dots-wave',
+            default: 'bars'
+          },
+          apiDark
         ],
         slots: []
       },
@@ -644,12 +647,7 @@ const tcComponents: TCComponentGroup[] = [
             parameters: 'bar, ring',
             description: 'Progress Type'
           },
-          {
-            name: 'color',
-            type: 'string',
-            description: 'Determines the color of the bar/ring',
-            default: '#0088ff'
-          },
+          { ...apiColor, default: '#08f' },
           {
             name: 'barHeight',
             type: 'number',
@@ -679,7 +677,8 @@ const tcComponents: TCComponentGroup[] = [
             name: 'title',
             type: 'String',
             description: 'Sets a prestyled title'
-          }
+          },
+          apiDark
         ],
         slots: [
           {
@@ -703,6 +702,7 @@ const tcComponents: TCComponentGroup[] = [
             type: 'string',
             description: 'Sets a prestyled title'
           },
+          apiDark,
           {
             name: 'variant',
             type: 'string',
@@ -736,7 +736,7 @@ const tcComponents: TCComponentGroup[] = [
           {
             name: '@click',
             type: 'function',
-            description: 'Get called whenever a user clicks the back button'
+            description: 'Gets called whenever a user clicks the back button'
           }
         ],
         slots: [
@@ -759,13 +759,8 @@ const tcComponents: TCComponentGroup[] = [
             type: 'string',
             description: 'Sets a prestyled title'
           },
-          {
-            name: 'icon',
-            type: 'string',
-            description:
-              'Inserts a Icon in front of Headline title (only visible with default title)',
-            parameters: "Timo's Icons"
-          }
+          apiIcon,
+          apiDark
         ],
         slots: [
           {
@@ -781,7 +776,7 @@ const tcComponents: TCComponentGroup[] = [
       {
         name: 'Segments',
         icon: 'segment',
-        api: [], // TODO:
+        api: [apiDark], // TODO:
         slots: [
           {
             name: 'TODO:',
@@ -792,28 +787,56 @@ const tcComponents: TCComponentGroup[] = [
       {
         name: 'Slider',
         icon: 'slider',
-        api: [], // TODO:
+        api: [
+          { default: 0, name: 'min', type: 'number', description: 'Min value' },
+          {
+            default: 100,
+            name: 'max',
+            type: 'number',
+            description: 'Max value'
+          },
+          {
+            default: 50,
+            name: 'value',
+            type: 'number',
+            description: 'Value of slider (between min and max)'
+          },
+          { name: 'v-model', type: 'number', description: '' },
+          {
+            ...apiIcon,
+            name: 'icon_start',
+            description: 'Icon to be displayed at the start of the slider'
+          },
+          {
+            ...apiIcon,
+            name: 'icon_end',
+            description: 'Icon to be displayed at the end of the slider'
+          }
+        ], // TODO:
         slots: []
       },
       {
         name: 'Navbar',
         icon: 'dot',
-        api: [
+        api: [apiDark, apiAutoBackground],
+        children: [
           {
-            name: '[TC-Navbar-Item]: to',
-            type: 'string | object',
-            description: 'Location, a user is forwarded to'
-          },
-          {
-            name: '[TC-Navbar-Item]: name',
-            type: 'string',
-            description: 'Name to be displayed'
-          },
-          {
-            name: '[TC-Navbar-Item]: icon',
-            type: 'string',
-            parameters: "Timo's Icons",
-            description: 'Custom Icon to be displayed'
+            name: 'tc-navbar-item',
+            icon: 'Navbar',
+            api: [
+              {
+                name: 'to',
+                type: 'string | object',
+                description: 'Location, a user is forwarded to'
+              },
+              {
+                name: 'name',
+                type: 'string',
+                description: 'Name to be displayed'
+              },
+              apiIcon
+            ],
+            slots: []
           }
         ],
         slots: [
@@ -844,12 +867,8 @@ const tcComponents: TCComponentGroup[] = [
             description: ''
           },
           { default: false, name: 'dark', type: 'boolean', description: '' },
-          {
-            default: false,
-            name: 'frosted',
-            type: 'boolean',
-            description: ''
-          },
+          apiFrosted,
+          apiDark,
           {
             default: false,
             name: 'multiple',
@@ -878,13 +897,68 @@ const tcComponents: TCComponentGroup[] = [
       {
         name: 'Tooltip',
         icon: 'tooltip',
-        api: [], // TODO:
+        api: [
+          {
+            name: 'position',
+            default: 'top',
+            type: 'string',
+            parameters: 'top, bottom, left, right',
+            description: 'Position of tooltip'
+          },
+          {
+            name: 'tooltip',
+            default: '',
+            type: 'string',
+            description: 'Tooltip to be displayed on hover'
+          }
+        ],
         slots: [{ name: 'default', description: 'TODO:' }]
       },
       {
         name: 'List',
         icon: 'list-bullet',
-        api: [], // TODO:
+        api: [
+          apiDark,
+          apiFrosted,
+          apiColor,
+          {
+            name: 'title',
+            type: 'string',
+            description: 'Adds a prestyled title on top of the list'
+          }
+        ],
+        children: [
+          {
+            name: 'list-item',
+            icon: 'list',
+            api: [
+              {
+                name: 'title',
+                type: 'string',
+                description: 'Add a title to the list'
+              },
+              apiIcon,
+              { name: 'to', type: 'string | RawLocation', description: '' },
+              { name: 'href', type: 'string', description: '' },
+              {
+                name: 'v-model',
+                type: 'boolean',
+                description: 'variable to be used for the switch'
+              },
+              {
+                name: 'description',
+                type: 'string',
+                description: 'Small text at the end of the item'
+              },
+              {
+                name: '@click',
+                type: 'function',
+                description: 'Gets called whenever a user clicks the element'
+              }
+            ],
+            slots: []
+          }
+        ],
         slots: [
           {
             name: 'default',
@@ -901,7 +975,76 @@ const tcComponents: TCComponentGroup[] = [
       {
         name: 'Badge',
         icon: 'notification',
-        api: [], // TODO:
+        api: [
+          {
+            name: 'value',
+            type: 'string | number',
+            description: 'Value to be displayed'
+          },
+          {
+            name: 'color',
+            type: 'HEX, rgb, tccolor',
+            description: 'Determines the background color of the badge'
+          },
+          {
+            name: 'max',
+            type: 'number',
+            description:
+              'Determines the max number to be displayed, if exceeded %max%+ will be displayed'
+          },
+          {
+            name: 'showEmpty',
+            type: 'boolean',
+            default: false,
+            description:
+              'Determines if the badge should be displayed if no value is set'
+          },
+          {
+            name: 'position',
+            type: 'string',
+            parameters: 'corner, behind, inside',
+            default: 'corner',
+            description: 'Determines the position of the badge on the element'
+          }
+        ], // TODO:
+        slots: [
+          {
+            name: 'default',
+            description: 'Inner element, the badge is applied to'
+          }
+        ] // TODO:
+      },
+      {
+        name: 'Avatar',
+        icon: 'user-circle',
+        api: [
+          {
+            name: 'background',
+            type: 'string',
+            description:
+              "Determines the background of your avatar, if it's a transparent png",
+            default: 'none'
+          },
+          {
+            name: 'src',
+            type: 'string',
+            description: 'Source to image, video, gif to be displayed'
+          },
+          {
+            name: 'size',
+            type: 'string',
+            description: 'Determines the size of your avatar',
+            parameters: 'large, medium, small, tiny',
+            default: 'small'
+          },
+          {
+            name: 'border',
+            type: 'string',
+            description: 'Determines the border-style of your avatar',
+            parameters: 'rounded, circle, square',
+            default: 'circle'
+          }
+        ], // TODO:
         slots: [] // TODO:
       }
     ].sort((a, b) => a.name.localeCompare(b.name))
@@ -920,7 +1063,63 @@ const tcComponents: TCComponentGroup[] = [
       {
         name: 'Grid',
         icon: 'plus',
-        api: [], // TODO:
+        api: [
+          {
+            default: '300',
+            name: 'minWidth',
+            type: 'number',
+            description:
+              'Determines the minimal with a continue can have inside the grid'
+          },
+          {
+            default: '30',
+            name: 'gap',
+            type: 'number',
+            description:
+              'Determines the distance between each element inside the grid'
+          },
+          {
+            default: 'auto-fit',
+            name: 'arrangement',
+            type: 'string',
+            description:
+              'The difference between auto-fit and auto-fill can be seen in the example above',
+            parameters: 'auto-fit, auto-fill'
+          }
+        ], // TODO:
+        slots: [
+          {
+            name: 'default',
+            description: 'TODO:'
+          }
+        ]
+      },
+      {
+        name: 'Flow',
+        icon: 'map',
+        api: [
+          {
+            name: 'vertical',
+            default: 'center',
+            type: 'string',
+            parameters: 'center, start, end',
+            description: 'Determines the vertical alignment'
+          },
+          {
+            name: 'horizontal',
+            default: 'center',
+            type: 'string',
+            parameters: 'center, space-between, space-around, start, end',
+            description: 'Determines the horizontal alignment'
+          },
+          {
+            name: 'flow',
+            default: 'row',
+            type: 'string',
+            parameters: 'row, column',
+            description: 'Determines the flow of your container'
+          }
+        ], // TODO:
         slots: [
           {
             name: 'default',

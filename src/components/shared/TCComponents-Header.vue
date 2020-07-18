@@ -48,10 +48,10 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 
 import { EventBus } from '@/eventBus';
 
-import TCHeader from '@/tccomponents/header/TC-Header.vue';
-import TCButton from '@/tccomponents/button/TC-Button.vue';
-import TCInput from '@/tccomponents/input/TC-Input.vue';
-import TCSwitch from '@/tccomponents/switch/TC-Switch.vue';
+import TCHeader from '@/tccomponents/component/header/TC-Header.vue';
+import TCButton from '@/tccomponents/component/button/TC-Button.vue';
+import TCInput from '@/tccomponents/component/input/TC-Input.vue';
+import TCSwitch from '@/tccomponents/component/switch/TC-Switch.vue';
 
 @Component({
   components: {

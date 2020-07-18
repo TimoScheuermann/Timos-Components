@@ -22,9 +22,9 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-import TCSpinner from '@/tccomponents/spinner/TC-Spinner.vue';
-import TCCard from '@/tccomponents/card/TC-Card.vue';
-import TCTooltip from '@/tccomponents/tooltip/TC-Tooltip.vue';
+import TCSpinner from '@/tccomponents/component/spinner/TC-Spinner.vue';
+import TCCard from '@/tccomponents/component/card/TC-Card.vue';
+import TCTooltip from '@/tccomponents/component/tooltip/TC-Tooltip.vue';
 @Component({
   components: {
     'tc-spinner': TCSpinner,

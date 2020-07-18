@@ -62,11 +62,11 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
-import TCCard from '@/tccomponents/card/TC-Card.vue';
+import TCCard from '@/tccomponents/component/card/TC-Card.vue';
 import PortfolioCodeExample from '@/components/CodeExample.vue';
-import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
+import TLGrid from '@/tccomponents/layout/grid/TL-Grid.vue';
 import { TCComponent } from '@/models/TCComponent.model';
-import TCImage from '@/tccomponents/image/TC-Image.vue';
+import TCImage from '@/tccomponents/component/image/TC-Image.vue';
 @Component({
   components: {
     'portfolio-code-example': PortfolioCodeExample,

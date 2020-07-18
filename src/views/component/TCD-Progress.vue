@@ -103,10 +103,10 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-import TCProgress from '@/tccomponents/progress/TC-Progress.vue';
+import TCProgress from '@/tccomponents/component/progress/TC-Progress.vue';
 import PortfolioCodeExample from '@/components/CodeExample.vue';
-import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
-import TCCard from '@/tccomponents/card/TC-Card.vue';
+import TLGrid from '@/tccomponents/layout/grid/TL-Grid.vue';
+import TCCard from '@/tccomponents/component/card/TC-Card.vue';
 @Component({
   components: {
     'tc-progress': TCProgress,

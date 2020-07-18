@@ -89,25 +89,16 @@
       :title="'Type: ' + currentType"
       :type="currentType"
     />
-    <div class="fyi" v-if="currentType === 'color'">
-      <p>
-        <b><i class="ti ti-i-circle" /> FYI</b>
-      </p>
-      <p>
-        For a better user-experience I highly recommend using
-        <tc-link>tc-color-selector</tc-link>.
-      </p>
-    </div>
     <p><br /></p>
   </div>
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-import TCInput from '@/tccomponents/input/TC-Input.vue';
-import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
+import TCInput from '@/tccomponents/component/input/TC-Input.vue';
+import TLGrid from '@/tccomponents/layout/grid/TL-Grid.vue';
 import PortfolioCodeExample from '@/components/CodeExample.vue';
-import TCLink from '@/tccomponents/link/TC-Link.vue';
+import TCLink from '@/tccomponents/component/link/TC-Link.vue';
 @Component({
   components: {
     'portfolio-code-example': PortfolioCodeExample,
@@ -150,10 +141,6 @@ export default class TCDInput extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-.fyi i {
-  margin-right: 5px;
-  color: #08f;
-}
 .inputTypes {
   display: flex;
   flex-wrap: wrap;

@@ -18,8 +18,8 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TCTabbar from '@/tccomponents/tabbar/TC-Tabbar.vue';
-import TCTabbarItem from '@/tccomponents/tabbar/TC-Tabbar-Item.vue';
+import TCTabbar from '@/tccomponents/component/tabbar/TC-Tabbar.vue';
+import TCTabbarItem from '@/tccomponents/component/tabbar/TC-Tabbar-Item.vue';
 
 @Component({
   components: {

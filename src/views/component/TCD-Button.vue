@@ -51,9 +51,9 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-import TCButton from '@/tccomponents/button/TC-Button.vue';
+import TCButton from '@/tccomponents/component/button/TC-Button.vue';
 import PortfolioCodeExample from '@/components/CodeExample.vue';
-import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
+import TLGrid from '@/tccomponents/layout/grid/TL-Grid.vue';
 @Component({
   components: {
     'portfolio-code-example': PortfolioCodeExample,

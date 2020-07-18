@@ -7,7 +7,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-import TCSlider from '@/tccomponents/slider/TC-Slider.vue';
+import TCSlider from '@/tccomponents/component/slider/TC-Slider.vue';
 @Component({
   components: {
     'tc-slider': TCSlider

@@ -33,9 +33,9 @@
 import { Vue, Component } from 'vue-property-decorator';
 
 import PortfolioCodeExample from '@/components/CodeExample.vue';
-import TCModal from '@/tccomponents/modal/TC-Modal.vue';
-import TCButton from '@/tccomponents/button/TC-Button.vue';
-import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
+import TCModal from '@/tccomponents/component/modal/TC-Modal.vue';
+import TCButton from '@/tccomponents/component/button/TC-Button.vue';
+import TLGrid from '@/tccomponents/layout/grid/TL-Grid.vue';
 @Component({
   components: {
     'portfolio-code-example': PortfolioCodeExample,

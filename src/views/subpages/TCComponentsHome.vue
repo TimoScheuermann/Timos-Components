@@ -88,15 +88,15 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TCHeadline from '@/tccomponents/headline/TC-Headline.vue';
-import TCCard from '@/tccomponents/card/TC-Card.vue';
-import TCButton from '@/tccomponents/button/TC-Button.vue';
-import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
-import TCList from '@/tccomponents/list/TC-List.vue';
-import TCListItem from '@/tccomponents/list/TC-List-Item.vue';
+import TCHeadline from '@/tccomponents/component/headline/TC-Headline.vue';
+import TCCard from '@/tccomponents/component/card/TC-Card.vue';
+import TCButton from '@/tccomponents/component/button/TC-Button.vue';
+import TLGrid from '@/tccomponents/layout/grid/TL-Grid.vue';
+import TCList from '@/tccomponents/component/list/TC-List.vue';
+import TCListItem from '@/tccomponents/component/list/TC-List-Item.vue';
 import { TCComponentGroup } from '@/models/TCComponentGroup.model';
 import tcComponents from '@/components';
-import TFIcon from '@/tccomponents/_fundamental/icon/TF-Icon.vue';
+import TFIcon from '@/tccomponents/fundamental/icon/TF-Icon.vue';
 import TCComponentsSubpageHero from '@/components/shared/TCComponents-Subpage-Hero.vue';
 
 @Component({

@@ -30,9 +30,9 @@
 import { Vue, Component } from 'vue-property-decorator';
 
 import PortfolioCodeExample from '@/components/CodeExample.vue';
-import TCNavbar from '@/tccomponents/navbar/TC-Navbar.vue';
-import TCNavbarItem from '@/tccomponents/navbar/TC-Navbar-Item.vue';
-import TLGrid from '@/tccomponents/_layout/grid/TL-Grid.vue';
+import TCNavbar from '@/tccomponents/component/navbar/TC-Navbar.vue';
+import TCNavbarItem from '@/tccomponents/component/navbar/TC-Navbar-Item.vue';
+import TLGrid from '@/tccomponents/layout/grid/TL-Grid.vue';
 @Component({
   components: {
     'portfolio-code-example': PortfolioCodeExample,

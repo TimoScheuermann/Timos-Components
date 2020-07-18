@@ -24,8 +24,8 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import { TCComponent } from '@/models/TCComponent.model';
-import TCCard from '@/tccomponents/card/TC-Card.vue';
-import TCTable from '@/tccomponents/table/TC-Table.vue';
+import TCCard from '@/tccomponents/component/card/TC-Card.vue';
+import TCTable from '@/tccomponents/component/table/TC-Table.vue';
 
 @Component({
   components: {
