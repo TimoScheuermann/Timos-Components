@@ -1,3 +1,4 @@
+export { default as TcAvatar } from '@/tccomponents/component/avatar/TC-Avatar.vue';
 export { default as TcBadge } from '@/tccomponents/component/badge/TC-Badge.vue';
 export { default as TcButton } from '@/tccomponents/component/button/TC-Button.vue';
 export { default as TcCard } from '@/tccomponents/component/card/TC-Card.vue';
