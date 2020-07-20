@@ -1,12 +1,12 @@
 <template>
-  <div class="tc-tabbar--item" v-if="!routeName">
-    <i :class="'ti-' + icon"></i>
+  <div
+    class="tc-tabbar--item"
+    :class="{ 'tc-tabbar--item__active': isActive }"
+    @click="handleClick"
+  >
+    <i :class="'ti-' + icon" />
     <span>{{ title }}</span>
   </div>
-  <router-link v-else :to="{ name: routeName }" class="tc-tabbar--item">
-    <i :class="'ti-' + icon"></i>
-    <span>{{ title }}</span>
-  </router-link>
 </template>
 
 <script lang="ts">
@@ -18,12 +18,28 @@ export default class TCTabbarItem extends Mixins(TCComponent) {
   @Prop({ default: 'house', type: String }) icon!: string;
   @Prop({ default: 'Home', type: String }) title!: string;
   @Prop() routeName!: string;
+  @Prop() href!: string;
+  @Prop() to!: object;
+
+  get isActive(): boolean {
+    return this.$route.name === this.routeName;
+  }
+
+  public handleClick() {
+    this.$emit('click');
+    if (this.routeName) {
+      this.$router.push({ name: this.routeName });
+    } else if (this.href) {
+      window.open(this.href, '_blank');
+    } else if (this.to) {
+      this.$router.push(this.to);
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .tc-tabbar--item {
-  text-decoration: none;
   flex: 1 1 0px;
   display: flex;
   user-select: none;
@@ -45,12 +61,8 @@ export default class TCTabbarItem extends Mixins(TCComponent) {
   span {
     height: 20px;
     line-height: 20px;
-    // background: green;
   }
-  span {
-    // background: orange;
-  }
-  &.router-link-exact-active {
+  &.tc-tabbar--item__active {
     color: $primary;
   }
 }

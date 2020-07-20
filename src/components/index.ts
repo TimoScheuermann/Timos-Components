@@ -490,6 +490,25 @@ const tcComponents: TCComponentGroup[] = [
                 default: 'home',
                 type: 'string',
                 description: 'Name of route to direct'
+              },
+              {
+                name: 'href',
+                default: '',
+                type: 'string',
+                description: 'URL to open'
+              },
+              {
+                name: 'to',
+                default: '',
+                type: 'object',
+                description: 'route to direct'
+              },
+              {
+                name: '@click',
+                default: 'hom',
+                type: 'function',
+                description:
+                  'Gets called whenever a user clicks the tabbar-item'
               }
             ],
             slots: []
