@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="tc-tabbar--item"
-    :class="{ 'tc-tabbar--item__active': isActive }"
-    @click="handleClick"
-  >
+  <div class="tc-tabbar--item" :class="classes" @click="handleClick">
     <i :class="'ti-' + icon" />
     <span>{{ title }}</span>
   </div>
@@ -25,6 +21,14 @@ export default class TCTabbarItem extends Mixins(TCComponent) {
     return this.$route.name === this.routeName;
   }
 
+  get classes() {
+    const c: Record<string, boolean> = {
+      'tc-tabbar--item__active': this.isActive
+    };
+    c['tc-tabbar--item__' + this.tccolor_] = true;
+    return c;
+  }
+
   public handleClick() {
     this.$emit('click');
     if (this.routeName) {
@@ -42,6 +46,7 @@ export default class TCTabbarItem extends Mixins(TCComponent) {
 .tc-tabbar--item {
   flex: 1 1 0px;
   display: flex;
+  cursor: pointer;
   user-select: none;
   @media only screen and(max-width: 650px) {
     flex-direction: column;
@@ -63,7 +68,11 @@ export default class TCTabbarItem extends Mixins(TCComponent) {
     line-height: 20px;
   }
   &.tc-tabbar--item__active {
-    color: $primary;
+    @each $n, $c in $color_colors {
+      &.tc-tabbar--item__#{$n} {
+        color: $c;
+      }
+    }
   }
 }
 </style>

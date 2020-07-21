@@ -3,12 +3,23 @@
     :key="$route.name"
     :dark="$store.getters.dark || $route.name === 'designer'"
   >
-    <tc-tabbar-item routeName="home" />
-    <tc-tabbar-item title="Designer" icon="tools" routeName="designer" />
-    <tc-tabbar-item title="How to" icon="question-circle" routeName="howto" />
-    <tc-tabbar-item title="Demos" icon="code" routeName="demos" />
+    <tc-tabbar-item color="error" title="Home" icon="house" routeName="home" />
+    <tc-tabbar-item
+      color="error"
+      title="Designer"
+      icon="tools"
+      routeName="designer"
+    />
+    <tc-tabbar-item
+      color="error"
+      title="How to"
+      icon="question-circle"
+      routeName="howto"
+    />
+    <tc-tabbar-item color="error" title="Demos" icon="code" routeName="demos" />
     <tc-tabbar-item
       v-if="showPlayground"
+      color="error"
       title="Playground"
       icon="dots"
       routeName="playground"

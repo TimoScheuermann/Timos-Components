@@ -33,6 +33,7 @@ export { default as TcTabbar } from '@/tccomponents/component/tabbar/TC-Tabbar.v
 export { default as TcTable } from '@/tccomponents/component/table/TC-Table.vue';
 export { default as TcTextarea } from '@/tccomponents/component/textarea/TC-Textarea.vue';
 export { default as TcTooltip } from '@/tccomponents/component/tooltip/TC-Tooltip.vue';
+export { default as TfIcon } from '@/tccomponents/fundamental/icon/TF-Icon.vue';
 export { default as TlFlow } from '@/tccomponents/layout/flow/TL-Flow.vue';
 export { default as TlGrid } from '@/tccomponents/layout/grid/TL-Grid.vue';
 export { default as TlModal } from '@/tccomponents/layout/modal/TL-Modal.vue';
