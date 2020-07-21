@@ -8,6 +8,7 @@
   >
     <div
       tc-flex
+      v-if="$slots.default"
       class="tc-navbar--expander"
       @click="toggleExpander()"
       :class="{ 'tc-navbar--expander__expanded': expanded }"
