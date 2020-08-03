@@ -1,5 +1,5 @@
 <template>
-  <div class="tc-tabbar--item" :class="classes" @click="handleClick">
+  <div class="tc-tabbar-item" :class="classes" @click="handleClick">
     <i :class="'ti-' + icon" />
     <span>{{ title }}</span>
   </div>
@@ -8,42 +8,25 @@
 <script lang="ts">
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 import TCComponent from '@/tccomponents/TC-Component.mixin';
+import TCURLComponent from '@/tccomponents/TC-URL-Component.mixin';
 
 @Component
-export default class TCTabbarItem extends Mixins(TCComponent) {
+export default class TCTabbarItem extends Mixins(TCComponent, TCURLComponent) {
   @Prop({ default: 'house', type: String }) icon!: string;
   @Prop({ default: 'Home', type: String }) title!: string;
-  @Prop() routeName!: string;
-  @Prop() href!: string;
-  @Prop() to!: object;
-
-  get isActive(): boolean {
-    return this.$route.name === this.routeName;
-  }
 
   get classes() {
-    const c: Record<string, boolean> = {
-      'tc-tabbar--item__active': this.isActive
+    const clazz: Record<string, boolean> = {
+      'tc-tabbar-item__active': this.isURLActive
     };
-    c['tc-tabbar--item__' + this.tccolor_] = true;
-    return c;
-  }
-
-  public handleClick() {
-    this.$emit('click');
-    if (this.routeName) {
-      this.$router.push({ name: this.routeName });
-    } else if (this.href) {
-      window.open(this.href, '_blank');
-    } else if (this.to) {
-      this.$router.push(this.to);
-    }
+    clazz['tc-tabbar-item__' + this.tccolor_] = true;
+    return clazz;
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.tc-tabbar--item {
+.tc-tabbar-item {
   flex: 1 1 0px;
   display: flex;
   cursor: pointer;
@@ -67,9 +50,9 @@ export default class TCTabbarItem extends Mixins(TCComponent) {
     height: 20px;
     line-height: 20px;
   }
-  &.tc-tabbar--item__active {
+  &.tc-tabbar-item__active {
     @each $n, $c in $color_colors {
-      &.tc-tabbar--item__#{$n} {
+      &.tc-tabbar-item__#{$n} {
         color: $c;
       }
     }

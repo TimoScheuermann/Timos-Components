@@ -89,7 +89,9 @@ export default class TCSpinner extends mixins(TCComponent) {
     }
   }
   &.tc-spinner__dots-breath,
+  &.tc-spinner__dots-spin,
   &.tc-spinner__dots,
+  &.tc-spinner__bars-breath,
   &.tc-spinner__bars {
     .tc-spinner--element {
       position: absolute;
@@ -118,10 +120,35 @@ export default class TCSpinner extends mixins(TCComponent) {
     width: calc(5 / 50 * var(--size));
     height: calc(15 / 50 * var(--size));
   }
+  &.tc-spinner__bars-breath .tc-spinner--element {
+    @for $i from 1 through 10 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{-1 + 0.1 * $i}s;
+      }
+    }
+    .indicator {
+      width: calc(5 / 50 * var(--size));
+      height: calc(15 / 50 * var(--size));
+      animation: bar-breath 1s ease-in-out 0s infinite both;
+      animation-delay: inherit;
+    }
+  }
   &.tc-spinner__dots-breath .tc-spinner--element {
     animation-name: unset;
     .indicator {
       animation: breath 1s ease-in-out 0s infinite both;
+      animation-delay: inherit;
+    }
+  }
+  &.tc-spinner__dots-spin .tc-spinner--element {
+    animation-name: dots-spin;
+    animation-duration: 1.5s;
+    animation-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    &:nth-child(ODD) {
+      display: none;
+    }
+    .indicator {
+      // animation: breath 1s ease-in-out 0s infinite both;
       animation-delay: inherit;
     }
   }
@@ -145,6 +172,15 @@ export default class TCSpinner extends mixins(TCComponent) {
     transform: scale(0.5);
   }
 }
+@keyframes bar-breath {
+  0%,
+  100% {
+    height: calc(15 / 50 * var(--size));
+  }
+  50% {
+    height: calc(10 / 50 * var(--size));
+  }
+}
 @keyframes dots-linear {
   0% {
     transform: scale(1);
@@ -155,6 +191,16 @@ export default class TCSpinner extends mixins(TCComponent) {
   }
   100% {
     transform: translateY(-10px) scale(0.8);
+  }
+}
+@keyframes dots-spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(-180deg)
+      translateY(calc(20 / 50 * var(--size)));
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(180deg)
+      translateY(calc(20 / 50 * var(--size)));
   }
 }
 </style>

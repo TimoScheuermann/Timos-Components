@@ -32,10 +32,33 @@ const apiBackground: TCComponentApi = {
 };
 const apiIcon: TCComponentApi = {
   name: 'icon',
-  type: 'String',
+  type: 'string',
   description: 'Icon to be displayed',
   parameters: "Timo's Icons"
 };
+const apiURLs: TCComponentApi[] = [
+  {
+    name: 'href',
+    type: 'string',
+    description: 'Hyperlink to open'
+  },
+  {
+    name: 'to',
+    type: 'Route ({name: string})',
+    description: 'Route to navigate to'
+  },
+  {
+    name: 'routeName',
+    type: 'string',
+    description: 'Routename to navigate to'
+  },
+  {
+    name: '@click',
+    type: 'function(event: MouseEvent)',
+    description: 'Gets called whenever the user clicks on the element'
+  }
+];
+
 const tcComponents: TCComponentGroup[] = [
   {
     group: 'Fundamentals',
@@ -301,18 +324,12 @@ const tcComponents: TCComponentGroup[] = [
         name: 'Button',
         icon: 'button',
         api: [
-          { name: 'to', type: 'object', description: 'Route to navigate to' },
-          { name: 'href', type: 'string', description: 'Href to open' },
           {
             name: 'name',
             type: 'string',
             description: 'Title to be displayed'
           },
-          {
-            name: '@click',
-            type: 'function',
-            description: 'Is triggered, when ever a button is clicked'
-          },
+          ...apiURLs,
           apiIcon,
           {
             name: 'disabled',
@@ -340,6 +357,22 @@ const tcComponents: TCComponentGroup[] = [
       {
         name: 'Sidebar',
         icon: 'sidebar',
+        children: [
+          {
+            name: 'sidebar-item',
+            icon: 'heart',
+            api: [
+              { ...apiIcon },
+              {
+                name: 'title',
+                type: 'string',
+                description: 'Name to be displayed'
+              },
+              ...apiURLs
+            ],
+            slots: []
+          }
+        ],
         api: [], // TODO:
         slots: [
           {
@@ -412,15 +445,7 @@ const tcComponents: TCComponentGroup[] = [
       {
         name: 'Link',
         icon: 'arrow-down-right',
-        api: [
-          {
-            name: 'to',
-            type: 'any',
-            description: ''
-          },
-          { name: 'href', type: 'string', description: '' },
-          { name: '@click', type: 'function', description: '' }
-        ],
+        api: [...apiURLs],
         slots: [
           {
             name: 'default',
@@ -485,31 +510,7 @@ const tcComponents: TCComponentGroup[] = [
                 type: 'string',
                 description: 'Name to be displayed'
               },
-              {
-                name: 'routeName',
-                default: 'home',
-                type: 'string',
-                description: 'Name of route to direct'
-              },
-              {
-                name: 'href',
-                default: '',
-                type: 'string',
-                description: 'URL to open'
-              },
-              {
-                name: 'to',
-                default: '',
-                type: 'object',
-                description: 'route to direct'
-              },
-              {
-                name: '@click',
-                default: 'hom',
-                type: 'function',
-                description:
-                  'Gets called whenever a user clicks the tabbar-item'
-              }
+              ...apiURLs
             ],
             slots: []
           }
@@ -591,7 +592,8 @@ const tcComponents: TCComponentGroup[] = [
             name: 'variant',
             description: 'Determines the variant used',
             type: 'string',
-            parameters: 'bars, dots, dots-breath, dots-wave',
+            parameters:
+              'bars, bars-breath, dots, dots-breath, dots-spin, dots-wave',
             default: 'bars'
           },
           apiDark
@@ -844,16 +846,12 @@ const tcComponents: TCComponentGroup[] = [
             icon: 'Navbar',
             api: [
               {
-                name: 'to',
-                type: 'string | object',
-                description: 'Location, a user is forwarded to'
-              },
-              {
                 name: 'name',
                 type: 'string',
                 description: 'Name to be displayed'
               },
-              apiIcon
+              apiIcon,
+              ...apiURLs
             ],
             slots: []
           }
@@ -956,9 +954,8 @@ const tcComponents: TCComponentGroup[] = [
                 type: 'string',
                 description: 'Add a title to the list'
               },
+              ...apiURLs,
               apiIcon,
-              { name: 'to', type: 'string | RawLocation', description: '' },
-              { name: 'href', type: 'string', description: '' },
               {
                 name: 'v-model',
                 type: 'boolean',
@@ -968,11 +965,6 @@ const tcComponents: TCComponentGroup[] = [
                 name: 'description',
                 type: 'string',
                 description: 'Small text at the end of the item'
-              },
-              {
-                name: '@click',
-                type: 'function',
-                description: 'Gets called whenever a user clicks the element'
               }
             ],
             slots: []

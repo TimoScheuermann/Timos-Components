@@ -1,5 +1,5 @@
 <template>
-  <div class="tc-button" :class="getClasses()" @click="clicked($event)">
+  <div class="tc-button" :class="getClasses()" @click="handleClick">
     <div v-if="icon && icon.length > 0" class="tc-button--icon">
       <tf-icon :icon="icon" />
     </div>
@@ -13,15 +13,14 @@
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 import TCComponent from '@/tccomponents/TC-Component.mixin';
 import TFIcon from '@/tccomponents/fundamental/icon/TF-Icon.vue';
+import TCURLComponent from '@/tccomponents/TC-URL-Component.mixin';
 
 @Component({
   components: {
     'tf-icon': TFIcon
   }
 })
-export default class TCButton extends Mixins(TCComponent) {
-  @Prop() to!: object;
-  @Prop() href!: string;
+export default class TCButton extends Mixins(TCComponent, TCURLComponent) {
   @Prop() name!: string;
   @Prop() icon!: string;
   @Prop({ default: 'left' }) iconPosition!: string;
@@ -48,17 +47,6 @@ export default class TCButton extends Mixins(TCComponent) {
     }
 
     return classes;
-  }
-
-  public clicked(event: Event): void {
-    if (!this.disabled) {
-      this.$emit('click', event);
-      if (this.to) {
-        this.$router.push(this.to);
-      } else if (this.href) {
-        window.open(this.href, '_blank');
-      }
-    }
   }
 }
 </script>

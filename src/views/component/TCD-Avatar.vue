@@ -48,7 +48,7 @@ import TCAvatar from '@/tccomponents/component/avatar/TC-Avatar.vue';
   }
 })
 export default class TCDBadge extends Vue {
-  public src = 'https://portfolio.timos.design/assets/home/me.jpg';
+  public src = 'https://timos.design/assets/me.jpg';
   public sizes: string[] = ['large', 'medium', 'small', 'tiny'];
   public borders: string[] = ['circle', 'rounded', 'square'];
 }

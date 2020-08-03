@@ -167,8 +167,7 @@ export default class TLSidebar extends Mixins(TCComponent) {
 
           &:hover,
           &:focus,
-          &.active,
-          &.router-link-exact-active {
+          &.tc-sidebar--item__active {
             color: #fff;
             border: none;
             background: rgba(#fff, 0.2);

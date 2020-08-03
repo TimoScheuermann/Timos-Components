@@ -1,7 +1,7 @@
 <template>
   <div
     class="tc-list-item"
-    @click="clicked"
+    @click="handleClick"
     :class="{ 'tc-list-item__link': href || to || value }"
   >
     <div class="tc-list-item--icon">
@@ -29,7 +29,7 @@ import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 import TCSwitch from '@/tccomponents/component/switch/TC-Switch.vue';
 import TCComponent from '@/tccomponents/TC-Component.mixin';
 import TFIcon from '@/tccomponents/fundamental/icon/TF-Icon.vue';
-import { RawLocation } from 'vue-router';
+import TCURLComponent from '@/tccomponents/TC-URL-Component.mixin';
 
 @Component({
   components: {
@@ -37,11 +37,9 @@ import { RawLocation } from 'vue-router';
     'tf-icon': TFIcon
   }
 })
-export default class TCListItem extends Mixins(TCComponent) {
+export default class TCListItem extends Mixins(TCComponent, TCURLComponent) {
   @Prop() title!: string;
   @Prop() icon!: string;
-  @Prop() to!: string | RawLocation;
-  @Prop() href!: string;
   @Prop() value!: boolean;
   @Prop() description!: string;
 
@@ -52,19 +50,8 @@ export default class TCListItem extends Mixins(TCComponent) {
     this.innerValue = this.value;
   }
 
-  public clicked(event: MouseEvent): void {
-    this.$emit('click', event);
-    if (this.to) {
-      let route: { name: string } = this.to as { name: string };
-      if (typeof this.to == 'string') {
-        route = { name: this.to };
-      }
-      if (this.$router.currentRoute.name !== route.name) {
-        this.$router.push(route);
-      }
-    } else if (this.href) {
-      window.open(this.href, '_blank');
-    } else if (this.value) {
+  public handleClick(): void {
+    if (this.value) {
       this.innerValue = !this.innerValue;
       this.$emit('input', this.innerValue);
     }

@@ -15,7 +15,12 @@
         <i class="ti-question-circle"></i>
       </tc-tooltip>
     </div>
-    <div v-if="buttons_" m class="tc-input--indicator indicator__button">
+    <div
+      v-if="buttons_"
+      @click="changeVal(-1)"
+      m
+      class="tc-input--indicator indicator__button"
+    >
       <i class="ti-minus" />
     </div>
     <div v-if="icon" class="tc-input--indicator indicator__icon">
@@ -57,7 +62,12 @@
     >
       <tf-icon icon="cross-inverted" />
     </div>
-    <div v-if="buttons_" p class="tc-input--indicator indicator__button">
+    <div
+      v-if="buttons_"
+      @click="changeVal(1)"
+      p
+      class="tc-input--indicator indicator__button"
+    >
       <i class="ti-plus" />
     </div>
   </div>

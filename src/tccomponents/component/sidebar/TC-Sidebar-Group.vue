@@ -26,6 +26,7 @@ export default class TCSidebarGroup extends Mixins(TCComponent) {
   padding: 5px 0;
 
   .tc-sidebar--group__title {
+    user-select: none;
     display: flex;
     justify-content: flex-start;
     align-items: center;

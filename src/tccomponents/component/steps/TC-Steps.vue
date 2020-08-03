@@ -28,7 +28,7 @@ import TCComponent from '@/tccomponents/TC-Component.mixin';
 
 @Component
 export default class TCSteps extends Mixins(TCComponent) {
-  @Prop({ default: 0 }) step!: number;
+  @Prop({ default: 1 }) step!: number;
 
   public steps: string[] = [
     'Validation',

@@ -1,20 +1,24 @@
 <template>
-  <router-link :to="to" class="tc-sidebar--item" :class="{ active: active }">
+  <div
+    class="tc-sidebar--item"
+    :class="{ 'tc-sidebar--item__active': isURLActive }"
+    @click="handleClick"
+  >
     <tf-icon :icon="icon" />
     <div class="name">{{ name }}</div>
-  </router-link>
+  </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 import TCComponent from '@/tccomponents/TC-Component.mixin';
 import TFIcon from '@/tccomponents/fundamental/icon/TF-Icon.vue';
+import TCURLComponent from '@/tccomponents/TC-URL-Component.mixin';
 
 @Component({
   components: { 'tf-icon': TFIcon }
 })
-export default class TCSidebarItem extends Mixins(TCComponent) {
-  @Prop({ default: '_blank' }) to!: string | object;
+export default class TCSidebarItem extends Mixins(TCComponent, TCURLComponent) {
   @Prop() name!: string;
   @Prop() icon!: string;
   @Prop() active!: boolean;
@@ -43,8 +47,7 @@ export default class TCSidebarItem extends Mixins(TCComponent) {
     outline: none;
   }
 
-  &.active,
-  &.router-link-exact-active {
+  &.tc-sidebar--item__active {
     opacity: 1;
     color: $primary;
     border-right: 4px solid $primary;
