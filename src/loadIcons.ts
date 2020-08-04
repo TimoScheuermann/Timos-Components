@@ -5,7 +5,7 @@ export async function loadIcons(): Promise<void> {
   const xhr = new XMLHttpRequest(); // a new request
   xhr.open(
     'GET',
-    'https://raw.githubusercontent.com/TimoScheuermann/github-assets/master/Timos-Icons/icons.json',
+    'https://raw.githubusercontent.com/TimoScheuermann/Timos-Icons/master/public/resources/icons.json',
     true
   );
   xhr.send(null);
