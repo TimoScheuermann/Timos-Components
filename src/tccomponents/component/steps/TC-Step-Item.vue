@@ -1,23 +1,24 @@
 <template>
-  <div
-    class="tc-step-item"
-    :tcid="uuid"
-    :key="key"
-    :class="'tc-step-item__' + getState()"
-  >
+  <div class="tc-step-item" :class="classes" :style="styles">
     <div class="tc-step-item--indicator">
       <tf-icon v-if="icon" :icon="icon" />
-      <div v-else>2</div>
+      <div class="number" v-else>{{ position + 1 }}</div>
     </div>
-    <div class="tc-step-item--title">{{ title }}</div>
-    <div class="tc-step-item--description">{{ description }}</div>
+    <div class="tc-step-item--content">
+      <div class="tc-step-item--title">{{ title }}</div>
+      <transition name="fade">
+        <div v-if="active" class="tc-step-item--description">
+          {{ description }}
+        </div>
+      </transition>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 import TFIcon from '../../fundamental/icon/TF-Icon.vue';
-import TCComponent from '../../TC-Component.mixin';
+import TCComponent from '@/tccomponents/TC-Component.mixin';
 
 @Component({
   components: {
@@ -29,124 +30,146 @@ export default class TCStepItem extends Mixins(TCComponent) {
   @Prop() description!: string;
   @Prop() icon!: string;
 
-  public key = 'nm';
-
-  mounted() {
-    console.log('MOUNT');
-    this.key = 'mo';
+  get current() {
+    return this.$parent.$props.current;
   }
 
-  getState(): string {
-    const elem: HTMLElement | null = document.querySelector(
-      "[tcid='" + this.uuid + "']"
-    );
+  get isRow(): boolean {
+    return this.$parent.$props.direction.toLowerCase() !== 'column';
+  }
 
-    console.log('state', elem);
-    if (elem) {
-      console.log('elem exsits');
-      const parent: (Node & ParentNode) | null = elem.parentNode;
-      if (parent) {
-        console.log('parent exists');
-        const current = +((parent as HTMLElement).getAttribute('current') || 0);
-        const index = Array.prototype.indexOf.call(parent.children, elem);
-        console.log({ c: current, i: index });
-        if (current === index) {
-          return 'active';
-        }
-        if (current > index) {
-          return 'completed';
-        }
-      }
-    }
-    return 'waiting';
+  get isDark(): boolean {
+    return this.$parent.$props.dark;
+  }
+
+  get position() {
+    const slot = this.$parent.$slots.default;
+    if (!slot) return -1;
+    return slot.indexOf(this.$vnode);
+  }
+
+  get active(): boolean {
+    return this.current === this.position;
+  }
+
+  get next(): boolean {
+    return this.current === this.position - 1;
+  }
+
+  get done(): boolean {
+    return this.current > this.position;
+  }
+
+  get waiting(): boolean {
+    return this.current < this.position - 1;
+  }
+
+  get classes(): Record<string, unknown> {
+    return {
+      'tc-step-item__isRow': this.isRow,
+      'tc-step-item__isColumn': !this.isRow,
+      'tc-step-item__active': this.active,
+      'tc-step-item__next': this.next,
+      'tc-step-item__done': this.done,
+      'tc-step-item__waiting': this.waiting
+    };
+  }
+  get styles(): string {
+    return `--tc-step-item__indicator-background: ${this.getChosenBackground(
+      this.isDark ? 'backgroundDark' : 'background'
+    )};--tc-step-item__inactive-color: ${this.getChosenColor(
+      this.isDark ? 'colorDark' : 'color'
+    )};`;
   }
 }
 </script>
-
 <style lang="scss" scoped>
 .tc-step-item {
-  display: flex;
-  flex-grow: 1;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 0 10px;
-  opacity: 0.5;
-  transition: all 0.3s ease-in-out;
-  position: relative;
-  z-index: 1;
+  $indicator: 35px;
 
-  &__active {
-    opacity: 1;
+  position: relative;
+  &::before {
+    z-index: 1;
+    content: '';
+    position: absolute;
+    height: 3px;
+    transition: all 1s ease-in-out;
+    top: 27.5px;
+    left: 50%;
+    width: 100%;
+    max-width: 0%;
+    background: $success;
+    transform: translateY(-50%);
+  }
+
+  &.tc-step-item__done {
     .tc-step-item--indicator {
-      background: $primary;
-      border-color: $primary !important;
+      border: #{$indicator / 2} solid $success;
       color: #fff;
     }
-    &::before {
-      background: $success !important;
+    .tc-step-item--title {
+      color: $success;
+    }
+    &.tc-step-item__isRow:not(:last-child)::before {
+      max-width: 100%;
     }
   }
-  &__completed {
-    opacity: 1;
-    color: $success;
+
+  &.tc-step-item__active {
     .tc-step-item--indicator {
-      border-color: $success;
-      background: $background;
+      border: 2px solid $primary;
+    }
+    .tc-step-item--title,
+    .tc-step-item--indicator {
+      color: $primary;
     }
   }
-  &__waiting {
+
+  &.tc-step-item__next,
+  &.tc-step-item__waiting {
     .tc-step-item--indicator {
-      background: $background;
+      color: rgba(var(--tc-step-item__inactive-color), 0.5);
+      border: 2px solid currentColor;
     }
   }
 
   .tc-step-item--indicator {
-    $scale: 26px;
-    height: $scale;
-    border-radius: $scale;
-    z-index: 1;
-    i {
-      font-size: 14px;
-    }
-    width: $scale;
-    line-height: $scale;
-    font-weight: bold;
-    text-align: center;
-    border: 2px solid;
-  }
-  .tc-step-item--title {
-    margin-top: 5px;
-    font-weight: 550;
-  }
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    background: currentColor;
-    height: 2px;
-    top: 13px;
-    width: calc(50% - 10px);
-    border-radius: 10px;
-    z-index: 0;
-  }
-  &:nth-child(1) {
-    padding-left: 0;
-    &::before {
-      display: none;
+    margin: 10px 0;
+    width: $indicator;
+    height: $indicator;
+    border-radius: $indicator;
+    background: rgba(var(--tc-step-item__indicator-background), 1);
+    box-sizing: border-box;
+    display: grid;
+    place-content: center;
+    transition: all 0.3s ease-in-out;
+    z-index: 2;
+
+    .number {
+      font-weight: bold;
     }
   }
-  &:last-child {
-    padding-right: 0;
-    &::after {
-      display: none;
+  &.tc-step-item__isColumn .tc-step-item--content {
+    align-items: flex-start;
+  }
+
+  .tc-step-item--content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .tc-step-item--title {
+      font-weight: 500;
     }
   }
-  &::before {
-    left: 0;
-  }
-  &::after {
-    right: 0;
-  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.3s ease;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+  height: 0px;
 }
 </style>

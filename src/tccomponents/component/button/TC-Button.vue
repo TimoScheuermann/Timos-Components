@@ -1,5 +1,10 @@
 <template>
-  <div class="tc-button" :class="getClasses()" @click="handleClick">
+  <div
+    class="tc-button"
+    :class="classes"
+    :style="styles"
+    @click="handleClickLocal"
+  >
     <div v-if="icon && icon.length > 0" class="tc-button--icon">
       <tf-icon :icon="icon" />
     </div>
@@ -29,13 +34,19 @@ export default class TCButton extends Mixins(TCComponent, TCURLComponent) {
 
   public variants: string[] = ['opaque', 'border', 'filled'];
 
-  public getClasses(): Record<string, unknown> {
+  public handleClickLocal(e: MouseEvent): void {
+    if (!this.disabled) {
+      this.handleClick(e);
+    } else {
+      e.preventDefault();
+    }
+  }
+
+  get classes(): Record<string, unknown> {
     const classes: Record<string, unknown> = {
       'tc-button__withoutName': this.icon && !name,
       'tc-button__disabled': this.disabled
     };
-
-    classes['tc-button__' + this.tccolor_] = true;
 
     if (!this.variant || !this.variants.includes(this.variant.toLowerCase())) {
       classes['tc-button__border'] = true;
@@ -48,6 +59,12 @@ export default class TCButton extends Mixins(TCComponent, TCURLComponent) {
 
     return classes;
   }
+
+  get styles(): string {
+    return `--tc-button__color: ${this.getChosenColor(
+      'colorDark'
+    )}; --tc-button__background: ${this.getChosenBackground('primary')};`;
+  }
 }
 </script>
 
@@ -58,6 +75,7 @@ export default class TCButton extends Mixins(TCComponent, TCURLComponent) {
   &.tc-button__icon-right {
     flex-direction: row-reverse;
   }
+
   justify-content: center;
   align-items: center;
   margin: 3px;
@@ -66,12 +84,13 @@ export default class TCButton extends Mixins(TCComponent, TCURLComponent) {
   padding: 5px 9px;
   border-radius: $border-radius;
   user-select: none;
-  cursor: pointer;
   white-space: nowrap;
   transition: 0.2s ease-in-out;
+
   &.tc-button__withoutName {
     padding: 5px 4px;
   }
+
   .tc-button--name,
   .tc-button--icon {
     display: inline-flex;
@@ -82,6 +101,7 @@ export default class TCButton extends Mixins(TCComponent, TCURLComponent) {
     z-index: 1;
     position: relative;
   }
+
   .tc-button--icon {
     width: 20px;
     position: relative;
@@ -90,108 +110,47 @@ export default class TCButton extends Mixins(TCComponent, TCURLComponent) {
       font-size: 12px;
     }
   }
+
   &.tc-button__opaque {
-    border: 1px solid $primary;
     position: relative;
-    &::before {
-      transition: inherit;
-      content: '';
-      border-radius: 2px;
-      z-index: 0;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      opacity: 0.25;
-    }
-
-    @each $n, $c in $color_colors {
-      &.tc-button__#{$n} {
-        color: $c;
-        border-color: $c;
-        &::before {
-          background: $c;
-        }
-      }
-    }
-    &.tc-button__paragraph {
-      color: $color;
-    }
+    margin: 5px;
+    border: 1px solid transparent;
+    color: rgba(var(--tc-button__background), 1);
+    background: rgba(var(--tc-button__background), 0.3);
   }
+
   &.tc-button__filled {
-    color: #fff;
-    border: 1px solid $primary;
-    // background: $primary;
+    color: rgba(var(--tc-button__color), 1);
+    border: 1px solid rgba(var(--tc-button__background), 1);
+    background: rgba(var(--tc-button__background), 1);
+  }
 
-    @each $n, $c in $color_colors {
-      &.tc-button__#{$n} {
-        border-color: $c;
-        background: $c;
-      }
-    }
-    &.tc-button__paragraph {
-      color: $color;
-    }
-  }
   &.tc-button__border {
-    // color: $primary;
-    border: 1px solid $primary;
-    @each $n, $c in $color_colors {
-      &.tc-button__#{$n} {
-        border-color: $c;
-        color: $c;
-      }
-    }
+    border: 1px solid rgba(var(--tc-button__background), 1);
+    color: rgba(var(--tc-button__background), 1);
   }
+
   &.tc-button__disabled {
-    color: $color;
-    border-color: $color;
-    opacity: 0.6;
-    cursor: default;
-    &.tc-button__opaque {
-      &::before {
-        background: $color;
-      }
-    }
-    &.tc-button__filled {
-      color: #fff;
-      border-color: $color;
-      background: $color;
-    }
+    filter: saturate(25%);
+    cursor: not-allowed;
   }
 
   &:not(.tc-button__disabled) {
+    cursor: pointer;
     &:active {
       filter: brightness(120%);
     }
     &:hover {
       &.tc-button__filled {
-        @each $n, $c in $color_colors {
-          &.tc-button__#{$n} {
-            box-shadow: 2px 4px 8px rgba($c, 0.3);
-          }
-        }
+        box-shadow: 2px 4px 8px rgba(var(--tc-button__background), 0.3);
       }
       &.tc-button__border {
-        color: #fff;
-        @each $n, $c in $color_colors {
-          &.tc-button__#{$n} {
-            background: $c;
-          }
-        }
-        &.tc-button__paragraph {
-          color: $color;
-        }
+        color: rgba(var(--tc-button__color), 1);
+        background: rgba(var(--tc-button__background), 1);
       }
       &.tc-button__opaque {
-        color: #fff;
-        &::before {
-          opacity: 1;
-        }
-        &.tc-button__paragraph {
-          color: $color;
-        }
+        color: rgba(var(--tc-button__color), 1);
+        background: rgba(var(--tc-button__background), 0.75);
       }
     }
   }

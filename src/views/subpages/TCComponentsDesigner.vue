@@ -15,14 +15,9 @@
             </span>
             <i class="ti-arrow-right" />
           </span>
-          <tc-button
-            v-else
-            name="Examples"
-            icon="exchange"
-            variant="opaque"
-            tccolor="alarm"
-            @click="showExamples"
-          />
+          <tc-link v-else tfcolor="alarm" @click="showExamples">
+            Examples
+          </tc-link>
           <tc-select
             inline
             :dark="true"
@@ -146,6 +141,7 @@ import TCAvatar from '@/tccomponents/component/avatar/TC-Avatar.vue';
     'tc-select': TCSelect,
     'tc-input': TCInput,
     'tc-button': TCButton,
+    'tc-link': TCLink,
     'tc-icon-select': IconSelect,
     'tc-checkbox': TCCheckbox,
     'tl-grid': TLGrid,
@@ -244,27 +240,25 @@ export default class TCComponentsDesigner extends Vue {
 
   get iconAttributes(): TCComponentApi[] {
     return this.allAttributes.filter(
-      (x: TCComponentApi) => x.parameters && x.parameters === "Timo's Icons"
+      (x: TCComponentApi) => x.parameters && x.parameters[0] === "Timo's Icons"
     );
   }
   get inputAttributes(): TCComponentApi[] {
-    return this.allAttributes.filter(
-      (x: TCComponentApi) => !(x.parameters || x.type === 'boolean')
-    );
+    return this.allAttributes.filter((x: TCComponentApi) => !x.parameters);
   }
   get selectAttributes(): TCComponentApi[] {
     return this.allAttributes
       .filter(
         (x: TCComponentApi) =>
-          ((x.parameters && x.parameters !== "Timo's Icons") ||
-            x.type === 'boolean') &&
+          x.parameters &&
+          x.parameters[0] !== "Timo's Icons" &&
           x.name !== 'dark'
       )
       .map((x: TCComponentApi) => {
-        x.selectValues = x.parameters
-          ? x.parameters.split(', ')
-          : [true, false];
-        return x;
+        return {
+          ...x,
+          selectValues: x.parameters
+        };
       });
   }
 
@@ -390,6 +384,12 @@ export default class TCComponentsDesigner extends Vue {
   }
   /deep/ .tc-card {
     animation: none !important;
+  }
+  /deep/ .tc-scroll-up {
+    display: inline-flex;
+    transform: scale(1);
+    position: relative;
+    margin: 3px;
   }
 }
 

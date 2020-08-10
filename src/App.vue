@@ -23,10 +23,21 @@
         slot="sidebar-content"
         :groups="tcComponents"
       />
-      <div v-if="sidebarVisible" class="sidebar-footer" slot="sidebar-footer">
-        <img src="assets/text.svg" />
-        {{ version }}
-      </div>
+      <tl-flow
+        flow="column"
+        v-if="sidebarVisible"
+        class="sidebar-footer"
+        slot="sidebar-footer"
+      >
+        <tl-flow>
+          <tc-switch
+            tfcolor="error"
+            v-model="darkModeSwitch"
+            @input="darkModeChanged"
+          />
+          <div class="mode">Darkmode</div>
+        </tl-flow>
+      </tl-flow>
 
       <tccomponents-header :sidebarVisible="sidebarVisible" />
       <router-view />
@@ -49,10 +60,15 @@ import TLSidebar from '@/tccomponents/layout/sidebar/TL-Sidebar.vue';
 import TCComponentsSidebar from '@/components/shared/TCComponents-Sidebar.vue';
 import TCComponentsTabbar from '@/components/shared/TCComponents-Tabbar.vue';
 import TCComponentsHeader from '@/components/shared/TCComponents-Header.vue';
+import TCSwitch from '@/tccomponents/component/switch/TC-Switch.vue';
+import TLFlow from '@/tccomponents/layout/flow/TL-Flow.vue';
+
 @Component({
   components: {
     'tc-input': TCInput,
+    'tc-switch': TCSwitch,
     'tl-sidebar': TLSidebar,
+    'tl-flow': TLFlow,
     'tccomponents-sidebar': TCComponentsSidebar,
     'tccomponents-tabbar': TCComponentsTabbar,
     'tccomponents-header': TCComponentsHeader
@@ -62,8 +78,13 @@ export default class App extends Vue {
   public query = '';
   public collapsedSidebar = false;
   public sidebarVisible = true;
-  public opened = false;
-  public opened2 = false;
+
+  public darkModeSwitch: boolean = this.$store.getters.dark;
+
+  public darkModeChanged() {
+    this.$store.commit('setDarkMode', this.darkModeSwitch);
+    this.$forceUpdate();
+  }
 
   get tcComponents(): TCComponentGroup[] {
     return tcComponents
@@ -79,7 +100,7 @@ export default class App extends Vue {
   }
 
   get version(): string {
-    return process.env.VERSION || 'v0.2.0';
+    return process.env.VERSION || 'v0.5.0';
   }
 
   mounted() {
@@ -134,20 +155,19 @@ body {
 }
 .sidebar-header,
 .sidebar-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding-top: 10px;
 }
 .sidebar-footer {
   padding: 10px 0;
   color: #fff;
-  img {
-    max-height: 20px;
-    margin-right: 10px;
+  .mode {
+    margin: 0 5px;
   }
 }
 .sidebar-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 5px;
   .searchInput {
     width: 173px;

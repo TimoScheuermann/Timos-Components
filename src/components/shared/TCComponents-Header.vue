@@ -5,41 +5,29 @@
     :dark="$store.state.dark || $route.name === 'designer'"
     :key="$route.name"
   >
-    <template v-if="isDesigner">
-      <div tc-header-line>
-        <tc-button
-          @click="downloadFile"
-          name="Save Configuration"
-          icon="download"
-          variant="filled"
-          class="save-config"
-        />
-      </div>
-      <div tc-header-line>
-        <tc-input
-          accept=".tccomponent"
-          type="file"
-          icon="component"
-          filePlaceholder="Load Configuration"
-          @fileLoaded="fileLoaded"
-          :dark="true"
-        />
-      </div>
-    </template>
-    <template v-if="!isDesigner">
-      <div class="darkmode" :class="{ dark: headerSwitch }">
-        <tc-switch v-model="headerSwitch" @input="darkModeChanged" />
-        <span t>Dark</span>
-      </div>
-    </template>
-    <template v-if="isDetailView">
+    <div tc-header-line v-if="isDesigner">
       <tc-button
-        name="Open in Designer"
-        icon="tools"
+        @click="downloadFile"
+        name="Save Configuration"
+        icon="download"
         variant="filled"
-        @click="openDesigner"
+        class="save-config"
       />
-    </template>
+    </div>
+    <div tc-header-line v-if="isDesigner">
+      <tc-input
+        accept=".tccomponent"
+        type="file"
+        icon="component"
+        filePlaceholder="Load Configuration"
+        @fileLoaded="fileLoaded"
+        :dark="true"
+      />
+    </div>
+    <tl-flow v-if="!isDesigner">
+      <img src="assets/text.svg" />
+      <div class="v">{{ version }}</div>
+    </tl-flow>
   </tc-header>
 </template>
 
@@ -51,22 +39,21 @@ import { EventBus } from '@/eventBus';
 import TCHeader from '@/tccomponents/component/header/TC-Header.vue';
 import TCButton from '@/tccomponents/component/button/TC-Button.vue';
 import TCInput from '@/tccomponents/component/input/TC-Input.vue';
-import TCSwitch from '@/tccomponents/component/switch/TC-Switch.vue';
+import TLFlow from '@/tccomponents/layout/flow/TL-Flow.vue';
 
 @Component({
   components: {
     'tc-header': TCHeader,
     'tc-button': TCButton,
     'tc-input': TCInput,
-    'tc-switch': TCSwitch
+    'tl-flow': TLFlow
   }
 })
 export default class TCComponentsHeader extends Vue {
   @Prop() sidebarVisible!: boolean;
-  public headerSwitch: boolean = this.$store.getters.dark;
 
-  get routeName(): string {
-    return this.$route.name || '';
+  get version(): string {
+    return process.env.VUE_APP_VERSION ?? '';
   }
 
   get headerTitle(): string {
@@ -74,19 +61,7 @@ export default class TCComponentsHeader extends Vue {
   }
 
   get isDesigner(): boolean {
-    return this.routeName === 'designer';
-  }
-
-  get isDetailView(): boolean {
-    return this.routeName.startsWith('TC-');
-  }
-
-  public openDesigner(): void {
-    this.$store.commit(
-      'updateDesignerComponent',
-      this.headerTitle.split('TC ').join('')
-    );
-    this.$router.push({ name: 'designer' });
+    return (this.$route.name || '') === 'designer';
   }
 
   public toggleSidebar(): void {
@@ -100,34 +75,19 @@ export default class TCComponentsHeader extends Vue {
   public fileLoaded(content: string): void {
     EventBus.$emit('designer-fileLoaded', content);
   }
-
-  public darkModeChanged() {
-    this.$store.commit('setDarkMode', this.headerSwitch);
-    this.$forceUpdate();
-  }
 }
 </script>
 
 <style lang="scss" scoped>
-.save-config,
-.darkmode {
+.save-config {
   display: flex;
 }
-.darkmode {
-  justify-content: center;
-  align-items: center;
-  margin: 3px;
-  border-radius: $border-radius;
-  background: $paragraph;
-  &.dark {
-    background: $paragraph_dark;
-  }
-  span[t] {
-    font-weight: 500;
-    margin: {
-      left: 10px;
-      right: 10px;
-    }
-  }
+img {
+  max-height: 20px;
+  margin-right: 5px;
+  margin-left: 10px;
+}
+.v {
+  font-weight: 500;
 }
 </style>

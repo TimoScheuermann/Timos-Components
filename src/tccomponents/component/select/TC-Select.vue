@@ -162,6 +162,7 @@ export default class TCSelect extends Mixins(TCComponent) {
       const vals: TValues[] = this.innerValue as TValues[];
       if (vals.length == 1) return vals[0];
       else if (vals.length > 1) return vals.length + 'x Items';
+      return this.placeholder;
     }
     return this.innerValue;
   }
@@ -229,6 +230,7 @@ export default class TCSelect extends Mixins(TCComponent) {
   }
   .tc-select--placeholder {
     opacity: 0.8;
+    white-space: nowrap;
   }
   .tc-select--container {
     max-height: 0px;

@@ -1,6 +1,6 @@
 <template>
-  <div class="tc-slider">
-    <i v-if="icon_start" id="l" :class="'ti-' + icon_start" />
+  <div class="tc-slider" :style="styles">
+    <tf-icon v-if="iconStart" :icon="iconStart" />
     <input
       @input="updateVal()"
       type="range"
@@ -8,21 +8,26 @@
       :max="max"
       v-model="data"
     />
-    <i v-if="icon_end" id="r" :class="'ti-' + icon_end" />
+    <tf-icon v-if="iconEnd" :icon="iconEnd" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Mixins, Watch } from 'vue-property-decorator';
 import TCComponent from '@/tccomponents/TC-Component.mixin';
+import TFIcon from '@/tccomponents/fundamental/icon/TF-Icon.vue';
 
-@Component
+@Component({
+  components: {
+    'tf-icon': TFIcon
+  }
+})
 export default class TCSlider extends Mixins(TCComponent) {
   @Prop({ default: 0 }) min!: number;
   @Prop({ default: 100 }) max!: number;
   @Prop({ default: 50 }) value!: number;
-  @Prop() icon_start!: string;
-  @Prop() icon_end!: string;
+  @Prop() iconStart!: string;
+  @Prop() iconEnd!: string;
 
   public data = this.value;
 
@@ -34,30 +39,40 @@ export default class TCSlider extends Mixins(TCComponent) {
   public updateVal(): void {
     this.$emit('input', this.data);
   }
+
+  get styles(): string {
+    return `--tc-slider__color: ${this.getChosenColor()};--tc-slider__background: ${this.getChosenBackground(
+      this.dark ? 'containerDark' : 'container'
+    )}`;
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .tc-slider {
   display: inline-flex;
+  width: 100%;
   justify-content: center;
   align-items: center;
-  i {
-    color: $primary;
+  .tf-icon {
+    color: rgba(var(--tc-slider__color), 1);
     font-size: 20px;
-    &#l {
-      margin-right: 5px;
+    &:nth-child(1) {
+      margin-right: 10px;
     }
-    &#r {
-      margin-left: 5px;
+    &:nth-child(2),
+    &:nth-child(3) {
+      margin-left: 10px;
     }
+    opacity: 0.75;
   }
   input {
     appearance: none;
     width: 100%;
+    max-width: 100%;
     height: 5px;
     border-radius: 5px;
-    background: $paragraph;
+    background: rgba(var(--tc-slider__background), 1);
     outline: none;
     transition: opacity 0.2s;
     &::-webkit-slider-thumb {
@@ -68,7 +83,7 @@ export default class TCSlider extends Mixins(TCComponent) {
       width: $size;
       border-radius: $size;
       height: $size;
-      background: $primary;
+      background: rgba(var(--tc-slider__color), 1);
       cursor: grab;
     }
   }

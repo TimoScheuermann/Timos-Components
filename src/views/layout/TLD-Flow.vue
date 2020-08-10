@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>FLow Layout</h1>
+    <h1>Flow Layout</h1>
     <h2>horizontal="center" vertical="center"</h2>
     <tl-flow horizontal="center" vertical="center">
       <div class="demobox a" />

@@ -1,5 +1,5 @@
 <template>
-  <div class="tc-quote" :class="{ 'tc-quote__dark': dark }">
+  <div class="tc-quote" :style="styles" :class="{ 'tc-quote__dark': dark }">
     <div class="tc-quote--content">
       <div v-if="title" class="tc-quote--title__prestyled">
         <i class="ti-quote-right"></i>
@@ -21,20 +21,24 @@ import TCComponent from '@/tccomponents/TC-Component.mixin';
 @Component
 export default class TCQuote extends Mixins(TCComponent) {
   @Prop() title!: string;
+
+  get styles() {
+    return `--tc-quote__highlight: ${this.getChosenColor()}`;
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .tc-quote {
   color: $color;
-  background: darken($background, 5%);
+  background: $container;
   &.tc-quote__dark {
     color: $color_dark;
-    background: lighten($background_dark, 5%);
+    background: $container_dark;
   }
   border: {
     radius: 5px;
-    left: 7px solid $primary;
+    left: 7px solid rgba(var(--tc-quote__highlight), 1);
   }
   padding: 15px;
   height: fit-content;
@@ -46,7 +50,7 @@ export default class TCQuote extends Mixins(TCComponent) {
       text-align: left;
       i {
         margin-right: 10px;
-        color: $primary;
+        color: rgba(var(--tc-quote__highlight), 1);
       }
     }
     & > .tc-quote--text {
@@ -55,7 +59,7 @@ export default class TCQuote extends Mixins(TCComponent) {
       &::after {
         content: '"';
         font-weight: bold;
-        color: $primary;
+        color: rgba(var(--tc-quote__highlight), 1);
       }
     }
   }

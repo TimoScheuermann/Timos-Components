@@ -9,7 +9,12 @@ updateComponents.*
 vue.*
 *.lock
 _defaultComp
+tsconfig.json
+babel.config.json
+
 dist
+.github
+.gitignore
 
 # local env files
 .env.local

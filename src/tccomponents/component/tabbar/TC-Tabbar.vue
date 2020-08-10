@@ -1,6 +1,6 @@
 <template>
-  <div class="tc-tabbar" :id="uuid_" :class="{ dark: dark_ }">
-    <div class="items">
+  <div class="tc-tabbar" :id="uuid_" :style="styles" :class="classes">
+    <div class="tc-tabbar-items">
       <slot />
     </div>
   </div>
@@ -11,7 +11,18 @@ import { Component, Mixins } from 'vue-property-decorator';
 import TCAutoBackground from '@/tccomponents/TC-Auto-Background.mixin';
 
 @Component
-export default class TCTabbar extends Mixins(TCAutoBackground) {}
+export default class TCTabbar extends Mixins(TCAutoBackground) {
+  get classes(): Record<string, unknown> {
+    return { 'tc-tabbar__dark': this.dark_ };
+  }
+  get styles(): string {
+    return `--tc-tabbar__color:${this.getChosenColor(
+      this.dark_ ? 'colorDark' : 'color'
+    )};--tc-tabbar__background: ${this.getChosenBackground(
+      this.dark_ ? 'paragraphDark' : 'paragraph'
+    )}`;
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -28,13 +39,11 @@ export default class TCTabbar extends Mixins(TCAutoBackground) {}
   padding: 0 2.5px {
     bottom: env(safe-area-inset-bottom);
   }
-  @include backdrop-blur($background);
-  color: $color;
-  &.dark {
-    @include backdrop-blur($background_dark);
-    color: $color_dark;
-  }
-  .items {
+
+  color: rgba(var(--tc-tabbar__color), 1);
+  @include tc-backdrop-blur2(var(--tc-tabbar__background));
+
+  .tc-tabbar-items {
     color: inherit;
     height: 50px;
     display: flex;

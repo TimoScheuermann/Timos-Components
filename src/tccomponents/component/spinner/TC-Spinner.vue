@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="tc-spinner"
-    :class="classes"
-    :style="'--size: ' + size + 'px;--color:' + color"
-  >
+  <div class="tc-spinner" :class="classes" :style="styles">
     <div
       class="tc-spinner--element"
       v-for="(a, i) in Array(10)"
@@ -23,14 +19,20 @@ import TCComponent from '@/tccomponents/TC-Component.mixin';
 export default class TCSpinner extends mixins(TCComponent) {
   @Prop({ default: 'bars' }) variant!: string;
   @Prop({ default: 50 }) size!: number;
-  @Prop() color!: string;
-  @Prop() dark!: boolean;
 
   get classes(): Record<string, unknown> {
     const classes: Record<string, unknown> = {};
     classes['tc-spinner__' + this.variant] = true;
     classes['tc-spinner__dark'] = this.dark;
     return classes;
+  }
+
+  get styles(): string {
+    return `--tc-spinner__size: ${
+      this.size
+    }px;--tc-spinner__color: ${this.getChosenColor(
+      this.dark ? 'colorDark' : 'color'
+    )};`;
   }
 }
 </script>
@@ -39,12 +41,12 @@ export default class TCSpinner extends mixins(TCComponent) {
 .tc-spinner {
   position: relative;
 
-  width: var(--size);
-  height: var(--size);
+  width: var(--tc-spinner__size);
+  height: var(--tc-spinner__size);
   &.tc-spinner__dark {
     color: #fff;
   }
-  color: var(--color);
+  color: rgba(var(--tc-spinner__color), 1);
 
   &.tc-spinner__dots-wave {
     .tc-spinner--element {
@@ -54,8 +56,8 @@ export default class TCSpinner extends mixins(TCComponent) {
       .indicator {
         background: currentColor;
         border-radius: 20px;
-        width: calc(8 / 50 * var(--size));
-        height: calc(8 / 50 * var(--size));
+        width: calc(8 / 50 * var(--tc-spinner__size));
+        height: calc(8 / 50 * var(--tc-spinner__size));
       }
       display: none;
 
@@ -99,10 +101,10 @@ export default class TCSpinner extends mixins(TCComponent) {
       left: 50%;
       .indicator {
         background: currentColor;
-        border-radius: calc(20 / 50 * var(--size));
+        border-radius: calc(20 / 50 * var(--tc-spinner__size));
 
-        width: calc(8 / 50 * var(--size));
-        height: calc(8 / 50 * var(--size));
+        width: calc(8 / 50 * var(--tc-spinner__size));
+        height: calc(8 / 50 * var(--tc-spinner__size));
       }
       animation: opacity 1s ease-in-out 0s infinite both;
 
@@ -110,15 +112,15 @@ export default class TCSpinner extends mixins(TCComponent) {
         &:nth-child(#{$i}) {
           transform: translate(-50%, -50%)
             rotate(#{36 * $i}deg)
-            translateY(calc(20 / 50 * var(--size)));
+            translateY(calc(20 / 50 * var(--tc-spinner__size)));
           animation-delay: #{-1 + 0.1 * $i}s;
         }
       }
     }
   }
   &.tc-spinner__bars .tc-spinner--element .indicator {
-    width: calc(5 / 50 * var(--size));
-    height: calc(15 / 50 * var(--size));
+    width: calc(5 / 50 * var(--tc-spinner__size));
+    height: calc(15 / 50 * var(--tc-spinner__size));
   }
   &.tc-spinner__bars-breath .tc-spinner--element {
     @for $i from 1 through 10 {
@@ -127,8 +129,8 @@ export default class TCSpinner extends mixins(TCComponent) {
       }
     }
     .indicator {
-      width: calc(5 / 50 * var(--size));
-      height: calc(15 / 50 * var(--size));
+      width: calc(5 / 50 * var(--tc-spinner__size));
+      height: calc(15 / 50 * var(--tc-spinner__size));
       animation: bar-breath 1s ease-in-out 0s infinite both;
       animation-delay: inherit;
     }
@@ -175,10 +177,10 @@ export default class TCSpinner extends mixins(TCComponent) {
 @keyframes bar-breath {
   0%,
   100% {
-    height: calc(15 / 50 * var(--size));
+    height: calc(15 / 50 * var(--tc-spinner__size));
   }
   50% {
-    height: calc(10 / 50 * var(--size));
+    height: calc(10 / 50 * var(--tc-spinner__size));
   }
 }
 @keyframes dots-linear {
@@ -196,11 +198,11 @@ export default class TCSpinner extends mixins(TCComponent) {
 @keyframes dots-spin {
   0% {
     transform: translate(-50%, -50%) rotate(-180deg)
-      translateY(calc(20 / 50 * var(--size)));
+      translateY(calc(20 / 50 * var(--tc-spinner__size)));
   }
   100% {
     transform: translate(-50%, -50%) rotate(180deg)
-      translateY(calc(20 / 50 * var(--size)));
+      translateY(calc(20 / 50 * var(--tc-spinner__size)));
   }
 }
 </style>

@@ -1,121 +1,168 @@
 <template>
-  <div
-    class="tc-navbar"
-    :id="uuid_"
-    :class="{
-      'tc-navbar__dark': dark_
-    }"
-  >
+  <div class="tc-navbar" :style="styles">
     <div
-      tc-flex
-      v-if="$slots.default"
       class="tc-navbar--expander"
-      @click="toggleExpander()"
-      :class="{ 'tc-navbar--expander__expanded': expanded }"
+      @click="expanded = !expanded"
+      :class="classes"
     >
-      <span></span>
-      <span></span>
+      <span /><span />
     </div>
-    <div tc-flex class="tc-navbar--logo">
+    <div class="tc-navbar--logo">
       <slot name="logo" />
     </div>
-    <div tc-flex>
-      <div
-        tc-flex
-        class="tc-navbar--items"
-        :class="{ 'tc-navbar--items__expanded': expanded }"
-      >
+    <div class="tc-navbar--items" :class="classes">
+      <div class="tc-navbar--item__wrapper">
         <slot />
       </div>
-      <div tc-flex class="tc-navbar--actions">
-        <slot name="actions" />
-      </div>
+    </div>
+    <div class="tc-navbar--actions">
+      <slot name="actions" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Watch, Mixins } from 'vue-property-decorator';
+import { Component, Mixins, Watch } from 'vue-property-decorator';
 import TCAutoBackground from '@/tccomponents/TC-Auto-Background.mixin';
-import { Route } from 'vue-router';
 
 @Component
 export default class TCNavbar extends Mixins(TCAutoBackground) {
   public expanded = false;
-  public bodyOverflowBefore: string | null = document.body.style.overflow;
-
-  public toggleExpander(): void {
-    this.expanded = !this.expanded;
-  }
-
-  @Watch('expanded')
-  expandedChanged(to: Route): void {
-    document.body.style.overflow = to
-      ? 'hidden'
-      : this.bodyOverflowBefore || '';
-  }
 
   @Watch('$route', { deep: true, immediate: true })
   closeExpander(): void {
     this.expanded = false;
   }
+
+  @Watch('expanded')
+  expandedChanged(): void {
+    if (this.expanded) {
+      document.body.classList.add('tc-navbar__open');
+      document.documentElement.classList.add('tc-navbar__open');
+    } else {
+      document.body.classList.remove('tc-navbar__open');
+      document.documentElement.classList.remove('tc-navbar__open');
+    }
+  }
+
+  get styles(): string {
+    return `--tc-navbar__color:${this.getChosenColor(
+      this.dark_ ? 'colorDark' : 'color'
+    )};--tc-navbar__background: ${this.getChosenBackground(
+      this.dark_ ? 'paragraphDark' : 'paragraph'
+    )};`;
+  }
+
+  get classes(): Record<string, unknown> {
+    return {
+      'tc-navbar__dark': this.dark_,
+      'tc-navbar__expanded': this.expanded
+    };
+  }
 }
 </script>
-
+<style lang="scss">
+.tc-navbar__open {
+  overflow: hidden;
+}
+</style>
 <style lang="scss" scoped>
-@mixin tc-navbar($c, $bg) {
-  border-bottom: 1px solid rgba($c, 0.3);
-  @include backdrop-blur($bg);
-  color: $c;
-  .tc-navbar--items {
-    @media #{$isMobile} {
-      background: rgba($bg, 0.3);
+.tc-navbar {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  padding: env(safe-area-inset-top) 5vw 0;
+  max-width: 100vw;
+  user-select: none;
+  box-shadow: $shadow;
 
-      &.tc-navbar--items__expanded {
-        background: rgba($bg, 1);
+  @include tc-backdrop-blur2(var(--tc-navbar__background));
+  color: rgba(var(--tc-navbar__color), 1);
+
+  @media #{$isMobile} {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media #{$isDesktop} {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+  .tc-navbar--items,
+  .tc-navbar--actions,
+  .tc-navbar--logo,
+  .tc-navbar--expander {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .tc-navbar--item__wrapper {
+    display: flex;
+    white-space: nowrap;
+    overflow: auto hidden;
+
+    @include custom-scrollbar__light();
+
+    @media #{$isMobile} {
+      flex-direction: column;
+    }
+  }
+  &.tc-navbar__dark .tc-navbar--item__wrapper {
+    @include custom-scrollbar__dark();
+  }
+
+  @media #{$isMobile} {
+    .tc-navbar--items {
+      @include custom-scrollbar__light();
+    }
+    &.tc-navbar__dark .tc-navbar--item--items {
+      @include custom-scrollbar__dark();
+    }
+
+    .tc-navbar--items {
+      position: fixed;
+      display: block;
+      top: calc(50px + env(safe-area-inset-top));
+      left: 0;
+      right: 0;
+      padding: 0 5vw;
+
+      background: rgba(var(--tc-navbar__background), 0);
+      color: rgba(var(--tc-navbar__color), 1);
+      border-radius: 0px 0px 40vw 40vw;
+      height: calc(100vh - 50px - env(safe-area-inset-top));
+      overflow: hidden;
+      max-height: 0px;
+      transition: 0.4s ease-in-out;
+
+      .tc-navbar--item__wrapper {
+        margin-top: -30px;
+        opacity: 0;
+        transition: inherit;
+      }
+
+      &.tc-navbar__expanded {
+        overflow: auto;
+        max-height: calc(100vh - 50px - env(safe-area-inset-top));
+        border-radius: 0px 0px 0px 0px;
+        background: rgba(var(--tc-navbar__background), 1);
+        .tc-navbar--item__wrapper {
+          transition-delay: 0.3s;
+          margin-top: 0px;
+          opacity: 1;
+        }
       }
     }
   }
-}
-
-.tc-navbar {
-  &,
-  [tc-flex] {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  user-select: none;
-  box-shadow: $shadow;
-  right: 0;
-  left: 0;
-  top: 0;
-  padding: 0 5vw;
-  padding-top: env(safe-area-inset-top);
-  min-height: 50px;
-  position: fixed;
-  z-index: 10999;
-
-  transition: color 0.1s ease-in-out, background 0.3s ease-in-out;
-
-  @include tc-navbar($color, $background);
-  &.tc-navbar__dark {
-    @include tc-navbar($color_dark, $background_dark);
-  }
-
-  .tc-navbar--expander,
-  .tc-navbar--logo,
-  .tc-navbar--items,
-  .tc-navbar--actions {
-    margin: 0 3px;
-  }
-
   .tc-navbar--expander {
     @media #{$isDesktop} {
       display: none;
     }
-
     cursor: pointer;
     position: relative;
     height: 50px;
@@ -142,7 +189,7 @@ export default class TCNavbar extends Mixins(TCAutoBackground) {
       }
     }
 
-    &.tc-navbar--expander__expanded {
+    &.tc-navbar__expanded {
       span {
         transition: top 0.25s ease-in-out 0s, transform 0.25s ease-in-out 0.25s !important;
 
@@ -156,53 +203,6 @@ export default class TCNavbar extends Mixins(TCAutoBackground) {
         }
       }
     }
-  }
-
-  .tc-navbar--logo {
-    @media #{$isMobile} {
-      position: absolute;
-      left: 50%;
-      top: calc(50% + env(safe-area-inset-top) / 2);
-      transform: translate(-50%, -50%);
-    }
-  }
-
-  .tc-navbar--items {
-    @media #{$isMobile} {
-      z-index: 9999999;
-      position: fixed;
-      display: block;
-      top: calc(50px + env(safe-area-inset-top));
-      right: -10px;
-      left: -10px;
-      height: calc(100vh - 50px);
-      max-height: 0px;
-      overflow: auto;
-      padding: 0px calc(10px + env(safe-area-inset-right)) 0px
-        calc(10px + env(safe-area-inset-left)) !important;
-
-      transition: max-height 0.5s ease-in-out, background 0.4s ease-in-out;
-      &::-webkit-scrollbar {
-        display: none;
-      }
-      & > * {
-        margin-top: -100px;
-        transition: margin-top 0.5s ease-in-out 0.1s;
-      }
-      &.tc-navbar--items__expanded {
-        padding: 0px calc(10px + env(safe-area-inset-right))
-          calc(50px + env(safe-area-inset-bottom))
-          calc(10px + env(safe-area-inset-left)) !important;
-        max-height: calc(100vh - 50px);
-
-        & > * {
-          margin-top: 0px;
-        }
-      }
-    }
-  }
-
-  .tc-navbar--actions {
   }
 }
 </style>

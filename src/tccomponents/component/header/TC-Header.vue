@@ -1,14 +1,7 @@
 <template>
   <div class="tc-header" :id="id" :style="styles" :class="classes">
     <div class="tc-header--head">
-      <div
-        v-if="backTo || backHref"
-        class="tc-header--backButton"
-        @click="clicked($event)"
-      >
-        <i class="ti-chevron-left"></i>
-        <span>{{ backName || 'back' }}</span>
-      </div>
+      <slot name="button" />
       <div class="tc-header--pre" v-if="$slots.pre">
         <slot name="pre" />
       </div>
@@ -40,7 +33,7 @@
           stroke="currentColor"
           stroke-linecap="round"
           stroke-linejoin="round"
-          stroke-width="4"
+          stroke-width="3"
         />
       </svg>
     </div>
@@ -66,14 +59,11 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
   @Prop() title!: string;
   @Prop({ default: 'fixed' }) variant!: 'fixed' | 'floating' | 'sticky';
   @Prop({ default: 0 }) top!: number;
-  @Prop() backTo!: Record<string, unknown>;
-  @Prop() backHref!: string;
-  @Prop() backName!: string;
 
   public itemsOverflow = false;
   public itemCard = false;
 
-  created(): void {
+  beforeMount(): void {
     window.addEventListener('resize', this.resize);
     this.resize();
     this.$nextTick(() => {
@@ -87,12 +77,6 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
 
   get id(): string {
     return 'tc-header_' + this.uuid_;
-  }
-
-  public clicked(event: MouseEvent): void {
-    this.$emit('click', event);
-    if (this.backTo) this.$router.push(this.backTo);
-    else if (this.backHref) window.open(this.backHref, '_blank');
   }
 
   @Watch('$slots.default', { deep: true, immediate: true })
@@ -111,8 +95,6 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
 
   get classes() {
     return {
-      'tc-header__light': !this.dark_,
-      'tc-header__dark': this.dark_,
       'tc-header__fixed': !(
         this.variant == 'floating' || this.variant == 'sticky'
       ),
@@ -121,18 +103,16 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
     };
   }
 
-  get styles(): Record<string, string> {
-    return {
-      color: this.color,
-      background: this.background,
-      top: (this.variant === 'floating' ? 40 : 0) + +this.top + 'px'
-    };
+  get styles(): string {
+    return `--tc-header__color:${this.getChosenColor(
+      this.dark_ ? 'colorDark' : 'color'
+    )};--tc-header__background: ${this.getChosenBackground(
+      this.dark_ ? 'paragraphDark' : 'paragraph'
+    )};--tc-header__top: ${this.top}px`;
   }
 
   get overflowStyles(): Record<string, string> {
     return {
-      color: this.color,
-      background: this.background,
       top: 'calc(env(safe-area-inset-top) + ' + (+(+this.top) + 50) + 'px)',
       maxHeight:
         'calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - ' +
@@ -155,35 +135,28 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
   z-index: 999;
 
   transition: color 0.1s ease-in-out, background 0.3s ease-in-out;
+  color: rgba(var(--tc-header__color), 1);
+  @include tc-backdrop-blur2(var(--tc-header__background));
 
-  &.tc-header__dark {
-    &.tc-header__sticky,
-    &.tc-header__fixed {
-      border-bottom: 1px solid rgba($color_dark, 0.3);
-    }
-    @include backdrop-blur($background_dark);
-    color: $color_dark;
+  &.tc-header__sticky,
+  &.tc-header__fixed {
+    border-bottom: 1px solid rgba(var(--tc-header__color), 0.3);
     .tc-header--items__overflow .tc-checkbox /deep/ .icon {
-      color: $color_dark;
+      color: rgba(var(--tc-header__color), 1);
     }
   }
-  &.tc-header__light {
-    &.tc-header__sticky,
-    &.tc-header__fixed {
-      border-bottom: 1px solid rgba($color, 0.2);
-    }
-    @include backdrop-blur($background);
-    color: $color;
-  }
+
   &.tc-header__sticky {
     position: sticky;
     padding: 0 5vw;
     overflow: hidden;
+    top: calc(var(--tc-header__top) + env(safe-area-inset-top));
   }
   &.tc-header__fixed {
     position: fixed;
     right: 0;
     left: 0;
+    top: (--tc-header__top);
     padding: 0 5vw {
       top: env(safe-area-inset-top);
     }
@@ -192,6 +165,7 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
     position: fixed;
     right: 0;
     left: 0;
+    top: calc(50px + var(--tc-header__top) + env(safe-area-inset-top));
     margin: 0 10vw;
     padding: 0 20px;
     border-radius: $border-radius;
@@ -207,18 +181,6 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
     align-items: center;
     max-width: 100%;
 
-    .tc-header--backButton {
-      cursor: pointer;
-      margin-right: 20px;
-      color: $primary;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      white-space: nowrap;
-      i {
-        margin-right: 5px;
-      }
-    }
     .tc-header--pre {
       margin-right: 10px;
       margin-left: calc(-5vw + 10px);
@@ -307,9 +269,10 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
     }
 
     &.tc-header__sticky {
-      position: absolute;
+      position: fixed;
       padding: 0 5vw;
       left: 0;
+      top: calc(50px + env(safe-area-inset-top) + var(--tc-header__top));
     }
     &.tc-header__fixed {
       position: fixed;
@@ -324,16 +287,8 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
       border-radius: $border-radius;
     }
 
-    &.tc-header__dark {
-      background: $background_dark;
-      color: $color_dark;
-    }
-    &.tc-header__light {
-      background: $background;
-      color: $color;
-    }
-
-    @include custom-scrollbar__dark();
+    background: rgba(var(--tc-header__background), 0.9);
+    color: rgba(var(--tc-header__color), 1);
   }
 }
 

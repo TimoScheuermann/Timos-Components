@@ -1,13 +1,5 @@
 <template>
-  <div
-    class="tc-textarea"
-    :class="{
-      'tc-textarea__frosted': frosted,
-      'tc-textarea__dark': dark,
-      'tc-textarea__hasHead': title || tooltip
-    }"
-    :style="{ color: tccolor_ }"
-  >
+  <div class="tc-textarea" :class="classes" :style="styles">
     <div class="tc-textarea--head" v-if="title || tooltip">
       <div class="tc-textarea--title">
         {{ title }}
@@ -79,12 +71,25 @@ export default class TCTextarea extends Mixins(TCComponent) {
   innerValueChanged(): void {
     this.$emit('input', this.innerValue);
   }
+
+  get classes(): Record<string, unknown> {
+    return {
+      'tc-textarea__frosted': this.frosted,
+      'tc-textarea__dark': this.dark,
+      'tc-textarea__hasHead': this.title || this.tooltip
+    };
+  }
+  get styles(): string {
+    return `--tc-textarea__color: ${this.getChosenColor(
+      this.dark ? 'colorDark' : 'color'
+    )};`;
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .tc-textarea {
-  color: $color;
+  color: var(--tc-textarea__color);
   textarea {
     @include tc-container__light();
     @include custom-scrollbar__light();
@@ -132,7 +137,7 @@ export default class TCTextarea extends Mixins(TCComponent) {
   }
 
   textarea {
-    color: inherit;
+    color: rgba(var(--tc-textarea__color), 1) !important;
     outline: none;
     font: inherit;
     width: calc(100% - 20px);
@@ -140,6 +145,7 @@ export default class TCTextarea extends Mixins(TCComponent) {
     transition: 0.2s ease-in-out;
     height: auto;
     resize: none;
+
     &::placeholder {
       color: inherit;
       opacity: 0.6;

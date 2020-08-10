@@ -1,24 +1,31 @@
 <template>
   <div
     class="tc-scroll-up"
-    :class="{ 'tc-scroll-up__visible': visible }"
+    :class="classes"
     @click="scrollUp()"
-    :style="{ background: background, color: color }"
+    :style="styles"
   >
-    <i :class="'ti-' + icon"></i>
+    <tf-icon :icon="icon" />
   </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 import TCComponent from '@/tccomponents/TC-Component.mixin';
+import TFIcon from '@/tccomponents/fundamental/icon/TF-Icon.vue';
 
-@Component
+@Component({
+  components: {
+    'tf-icon': TFIcon
+  }
+})
 export default class TCScrollUp extends Mixins(TCComponent) {
   @Prop({ default: 'chevron-up' }) icon!: string;
+  @Prop({ default: 45 }) size!: number;
+  @Prop({ default: 'border' }) variant!: string;
 
   public visible = false;
 
-  created(): void {
+  beforeMount(): void {
     document.onscroll = () => {
       this.visible =
         document.body.scrollTop > 20 || document.documentElement.scrollTop > 20;
@@ -29,15 +36,32 @@ export default class TCScrollUp extends Mixins(TCComponent) {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0;
   }
+
+  get styles(): string {
+    return `--tc-scroll-up__color: ${this.getChosenColor(
+      'colorDark'
+    )};--tc-scroll-up__background: ${this.getChosenBackground(
+      'primary'
+    )};--tc-scroll-up__size: ${this.size}px;`;
+  }
+
+  get classes(): Record<string, unknown> {
+    return {
+      'tc-scroll-up__visible': this.visible,
+      'tc-scroll-up__filled': this.variant !== 'border',
+      'tc-scroll-up__border': this.variant === 'border'
+    };
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-$size: 50px;
+$size: var(--tc-scroll-up__size);
 .tc-scroll-up {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: calc(var(--tc-scroll-up__size) / 2.5);
   transition: all 0.2s ease-in-out;
   transform: translateX(30px) scale(0);
   &.tc-scroll-up__visible {
@@ -56,8 +80,20 @@ $size: 50px;
   height: $size;
   border-radius: $size;
   cursor: pointer;
-  background: #08f;
-  color: #fff;
-  font-size: 20px;
+
+  &.tc-scroll-up__filled {
+    background: rgba(var(--tc-scroll-up__background), 1);
+    color: rgba(var(--tc-scroll-up__color), 1);
+  }
+
+  &.tc-scroll-up__border {
+    border: 2.5px solid rgba(var(--tc-scroll-up__background), 1);
+    box-sizing: border-box;
+    color: rgba(var(--tc-scroll-up__background), 1);
+    &:hover {
+      border-width: calc(var(--tc-scroll-up__size) / 2);
+      color: rgba(var(--tc-scroll-up__color), 1);
+    }
+  }
 }
 </style>

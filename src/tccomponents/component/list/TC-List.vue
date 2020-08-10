@@ -2,7 +2,7 @@
   <div
     class="tc-list"
     :class="{ 'tc-list__dark': dark, 'tc-list__frosted': frosted }"
-    :style="{ color: tccolor_ }"
+    :style="styles"
   >
     <div class="tc-list--title" v-if="title">
       {{ title }}
@@ -18,6 +18,12 @@ import TCComponent from '@/tccomponents/TC-Component.mixin';
 @Component
 export default class TCList extends Mixins(TCComponent) {
   @Prop() title!: string;
+
+  get styles(): string {
+    return `--tc-list__color: ${this.getChosenColor(
+      this.dark ? 'colorDark' : 'color'
+    )}`;
+  }
 }
 </script>
 
@@ -26,12 +32,12 @@ export default class TCList extends Mixins(TCComponent) {
   padding: 5px;
   border-radius: $border-radius;
   background: $paragraph;
-  color: $color;
+  color: rgba(var(--tc-list__color), 1);
+
   &.tc-list__frosted {
     @include backdrop-blur($paragraph);
   }
   &.tc-list__dark {
-    color: $color_dark;
     background: $paragraph_dark;
     &.tc-list__frosted {
       @include backdrop-blur($paragraph_dark);

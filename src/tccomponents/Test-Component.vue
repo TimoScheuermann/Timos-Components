@@ -2,7 +2,6 @@
   <div class="tc-test-component">
     <ul>
       <li>UUID: {{ uuid_ }}</li>
-      <li>TCCO: {{ tccolor_ }}</li>
       <li>DARK: {{ dark }}</li>
       <li>ISDA: {{ dark_ }}</li>
     </ul>

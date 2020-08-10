@@ -1,144 +1,125 @@
 <template>
-  <div class="tc-segments" :class="{ 'tc-segments--dark': dark }">
-    <div class="header">
-      <div class="items" :style="getItemsStyle()">
-        <div
-          v-for="(seg, index) in segments"
-          :key="seg"
-          @click="changeSelection(index)"
-          class="item"
-        >
-          {{ seg }}
-        </div>
+  <div class="tc-segments" :style="styles" :class="classes">
+    <div class="tc-segments--head">
+      <div class="tc-segments--head__background" />
+      <div
+        class="tc-segments--head__item"
+        @click="show(i)"
+        v-for="(n, i) in segments"
+        :key="i"
+      >
+        {{ n }}
       </div>
-      <div class="background" :style="getBackgroundStyle()"></div>
     </div>
-    <transition-group name="icon-trans" tag="div" class="content">
-      <div v-for="seg in currentSegments" :key="seg" class="slot">
-        <slot :name="seg">
-          <b>Fail</b>
-        </slot>
-      </div>
-    </transition-group>
+    <div class="tc-segments--segments">
+      <slot />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Mixins, Watch } from 'vue-property-decorator';
+import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
 import TCComponent from '@/tccomponents/TC-Component.mixin';
 
 @Component
 export default class TCSegments extends Mixins(TCComponent) {
-  @Prop() segments!: string[];
   @Prop() value!: number;
+  @Prop() highlight!: string;
 
-  public currentlySelected = this.value || 0;
+  public segments: string[] = [];
+  public active = this.value || 0;
 
   @Watch('value')
   valueChanged(): void {
-    if (this.value) this.currentlySelected = this.value;
+    this.show(this.value);
   }
 
-  public changeSelection(to: number): void {
-    this.currentlySelected = to;
-    this.$emit('input', to);
+  mounted() {
+    this.init();
+    this.$on('recheck', this.init);
+    this.show();
   }
 
-  get currentSegments(): string[] {
-    return this.segments.filter((x, i) => i === this.currentlySelected);
+  public init(timeout = 0) {
+    setTimeout(() => {
+      this.segments = this.$children.map(
+        (x, i) => x.$props.title || `Segment #${i}`
+      );
+      if (this.active >= this.segments.length)
+        this.show(this.segments.length - 1);
+    }, timeout);
   }
 
-  public getBackgroundStyle(): Record<string, unknown> {
+  public show(s = this.active) {
+    this.active = s;
+    this.$children.forEach((x, i) => (x.$data.tcSegmentItemShow = s === i));
+    this.$emit('input', this.active);
+  }
+
+  get highlighter(): string {
+    let c;
+    if (this.highlight) c = this.convertToRGB(this.highlight);
+    if (c) return c;
+
+    return this.convertToRGB(this.getHEX(this.dark ? 'color' : 'colorDark'));
+  }
+
+  get styles(): string {
+    return `--tc-segments__amount: ${
+      this.segments.length
+    };--tc-segments__highlight: ${
+      this.highlighter
+    };--tc-segments__color: ${this.getChosenColor(
+      this.dark ? 'colorDark' : 'color'
+    )};--tc-segments__background: ${this.getChosenBackground(
+      this.dark ? 'containerDark' : 'container'
+    )};--tc-segments__current: ${this.active}`;
+  }
+
+  get classes(): Record<string, unknown> {
     return {
-      width: `calc(${100 / this.segments.length}% - 10px)`,
-      left: `calc(5px + 100% / ${this.segments.length} * ${this.currentlySelected})`
-    };
-  }
-
-  public getItemsStyle(): Record<string, unknown> {
-    return {
-      gridTemplateColumns: `repeat(${this.segments.length}, 1fr)`
+      'tc-segments__dark': this.dark
     };
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.icon-trans-move {
-  transition: all 0.4s ease-in-out;
-}
-.icon-trans-enter-active,
-.icon-trans-leave-active {
-  transition: all 0.4s;
-}
-.icon-trans-leave-active {
-  position: absolute;
-}
-.icon-trans-enter {
-  opacity: 0;
-}
-.icon-trans-leave-to {
-  transition: all 0.3s ease-in-out;
-  opacity: 0;
-}
-
 .tc-segments {
-  padding: 20px 0 {
-    top: 0.1px;
-  }
   max-width: 100%;
-
-  &.tc-segments--dark {
-    .header {
-      background: lighten($background_dark, 10%);
-      color: $color_dark;
-      .background {
-        background: $paragraph_dark;
-      }
-    }
-  }
-
-  .header {
-    background: darken($background, 5%);
-    color: $color;
-    .background {
-      background: $paragraph;
-    }
+  overflow: hidden;
+  .tc-segments--head {
+    background: rgba(var(--tc-segments__background), 1);
     padding: 5px;
     border-radius: $border-radius;
-    position: relative;
-    position: relative;
-    margin: 3px {
-      bottom: 10px;
-    }
-    .background {
+    margin-bottom: 10px;
+    .tc-segments--head__background {
       position: absolute;
-      border-radius: 3px;
-      width: 100%;
-      height: calc(100% - 10px);
       top: 5px;
-      transition: left 0.2s ease-in-out;
-      box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
-    }
-    .items {
+      border-radius: inherit;
+      height: calc(100% - 10px);
+      transition: left 0.4s cubic-bezier(0.87, 1.46, 0.52, 0.75);
+      left: calc(
+        5px + 100% / var(--tc-segments__amount) * var(--tc-segments__current)
+      );
+      width: calc((100% / var(--tc-segments__amount)) - 10px);
+      background: rgba(var(--tc-segments__highlight), 1);
       z-index: 1;
-      position: relative;
-      display: grid;
-      grid-gap: 10px;
-      .item {
-        cursor: pointer;
-        font-weight: 500;
-        min-height: 25px;
-        line-height: 25px;
-        text-align: center;
-        // overflow: ;
-      }
     }
-  }
-  .content {
+
     position: relative;
-    .slot {
-      margin: 0 5px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(var(--tc-segments__amount), 1fr);
+    .tc-segments--head__item {
+      z-index: 2;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 5px;
+      text-align: center;
+      color: rgba(var(--tc-segments__color), 1);
+      border-radius: inherit;
+      cursor: pointer;
     }
   }
 }

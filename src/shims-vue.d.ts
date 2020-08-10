@@ -4,3 +4,5 @@ declare module '*.vue' {
 }
 
 declare module 'uuid';
+declare module 'vue-code-highlight';
+declare module 'simple-color-converter';

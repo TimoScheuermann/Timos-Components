@@ -1,8 +1,8 @@
 <template>
   <div
     class="tc-list-item"
-    @click="handleClick"
-    :class="{ 'tc-list-item__link': href || to || value }"
+    @click="handleClickLocal"
+    :class="{ 'tc-list-item__link': href || to || routeName || value }"
   >
     <div class="tc-list-item--icon">
       <tf-icon :icon="icon" />
@@ -17,7 +17,7 @@
       <div v-else-if="description" class="tc-list-item--description">
         {{ description }}
       </div>
-      <div v-else-if="to || href" class="tc-list-item--indicator">
+      <div v-else-if="to || href || routeName" class="tc-list-item--indicator">
         <i class="ti-chevron-right" />
       </div>
     </div>
@@ -50,10 +50,13 @@ export default class TCListItem extends Mixins(TCComponent, TCURLComponent) {
     this.innerValue = this.value;
   }
 
-  public handleClick(): void {
+  public handleClickLocal(e: MouseEvent): void {
     if (this.value) {
       this.innerValue = !this.innerValue;
       this.$emit('input', this.innerValue);
+      e.preventDefault();
+    } else {
+      this.handleClick(e);
     }
   }
 }

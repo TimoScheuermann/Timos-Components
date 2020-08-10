@@ -1,5 +1,5 @@
 <template>
-  <span class="tc-link" :class="'tc-link__' + tccolor_" @click="handleClick">
+  <span class="tc-link" :style="styles" @click="handleClick">
     <slot />
   </span>
 </template>
@@ -10,7 +10,11 @@ import TCComponent from '@/tccomponents/TC-Component.mixin';
 import TCURLComponent from '@/tccomponents/TC-URL-Component.mixin';
 
 @Component
-export default class TCLink extends Mixins(TCComponent, TCURLComponent) {}
+export default class TCLink extends Mixins(TCComponent, TCURLComponent) {
+  get styles(): string {
+    return `--tc-link__color: ${this.getChosenColor()}`;
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -20,12 +24,7 @@ export default class TCLink extends Mixins(TCComponent, TCURLComponent) {}
   position: relative;
   margin: 0 2px;
   text-align: center;
-
-  @each $n, $c in $color_colors {
-    &.tc-link__#{$n} {
-      color: $c;
-    }
-  }
+  color: rgba(var(--tc-link__color), 1);
 
   &::after {
     transition: 0.2s ease-in-out;
@@ -38,10 +37,8 @@ export default class TCLink extends Mixins(TCComponent, TCURLComponent) {}
     left: 50%;
     transform: translateX(-50%);
   }
-  &:hover {
-    &::after {
-      width: 100%;
-    }
+  &:hover::after {
+    width: 100%;
   }
 }
 </style>

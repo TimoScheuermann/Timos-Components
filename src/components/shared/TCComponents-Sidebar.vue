@@ -13,7 +13,7 @@
         icon="question-circle"
         :to="{ name: 'howto' }"
       />
-      <tc-badge value="new" color="error" position="inside">
+      <tc-badge value="new" position="inside">
         <tc-sidebar-item
           key="designer"
           name="Designer"

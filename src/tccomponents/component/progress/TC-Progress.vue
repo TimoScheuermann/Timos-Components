@@ -1,40 +1,23 @@
 <template>
-  <div
-    class="tc-progress tc-progress__bar"
-    v-if="type != 'ring'"
-    :style="{ height: barHeight + 'px' }"
-  >
-    <div class="tc-progress--background" :style="{ background: color }"></div>
-    <div
-      class="tc-progress--bar"
-      :style="{ width: percent + '%', background: color }"
-    />
-  </div>
-  <div v-else class="tc-progress tc-progress__ring">
-    <svg
-      :width="ringSize"
-      :height="ringSize"
-      :viewBox="'0 0 ' + ringSize + ' ' + ringSize + ''"
-    >
-      <circle
-        class="tc-progress--background"
-        :style="{ 'stroke-width': ringWidth + 'px' }"
-        :cx="ringSize / 2"
-        :cy="ringSize / 2"
-        :r="radius"
-      />
-      <circle
-        :style="{
-          'stroke-width': ringWidth + 'px',
-          'stroke-dasharray': dasharray,
-          'stroke-dashoffset': dashoffset,
-          stroke: color
-        }"
-        :cx="ringSize / 2"
-        :cy="ringSize / 2"
-        :r="radius"
-      />
-    </svg>
+  <div class="tc-progress" :style="styles" :class="classes">
+    <template v-if="type === 'bar'">
+      <div class="tc-progress--background" />
+      <div class="tc-progress--bar" />
+    </template>
+    <template v-else>
+      <svg>
+        <circle :cx="ringSize / 2" :cy="ringSize / 2" :r="radius" />
+        <circle
+          :style="{
+            'stroke-dasharray': dasharray,
+            'stroke-dashoffset': dashoffset
+          }"
+          :cx="ringSize / 2"
+          :cy="ringSize / 2"
+          :r="radius"
+        />
+      </svg>
+    </template>
   </div>
 </template>
 <script lang="ts">
@@ -64,6 +47,29 @@ export default class TCProgress extends Mixins(TCComponent) {
   get dasharray(): string {
     return `${this.circumference} ${this.circumference}`;
   }
+
+  get classes(): Record<string, unknown> {
+    return {
+      'tc-progress__ring': this.type !== 'bar',
+      'tc-progress__bar': this.type === 'bar'
+    };
+  }
+
+  get styles(): string {
+    const defaultStyle = `--tc-progress__color: ${this.getChosenColor()}; --tc-progress__background: ${this.getChosenBackground(
+      this.dark ? 'containerDark' : 'container'
+    )};`;
+    if (this.type === 'bar') {
+      return (
+        defaultStyle +
+        `--tc-progress__bar-height: ${this.barHeight}px; --tc-progress__percent: ${this.percent}%;`
+      );
+    }
+    return (
+      defaultStyle +
+      `--tc-progress__ring-width: ${this.ringWidth}px; --tc-progress__ring-size: ${this.ringSize}px;`
+    );
+  }
 }
 </script>
 
@@ -72,35 +78,47 @@ export default class TCProgress extends Mixins(TCComponent) {
   &.tc-progress__ring {
     svg {
       transform: rotate(-90deg);
+      width: var(--tc-progress__ring-size);
+      height: var(--tc-progress__ring-size);
+
       circle {
         fill: none;
-        stroke: $primary;
-        stroke-linecap: round;
-        stroke-linejoin: round;
+
+        stroke: rgba(var(--tc-progress__background), 1) {
+          linecap: round;
+          linejoin: round;
+          width: var(--tc-progress__ring-width);
+        }
+
         transition: 0.2s ease-in-out;
-        &.tc-progress--background {
-          stroke: $paragraph;
+        &:nth-child(2) {
+          stroke: rgba(var(--tc-progress__color), 1);
         }
       }
     }
   }
 
   &.tc-progress__bar {
-    border-radius: 10px;
+    border-radius: var(--tc-progress__bar-height);
     margin: 5px 0;
     position: relative;
+    height: var(--tc-progress__bar-height);
+
     .tc-progress--background {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      filter: brightness(50%);
+      bottom: 0;
+      background: rgba(var(--tc-progress__background), 1);
       z-index: -1;
+      border-radius: inherit;
     }
-    .tc-progress--bar,
-    .tc-progress--background {
+
+    .tc-progress--bar {
       transition: 0.2s ease-in-out;
-      background: $primary;
+      background: rgba(var(--tc-progress__color), 1);
+      width: var(--tc-progress__percent);
       border-radius: inherit;
       height: inherit;
     }

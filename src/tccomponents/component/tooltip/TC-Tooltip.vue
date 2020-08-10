@@ -1,6 +1,6 @@
 <template>
   <div class="tc-tooltip">
-    <div class="tooltip" :class="'tooltip--' + getPosition()">
+    <div class="tooltip" :style="styles" :class="'tooltip--' + getPosition()">
       <div class="tooltip--content">{{ tooltip }}</div>
       <div class="arrow"></div>
     </div>
@@ -20,9 +20,15 @@ export default class TCTooltip extends Mixins(TCComponent) {
   @Prop({ default: 'Tooltip' }) tooltip!: string;
 
   getPosition(): string {
-    return ['top', 'bottom', 'left', 'right'].includes(this.position)
-      ? this.position
+    return ['top', 'bottom', 'left', 'right'].includes(
+      this.position.toLowerCase()
+    )
+      ? this.position.toLowerCase()
       : 'top';
+  }
+
+  get styles(): string {
+    return `--tc-tooltip__background: ${this.getChosenBackground('primary')}`;
   }
 }
 </script>
@@ -45,7 +51,7 @@ export default class TCTooltip extends Mixins(TCComponent) {
   &:hover {
     .tooltip {
       visibility: visible;
-      animation: anim 0.3s ease-in-out 0.3s both;
+      animation: anim 0.3s ease-in-out 0.15s both;
     }
   }
 
@@ -53,7 +59,6 @@ export default class TCTooltip extends Mixins(TCComponent) {
     visibility: hidden;
     z-index: 200;
     position: absolute;
-    // white-space: nowrap;
 
     &.tooltip--top {
       left: 50%;
@@ -100,12 +105,11 @@ export default class TCTooltip extends Mixins(TCComponent) {
       height: 0;
       border-left: 10px solid transparent;
       border-right: 10px solid transparent;
-      border-top: 10px solid $primary;
+      border-top: 10px solid rgba(var(--tc-tooltip__background), 1);
       position: absolute;
     }
     .tooltip--content {
-      background: $primary;
-      // width: fit-content;
+      background: rgba(var(--tc-tooltip__background), 1);
       width: max-content;
       position: sticky;
       right: 0;

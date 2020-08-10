@@ -6,6 +6,22 @@
   }
 }
 
+@mixin tc-backdrop-blur($bdbColor, $d) {
+  background: rgba($bdbColor, 1);
+  @supports (backdrop-filter: saturate(180%) blur(20px)) {
+    background: rgba($bdbColor, 0.5);
+    backdrop-filter: saturate(180%) blur(20px);
+  }
+}
+
+@mixin tc-backdrop-blur2($bdbColor) {
+  background: rgba($bdbColor, 1);
+  @supports (backdrop-filter: saturate(180%) blur(20px)) {
+    background: rgba($bdbColor, 0.5);
+    backdrop-filter: saturate(180%) blur(20px);
+  }
+}
+
 @mixin tc-container($c, $bg) {
   display: flex;
   align-items: center;
@@ -26,10 +42,10 @@
   }
 }
 @mixin tc-container__dark {
-  @include tc-container($color_dark, lighten($paragraph_dark, 5%));
+  @include tc-container($color_dark, lighten($paragraph_dark, 7.5%));
 }
 @mixin tc-container__light {
-  @include tc-container($color, darken($paragraph, 5%));
+  @include tc-container($color, darken($paragraph, 7.5%));
 }
 
 @mixin tc-container--title {

@@ -4,19 +4,24 @@
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "node build.js && vue-cli-service build",
     "lint": "vue-cli-service lint",
     "build-lib": "cross-env TC_TARGET=true vue-cli-service build --target lib --name tccomponents_vue src/tccomponents_vue.ts",
-    "prepublish": "yarn build-lib"
+    "prepublishOnly": "yarn build-lib"
   },
-  "main": "./lib/tccomponents_vue.common.js",
+  "main": "lib/tccomponents_vue.common.js",
+  "unpkg": "lib/tccomponents_vue.umd.min.js",
+  "browser": "lib/tccomponents_vue.umd.min.js",
+  "types": "lib/tccomponents_vue.d.ts",
   "dependencies": {
     "core-js": "^3.6.5",
     "node-sass": "^4.14.1",
     "register-service-worker": "^1.7.1",
-    "uuid": "^8.2.0",
+    "simple-color-converter": "^2.1.5",
+    "uuid": "^8.3.0",
     "vue": "^2.6.11",
-    "vue-router": "^3.3.4",
+    "vue-code-highlight": "^0.7.4",
+    "vue-router": "^3.4.2",
     "vuex": "^3.5.1"
   },
   "devDependencies": {
@@ -62,7 +67,6 @@
     "last 2 versions",
     "not dead"
   ],
-  "types": "./lib/tccomponents_vue.d.ts",
   "description": "## Project setup ``` yarn add tccomponents_vue ```",
   "directories": {
     "lib": "lib"

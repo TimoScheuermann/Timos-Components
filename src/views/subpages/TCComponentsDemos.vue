@@ -5,7 +5,12 @@
       <big-heading title="Websites" subtitle="using TCComponents" />
       <tl-grid>
         <a v-for="w in websites" :key="w.name" :href="w.url" target="_blank">
-          <tc-card :title="w.name" :dark="w.dark" rounded="true" hover="true">
+          <tc-card
+            :title="w.name"
+            :dark="w.dark || $store.getters.dark"
+            rounded="true"
+            hover="true"
+          >
             <img :src="w.thumbnail" />
           </tc-card>
         </a>
@@ -51,7 +56,13 @@ export default class TCComponentsDemos extends Vue {
     {
       name: "Timo's Newsroom",
       thumbnail: 'https://newsroom.timos.design/pwa/maskIcon.svg',
-      url: 'http://newsroom.timos.design'
+      url: 'https://newsroom.timos.design'
+    },
+    {
+      name: 'Gastro Assistant',
+      thumbnail:
+        'https://portfolio.timos.design/assets/projects/gastroassistant/hero.png',
+      url: 'https://gaestro.org'
     }
   ];
 }

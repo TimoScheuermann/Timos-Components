@@ -8,7 +8,7 @@
       rounded="true"
       title="Colors"
       class="color-palette"
-      :subtitle="(i % 2 == 1 ? 'Dark' : 'Light') + ' Background'"
+      :subtitle="'on ' + (i % 2 == 1 ? 'Dark' : 'Light') + ' Background'"
       :dark="i % 2 == 1"
     >
       <tl-grid minWidth="150">
@@ -17,8 +17,8 @@
           :key="c.name"
           rounded="true"
           hover="true"
-          :background="c.code"
-          :dark="!c.dark"
+          :tfbackground="c.name"
+          :dark="!c.light"
         >
           <b>{{ c.name }}</b>
         </tc-card>
@@ -39,17 +39,22 @@ import TLGrid from '@/tccomponents/layout/grid/TL-Grid.vue';
   }
 })
 export default class TFDColors extends Vue {
-  public colors: { name: string; code: string; dark?: boolean }[] = [
-    { name: 'background', code: '#f5f5f7', dark: true },
-    { name: 'background_dark', code: '#1f2024' },
-    { name: 'paragraph', code: '#fff', dark: true },
-    { name: 'paragraph_dark', code: '#28292d' },
-    { name: 'color', code: '#111' },
-    { name: 'color_dark', code: '#fff', dark: true },
-    { name: 'primary', code: '#08f' },
-    { name: 'error', code: '#ff4757' },
-    { name: 'success', code: '#2ed573' },
-    { name: 'alarm', code: '#f1c40f' }
+  public colors: { name: string; light?: boolean }[] = [
+    { name: 'background', light: true },
+    { name: 'backgroundDark' },
+    { name: 'paragraph', light: true },
+    { name: 'paragraphDark' },
+    { name: 'container', light: true },
+    { name: 'containerDark' },
+    { name: 'color' },
+    { name: 'colorDark', light: true },
+    { name: 'primary' },
+    { name: 'error' },
+    { name: 'success' },
+    { name: 'alarm' },
+    { name: 'lightBlue' },
+    { name: 'darkBlue' },
+    { name: 'orange' }
   ];
 }
 </script>

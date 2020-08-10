@@ -73,11 +73,12 @@ export default class TCCard extends Mixins(TCComponent) {
     };
   }
 
-  get styles(): Record<string, string> {
-    return {
-      color: this.color,
-      background: this.background
-    };
+  get styles(): string {
+    return `--tc-card__background: ${this.getChosenBackground(
+      this.dark ? 'paragraphDark' : 'paragraph'
+    )};--tc-card__color: ${this.getChosenColor(
+      this.dark ? 'colorDark' : 'color'
+    )}`;
   }
 }
 </script>
@@ -88,18 +89,11 @@ export default class TCCard extends Mixins(TCComponent) {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  color: $color;
-  background: $paragraph;
+  color: rgba(var(--tc-card__color), 1);
+  background: rgba(var(--tc-card__background), 1);
 
   &.tc-card__frosted {
-    @include backdrop-blur($paragraph);
-  }
-  &.tc-card__dark {
-    background: $paragraph_dark;
-    color: $color_dark;
-    &.tc-card__frosted {
-      @include backdrop-blur($paragraph_dark);
-    }
+    @include tc-backdrop-blur2(var(--tc-card__background));
   }
 
   &.tc-card__shadow {

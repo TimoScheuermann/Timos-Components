@@ -1,5 +1,11 @@
 <template>
-  <img class="tc-image" :src="innerSrc" @click="expand()" @error="error()" />
+  <img
+    class="tc-image"
+    :class="classes"
+    :src="innerSrc"
+    @click="expand()"
+    @error="error()"
+  />
 </template>
 <script lang="ts">
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
@@ -9,12 +15,21 @@ import TCComponent from '@/tccomponents/TC-Component.mixin';
 export default class TCImage extends Mixins(TCComponent) {
   @Prop() src!: string;
   @Prop() fallback!: string;
+  @Prop({ default: 'contain' }) mode!: string;
+
   private expanded = false;
   private innerSrc = this.src;
 
   private bgElement: HTMLElement = document.createElement('div');
   private close: HTMLElement = document.createElement('div');
   private img: HTMLImageElement = document.createElement('img');
+
+  get classes(): Record<string, unknown> {
+    return {
+      'tc-image__cover': this.mode === 'cover',
+      'tc-image__contain': this.mode !== 'cover'
+    };
+  }
 
   @Watch('src')
   srcChanged(): void {
@@ -48,10 +63,12 @@ export default class TCImage extends Mixins(TCComponent) {
     this.bgElement.appendChild(this.close);
     this.bgElement.appendChild(this.img);
     document.body.appendChild(this.bgElement);
+    document.addEventListener('keydown', this.closeListener);
   }
 
   beforeDestroy(): void {
     document.body.removeChild(this.bgElement);
+    document.removeEventListener('keydown', this.closeListener);
   }
 
   public expand(): void {
@@ -61,12 +78,27 @@ export default class TCImage extends Mixins(TCComponent) {
   public shrink(): void {
     this.bgElement.removeAttribute('expanded');
   }
+
+  private closeListener(e: KeyboardEvent): void {
+    if (e.keyCode === 27) {
+      this.shrink();
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .tc-image {
   cursor: zoom-in;
+  width: 100%;
+  height: 100%;
+
+  &.tc-image__cover {
+    object-fit: cover;
+  }
+  &.tc-image__contain {
+    object-fit: contain;
+  }
 }
 </style>
 <style lang="scss">

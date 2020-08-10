@@ -1,7 +1,12 @@
 <template>
-  <div class="tc-tabbar-item" :class="classes" @click="handleClick">
-    <i :class="'ti-' + icon" />
-    <span>{{ title }}</span>
+  <div
+    class="tc-tabbar-item"
+    :style="styles"
+    :class="classes"
+    @click="handleClick"
+  >
+    <tf-icon v-if="icon" :icon="icon" />
+    <span v-if="title">{{ title }}</span>
   </div>
 </template>
 
@@ -9,18 +14,22 @@
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 import TCComponent from '@/tccomponents/TC-Component.mixin';
 import TCURLComponent from '@/tccomponents/TC-URL-Component.mixin';
+import TFIcon from '@/tccomponents/fundamental/icon/TF-Icon.vue';
 
-@Component
+@Component({
+  components: {
+    'tf-icon': TFIcon
+  }
+})
 export default class TCTabbarItem extends Mixins(TCComponent, TCURLComponent) {
   @Prop({ default: 'house', type: String }) icon!: string;
   @Prop({ default: 'Home', type: String }) title!: string;
 
-  get classes() {
-    const clazz: Record<string, boolean> = {
-      'tc-tabbar-item__active': this.isURLActive
-    };
-    clazz['tc-tabbar-item__' + this.tccolor_] = true;
-    return clazz;
+  get classes(): Record<string, unknown> {
+    return { 'tc-tabbar-item__active': this.isURLActive };
+  }
+  get styles(): string {
+    return `--tc-tabbar-item__color: ${this.getChosenColor()}`;
   }
 }
 </script>
@@ -51,11 +60,7 @@ export default class TCTabbarItem extends Mixins(TCComponent, TCURLComponent) {
     line-height: 20px;
   }
   &.tc-tabbar-item__active {
-    @each $n, $c in $color_colors {
-      &.tc-tabbar-item__#{$n} {
-        color: $c;
-      }
-    }
+    color: rgba(var(--tc-tabbar-item__color), 1);
   }
 }
 </style>

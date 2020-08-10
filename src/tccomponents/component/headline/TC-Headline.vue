@@ -1,7 +1,7 @@
 <template>
   <div class="tc-headline" :class="{ 'tc-headline__dark': dark }">
     <div class="tc-headline--title__prestyled" v-if="title">
-      <i v-if="icon" :class="'ti-' + icon"></i>{{ title }}
+      <tf-icon v-if="icon" :icon="icon" />{{ title }}
     </div>
     <div class="tc-headline--title" v-else>
       <slot name="title" />
@@ -16,11 +16,22 @@
 <script lang="ts">
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 import TCComponent from '@/tccomponents/TC-Component.mixin';
+import TFIcon from '@/tccomponents/fundamental/icon/TF-Icon.vue';
 
-@Component
+@Component({
+  components: {
+    'tf-icon': TFIcon
+  }
+})
 export default class TCHeadline extends Mixins(TCComponent) {
   @Prop() title!: string;
   @Prop() icon!: string;
+
+  get styles(): string {
+    return `--tc-headline__color: ${this.getChosenColor(
+      this.dark ? 'colorDark' : 'color'
+    )}`;
+  }
 }
 </script>
 
@@ -52,7 +63,7 @@ export default class TCHeadline extends Mixins(TCComponent) {
     font-size: 18px;
     white-space: nowrap;
     opacity: 0.8;
-    i {
+    .tf-icon {
       color: $primary;
       margin-right: 10px;
     }

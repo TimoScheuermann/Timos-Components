@@ -1,5 +1,5 @@
 <template>
-  <div class="tc-badge">
+  <div class="tc-badge" :style="styles">
     <div v-if="value || showEmpty" class="tc-badge--badge" :class="badgeClass">
       {{ text }}
     </div>
@@ -28,18 +28,15 @@ export default class TCBadge extends Mixins(TCComponent) {
   }
 
   get badgeClass(): Record<string, unknown> {
-    const classes: Record<string, unknown> = {};
+    return {
+      'tc-badge__behind': this.position === 'behind',
+      'tc-badge__inside': this.position === 'inside',
+      'tc-badge__corner': !['behind', 'inside'].includes(this.position)
+    };
+  }
 
-    classes[`tc-badge__${this.tccolor_}`] = true;
-
-    if (this.position === 'behind') {
-      classes['tc-badge__behind'] = true;
-    } else if (this.position === 'inside') {
-      classes['tc-badge__inside'] = true;
-    } else {
-      classes['tc-badge__corner'] = true;
-    }
-    return classes;
+  get styles(): string {
+    return `--tc-badge__color: ${this.getChosenColor('error')}`;
   }
 }
 </script>
@@ -77,19 +74,7 @@ export default class TCBadge extends Mixins(TCComponent) {
       right: 0;
       transform: translateY(-50%);
     }
-
-    &.tc-badge__primary {
-      background: $primary;
-    }
-    &.tc-badge__error {
-      background: $error;
-    }
-    &.tc-badge__alarm {
-      background: $alarm;
-    }
-    &.tc-badge__success {
-      background: $success;
-    }
+    background: rgba(var(--tc-badge__color), 1);
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="tl-grid" :style="style">
+  <div class="tl-grid" :style="styles">
     <slot />
   </div>
 </template>
@@ -18,16 +18,8 @@ export default class TLGrid extends Vue {
     return this.arrangement;
   }
 
-  get style(): string {
-    return (
-      '--arrangement: ' +
-      this.arrange +
-      ';--gap: ' +
-      this.gap +
-      'px;--minWidth: ' +
-      this.minWidth +
-      'px'
-    );
+  get styles(): string {
+    return `--tl-grid__arrangement: ${this.arrange};--tl-grid__gap: ${this.gap}px;--tl-grid__min-width: ${this.minWidth}px;`;
   }
 }
 </script>
@@ -35,10 +27,10 @@ export default class TLGrid extends Vue {
 <style lang="scss" scoped>
 .tl-grid {
   display: grid;
-  grid-gap: var(--gap);
+  grid-gap: var(--tl-grid__gap);
   grid-template-columns: repeat(
-    var(--arrangement),
-    minmax(var(--minWidth), 1fr)
+    var(--tl-grid__arrangement),
+    minmax(var(--tl-grid__min-width), 1fr)
   );
 }
 </style>

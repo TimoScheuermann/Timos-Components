@@ -4,6 +4,7 @@ import router from '@/router';
 import store from '@/store';
 import Vue from 'vue';
 import { Route } from 'vue-router';
+import './code-theme.css';
 import './registerServiceWorker';
 
 Vue.config.productionTip = false;

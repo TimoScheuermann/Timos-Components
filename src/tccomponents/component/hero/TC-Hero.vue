@@ -20,15 +20,22 @@ export default class TCHero extends Mixins(TCComponent) {
   @Prop({ default: 200 }) height!: string | number;
   @Prop({ default: 'px' }) unit!: string;
   @Prop({ default: true }) hasFixedHeader!: boolean;
+  @Prop() gradient!: string;
 
-  get styles(): Record<string, string> {
-    return {
-      background: this.background,
-      color: this.color,
-      height: `calc(${+this.height}${this.unit} + ${
-        this.hasFixedHeader ? 50 : 0
-      }px)`
-    };
+  get styles(): string {
+    let stylez = `--tc-hero__background: ${this.getChosenBackground(
+      this.dark ? 'containerDark' : 'container'
+    )};--tc-hero__color: ${this.getChosenColor(
+      this.dark ? 'colorDark' : 'color'
+    )};--tc-hero__height: calc(${+this.height}${this.unit} + ${
+      this.hasFixedHeader ? 50 : 0
+    }px);`;
+
+    if (this.gradient) {
+      stylez += `--tc-hero__background-image: ${this.gradient}`;
+    }
+
+    return stylez;
   }
 }
 </script>
@@ -39,6 +46,12 @@ export default class TCHero extends Mixins(TCComponent) {
   position: relative;
   max-width: 100vw;
   overflow: hidden;
+
+  background: rgba(var(--tc-hero__background), 1);
+  background-image: var(--tc-hero__background-image);
+  color: rgba(var(--tc-hero__color), 1);
+  height: var(--tc-hero__height);
+
   .tc-hero--background {
     height: inherit;
     img,

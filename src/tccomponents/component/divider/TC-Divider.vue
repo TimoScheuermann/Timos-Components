@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="tc-divider"
-    :style="{ color: color }"
-    :class="{ 'tc-divider__dark': dark }"
-  >
+  <div class="tc-divider" :style="styles" :class="classes">
     <div
       class="tc-divider--bar"
       :class="{
@@ -11,7 +7,7 @@
       }"
     />
     <div class="tc-divider--content" v-if="icon || name">
-      <i v-if="icon" :class="'ti-' + icon"></i>
+      <tf-icon v-if="icon" :icon="icon" />
       <span v-if="name">{{ name }}</span>
     </div>
     <div
@@ -26,8 +22,13 @@
 <script lang="ts">
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 import TCComponent from '@/tccomponents/TC-Component.mixin';
+import TFIcon from '@/tccomponents/fundamental/icon/TF-Icon.vue';
 
-@Component
+@Component({
+  components: {
+    'tf-icon': TFIcon
+  }
+})
 export default class TCDivider extends Mixins(TCComponent) {
   @Prop() name!: string;
   @Prop() icon!: string;
@@ -35,6 +36,16 @@ export default class TCDivider extends Mixins(TCComponent) {
 
   get alignment(): string {
     return this.position || 'center';
+  }
+
+  get styles(): string {
+    return `--tc-divider__color: ${this.getChosenColor(
+      this.dark ? 'colorDark' : 'color'
+    )}`;
+  }
+
+  get classes(): Record<string, unknown> {
+    return { 'tc-divider__dark': this.dark };
   }
 }
 </script>
@@ -45,9 +56,12 @@ export default class TCDivider extends Mixins(TCComponent) {
   margin: 5px 10px;
   min-height: 10px;
   align-items: center;
+
   &.tc-divider__dark {
     color: #fff;
   }
+  color: rgba(var(--tc-divider__color), 1);
+
   .tc-divider--bar {
     background: currentColor;
     border-radius: 5px;

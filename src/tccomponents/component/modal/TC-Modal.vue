@@ -178,6 +178,7 @@ $time: 0.3s;
     position: sticky;
     padding: 20px 5vw;
     top: 0;
+    z-index: 10;
     &.tc-modal--head__prestyled {
       text-align: center;
       .tc-modal--title {
@@ -192,8 +193,11 @@ $time: 0.3s;
   }
   .tc-modal--content {
     padding: 0 5vw;
+    position: relative;
+    z-index: 5;
   }
   .tc-modal--footer {
+    z-index: 10;
     position: sticky;
     bottom: 0;
     padding: 20px 5vw;

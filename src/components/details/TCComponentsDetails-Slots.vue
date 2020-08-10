@@ -17,25 +17,20 @@
         />
       </transition-group>
 
-      <tc-segments
-        v-model="currentSelection"
-        :segments="segments"
-        :dark="$store.getters.dark"
-      >
-        <h2
+      <tc-segments v-model="currentSelection" :dark="$store.getters.dark">
+        <tc-segment-item
           v-for="slot in component.slots"
-          :key="slot.name + 't'"
-          :slot="slot.name"
+          :key="slot.name"
+          :title="slot.name"
         >
-          {{ slot.name }}
-        </h2>
-        <p v-for="slot in component.slots" :key="slot.name" :slot="slot.name">
-          {{ slot.description }}
-        </p>
+          <h2>{{ slot.name }}</h2>
+          <p>{{ slot.description }}</p>
+        </tc-segment-item>
       </tc-segments>
     </template>
-    <template v-else>
-      <h3>default</h3>
+    <template v-else-if="component.slots.length > 0">
+      <h2>{{ component.slots[0].name }}</h2>
+      <p>{{ component.slots[0].description }}</p>
     </template>
   </tc-card>
 </template>
@@ -47,11 +42,13 @@ import TLGrid from '@/tccomponents/layout/grid/TL-Grid.vue';
 import TCSegments from '@/tccomponents/component/segments/TC-Segments.vue';
 import TCCard from '@/tccomponents/component/card/TC-Card.vue';
 import TCImage from '@/tccomponents/component/image/TC-Image.vue';
+import TCSegmentItem from '@/tccomponents/component/segments/TC-Segment-Item.vue';
 
 @Component({
   components: {
     'tl-grid': TLGrid,
     'tc-segments': TCSegments,
+    'tc-segment-item': TCSegmentItem,
     'tc-card': TCCard,
     'tc-image': TCImage
   }
@@ -64,10 +61,6 @@ export default class TCComponentsDetailsSlots extends Vue {
 
   get filePath(): string {
     return `assets/slots/${this.prefix}/${this.component.name}/`;
-  }
-
-  get segments(): string[] {
-    return this.component.slots.map(x => x.name);
   }
 
   get currentSlotTitle(): string[] {

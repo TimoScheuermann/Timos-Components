@@ -1,5 +1,5 @@
 <template>
-  <div class="tc-switch" :class="{ 'tc-switch__dark': dark }">
+  <div class="tc-switch" :style="styles" :class="classes">
     <input @input="updateVal()" type="checkbox" :id="id" v-model="toggled" />
     <label :for="id">
       <div class="container">
@@ -29,6 +29,14 @@ export default class TCSwitch extends Mixins(TCComponent) {
   updateVal(): void {
     this.$emit('input', !this.toggled);
   }
+
+  get classes(): Record<string, unknown> {
+    return { 'tc-switch__dark': this.dark };
+  }
+
+  get styles(): string {
+    return `--tc-switch__color: ${this.getChosenColor()}`;
+  }
 }
 </script>
 
@@ -44,14 +52,14 @@ export default class TCSwitch extends Mixins(TCComponent) {
   }
   input:checked + label {
     .container {
-      background: $primary;
+      background: rgba(var(--tc-switch__color), 1);
       .ball {
         transform: translate(calc(50% + #{$ballSize / 2 + 2}px), -50%);
       }
     }
   }
   &.tc-switch__dark label .container {
-    background: lighten($paragraph_dark, 10%);
+    background: $container_dark;
   }
   label {
     cursor: pointer;
@@ -59,7 +67,7 @@ export default class TCSwitch extends Mixins(TCComponent) {
       width: #{$ballSize * 2 + 4}px;
       height: #{$ballSize + 4}px;
       border-radius: #{$ballSize + 4}px;
-      background: darken($paragraph, 10%);
+      background: $container;
       position: relative;
       transition: 0.2s ease-in;
 
