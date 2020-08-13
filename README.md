@@ -1,9 +1,4 @@
-<div style="text-align:center">
-
-![](https://components.timos.design/assets/banner.svg)
-
-<div style="font-size: 50px; font-weight: bold">Components</div>
-</div>
+# ![](https://components.timos.design/assets/banner.svg) Components
 
 > A Vue Component Library of high-quality ready to use components that will help you speed up your development workflow.
 
@@ -15,6 +10,52 @@
 - [Gastro Assistant](https://gastro-assistant.com)
 - [Sport Kamasutra](https://sk.timos.design/)
 - [Investing Collectors](https://wip-investing-collectors.netlify.app/)
+
+## Available Components
+
+[Avatar](https://components.timos.design/component/Avatar),
+[Badge](https://components.timos.design/component/Badge),
+[Button](https://components.timos.design/component/Button),
+[Card](https://components.timos.design/component/Card),
+[Checkbox](https://components.timos.design/component/Checkbox),
+[Divider](https://components.timos.design/component/Divider),
+[Header](https://components.timos.design/component/Header),
+[Headline](https://components.timos.design/component/Headline),
+[Hero](https://components.timos.design/component/Hero),
+[Image](https://components.timos.design/component/Image),
+[Input](https://components.timos.design/component/Input),
+[Link](https://components.timos.design/component/Link),
+[List](https://components.timos.design/component/List),
+[Modal](https://components.timos.design/component/Modal),
+[Navbar](https://components.timos.design/component/Navbar),
+[Progress](https://components.timos.design/component/Progress),
+[Quote](https://components.timos.design/component/Quote),
+[Revealer](https://components.timos.design/component/Revealer),
+[Scroll Up](https://components.timos.design/component/Scroll%20Up),
+[Segments](https://components.timos.design/component/Segments),
+[Select](https://components.timos.design/component/Select),
+[Slider](https://components.timos.design/component/Slider),
+[Spinner](https://components.timos.design/component/Spinner),
+[Steps](https://components.timos.design/component/Steps),
+[Switch](https://components.timos.design/component/Switch),
+[Tabbar](https://components.timos.design/component/Tabbar),
+[Table](https://components.timos.design/component/Table),
+[Textarea](https://components.timos.design/component/Textarea),
+[Tooltip](https://components.timos.design/component/Tooltip)
+
+## Layouts
+
+[Flow](https://components.timos.design/layout/Flow),
+[Grid](https://components.timos.design/layout/Grid),
+[Sidebar](https://components.timos.design/layout/Sidebar),
+[Modal](https://components.timos.design/layout/Modal)
+
+## Fundamentals
+
+[Default Tags](https://components.timos.design/fundamental/Default%20Tags),
+[Colors](https://components.timos.design/fundamental/Colors),
+[Icons](https://components.timos.design/fundamental/Icons),
+[Auto Background](https://components.timos.design/fundamental/Auto%20Background),
 
 ## Installation
 
