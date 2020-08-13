@@ -1,4 +1,9 @@
-# TC Components
+<div style="text-align:center">
+
+![](https://components.timos.design/assets/banner.svg)
+
+<div style="font-size: 50px; font-weight: bold">Components</div>
+</div>
 
 > A Vue Component Library of high-quality ready to use components that will help you speed up your development workflow.
 
