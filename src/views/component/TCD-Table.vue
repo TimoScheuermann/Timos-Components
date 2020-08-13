@@ -421,7 +421,7 @@ get personsSorted(): Person[] {
       </tc-table>
 
       <tc-code-example>
-        <pre><code>
+        <pre v-pre>
 &lt;tc-table
   :selectable="true"
   :multiSelect="true"
@@ -463,7 +463,8 @@ get personsSorted(): Person[] {
       &lt;/tl-flow>
     &lt;/template>
   &lt;/tc-tr>
-&lt;/tc-table></code></pre>
+&lt;/tc-table></pre
+        >
       </tc-code-example>
     </tc-card>
 

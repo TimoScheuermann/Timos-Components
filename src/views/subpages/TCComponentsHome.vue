@@ -70,7 +70,12 @@
                   group.prefix + '-' + comp.name.toLowerCase().replace(' ', '-')
               }"
             >
-              <tc-card :dark="$store.getters.dark" :hover="true" rounded="true">
+              <tc-card
+                :dark="$store.getters.dark"
+                :shadow="false"
+                :hover="true"
+                rounded="true"
+              >
                 <div class="details">
                   <div class="watermark">
                     <tf-icon :icon="comp.icon" />

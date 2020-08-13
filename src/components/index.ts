@@ -3,25 +3,27 @@ import { TCComponentGroup } from '@/models/TCComponentGroup.model';
 import availableColors from '@/tccomponents/TFColors';
 
 const TfColors = Object.keys(availableColors);
-const apiAutoBackground: TCComponentApi = {
-  name: 'autoBackground',
+const apiBoolean: TCComponentApi = {
+  name: '',
+  description: '',
+  parameters: [true, false],
   type: 'boolean',
-  default: ' false',
+  default: false
+};
+const apiAutoBackground: TCComponentApi = {
+  ...apiBoolean,
+  name: 'autoBackground',
   description:
     "Toggles automatically between dark and light whenever the element intersects with an element which has 'tc-dark-container' or 'tc-light-container' attribute in it"
 };
 const apiDark: TCComponentApi = {
+  ...apiBoolean,
   name: 'dark',
-  type: 'boolean',
-  parameters: [true, false],
-  default: false,
   description: 'Toggles darkmode on or off'
 };
 const apiFrosted: TCComponentApi = {
+  ...apiBoolean,
   name: 'frosted',
-  type: 'boolean',
-  parameters: [true, false],
-  default: false,
   description: 'Determines if the element should have a frosted appearance'
 };
 const apiFullColor: TCComponentApi[] = [
@@ -135,8 +137,8 @@ const tcComponents: TCComponentGroup[] = [
             description: 'Sets a prestyled title on top of the input field'
           },
           {
+            ...apiBoolean,
             name: 'buttons',
-            type: 'boolean',
             description: "Adds +/- Buttons (only for type='number')"
           },
           {
@@ -203,14 +205,14 @@ const tcComponents: TCComponentGroup[] = [
               'Specifies whether an <tc-input> element should have autocomplete enabled'
           },
           {
+            ...apiBoolean,
             name: 'autofocus',
-            type: 'boolean',
             description:
               'Specifies that an <tc-input> element should automatically get focus when the page loads'
           },
           {
+            ...apiBoolean,
             name: 'disabled',
-            type: 'boolean',
             description:
               'Specifies that an <tc-input> element should be disabled'
           },
@@ -242,8 +244,8 @@ const tcComponents: TCComponentGroup[] = [
               'Specifies the minimum number of characters required in an <tc-input> element'
           },
           {
+            ...apiBoolean,
             name: 'multiple',
-            type: 'boolean',
             description:
               'Specifies that a user can enter more than one value in an <tc-input> element'
           },
@@ -254,13 +256,13 @@ const tcComponents: TCComponentGroup[] = [
               "Specifies a regular expression that an <tc-input> element's value is checked against"
           },
           {
+            ...apiBoolean,
             name: 'readonly',
-            type: 'boolean',
             description: 'Specifies that an input field is read-only'
           },
           {
+            ...apiBoolean,
             name: 'required',
-            type: 'boolean',
             description:
               'Specifies that an input field must be filled out before submitting the form'
           },
@@ -289,18 +291,18 @@ const tcComponents: TCComponentGroup[] = [
             type: 'string'
           },
           {
+            ...apiBoolean,
+            default: true,
             name: 'shadow',
-            type: 'boolean',
-            default: 'true',
             description: 'Determines if the card should have a base shadow'
           },
           {
+            ...apiBoolean,
             name: 'rounded',
-            type: 'boolean',
             description: "Determines if the card's borders are rounded"
           },
           {
-            name: 'hover',
+            ...apiBoolean,
             type: 'boolean',
             description: 'Determines if a shadow should appear on hover'
           },
@@ -364,10 +366,9 @@ const tcComponents: TCComponentGroup[] = [
             description: 'Determine the position of the icon'
           },
           {
+            ...apiBoolean,
             name: 'disabled',
-            type: 'boolean',
-            description: 'Determines if the button is disabled',
-            default: 'false'
+            description: 'Determines if the button is disabled'
           },
           {
             name: 'variant',
@@ -456,12 +457,11 @@ const tcComponents: TCComponentGroup[] = [
           ...apiFullColor,
           ...apiFullBackground,
           {
+            ...apiBoolean,
             name: 'value',
-            type: 'boolean',
-            description: 'Determines the state of the checkbox',
-            default: 'false'
+            description: 'Determines the state of the checkbox'
           },
-          { name: 'v-model', type: 'boolean', description: '' },
+          { ...apiBoolean, name: 'v-model', description: '' },
           {
             name: '@input',
             type: 'function',
@@ -499,12 +499,11 @@ const tcComponents: TCComponentGroup[] = [
             type: 'string'
           },
           {
+            ...apiBoolean,
             name: 'value',
-            type: 'boolean',
-            description: 'Determines the state of the modal',
-            default: 'false'
+            description: 'Determines the state of the modal'
           },
-          { name: 'v-model', type: 'boolean', description: '' },
+          { ...apiBoolean, name: 'v-model', description: '' },
           {
             name: '@close',
             type: 'function',
@@ -562,33 +561,13 @@ const tcComponents: TCComponentGroup[] = [
         icon: 'table',
         api: [
           {
-            default: false,
+            ...apiBoolean,
             name: 'selectable',
-            type: 'boolean',
-            parameters: [true, false],
             description: ''
           },
-          {
-            default: false,
-            name: 'multiSelect',
-            type: 'boolean',
-            parameters: [true, false],
-            description: ''
-          },
-          {
-            default: false,
-            name: 'striped',
-            type: 'boolean',
-            parameters: [true, false],
-            description: ''
-          },
-          {
-            default: true,
-            name: 'border',
-            type: 'boolean',
-            parameters: [true, false],
-            description: ''
-          },
+          { ...apiBoolean, name: 'multiSelect', description: '' },
+          { ...apiBoolean, name: 'striped', description: '' },
+          { ...apiBoolean, name: 'border', description: '' },
           {
             name: 'v-model',
             type: 'object | object[]',
@@ -628,6 +607,7 @@ const tcComponents: TCComponentGroup[] = [
                 description:
                   'Determines the data to be emitted by the table if selectable is set to true'
               },
+              ...apiURLs,
               ...apiFullBackground
             ],
             slots: [{ name: 'expander', description: '' }]
@@ -729,12 +709,11 @@ const tcComponents: TCComponentGroup[] = [
         icon: 'toggle',
         api: [
           {
+            ...apiBoolean,
             name: 'value',
-            type: 'any',
-            description: 'Determines the state of your switch',
-            default: 'false'
+            description: 'Determines the state of your switch'
           },
-          { name: 'v-model', type: 'boolean', description: '' },
+          { ...apiBoolean, name: 'v-model', description: '' },
           apiDark,
           ...apiFullColor
         ],
@@ -786,9 +765,9 @@ const tcComponents: TCComponentGroup[] = [
             description: 'Unit of height'
           },
           {
-            default: 'true',
+            ...apiBoolean,
+            default: true,
             name: 'hasFixedHeader',
-            type: 'boolean',
             description: 'Determines if top should have a padding of 50px'
           },
           ...apiFullColor,
@@ -849,7 +828,7 @@ const tcComponents: TCComponentGroup[] = [
           {
             name: 'percent',
             type: 'number',
-            default: '0',
+            default: 0,
             description: 'Percentage to be displayed'
           },
           {
@@ -864,19 +843,19 @@ const tcComponents: TCComponentGroup[] = [
           {
             name: 'barHeight',
             type: 'number',
-            default: '4',
+            default: 4,
             description: 'Determines the height of the progress bar'
           },
           {
             name: 'ringSize',
             type: 'number',
-            default: '70',
+            default: 70,
             description: 'Determines the size of the progress ring'
           },
           {
             name: 'ringWidth',
             type: 'number',
-            default: '8',
+            default: 8,
             description: 'Determines the width of the ring of the progress ring'
           }
         ],
@@ -925,7 +904,8 @@ const tcComponents: TCComponentGroup[] = [
           {
             name: 'variant',
             type: 'string',
-            description: 'Determines the variant used for TC-Header',
+            description:
+              'Determines the variant used for TC-Header, if floating top = top + 40px',
             parameters: ['fixed', 'floating', 'sticky'],
             default: 'fixed'
           },
@@ -933,7 +913,7 @@ const tcComponents: TCComponentGroup[] = [
             name: 'top',
             type: 'number',
             description: 'Determines the position of TC-Header',
-            default: '0 (if variant=floating +40)'
+            default: 0
           },
           ...apiFullBackground,
           ...apiFullColor
@@ -1124,10 +1104,8 @@ const tcComponents: TCComponentGroup[] = [
           apiFrosted,
           apiDark,
           {
-            default: false,
+            ...apiBoolean,
             name: 'multiple',
-            type: 'boolean',
-            parameters: [true, false],
             description: 'Determines if multiple items can be selected'
           },
           {
@@ -1202,8 +1180,8 @@ const tcComponents: TCComponentGroup[] = [
               ...apiURLs,
               apiIcon,
               {
+                ...apiBoolean,
                 name: 'v-model',
-                type: 'boolean',
                 description: 'variable to be used for the switch'
               },
               {
@@ -1229,6 +1207,7 @@ const tcComponents: TCComponentGroup[] = [
           {
             name: 'current',
             type: 'number',
+            default: 0,
             description: 'Determines the current active step, starting at 0'
           },
           {
@@ -1286,9 +1265,8 @@ const tcComponents: TCComponentGroup[] = [
               'Determines the max number to be displayed, if exceeded %max%+ will be displayed'
           },
           {
+            ...apiBoolean,
             name: 'showEmpty',
-            type: 'boolean',
-            default: false,
             description:
               'Determines if the badge should be displayed if no value is set'
           },
@@ -1352,17 +1330,15 @@ const tcComponents: TCComponentGroup[] = [
           { name: 'tooltip', type: 'string', description: '' },
 
           {
+            ...apiBoolean,
             name: 'autofocus',
-            type: 'boolean',
-            parameters: [true, false],
             description: ''
           },
           { name: 'cols', type: 'number', description: '' },
           { name: 'dirname', type: 'string', description: '' },
           {
+            ...apiBoolean,
             name: 'disabled',
-            type: 'boolean',
-            parameters: [true, false],
             description: ''
           },
           { name: 'form', type: 'string', description: '' },
@@ -1375,15 +1351,13 @@ const tcComponents: TCComponentGroup[] = [
             default: 'Enter text'
           },
           {
+            ...apiBoolean,
             name: 'readonly',
-            type: 'boolean',
-            parameters: [true, false],
             description: ''
           },
           {
+            ...apiBoolean,
             name: 'required',
-            type: 'boolean',
-            parameters: [true, false],
             description: ''
           },
           { name: 'rows', type: 'string', description: '', default: 10 },
@@ -1409,14 +1383,14 @@ const tcComponents: TCComponentGroup[] = [
         icon: 'plus',
         api: [
           {
-            default: '300',
+            default: 300,
             name: 'minWidth',
             type: 'number',
             description:
               'Determines the minimal with a continue can have inside the grid'
           },
           {
-            default: '30',
+            default: 30,
             name: 'gap',
             type: 'number',
             description:

@@ -1,7 +1,7 @@
 <template>
   <div
     class="tc-tr"
-    @click="handleClick"
+    @click="handleClickLocal"
     :style="styles"
     :class="classes"
     :ref="uuid_"
@@ -30,6 +30,7 @@ import TCTd from './TC-Td.vue';
 import TCComponent from '@/tccomponents/TC-Component.mixin';
 import TCTrExpanded from './TC-Tr-Expanded.vue';
 import { CombinedVueInstance } from 'vue/types/vue';
+import TCURLComponent from '@/tccomponents/TC-URL-Component.mixin';
 
 @Component({
   components: {
@@ -37,7 +38,7 @@ import { CombinedVueInstance } from 'vue/types/vue';
     'tc-td': TCTd
   }
 })
-export default class TCTr extends Mixins(TCComponent) {
+export default class TCTr extends Mixins(TCComponent, TCURLComponent) {
   @Prop() data!: object;
 
   public instance!: CombinedVueInstance<
@@ -76,8 +77,9 @@ export default class TCTr extends Mixins(TCComponent) {
     document.querySelectorAll('tr.tc-tr-generated').forEach(e => e.remove());
   }
 
-  public handleClick(): void {
+  public handleClickLocal(event: MouseEvent): void {
     const affected: Element = this.$refs[this.uuid_] as Element;
+    this.handleClick(event);
     affected.classList.remove('tc-tr__expanded');
     if (this.getExpanded()) {
       this.hideExpander();

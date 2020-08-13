@@ -43,6 +43,7 @@
             :dark="true"
             :values="api.selectValues"
             v-model="data[api.name]"
+            :value="api.default"
           />
         </div>
         <div v-for="api in inputAttributes" :key="api.name">
@@ -50,6 +51,7 @@
             :tooltip="api.description"
             :title="api.name"
             :dark="true"
+            :value="api.default"
             :type="api.type === 'number' ? 'number' : 'text'"
             :buttons="api.type === 'number'"
             v-model="data[api.name]"
@@ -291,7 +293,6 @@ export default class TCComponentsDesigner extends Vue {
       element.appendChild(instance.$el);
     } catch (error) {
       //
-      // console.log('e', error);
     }
   }
 
