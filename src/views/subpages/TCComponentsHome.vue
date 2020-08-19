@@ -2,7 +2,7 @@
   <div class="tccomponents--home">
     <tccomponents-subpage-hero subtitle="Components" />
     <div content>
-      <tc-card hero :shadow="false" :dark="$store.getters.dark" rounded="true">
+      <tc-card hero :shadow="false" rounded="true">
         <div class="hero-tiles">
           <span>
             <i class="ti-card" />
@@ -43,11 +43,7 @@
         class="group-show-real"
         :id="'show-real_' + group.group"
       >
-        <tc-list
-          class="tc-components-home--list"
-          :dark="$store.getters.dark"
-          :title="group.group"
-        >
+        <tc-list class="tc-components-home--list" :title="group.group">
           <tc-list-item
             v-for="comp in group.components"
             :key="comp.name"
@@ -70,12 +66,7 @@
                   group.prefix + '-' + comp.name.toLowerCase().replace(' ', '-')
               }"
             >
-              <tc-card
-                :dark="$store.getters.dark"
-                :shadow="false"
-                :hover="true"
-                rounded="true"
-              >
+              <tc-card :shadow="false" :hover="true" rounded="true">
                 <div class="details">
                   <div class="watermark">
                     <tf-icon :icon="comp.icon" />

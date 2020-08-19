@@ -69,15 +69,15 @@ export default class TCCard extends Mixins(TCComponent) {
       'tc-card__shadow': this.shadow,
       'tc-card__rounded': this.rounded,
       'tc-card__hover': this.hover,
-      'tc-card__dark': this.dark
+      'tc-card__dark': this.darkmode
     };
   }
 
   get styles(): string {
     return `--tc-card__background: ${this.getChosenBackground(
-      this.dark ? 'paragraphDark' : 'paragraph'
+      this.darkmode ? 'paragraphDark' : 'paragraph'
     )};--tc-card__color: ${this.getChosenColor(
-      this.dark ? 'colorDark' : 'color'
+      this.darkmode ? 'colorDark' : 'color'
     )}`;
   }
 }

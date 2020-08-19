@@ -7,15 +7,15 @@
       tempore aperiam atque repellendus. Itaque quod ipsum repudiandae eligendi.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="200">
         <div>
           <h2>Progress-Bar</h2>
-          <tc-progress :dark="$store.getters.dark" :percent="33" />
+          <tc-progress :percent="33" />
         </div>
         <div>
           <h2>Progress-Ring</h2>
-          <tc-progress :dark="$store.getters.dark" type="ring" :percent="33" />
+          <tc-progress type="ring" :percent="33" />
         </div>
       </tl-grid>
 
@@ -34,37 +34,23 @@
       tempore aperiam atque repellendus. Itaque quod ipsum repudiandae eligendi.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="200">
         <div>
           <h2>error</h2>
-          <tc-progress
-            :dark="$store.getters.dark"
-            type="ring"
-            tfcolor="error"
-            :percent="75"
-          />
+          <tc-progress type="ring" tfcolor="error" :percent="75" />
         </div>
         <div>
           <h2>orange</h2>
-          <tc-progress
-            :dark="$store.getters.dark"
-            type="ring"
-            color="orange"
-            :percent="35"
-          />
+          <tc-progress type="ring" color="orange" :percent="35" />
         </div>
         <div>
           <h2>success</h2>
-          <tc-progress
-            :dark="$store.getters.dark"
-            tfcolor="success"
-            :percent="33"
-          />
+          <tc-progress tfcolor="success" :percent="33" />
         </div>
         <div>
           <h2>aqua</h2>
-          <tc-progress :dark="$store.getters.dark" color="aqua" :percent="54" />
+          <tc-progress color="aqua" :percent="54" />
         </div>
       </tl-grid>
 
@@ -85,30 +71,19 @@
       tempore aperiam atque repellendus. Itaque quod ipsum repudiandae eligendi.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="200">
         <div>
           <h2>ringWidth</h2>
-          <tc-progress
-            :dark="$store.getters.dark"
-            type="ring"
-            ringWidth="20"
-            :percent="33"
-          />
+          <tc-progress type="ring" ringWidth="20" :percent="33" />
         </div>
         <div>
           <h2>ringSize</h2>
-          <tc-progress
-            :dark="$store.getters.dark"
-            type="ring"
-            ringSize="100"
-            :percent="33"
-          />
+          <tc-progress type="ring" ringSize="100" :percent="33" />
         </div>
         <div>
           <h2>ringWidth & ringSize</h2>
           <tc-progress
-            :dark="$store.getters.dark"
             type="ring"
             ringWidth="20"
             ringSize="100"
@@ -138,23 +113,15 @@
       tempore aperiam atque repellendus. Itaque quod ipsum repudiandae eligendi.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="200">
         <div>
           <h2>barHeight (10px)</h2>
-          <tc-progress
-            :dark="$store.getters.dark"
-            barHeight="10"
-            :percent="33"
-          />
+          <tc-progress barHeight="10" :percent="33" />
         </div>
         <div>
           <h2>barHeight (15px)</h2>
-          <tc-progress
-            :dark="$store.getters.dark"
-            barHeight="15"
-            :percent="33"
-          />
+          <tc-progress barHeight="15" :percent="33" />
         </div>
       </tl-grid>
 

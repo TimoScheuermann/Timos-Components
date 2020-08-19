@@ -8,16 +8,16 @@
       nemo maiores.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid>
         <div>
           <h2>Normal</h2>
-          <tc-textarea :dark="$store.getters.dark" />
+          <tc-textarea />
         </div>
         <div>
           <h2>Frosted</h2>
           <div bg>
-            <tc-textarea :dark="$store.getters.dark" :frosted="true" />
+            <tc-textarea :frosted="true" />
           </div>
         </div>
       </tl-grid>
@@ -36,27 +36,23 @@
       eligendi aspernatur eum explicabo sapiente ipsa. Incidunt aspernatur
       repellendus cumque?
     </p>
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="200">
         <tl-flow flow="column" horizontal="space-between">
           <h2>Colors</h2>
-          <tc-textarea :dark="$store.getters.dark" tfcolor="error" />
+          <tc-textarea tfcolor="error" />
         </tl-flow>
         <tl-flow flow="column" horizontal="space-between">
           <h2>Title</h2>
-          <tc-textarea :dark="$store.getters.dark" title="Title" />
+          <tc-textarea title="Title" />
         </tl-flow>
         <tl-flow flow="column" horizontal="space-between">
           <h2>Tooltip</h2>
-          <tc-textarea :dark="$store.getters.dark" tooltip="Tooltip" />
+          <tc-textarea tooltip="Tooltip" />
         </tl-flow>
         <tl-flow flow="column" horizontal="space-between">
           <h2>Title & Tooltip</h2>
-          <tc-textarea
-            :dark="$store.getters.dark"
-            title="Title"
-            tooltip="Tooltip"
-          />
+          <tc-textarea title="Title" tooltip="Tooltip" />
         </tl-flow>
       </tl-grid>
       <tc-code-example>

@@ -7,11 +7,11 @@
       accusantium repellendus, eaque vel, nihil tempora voluptates laboriosam!
       Numquam illo beatae assumenda!
     </p>
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid>
         <div>
           <h2>Simple</h2>
-          <tc-table :dark="$store.getters.dark">
+          <tc-table>
             <template slot="head">
               <tc-th>Name</tc-th>
               <tc-th>Age</tc-th>
@@ -28,7 +28,7 @@
         </div>
         <div>
           <h2>Striped & No Border</h2>
-          <tc-table :striped="true" :border="false" :dark="$store.getters.dark">
+          <tc-table :striped="true" :border="false">
             <template slot="head">
               <tc-th>Name</tc-th>
               <tc-th>Age</tc-th>
@@ -71,9 +71,9 @@
       similique deleniti inventore beatae repellendus!
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <h2>Example</h2>
-      <tc-table :dark="$store.getters.dark" @sort="s => (sort = s)">
+      <tc-table @sort="s => (sort = s)">
         <template slot="head">
           <tc-th attribute="name">Name</tc-th>
           <tc-th>Age</tc-th>
@@ -132,16 +132,12 @@ get personsSorted(): Person[] {
       similique deleniti inventore beatae repellendus!
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid>
         <div>
           <h2>Single Select</h2>
           <p>{{ singleSelect || 'nothing selected' }}</p>
-          <tc-table
-            :dark="$store.getters.dark"
-            :selectable="true"
-            v-model="singleSelect"
-          >
+          <tc-table :selectable="true" v-model="singleSelect">
             <template slot="head">
               <tc-th>Name</tc-th>
               <tc-th>Age</tc-th>
@@ -160,7 +156,6 @@ get personsSorted(): Person[] {
           <h2>Multi Select</h2>
           <p>{{ multiSelect.join(', ') || 'nothing selected' }}</p>
           <tc-table
-            :dark="$store.getters.dark"
             :selectable="true"
             :multiSelect="true"
             v-model="multiSelect"
@@ -207,9 +202,9 @@ get personsSorted(): Person[] {
       quos culpa, nostrum consectetur modi asperiores soluta pariatur cumque est
       in, sunt voluptate commodi tempore, aspernatur natus eum reiciendis totam.
     </p>
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <p>Click on a row to expand it for further informations</p>
-      <tc-table :dark="$store.getters.dark">
+      <tc-table>
         <template slot="head">
           <tc-th>Name</tc-th>
           <tc-th>Age</tc-th>
@@ -283,11 +278,11 @@ get personsSorted(): Person[] {
       Itaque.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid>
         <div>
           <h2>TD Color</h2>
-          <tc-table :striped="true" :border="false" :dark="$store.getters.dark">
+          <tc-table :striped="true" :border="false">
             <template slot="head">
               <tc-th>Name</tc-th>
               <tc-th>Age</tc-th>
@@ -321,7 +316,7 @@ get personsSorted(): Person[] {
         </div>
         <div>
           <h2>TR Background</h2>
-          <tc-table :striped="true" :border="false" :dark="$store.getters.dark">
+          <tc-table :striped="true" :border="false">
             <template slot="head">
               <tc-th>Name</tc-th>
               <tc-th>Age</tc-th>
@@ -375,9 +370,8 @@ get personsSorted(): Person[] {
       Temporibus excepturi, rem possimus magni est aliquid cum veritatis natus,
       illum nisi enim?
     </p>
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tc-table
-        :dark="$store.getters.dark"
         :selectable="true"
         :multiSelect="true"
         :border="false"
@@ -475,12 +469,11 @@ get personsSorted(): Person[] {
       nisi maiores quaerat minus ducimus nesciunt magnam neque explicabo. Est,
       distinctio!
     </p>
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tccomponents-details-api
         v-for="c in component.children"
         :key="c.name"
         :component="c"
-        :dark="$store.getters.dark"
         :suffix="'for tc-' + c.name"
       />
     </tc-card>

@@ -7,7 +7,7 @@
       accusantium repellendus, eaque vel, nihil tempora voluptates laboriosam!
       Numquam illo beatae assumenda!
     </p>
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="140">
         <div>
           <h2>Simple Badge</h2>
@@ -67,7 +67,7 @@
       debitis, impedit sint voluptatum necessitatibus iste. Aut, sequi optio.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="140">
         <div>
           <h2>Corner</h2>
@@ -117,7 +117,7 @@
       Reiciendis, adipisci.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="140">
         <div>
           <h2>primary</h2>

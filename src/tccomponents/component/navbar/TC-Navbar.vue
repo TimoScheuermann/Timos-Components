@@ -1,6 +1,7 @@
 <template>
   <div class="tc-navbar" :style="styles">
     <div
+      v-if="$slots.default"
       class="tc-navbar--expander"
       @click="expanded = !expanded"
       :class="classes"
@@ -47,15 +48,15 @@ export default class TCNavbar extends Mixins(TCAutoBackground) {
 
   get styles(): string {
     return `--tc-navbar__color:${this.getChosenColor(
-      this.dark_ ? 'colorDark' : 'color'
+      this.darkmodeadv ? 'colorDark' : 'color'
     )};--tc-navbar__background: ${this.getChosenBackground(
-      this.dark_ ? 'paragraphDark' : 'paragraph'
+      this.darkmodeadv ? 'paragraphDark' : 'paragraph'
     )};`;
   }
 
   get classes(): Record<string, unknown> {
     return {
-      'tc-navbar__dark': this.dark_,
+      'tc-navbar__dark': this.darkmodeadv,
       'tc-navbar__expanded': this.expanded
     };
   }

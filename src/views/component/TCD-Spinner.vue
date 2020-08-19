@@ -7,12 +7,12 @@
       aut itaque, numquam ducimus, voluptatum optio maiores ad aspernatur. At,
       officia.
     </p>
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="140">
         <div v-for="v in variants" :key="v">
           <h2>{{ v }}</h2>
           <tl-flow>
-            <tc-spinner :dark="$store.getters.dark" :variant="v" />
+            <tc-spinner :variant="v" />
           </tl-flow>
         </div>
       </tl-grid>
@@ -32,7 +32,7 @@
       aut itaque, numquam ducimus, voluptatum optio maiores ad aspernatur. At,
       officia.
     </p>
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="140">
         <div>
           <h2>error</h2>

@@ -8,8 +8,8 @@
       natus.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
-      <tc-headline :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
+      <tc-headline>
         <h2 slot="title">Row</h2>
         <tc-button
           variant="opaque"
@@ -24,7 +24,7 @@
           @click="next"
         />
       </tc-headline>
-      <tc-steps :dark="$store.getters.dark" :current="current">
+      <tc-steps :current="current">
         <tc-step-item title="Validation" />
         <tc-step-item title="Authentication" />
         <tc-step-item title="Confirmation" />
@@ -41,8 +41,8 @@
       </tc-code-example>
     </tc-card>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
-      <tc-headline :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
+      <tc-headline>
         <h2 slot="title">Column</h2>
         <tc-button
           variant="opaque"
@@ -57,11 +57,7 @@
           @click="next"
         />
       </tc-headline>
-      <tc-steps
-        :dark="$store.getters.dark"
-        direction="column"
-        :current="current"
-      >
+      <tc-steps direction="column" :current="current">
         <tc-step-item title="Validation" />
         <tc-step-item title="Authentication" />
         <tc-step-item title="Confirmation" />
@@ -85,8 +81,8 @@
       vitae perferendis, rerum eaque, sunt et aperiam a amet. Omnis?
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
-      <tc-headline :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
+      <tc-headline>
         <h2 slot="title">Descriptions</h2>
         <tc-button
           variant="opaque"
@@ -101,7 +97,7 @@
           @click="next"
         />
       </tc-headline>
-      <tc-steps :dark="$store.getters.dark" :current="current">
+      <tc-steps :current="current">
         <tc-step-item title="Validation" description="Description #1" />
         <tc-step-item title="Authentication" description="Description #2" />
         <tc-step-item title="Confirmation" description="Description #3" />
@@ -117,8 +113,8 @@
       </tc-code-example>
     </tc-card>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
-      <tc-headline :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
+      <tc-headline>
         <h2 slot="title">Custom Icons</h2>
         <tc-button
           variant="opaque"
@@ -133,7 +129,7 @@
           @click="next"
         />
       </tc-headline>
-      <tc-steps :dark="$store.getters.dark" :current="current">
+      <tc-steps :current="current">
         <tc-step-item title="Validation" />
         <tc-step-item title="Authentication" icon="user" />
         <tc-step-item title="Confirmation" icon="checkmark" />
@@ -162,7 +158,6 @@
     <tccomponents-details-api
       :component="component.children[0]"
       suffix="for TC Step Item"
-      :dark="$store.getters.dark"
     />
   </div>
 </template>

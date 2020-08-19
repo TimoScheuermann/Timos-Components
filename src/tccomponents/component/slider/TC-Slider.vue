@@ -42,7 +42,7 @@ export default class TCSlider extends Mixins(TCComponent) {
 
   get styles(): string {
     return `--tc-slider__color: ${this.getChosenColor()};--tc-slider__background: ${this.getChosenBackground(
-      this.dark ? 'containerDark' : 'container'
+      this.darkmode ? 'containerDark' : 'container'
     )}`;
   }
 }

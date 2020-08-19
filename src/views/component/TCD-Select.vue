@@ -7,16 +7,15 @@
       eligendi sed. Facere minima nihil id possimus harum! Ea, perspiciatis!
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="120">
         <div>
           <h2>Simple Select</h2>
-          <tc-select :dark="$store.getters.dark" :values="values" />
+          <tc-select :values="values" />
         </div>
         <div>
           <h2>Multiple Values</h2>
           <tc-select
-            :dark="$store.getters.dark"
             :multiple="true"
             :values="values"
             placeholder="Select multiple"
@@ -24,27 +23,15 @@
         </div>
         <div>
           <h2>Placeholder</h2>
-          <tc-select
-            :dark="$store.getters.dark"
-            placeholder="Choose one item"
-            :values="values"
-          />
+          <tc-select placeholder="Choose one item" :values="values" />
         </div>
         <div>
           <h2>Title</h2>
-          <tc-select
-            :dark="$store.getters.dark"
-            title="Choose one item"
-            :values="values"
-          />
+          <tc-select title="Choose one item" :values="values" />
         </div>
         <div>
           <h2>Custom icon</h2>
-          <tc-select
-            :dark="$store.getters.dark"
-            icon="tccomponents-tc"
-            :values="values"
-          />
+          <tc-select icon="tccomponents-tc" :values="values" />
         </div>
       </tl-grid>
       <tc-code-example>

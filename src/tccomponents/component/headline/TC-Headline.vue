@@ -1,5 +1,5 @@
 <template>
-  <div class="tc-headline" :class="{ 'tc-headline__dark': dark }">
+  <div class="tc-headline">
     <div class="tc-headline--title__prestyled" v-if="title">
       <tf-icon v-if="icon" :icon="icon" />{{ title }}
     </div>
@@ -29,7 +29,7 @@ export default class TCHeadline extends Mixins(TCComponent) {
 
   get styles(): string {
     return `--tc-headline__color: ${this.getChosenColor(
-      this.dark ? 'colorDark' : 'color'
+      this.darkmode ? 'colorDark' : 'color'
     )}`;
   }
 }
@@ -44,10 +44,7 @@ export default class TCHeadline extends Mixins(TCComponent) {
   align-items: center;
   flex-wrap: wrap;
   position: relative;
-  color: $color;
-  &__dark {
-    color: $color_dark;
-  }
+  color: rgba(var(--tc-headline__color), 1);
   .tc-headline--bar {
     position: absolute;
     bottom: -5px;

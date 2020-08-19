@@ -13,13 +13,13 @@ import TCAutoBackground from '@/tccomponents/TC-Auto-Background.mixin';
 @Component
 export default class TCTabbar extends Mixins(TCAutoBackground) {
   get classes(): Record<string, unknown> {
-    return { 'tc-tabbar__dark': this.dark_ };
+    return { 'tc-tabbar__dark': this.darkmodeadv };
   }
   get styles(): string {
     return `--tc-tabbar__color:${this.getChosenColor(
-      this.dark_ ? 'colorDark' : 'color'
+      this.darkmodeadv ? 'colorDark' : 'color'
     )};--tc-tabbar__background: ${this.getChosenBackground(
-      this.dark_ ? 'paragraphDark' : 'paragraph'
+      this.darkmodeadv ? 'paragraphDark' : 'paragraph'
     )}`;
   }
 }

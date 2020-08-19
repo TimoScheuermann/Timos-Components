@@ -2,7 +2,7 @@
   <div
     class="tc-input"
     :class="{
-      'tc-input__dark': dark,
+      'tc-input__dark': darkmode,
       'tc-input__frosted': frosted,
       'tc-input__fit-content': isFitContent,
       'tc-input__hasHead': title || tooltip

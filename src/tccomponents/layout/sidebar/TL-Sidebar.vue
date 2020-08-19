@@ -110,6 +110,7 @@ export default class TLSidebar extends Mixins(TCComponent) {
     max-height: 100vh;
     position: relative;
     overflow: hidden;
+    z-index: 2;
 
     .layout-sidebar--background {
       position: absolute;

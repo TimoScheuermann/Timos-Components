@@ -7,58 +7,43 @@
       speed up your develeopment workflow. Below are some examples.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="200">
         <tl-flow flow="column" horizontal="space-between">
           <h2>Simple Text Input</h2>
-          <tc-input :dark="$store.getters.dark" />
+          <tc-input />
         </tl-flow>
         <tl-flow flow="column" horizontal="space-between">
           <h2>Text Input & Icon</h2>
-          <tc-input :dark="$store.getters.dark" icon="user" />
+          <tc-input icon="user" />
         </tl-flow>
         <tl-flow flow="column" horizontal="space-between">
           <h2>Simple Number Input</h2>
-          <tc-input :dark="$store.getters.dark" type="number" value="0" />
+          <tc-input type="number" value="0" />
         </tl-flow>
         <tl-flow flow="column" horizontal="space-between">
           <h2>Number Input & Icon</h2>
-          <tc-input
-            :dark="$store.getters.dark"
-            type="number"
-            icon="percentage"
-            value="0"
-          />
+          <tc-input type="number" icon="percentage" value="0" />
         </tl-flow>
         <tl-flow flow="column" horizontal="space-between">
           <h2>Number Input & Button</h2>
-          <tc-input
-            :dark="$store.getters.dark"
-            type="number"
-            :buttons="true"
-            value="0"
-          />
+          <tc-input type="number" :buttons="true" value="0" />
         </tl-flow>
         <tl-flow flow="column" horizontal="space-between">
           <h2>Number Input & Buttons & Icon</h2>
-          <tc-input
-            :dark="$store.getters.dark"
-            type="number"
-            :buttons="true"
-            icon="file-empty"
-          />
+          <tc-input type="number" :buttons="true" icon="file-empty" />
         </tl-flow>
         <tl-flow flow="column" horizontal="space-between">
           <h2>Disabled Input</h2>
-          <tc-input :dark="$store.getters.dark" :disabled="true" />
+          <tc-input :disabled="true" />
         </tl-flow>
         <tl-flow flow="column" horizontal="space-between">
           <h2>Input with placeholder</h2>
-          <tc-input :dark="$store.getters.dark" placeholder="placeholder" />
+          <tc-input placeholder="placeholder" />
         </tl-flow>
         <tl-flow flow="column" horizontal="space-between">
           <h2>Input with Title</h2>
-          <tc-input :dark="$store.getters.dark" title="Title" />
+          <tc-input title="Title" />
         </tl-flow>
       </tl-grid>
 
@@ -80,7 +65,7 @@
     <h1>Types</h1>
     <p>You can assign the following input types to TC Input</p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-flow>
         <tc-button
           v-for="t in inputTypes"
@@ -95,11 +80,7 @@
       <br />
       <br />
       <tl-flow>
-        <tc-input
-          :dark="$store.getters.dark"
-          :title="'Type: ' + currentType"
-          :type="currentType"
-        />
+        <tc-input :title="'Type: ' + currentType" :type="currentType" />
       </tl-flow>
     </tc-card>
   </div>

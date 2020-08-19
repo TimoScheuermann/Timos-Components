@@ -24,9 +24,9 @@ export default class TCHero extends Mixins(TCComponent) {
 
   get styles(): string {
     let stylez = `--tc-hero__background: ${this.getChosenBackground(
-      this.dark ? 'containerDark' : 'container'
+      this.darkmode ? 'containerDark' : 'container'
     )};--tc-hero__color: ${this.getChosenColor(
-      this.dark ? 'colorDark' : 'color'
+      this.darkmode ? 'colorDark' : 'color'
     )};--tc-hero__height: calc(${+this.height}${this.unit} + ${
       this.hasFixedHeader ? 50 : 0
     }px);`;

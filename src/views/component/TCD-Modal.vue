@@ -8,7 +8,7 @@
       itaque, nemo praesentium? Aspernatur.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid>
         <div>
           <h2>Sample Modal</h2>
@@ -43,10 +43,7 @@
       </tl-grid>
       <br />
 
-      <tc-segments
-        :dark="$store.getters.dark"
-        :segments="['Sample Modal', 'With Footer', 'More advanced']"
-      >
+      <tc-segments :segments="['Sample Modal', 'With Footer', 'More advanced']">
         <tc-segment-item title="Sample Modal">
           <tc-code-example>
             <pre>
@@ -139,12 +136,7 @@
       </tc-segments>
     </tc-card>
 
-    <tc-modal
-      :dark="$store.getters.dark"
-      v-model="modalSample"
-      title="Sample Modal"
-      subtitle="Very Simple"
-    >
+    <tc-modal v-model="modalSample" title="Sample Modal" subtitle="Very Simple">
       <p><b>Open Dev-Tools for a mobile demo</b></p>
       <p>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore,
@@ -155,7 +147,6 @@
     </tc-modal>
 
     <tc-modal
-      :dark="$store.getters.dark"
       v-model="modalFooter"
       title="With Footer"
       subtitle="Buttons added to footer"
@@ -178,7 +169,6 @@
     </tc-modal>
 
     <tc-modal
-      :dark="$store.getters.dark"
       v-model="modalAdvanced"
       title="More advanced"
       subtitle="You can place anything you want inside the modal"
@@ -191,16 +181,11 @@
         vel?
       </p>
       <tl-grid minWidth="200">
-        <tc-card :dark="$store.getters.dark" :rounded="true" title="Card #1" />
-        <tc-card :dark="$store.getters.dark" :rounded="true" title="Card #2" />
+        <tc-card :rounded="true" title="Card #1" />
+        <tc-card :rounded="true" title="Card #2" />
       </tl-grid>
       <br />
-      <tc-card
-        :dark="$store.getters.dark"
-        :rounded="true"
-        title="Card #3"
-        subtitle="Hi, here's a turtle"
-      >
+      <tc-card :rounded="true" title="Card #3" subtitle="Hi, here's a turtle">
         <img
           src="https://images.unsplash.com/photo-1518467166778-b88f373ffec7?w=1080&q=10"
           slot="media"

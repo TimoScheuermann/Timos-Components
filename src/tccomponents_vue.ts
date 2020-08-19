@@ -1,3 +1,7 @@
+import { VueConstructor } from 'vue/types/umd';
+import { Store } from 'vuex';
+import { tcStore } from './tccomponents/TC-Store';
+
 export { default as tcAvatar } from './tccomponents/component/avatar/TC-Avatar.vue';
 export { default as tcBadge } from './tccomponents/component/badge/TC-Badge.vue';
 export { default as tcButton } from './tccomponents/component/button/TC-Button.vue';
@@ -13,6 +17,7 @@ export { default as tcInput } from './tccomponents/component/input/TC-Input.vue'
 export { default as tcLink } from './tccomponents/component/link/TC-Link.vue';
 export { default as tcListItem } from './tccomponents/component/list/TC-List-Item.vue';
 export { default as tcList } from './tccomponents/component/list/TC-List.vue';
+export { default as tcMagicCard } from './tccomponents/component/magic-card/TC-Magic-Card.vue';
 export { default as tcModal } from './tccomponents/component/modal/TC-Modal.vue';
 export { default as tcNavbarItem } from './tccomponents/component/navbar/TC-Navbar-Item.vue';
 export { default as tcNavbar } from './tccomponents/component/navbar/TC-Navbar.vue';
@@ -45,3 +50,22 @@ export { default as tlFlow } from './tccomponents/layout/flow/TL-Flow.vue';
 export { default as tlGrid } from './tccomponents/layout/grid/TL-Grid.vue';
 export { default as tlModal } from './tccomponents/layout/modal/TL-Modal.vue';
 export { default as tlSidebar } from './tccomponents/layout/sidebar/TL-Sidebar.vue';
+
+export interface TCOptions {
+  primaryColor?: string;
+  store?: Store<any>;
+}
+
+export default {
+  install(vue: VueConstructor<Vue>, options: TCOptions) {
+    console.log('installing tccomponents_vue...');
+    if (options) {
+      if (options.primaryColor && !options.store) {
+        throw new Error('Please initialise plugin with a Vuex store.');
+      }
+      if (options.store)
+        options.store.registerModule('tccomponents_vue', tcStore);
+      tcStore.commit('setPrimary', options.primaryColor);
+    }
+  }
+};

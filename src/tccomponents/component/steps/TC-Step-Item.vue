@@ -39,7 +39,7 @@ export default class TCStepItem extends Mixins(TCComponent) {
   }
 
   get isDark(): boolean {
-    return this.$parent.$props.dark;
+    return this.$parent.$props.dark || this.$store.getters.dark;
   }
 
   get position() {

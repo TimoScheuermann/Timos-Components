@@ -61,7 +61,9 @@ export default class TCSegments extends Mixins(TCComponent) {
     if (this.highlight) c = this.convertToRGB(this.highlight);
     if (c) return c;
 
-    return this.convertToRGB(this.getHEX(this.dark ? 'color' : 'colorDark'));
+    return this.convertToRGB(
+      this.getHEX(this.darkmode ? 'color' : 'colorDark')
+    );
   }
 
   get styles(): string {
@@ -70,9 +72,9 @@ export default class TCSegments extends Mixins(TCComponent) {
     };--tc-segments__highlight: ${
       this.highlighter
     };--tc-segments__color: ${this.getChosenColor(
-      this.dark ? 'colorDark' : 'color'
+      this.darkmode ? 'colorDark' : 'color'
     )};--tc-segments__background: ${this.getChosenBackground(
-      this.dark ? 'containerDark' : 'container'
+      this.darkmode ? 'containerDark' : 'container'
     )};--tc-segments__current: ${this.active}`;
   }
 

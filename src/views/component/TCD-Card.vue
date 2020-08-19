@@ -7,29 +7,25 @@
       develeopment workflow. Below are some examples.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid>
         <div>
           <h2>Title</h2>
-          <tc-card :dark="$store.getters.dark" title="Title" />
+          <tc-card title="Title" />
         </div>
         <div>
           <h2>Title + Subtitle</h2>
-          <tc-card
-            :dark="$store.getters.dark"
-            title="Title"
-            subtitle="Subtitle"
-          />
+          <tc-card title="Title" subtitle="Subtitle" />
         </div>
         <div>
           <h2>Title + Media</h2>
-          <tc-card :dark="$store.getters.dark" title="Title">
+          <tc-card title="Title">
             <img src="assets/hero.png" slot="media" />
           </tc-card>
         </div>
         <div>
           <h2>Title + Media + Content</h2>
-          <tc-card :dark="$store.getters.dark" title="Title">
+          <tc-card title="Title">
             <img src="assets/hero.png" slot="media" />
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -39,11 +35,7 @@
 
         <div>
           <h2>Title + Subtitle + Content</h2>
-          <tc-card
-            :dark="$store.getters.dark"
-            title="Title"
-            subtitle="Subtitle"
-          >
+          <tc-card title="Title" subtitle="Subtitle">
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem hic
               sed temporibus accusamus debitis necessitatibus qui possimus
@@ -86,31 +78,22 @@
       basic options you can choose from.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="150">
         <div>
           <h2>Rounded</h2>
-          <tc-card
-            :dark="$store.getters.dark"
-            title="Rounded"
-            :rounded="true"
-          />
+          <tc-card title="Rounded" :rounded="true" />
         </div>
         <div>
           <h2>Hover</h2>
-          <tc-card :dark="$store.getters.dark" title="Hover me" :hover="true" />
+          <tc-card title="Hover me" :hover="true" />
         </div>
         <div>
           <h2>Frosted</h2>
           <div
             style="background: url('https://images.unsplash.com/photo-1525183995014-bd94c0750cd5')"
           >
-            <tc-card
-              :dark="$store.getters.dark"
-              title="Frosted"
-              color="#fff"
-              :frosted="true"
-            />
+            <tc-card title="Frosted" color="#fff" :frosted="true" />
           </div>
         </div>
       </tl-grid>
@@ -131,7 +114,7 @@
       colors or set your own using the color and background attribute.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="150">
         <div>
           <h2>Dark + Gold</h2>

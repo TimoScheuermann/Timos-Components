@@ -1,7 +1,7 @@
 <template>
   <div
     class="tc-list"
-    :class="{ 'tc-list__dark': dark, 'tc-list__frosted': frosted }"
+    :class="{ 'tc-list__dark': darkmode, 'tc-list__frosted': frosted }"
     :style="styles"
   >
     <div class="tc-list--title" v-if="title">
@@ -21,7 +21,7 @@ export default class TCList extends Mixins(TCComponent) {
 
   get styles(): string {
     return `--tc-list__color: ${this.getChosenColor(
-      this.dark ? 'colorDark' : 'color'
+      this.darkmode ? 'colorDark' : 'color'
     )}`;
   }
 }

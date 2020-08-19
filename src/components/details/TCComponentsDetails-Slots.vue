@@ -5,7 +5,6 @@
     v-if="component.slots.length > 0"
     title="Slots"
     rounded="true"
-    :dark="$store.getters.dark"
   >
     <template v-if="component.slots.length > 1">
       <transition-group name="image-swap" class="slot-images" tag="div">
@@ -17,7 +16,7 @@
         />
       </transition-group>
 
-      <tc-segments v-model="currentSelection" :dark="$store.getters.dark">
+      <tc-segments v-model="currentSelection">
         <tc-segment-item
           v-for="slot in component.slots"
           :key="slot.name"

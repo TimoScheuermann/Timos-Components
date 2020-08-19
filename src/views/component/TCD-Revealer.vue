@@ -8,31 +8,25 @@
       voluptate incidunt.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="170">
         <tl-flow horizontal="space-between" flow="column">
           <h2>Simple Revealer</h2>
-          <tc-revealer :dark="$store.getters.dark"><h2>Hello</h2></tc-revealer>
+          <tc-revealer><h2>Hello</h2></tc-revealer>
         </tl-flow>
         <tl-flow horizontal="space-between" flow="column">
           <h2>Revealer with title</h2>
-          <tc-revealer :dark="$store.getters.dark" title="Click to expand"
-            ><h2>Hello</h2></tc-revealer
-          >
+          <tc-revealer title="Click to expand"><h2>Hello</h2></tc-revealer>
         </tl-flow>
         <tl-flow horizontal="space-between" flow="column">
           <h2>Icon & Title</h2>
-          <tc-revealer
-            :dark="$store.getters.dark"
-            title="Click to expand"
-            icon="heart"
-          >
+          <tc-revealer title="Click to expand" icon="heart">
             <h2>Hello</h2>
           </tc-revealer>
         </tl-flow>
         <tl-flow horizontal="space-between" flow="column">
           <h2>Custom title</h2>
-          <tc-revealer :dark="$store.getters.dark">
+          <tc-revealer>
             <h2 slot="head">Huge title</h2>
             <h2>Hello</h2>
           </tc-revealer>
@@ -58,13 +52,13 @@
       Accusamus quae nam, at, non reprehenderit aut sunt asperiores dolores
       fugit nemo nostrum!
     </p>
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <h2>Custom Highlight Colors</h2>
       <tl-grid minWidth="150">
-        <tc-revealer :dark="$store.getters.dark" highlight="error" />
-        <tc-revealer :dark="$store.getters.dark" highlight="success" />
-        <tc-revealer :dark="$store.getters.dark" highlight="gold" />
-        <tc-revealer :dark="$store.getters.dark" highlight="pink" />
+        <tc-revealer highlight="error" />
+        <tc-revealer highlight="success" />
+        <tc-revealer highlight="gold" />
+        <tc-revealer highlight="pink" />
       </tl-grid>
 
       <tc-code-example>
@@ -78,29 +72,10 @@
       <br />
       <h2>Background & Colors</h2>
       <tl-grid minWidth="150">
-        <tc-revealer
-          :dark="$store.getters.dark"
-          tfbackground="error"
-          color="gold"
-          title="Title"
-        />
-        <tc-revealer
-          :dark="$store.getters.dark"
-          tfbackground="success"
-          color="#fff"
-          title="Title"
-        />
-        <tc-revealer
-          :dark="$store.getters.dark"
-          background="gold"
-          title="Title"
-        />
-        <tc-revealer
-          :dark="$store.getters.dark"
-          background="pink"
-          color="#fff"
-          title="Title"
-        />
+        <tc-revealer tfbackground="error" color="gold" title="Title" />
+        <tc-revealer tfbackground="success" color="#fff" title="Title" />
+        <tc-revealer background="gold" title="Title" />
+        <tc-revealer background="pink" color="#fff" title="Title" />
       </tl-grid>
       <tc-code-example>
         <pre>

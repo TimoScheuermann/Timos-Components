@@ -24,7 +24,7 @@ export default class TCTrExpanded extends Mixins(TCComponent) {
 
   get styles(): string {
     return `--tc-tr-expanded__background: ${this.getChosenBackground(
-      this.dark ? 'containerDark' : 'container'
+      this.darkmode ? 'containerDark' : 'container'
     )}`;
   }
 }

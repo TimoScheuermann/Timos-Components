@@ -7,23 +7,19 @@
       praesentium, assumenda ab, maxime sed aut amet ea omnis modi beatae!
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="140">
         <div>
           <h2>Simple Headline</h2>
-          <tc-headline :dark="$store.getters.dark" title="Welcome" />
+          <tc-headline title="Welcome" />
         </div>
         <div>
           <h2>Headline & Icon</h2>
-          <tc-headline
-            :dark="$store.getters.dark"
-            title="Thank You!"
-            icon="heart"
-          />
+          <tc-headline title="Thank You!" icon="heart" />
         </div>
         <div>
           <h2>Headline & default slot</h2>
-          <tc-headline :dark="$store.getters.dark" title="Whats up">
+          <tc-headline title="Whats up">
             <tc-link>Updates</tc-link>
           </tc-headline>
         </div>

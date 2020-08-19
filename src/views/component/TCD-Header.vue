@@ -8,17 +8,17 @@
       porro consequatur repellat?
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <h2>Simple Header</h2>
-      <tc-header :dark="$store.getters.dark" title="Simple Header" />
+      <tc-header title="Simple Header" />
       <tc-code-example>
         <pre>&lt;tc-header title="Simple Header" /></pre>
       </tc-code-example>
     </tc-card>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <h2>Header & Button</h2>
-      <tc-header :dark="$store.getters.dark" title="Child View">
+      <tc-header title="Child View">
         <tc-header-button slot="button" name="Parent View" />
       </tc-header>
       <tc-code-example>
@@ -30,9 +30,9 @@
       </tc-code-example>
     </tc-card>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <h2>Header & Default Slot</h2>
-      <tc-header :dark="$store.getters.dark" title="Title">
+      <tc-header title="Title">
         <tc-header-button slot="button" />
         <tc-button icon="login" name="login" />
       </tc-header>
@@ -54,14 +54,9 @@
       assumenda.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <h2>Sticky / Fixed</h2>
-      <tc-header
-        :dark="$store.getters.dark"
-        title="Sticky Header; top=0"
-        variant="sticky"
-        top="0"
-      />
+      <tc-header title="Sticky Header; top=0" variant="sticky" top="0" />
       <tc-code-example>
         <pre>
 &lt;tc-header title="Sticky Header; top=0" variant="sticky" top="0" /></pre
@@ -69,14 +64,9 @@
       </tc-code-example>
     </tc-card>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <h2>Floating</h2>
-      <tc-header
-        :dark="$store.getters.dark"
-        title="Floating Header; top=0"
-        variant="floating"
-        top="0"
-      />
+      <tc-header title="Floating Header; top=0" variant="floating" top="0" />
       <tc-code-example>
         <pre>
 &lt;tc-header title="Floating Header; top=0" variant="floating" top="0" /></pre
@@ -91,7 +81,7 @@
       dignissimos quo vero a fuga. Vero, quisquam eveniet.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <h2>Variants</h2>
       <tl-grid>
         <div>
@@ -116,7 +106,6 @@
       </tc-code-example>
       <tccomponents-details-api
         suffix="for TC Header Button"
-        :dark="$store.getters.dark"
         :component="component.children[0]"
       />
     </tc-card>

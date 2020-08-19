@@ -2,7 +2,7 @@
   <div
     class="tc-select"
     :class="{
-      'tc-select__dark': dark,
+      'tc-select__dark': darkmode,
       'tc-select__frosted': frosted,
       'tc-select__fit-content': isFitContent,
       'tc-select__hasHead': title || placeholder

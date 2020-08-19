@@ -8,9 +8,9 @@
       tenetur.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <h2>Simple Navbar</h2>
-      <tc-navbar :dark="$store.getters.dark">
+      <tc-navbar>
         <tc-navbar-item icon="house" name="Home" />
         <tc-navbar-item
           icon="file-code"
@@ -32,9 +32,9 @@
       </tc-code-example>
     </tc-card>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <h2>Navbar & Logo</h2>
-      <tc-navbar :dark="$store.getters.dark">
+      <tc-navbar>
         <b slot="logo"><i class="ti-tccomponents-tc" /> Components</b>
         <tc-navbar-item icon="house" name="Home" />
         <tc-navbar-item icon="gears" name="Settings" />
@@ -50,9 +50,9 @@
       </tc-code-example>
     </tc-card>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <h2>Navbar & Logo & Actions</h2>
-      <tc-navbar :dark="$store.getters.dark">
+      <tc-navbar>
         <b slot="logo"><i class="ti-tccomponents-tc" /> Components</b>
         <tc-navbar-item icon="house" name="Home" />
         <tc-navbar-item icon="gears" name="Settings" />
@@ -78,7 +78,7 @@
       dignissimos quo vero a fuga. Vero, quisquam eveniet.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" snbi :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false" snbi>
       <h2>Variants</h2>
       <tl-grid>
         <div>
@@ -165,7 +165,6 @@
       </tc-code-example>
       <tccomponents-details-api
         suffix="for TC Navbar Item"
-        :dark="$store.getters.dark"
         :component="component.children[0]"
       />
     </tc-card>

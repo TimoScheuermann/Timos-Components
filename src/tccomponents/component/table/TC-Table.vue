@@ -65,7 +65,7 @@ export default class TCTable extends Mixins(TCComponent) {
 
   get classes(): Record<string, unknown> {
     return {
-      'tc-table__dark': this.dark,
+      'tc-table__dark': this.darkmode,
       'tc-table__striped': this.striped,
       'tc-table__border': this.border
     };

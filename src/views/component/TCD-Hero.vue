@@ -9,9 +9,9 @@
       magnam.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <h2>Simple Hero</h2>
-      <tc-hero :dark="$store.getters.dark" :hasFixedHeader="false">
+      <tc-hero :hasFixedHeader="false">
         <h1>Hero Title</h1>
       </tc-hero>
       <tc-code-example>
@@ -23,9 +23,9 @@
       </tc-code-example>
     </tc-card>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <h2>Hero & Background-Image</h2>
-      <tc-hero color="#fff" :dark="$store.getters.dark" :hasFixedHeader="false">
+      <tc-hero color="#fff" :hasFixedHeader="false">
         <img
           src="https://portfolio.timos.design/assets/home-hero.jpg"
           slot="background"
@@ -45,10 +45,9 @@
       </tc-code-example>
     </tc-card>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <h2>Hero & Gradients</h2>
       <tc-hero
-        :dark="$store.getters.dark"
         color="#fff"
         gradient="linear-gradient(90deg, rgb(243, 114, 209) 0%,rgb(44, 19, 241) 100%)"
         :hasFixedHeader="false"

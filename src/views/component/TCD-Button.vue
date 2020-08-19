@@ -6,7 +6,7 @@
       variant has its own disabled state.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="200">
         <div v-for="variant in variants" :key="variant">
           <h2>{{ variant }}</h2>
@@ -37,7 +37,7 @@
       custom hex/rgb/hsl values.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="200">
         <div v-for="color in colors" :key="color">
           <h2>{{ color }}</h2>

@@ -7,11 +7,11 @@
       Reprehenderit quam fuga, porro maiores id mollitia temporibus eveniet!
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid>
         <div>
           <h2>Normal</h2>
-          <tc-list :dark="$store.getters.dark">
+          <tc-list>
             <tc-list-item title="Users" icon="users" />
             <tc-list-item title="Menu" routeName="TC-list" icon="settings" />
             <tc-list-item title="Swich" value="true" icon="toggle" />
@@ -25,7 +25,7 @@
         <div>
           <h2>Frosted & Title</h2>
           <div class="example-frosted">
-            <tc-list :dark="$store.getters.dark" title="Title" :frosted="true">
+            <tc-list title="Title" :frosted="true">
               <tc-list-item title="Users" icon="users" />
               <tc-list-item title="Menu" routeName="TC-list" icon="settings" />
               <tc-list-item title="Swich" value="true" icon="toggle" />
@@ -72,7 +72,7 @@
       dignissimos quo vero a fuga. Vero, quisquam eveniet.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <h2>Variants</h2>
       <tl-grid>
         <div>
@@ -97,7 +97,6 @@
       </tc-code-example>
       <tccomponents-details-api
         suffix="for TC List Item"
-        :dark="$store.getters.dark"
         :component="component.children[0]"
       />
     </tc-card>

@@ -1,12 +1,7 @@
 <template>
   <div class="portfolio--codeexample">
-    <tc-card
-      :title="title"
-      :shadow="false"
-      rounded="true"
-      :dark="$store.getters.dark"
-    >
-      <tc-segments :segments="['Example', 'Code']" :dark="$store.getters.dark">
+    <tc-card :title="title" :shadow="false" rounded="true">
+      <tc-segments :segments="['Example', 'Code']">
         <div id="Example" slot="Example">
           <slot />
         </div>

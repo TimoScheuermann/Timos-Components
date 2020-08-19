@@ -31,7 +31,7 @@ export default class TCSwitch extends Mixins(TCComponent) {
   }
 
   get classes(): Record<string, unknown> {
-    return { 'tc-switch__dark': this.dark };
+    return { 'tc-switch__dark': this.darkmode };
   }
 
   get styles(): string {

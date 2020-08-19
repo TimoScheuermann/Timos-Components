@@ -1,5 +1,5 @@
 <template>
-  <div class="tc-sidebar" :style="styles" :class="{ dark: dark }">
+  <div class="tc-sidebar" :style="styles" :class="{ dark: darkmode }">
     <div class="header">
       <slot name="header"></slot>
     </div>

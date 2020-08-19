@@ -2,23 +2,23 @@
   <div>
     <h1>Options & Colors</h1>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="140">
         <div>
           <h2>Simple Switch</h2>
-          <tc-switch :dark="$store.getters.dark" />
+          <tc-switch />
         </div>
         <div>
           <h2>Color: error</h2>
-          <tc-switch :dark="$store.getters.dark" tfcolor="error" />
+          <tc-switch tfcolor="error" />
         </div>
         <div>
           <h2>Color: lime</h2>
-          <tc-switch :dark="$store.getters.dark" color="lime" />
+          <tc-switch color="lime" />
         </div>
         <div>
           <h2>Color: alarm</h2>
-          <tc-switch :dark="$store.getters.dark" tfcolor="alarm" />
+          <tc-switch tfcolor="alarm" />
         </div>
       </tl-grid>
       <tc-code-example>

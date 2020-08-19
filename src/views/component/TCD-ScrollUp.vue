@@ -8,7 +8,7 @@
       laboriosam.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="120">
         <div>
           <h2>Variant: border</h2>
@@ -46,7 +46,7 @@
       vero. Culpa.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="120">
         <div>
           <h2>error (border)</h2>

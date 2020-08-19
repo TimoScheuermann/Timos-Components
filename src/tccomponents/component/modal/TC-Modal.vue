@@ -8,7 +8,7 @@
     <div
       class="tc-modal"
       :class="{
-        'tc-modal__dark': dark,
+        'tc-modal__dark': darkmode,
         'tc-modal__frosted': frosted,
         'tc-modal__opened': opened
       }"

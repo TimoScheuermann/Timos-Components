@@ -23,7 +23,7 @@ export default class TCSpinner extends mixins(TCComponent) {
   get classes(): Record<string, unknown> {
     const classes: Record<string, unknown> = {};
     classes['tc-spinner__' + this.variant] = true;
-    classes['tc-spinner__dark'] = this.dark;
+    classes['tc-spinner__dark'] = this.darkmode;
     return classes;
   }
 
@@ -31,7 +31,7 @@ export default class TCSpinner extends mixins(TCComponent) {
     return `--tc-spinner__size: ${
       this.size
     }px;--tc-spinner__color: ${this.getChosenColor(
-      this.dark ? 'colorDark' : 'color'
+      this.darkmode ? 'colorDark' : 'color'
     )};`;
   }
 }

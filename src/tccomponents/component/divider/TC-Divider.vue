@@ -40,12 +40,12 @@ export default class TCDivider extends Mixins(TCComponent) {
 
   get styles(): string {
     return `--tc-divider__color: ${this.getChosenColor(
-      this.dark ? 'colorDark' : 'color'
+      this.darkmode ? 'colorDark' : 'color'
     )}`;
   }
 
   get classes(): Record<string, unknown> {
-    return { 'tc-divider__dark': this.dark };
+    return { 'tc-divider__dark': this.darkmode };
   }
 }
 </script>

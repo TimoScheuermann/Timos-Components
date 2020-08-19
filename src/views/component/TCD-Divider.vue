@@ -7,11 +7,11 @@
       develeopment workflow. Below are some examples.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="150">
         <div>
           <h2>Simple Line</h2>
-          <tc-divider :dark="$store.getters.dark" />
+          <tc-divider />
         </div>
         <div>
           <h2>With icon & color</h2>
@@ -19,15 +19,11 @@
         </div>
         <div>
           <h2>With text</h2>
-          <tc-divider :dark="$store.getters.dark" name="Sample text" />
+          <tc-divider name="Sample text" />
         </div>
         <div>
           <h2>With icon & text</h2>
-          <tc-divider
-            :dark="$store.getters.dark"
-            name="Icehockey"
-            icon="hockey-stick"
-          />
+          <tc-divider name="Icehockey" icon="hockey-stick" />
         </div>
       </tl-grid>
 
@@ -47,27 +43,19 @@
       position attribute to whereever you want your content to be aligned.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="150">
         <div>
           <h2>Left-Alignment</h2>
-          <tc-divider :dark="$store.getters.dark" position="left" name="left" />
+          <tc-divider position="left" name="left" />
         </div>
         <div>
           <h2>Center-Alignment</h2>
-          <tc-divider
-            :dark="$store.getters.dark"
-            position="center"
-            name="center"
-          />
+          <tc-divider position="center" name="center" />
         </div>
         <div>
           <h2>Right-Alignment</h2>
-          <tc-divider
-            :dark="$store.getters.dark"
-            position="right"
-            name="right"
-          />
+          <tc-divider position="right" name="right" />
         </div>
       </tl-grid>
 

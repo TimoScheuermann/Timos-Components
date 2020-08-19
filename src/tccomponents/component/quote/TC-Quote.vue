@@ -1,5 +1,5 @@
 <template>
-  <div class="tc-quote" :style="styles" :class="{ 'tc-quote__dark': dark }">
+  <div class="tc-quote" :style="styles" :class="{ 'tc-quote__dark': darkmode }">
     <div class="tc-quote--content">
       <div v-if="title" class="tc-quote--title__prestyled">
         <i class="ti-quote-right"></i>

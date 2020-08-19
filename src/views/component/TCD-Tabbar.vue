@@ -8,12 +8,12 @@
       temporibus atque.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid>
         <div>
           <h2>Simple Tabbar</h2>
           <!-- Simple Tabbar -->
-          <tc-tabbar :dark="$store.getters.dark">
+          <tc-tabbar>
             <tc-tabbar-item icon="house" title="Home" />
             <tc-tabbar-item
               icon="tabbar"
@@ -25,7 +25,7 @@
         <div>
           <h2>Tabbar with 3 items</h2>
           <!-- Tabbar with 3 items -->
-          <tc-tabbar :dark="$store.getters.dark">
+          <tc-tabbar>
             <tc-tabbar-item icon="house" title="Home" />
             <tc-tabbar-item icon="chat-bubbles" title="Chat" />
             <tc-tabbar-item
@@ -38,7 +38,7 @@
         <div>
           <h2>Tabbar with 4 items</h2>
           <!-- Tabbar with 4 items -->
-          <tc-tabbar :dark="$store.getters.dark">
+          <tc-tabbar>
             <tc-tabbar-item icon="house" title="Home" />
             <tc-tabbar-item icon="chat-bubbles" title="Chat" />
             <tc-tabbar-item
@@ -95,12 +95,12 @@
       dignissimos quo vero a fuga. Vero, quisquam eveniet.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" snbi :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false" snbi>
       <h2>Colors (active state)</h2>
       <tl-grid>
         <div>
           <h3>error</h3>
-          <tc-tabbar :dark="$store.getters.dark">
+          <tc-tabbar>
             <tc-tabbar-item
               icon="cross-inverted"
               title="error"
@@ -112,7 +112,7 @@
         <div>
           <h3>success</h3>
 
-          <tc-tabbar :dark="$store.getters.dark">
+          <tc-tabbar>
             <tc-tabbar-item
               icon="checkmark-circle"
               title="success"
@@ -124,7 +124,7 @@
         <div>
           <h3>magenta</h3>
 
-          <tc-tabbar :dark="$store.getters.dark">
+          <tc-tabbar>
             <tc-tabbar-item
               icon="heart"
               title="magenta"
@@ -158,7 +158,6 @@
       </tc-code-example>
       <tccomponents-details-api
         suffix="for TC Tabbar Item"
-        :dark="$store.getters.dark"
         :component="component.children[0]"
       />
     </tc-card>

@@ -7,11 +7,11 @@
       nostrum dolor optio culpa velit, quam assumenda sit veritatis enim
       laboriosam.
     </p>
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="200">
         <div>
           <h2>Simple Quote</h2>
-          <tc-quote :dark="$store.getters.dark">
+          <tc-quote>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. At ipsum
             adipisci nostrum ab perspiciatis numquam necessitatibus blanditiis
             in, error consequuntur, eaque non dignissimos aliquam architecto
@@ -20,7 +20,7 @@
         </div>
         <div>
           <h2>Quote & Title</h2>
-          <tc-quote :dark="$store.getters.dark" title="Quote title">
+          <tc-quote title="Quote title">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti,
             in ex? Ducimus nemo aliquam tempore, hic excepturi ullam unde
             tempora laborum cumque labore minima magni eaque alias quia, at
@@ -29,12 +29,8 @@
         </div>
         <div>
           <h2>Custom Head</h2>
-          <tc-quote :dark="$store.getters.dark">
-            <tc-headline
-              :dark="$store.getters.dark"
-              slot="header"
-              title="Custom Title"
-            />
+          <tc-quote>
+            <tc-headline slot="header" title="Custom Title" />
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam ea
             enim quisquam consectetur dignissimos autem architecto fugit
             voluptatibus. Quasi perferendis voluptates nisi dolor pariatur culpa
@@ -75,36 +71,24 @@
       nulla sunt mollitia fugiat in at facere. Architecto, sit magni?
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="200">
         <div>
           <h2>Color: error</h2>
-          <tc-quote
-            :dark="$store.getters.dark"
-            tfcolor="error"
-            title="Important Quote"
-          >
+          <tc-quote tfcolor="error" title="Important Quote">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit.
           </tc-quote>
         </div>
         <div>
           <h2>Color: gold</h2>
-          <tc-quote
-            :dark="$store.getters.dark"
-            color="gold"
-            title="Special Quote"
-          >
+          <tc-quote color="gold" title="Special Quote">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit.
           </tc-quote>
         </div>
 
         <div>
           <h2>Color: success</h2>
-          <tc-quote
-            :dark="$store.getters.dark"
-            tfcolor="success"
-            title="Healthy Quote"
-          >
+          <tc-quote tfcolor="success" title="Healthy Quote">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit.
           </tc-quote>
         </div>

@@ -8,31 +8,30 @@
       examples.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="100">
         <div>
           <h2>Checkmark</h2>
           <tl-flow>
-            <tc-checkbox :dark="$store.getters.dark" />
+            <tc-checkbox />
           </tl-flow>
         </div>
         <div>
           <h2>Line</h2>
           <tl-flow>
-            <tc-checkbox variant="line" :dark="$store.getters.dark" />
+            <tc-checkbox variant="line" />
           </tl-flow>
         </div>
         <div>
           <h2>With Title</h2>
           <tl-flow>
-            <tc-checkbox :dark="$store.getters.dark" title="Activated" />
+            <tc-checkbox title="Activated" />
           </tl-flow>
         </div>
         <div>
           <h2>Custom icon</h2>
           <tl-flow>
             <tc-checkbox
-              :dark="$store.getters.dark"
               title="Custom Icon"
               iconChecked="checkmark"
               iconUnchecked="cross"
@@ -64,22 +63,18 @@
       basic options you can choose from.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="150">
         <div>
           <h2>Left</h2>
           <tl-flow>
-            <tc-checkbox :dark="$store.getters.dark" title="Left" />
+            <tc-checkbox title="Left" />
           </tl-flow>
         </div>
         <div>
           <h2>Right</h2>
           <tl-flow>
-            <tc-checkbox
-              :dark="$store.getters.dark"
-              title="Right"
-              position="right"
-            />
+            <tc-checkbox title="Right" position="right" />
           </tl-flow>
         </div>
       </tl-grid>
@@ -99,13 +94,12 @@
       should be changed.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="150">
         <div>
           <h2>Animation: spin</h2>
           <tl-flow>
             <tc-checkbox
-              :dark="$store.getters.dark"
               title="Spin"
               iconChecked="arrow-down"
               iconUnchecked="arrow-up"
@@ -117,7 +111,6 @@
           <h2>Animation: step</h2>
           <tl-flow>
             <tc-checkbox
-              :dark="$store.getters.dark"
               title="Step"
               iconChecked="minus"
               iconUnchecked="plus"
@@ -129,7 +122,6 @@
           <h2>Animation: flip</h2>
           <tl-flow>
             <tc-checkbox
-              :dark="$store.getters.dark"
               title="Flip"
               iconChecked="key"
               iconUnchecked="lock-closed"
@@ -170,24 +162,18 @@
       color attribute.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="150">
         <div>
           <h2>Error</h2>
           <tl-flow>
-            <tc-checkbox
-              :dark="$store.getters.dark"
-              title="error"
-              variant="line"
-              tfbackground="error"
-            />
+            <tc-checkbox title="error" variant="line" tfbackground="error" />
           </tl-flow>
         </div>
         <div>
           <h2>Alarm</h2>
           <tl-flow>
             <tc-checkbox
-              :dark="$store.getters.dark"
               title="alarm"
               position="right"
               tfcolor="alarm"
@@ -200,12 +186,7 @@
         <div>
           <h2>Custom</h2>
           <tl-flow>
-            <tc-checkbox
-              :dark="$store.getters.dark"
-              title="custom"
-              position="right"
-              background="#10ac84"
-            />
+            <tc-checkbox title="custom" position="right" background="#10ac84" />
           </tl-flow>
         </div>
       </tl-grid>

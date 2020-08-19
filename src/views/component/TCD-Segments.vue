@@ -8,9 +8,9 @@
       praesentium.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" snbi :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false" snbi>
       <h2>Sample Segments</h2>
-      <tc-segments :dark="$store.getters.dark">
+      <tc-segments>
         <tc-segment-item>
           <h2>item content 1</h2>
         </tc-segment-item>
@@ -46,14 +46,9 @@
       praesentium.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" snbi :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false" snbi>
       <h2>Colorful Segment</h2>
-      <tc-segments
-        :dark="$store.getters.dark"
-        tfbackground="error"
-        highlight="gold"
-        color="#fff"
-      >
+      <tc-segments tfbackground="error" highlight="gold" color="#fff">
         <tc-segment-item>
           <tc-card
             tfbackground="alarm"
@@ -103,7 +98,6 @@
     <tccomponents-details-api
       :component="component.children[0]"
       suffix="for TC Segment Item"
-      :dark="$store.getters.dark"
     />
   </div>
 </template>

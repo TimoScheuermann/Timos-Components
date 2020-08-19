@@ -57,7 +57,7 @@ export default class TCProgress extends Mixins(TCComponent) {
 
   get styles(): string {
     const defaultStyle = `--tc-progress__color: ${this.getChosenColor()}; --tc-progress__background: ${this.getChosenBackground(
-      this.dark ? 'containerDark' : 'container'
+      this.darkmode ? 'containerDark' : 'container'
     )};`;
     if (this.type === 'bar') {
       return (

@@ -7,7 +7,7 @@
       nostrum dolor optio culpa velit, quam assumenda sit veritatis enim
       laboriosam.
     </p>
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="100">
         <div>
           <h2>Top</h2>
@@ -59,7 +59,7 @@
       impedit rem iure quaerat ipsam optio quae odit minus harum?
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="100">
         <div>
           <h2>lightBlue</h2>

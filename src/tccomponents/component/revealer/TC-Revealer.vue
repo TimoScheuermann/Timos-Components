@@ -40,9 +40,9 @@ export default class TCRevealer extends Mixins(TCComponent) {
 
   get styles(): string {
     return `--tc-revealer__color:${this.getChosenColor(
-      this.dark ? 'colorDark' : 'color'
+      this.darkmode ? 'colorDark' : 'color'
     )};--tc-revealer__background: ${this.getChosenBackground(
-      this.dark ? 'containerDark' : 'paragraph'
+      this.darkmode ? 'containerDark' : 'paragraph'
     )};--tc-revealer__highlight: ${this.convertToRGB(
       this.getHEX(this.highlight) || this.highlight
     )};`;

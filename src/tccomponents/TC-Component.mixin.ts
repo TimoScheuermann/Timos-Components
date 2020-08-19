@@ -6,10 +6,7 @@ import availableColors from './TFColors';
 const usedUUIDs: string[] = [];
 @Component
 export default class TCComponent extends Vue {
-  @Prop({ default: false }) dark!: boolean;
-
-  @Prop({ default: 'primary' }) tccolor!: string;
-  @Prop() tcbackground!: string;
+  @Prop() dark!: boolean;
 
   @Prop() color!: string;
   @Prop() tfcolor!: string;
@@ -17,6 +14,10 @@ export default class TCComponent extends Vue {
   @Prop() tfbackground!: string;
 
   @Prop({ default: false }) frosted!: boolean;
+
+  get darkmode(): boolean {
+    return this.dark || this.$store.getters.dark;
+  }
 
   // eslint-disable-next-line
   public colorConverter: any;

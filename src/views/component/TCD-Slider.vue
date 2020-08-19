@@ -7,31 +7,23 @@
       ullam facilis accusamus blanditiis, quis quisquam harum consequatur sint!
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="140">
         <tl-flow horizontal="space-between" flow="column">
           <h2>Basic Slider</h2>
-          <tc-slider :dark="$store.getters.dark" />
+          <tc-slider />
         </tl-flow>
         <tl-flow horizontal="space-between" flow="column">
           <h2>Slider & Icons</h2>
-          <tc-slider
-            :dark="$store.getters.dark"
-            iconStart="tiles-four"
-            iconEnd="tiles-sixteen"
-          />
+          <tc-slider iconStart="tiles-four" iconEnd="tiles-sixteen" />
         </tl-flow>
         <tl-flow horizontal="space-between" flow="column">
           <h2>Slider & 1 Icon</h2>
-          <tc-slider :dark="$store.getters.dark" iconStart="flashlight" />
+          <tc-slider iconStart="flashlight" />
         </tl-flow>
         <tl-flow horizontal="space-between" flow="column">
           <h2>Slider & 1 Icon</h2>
-          <tc-slider
-            :dark="$store.getters.dark"
-            tfcolor="error"
-            iconEnd="cross-inverted"
-          />
+          <tc-slider tfcolor="error" iconEnd="cross-inverted" />
         </tl-flow>
       </tl-grid>
 
@@ -53,35 +45,23 @@
       fugit.
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="140">
         <tl-flow horizontal="space-between" flow="column">
           <h2>Example #1</h2>
-          <tc-slider :dark="$store.getters.dark" tfcolor="error" />
+          <tc-slider tfcolor="error" />
         </tl-flow>
         <tl-flow horizontal="space-between" flow="column">
           <h2>Example #2</h2>
-          <tc-slider
-            :dark="$store.getters.dark"
-            color="purple"
-            background="pink"
-          />
+          <tc-slider color="purple" background="pink" />
         </tl-flow>
         <tl-flow horizontal="space-between" flow="column">
           <h2>Example #3</h2>
-          <tc-slider
-            :dark="$store.getters.dark"
-            tfbackground="lightBlue"
-            tfcolor="darkBlue"
-          />
+          <tc-slider tfbackground="lightBlue" tfcolor="darkBlue" />
         </tl-flow>
         <tl-flow horizontal="space-between" flow="column">
           <h2>Example #4</h2>
-          <tc-slider
-            :dark="$store.getters.dark"
-            tfcolor="success"
-            background="green"
-          />
+          <tc-slider tfcolor="success" background="green" />
         </tl-flow>
       </tl-grid>
       <tc-code-example>

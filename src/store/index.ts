@@ -7,12 +7,16 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     dark: false,
+    primary: '#08f',
     designer: {
       component: ''
     },
     icons: [] as Icon[]
   },
   getters: {
+    primary: (state: any): string => {
+      return state.primary;
+    },
     designerComponent: (state: any) => {
       return state.designer.component;
     },

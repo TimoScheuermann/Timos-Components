@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Sizes</h1>
-    <tc-card :shadow="false" :rounded="true" :dark="this.$store.getters.dark">
+    <tc-card :shadow="false" :rounded="true">
       <tl-grid minWidth="200">
         <div v-for="size in sizes" :key="size">
           <h2>{{ size }}</h2>
@@ -22,7 +22,7 @@
     </tc-card>
 
     <h1>Borders</h1>
-    <tc-card :shadow="false" :rounded="true" :dark="this.$store.getters.dark">
+    <tc-card :shadow="false" :rounded="true">
       <tl-grid minWidth="200">
         <div v-for="border in borders" :key="border">
           <h2>{{ border }}</h2>

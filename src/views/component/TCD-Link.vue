@@ -8,7 +8,7 @@
       soluta earum nihil!
     </p>
 
-    <tc-card :rounded="true" :shadow="false" :dark="$store.getters.dark">
+    <tc-card :rounded="true" :shadow="false">
       <tl-grid minWidth="100">
         <div>
           <h2>Example #1</h2>

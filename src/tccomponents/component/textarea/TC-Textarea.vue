@@ -75,13 +75,13 @@ export default class TCTextarea extends Mixins(TCComponent) {
   get classes(): Record<string, unknown> {
     return {
       'tc-textarea__frosted': this.frosted,
-      'tc-textarea__dark': this.dark,
+      'tc-textarea__dark': this.darkmode,
       'tc-textarea__hasHead': this.title || this.tooltip
     };
   }
   get styles(): string {
     return `--tc-textarea__color: ${this.getChosenColor(
-      this.dark ? 'colorDark' : 'color'
+      this.darkmode ? 'colorDark' : 'color'
     )};`;
   }
 }

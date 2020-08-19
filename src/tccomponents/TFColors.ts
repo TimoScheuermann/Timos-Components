@@ -1,5 +1,7 @@
+import store from '@/store';
+
 const availableColors: Record<string, string> = {
-  primary: '#0088ff',
+  primary: store.getters.primary || '#0088ff',
   error: '#ff4757',
   success: '#25ca49',
   alarm: '#fed330',

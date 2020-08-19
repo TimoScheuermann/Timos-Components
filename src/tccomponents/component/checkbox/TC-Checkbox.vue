@@ -95,7 +95,7 @@ export default class TCCheckbox extends Mixins(TCComponent) {
 
   get classes(): Record<string, unknown> {
     return {
-      'tc-checkbox__dark': this.dark,
+      'tc-checkbox__dark': this.darkmode,
       'tc-checkbox__no-label': !this.title
     };
   }
