@@ -5,15 +5,10 @@ import TCComponent from './TC-Component.mixin';
 export default class TCAutoBackground extends Mixins(TCComponent) {
   @Prop({ default: true }) autoBackground!: boolean;
 
-  public dark_: boolean = this.darkmode;
+  public dark_: boolean = this.dark;
 
   get darkmodeadv(): boolean {
-    return this.dark_ || this.$store.getters.dark;
-  }
-
-  @Watch('dark')
-  darkChanged(): void {
-    this.handleScroll();
+    return this.dark_;
   }
 
   // Container

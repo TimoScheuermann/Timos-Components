@@ -105,9 +105,9 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
 
   get styles(): string {
     return `--tc-header__color:${this.getChosenColor(
-      this.darkmodeadv ? 'colorDark' : 'color'
+      this.dark_ ? 'colorDark' : 'color'
     )};--tc-header__background: ${this.getChosenBackground(
-      this.darkmodeadv ? 'paragraphDark' : 'paragraph'
+      this.dark_ ? 'paragraphDark' : 'paragraph'
     )};--tc-header__top: ${this.top}px`;
   }
 

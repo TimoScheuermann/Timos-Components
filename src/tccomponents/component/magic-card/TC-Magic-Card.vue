@@ -205,9 +205,13 @@ export default class TCMagicCard extends Mixins(TCComponent) {
         // border-radius: $border-radius $border-radius 0px 0px;
         top: calc(70px + env(safe-area-inset-top));
         transform: scale(1);
-        left: 0;
-        max-height: 100%;
-        max-width: 100%;
+        left: env(safe-area-inset-left);
+        max-height: calc(
+          100% - 70px - env(safe-area-inset-top) - env(safe-area-inset-bottom)
+        );
+        max-width: calc(
+          100% - env(safe-area-inset-left) - env(safe-area-inset-right)
+        );
       }
       box-shadow: $shadow;
     }
