@@ -4,8 +4,8 @@
     :dark="$store.getters.dark || $route.name === 'designer'"
   >
     <tc-tabbar-item
-      tfcolor="error"
       title="Home"
+      tfcolor="error"
       icon="house"
       routeName="home"
     />

@@ -152,7 +152,6 @@ export default class TCInput extends Mixins(TCComponent) {
       styles.transition = 'none';
     }
     return styles;
-    // background: this.type === 'color' ? this.innerValue : undefined,
   }
 
   public clear() {
@@ -161,6 +160,7 @@ export default class TCInput extends Mixins(TCComponent) {
   }
   public changeVal(amount: number): void {
     this.innerValue = +this.innerValue + +amount * +this.step;
+    this.innerValue = Math.round(this.innerValue * (1 / this.step)) * this.step;
     this.update();
   }
 

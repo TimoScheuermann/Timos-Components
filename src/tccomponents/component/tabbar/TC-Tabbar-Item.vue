@@ -5,7 +5,7 @@
     :class="classes"
     @click="handleClick"
   >
-    <tf-icon v-if="icon" :icon="icon" />
+    <tf-icon v-if="icon" :icon="icon" :class="{ hasText: title }" />
     <span v-if="title">{{ title }}</span>
   </div>
 </template>
@@ -22,8 +22,8 @@ import TFIcon from '@/tccomponents/fundamental/icon/TF-Icon.vue';
   }
 })
 export default class TCTabbarItem extends Mixins(TCComponent, TCURLComponent) {
-  @Prop({ default: 'house', type: String }) icon!: string;
-  @Prop({ default: 'Home', type: String }) title!: string;
+  @Prop() icon!: string;
+  @Prop() title!: string;
 
   get classes(): Record<string, unknown> {
     return { 'tc-tabbar-item__active': this.isURLActive };
@@ -46,7 +46,7 @@ export default class TCTabbarItem extends Mixins(TCComponent, TCURLComponent) {
   @media only screen and(min-width: 651px) {
     margin: 0 15px;
     padding: 8px 0;
-    i {
+    .hasText {
       margin-right: 10px;
     }
   }

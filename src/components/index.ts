@@ -536,10 +536,9 @@ const tcComponents: TCComponentGroup[] = [
             name: 'tabbar-item',
             icon: 'heart',
             api: [
-              { ...apiIcon, default: 'house' },
+              { ...apiIcon },
               {
                 name: 'title',
-                default: 'Home',
                 type: 'string',
                 description: 'Name to be displayed'
               },

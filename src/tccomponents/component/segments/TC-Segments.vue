@@ -117,7 +117,7 @@ export default class TCSegments extends Mixins(TCComponent) {
       z-index: 2;
       font-weight: 500;
       cursor: pointer;
-      padding: 5px;
+      padding: 2.5px;
       text-align: center;
       color: rgba(var(--tc-segments__color), 1);
       border-radius: inherit;
