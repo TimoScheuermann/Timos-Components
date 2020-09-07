@@ -76,6 +76,8 @@ export default class TCMagicCard extends Mixins(TCComponent) {
       mapped.push(
         '--sidebarWidth:' + sidebar.getBoundingClientRect().width + 'px'
       );
+    } else {
+      mapped.push('--sidebarWidth:0px');
     }
 
     expanded.setAttribute('style', mapped.join(';'));
