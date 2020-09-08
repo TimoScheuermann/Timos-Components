@@ -8,10 +8,11 @@
       }"
     >
       <img :src="src" :alt="title + ' preview'" />
-      <div class="description">
-        <div class="subtitle">{{ subtitle }}</div>
-        <div class="title">{{ title }}</div>
+      <div class="description" v-if="title || subtitle">
+        <div class="subtitle" v-if="subtitle">{{ subtitle }}</div>
+        <div class="title" v-if="title">{{ title }}</div>
       </div>
+      <slot name="thumbnail" />
     </div>
     <div
       class="tc-magic-card--background"
@@ -27,10 +28,11 @@
     >
       <div class="tc-magic-card--thumbnail">
         <img :src="src" :alt="title + ' preview'" />
-        <div class="description">
-          <div class="subtitle">{{ subtitle }}</div>
-          <div class="title">{{ title }}</div>
+        <div class="description" v-if="title || subtitle">
+          <div class="subtitle" v-if="subtitle">{{ subtitle }}</div>
+          <div class="title" v-if="title">{{ title }}</div>
         </div>
+        <slot name="thumbnail" />
         <i class="ti-cross-inverted" @click="expanded = false" />
       </div>
 
