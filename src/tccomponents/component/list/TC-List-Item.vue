@@ -2,9 +2,12 @@
   <div
     class="tc-list-item"
     @click="handleClickLocal"
-    :class="{ 'tc-list-item__link': href || to || routeName || value }"
+    :class="{
+      'tc-list-item__link': href || to || routeName || value,
+      'tc-list-item__no-icon': !icon
+    }"
   >
-    <div class="tc-list-item--icon">
+    <div class="tc-list-item--icon" v-if="icon">
       <tf-icon :icon="icon" />
     </div>
     <div class="tc-list-item--container">
@@ -70,18 +73,25 @@ $size: 40px;
     &:hover {
       background: rgba(lighten($paragraph_dark, 20%), 0.5);
     }
+    .tc-switch label .container {
+      background: $container_dark;
+    }
   }
 }
 .tc-list-item {
   display: grid;
   grid-gap: 10px;
   grid-template-columns: $size 1fr;
+  &.tc-list-item__no-icon {
+    grid-template-columns: 1fr;
+    padding-left: 10px;
+  }
   grid-template-rows: $size;
   border-radius: $border-radius;
 
-  transition: background 0.2s ease-in-out;
+  transition: background 0.2s ease-in-out, transform 0.5s;
   &:hover {
-    background: rgba(darken($paragraph, 15%), 0.5);
+    background: rgba(darken($paragraph, 20%), 0.5);
   }
 
   &.tc-list-item__link {

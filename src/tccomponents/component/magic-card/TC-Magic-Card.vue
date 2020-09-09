@@ -36,7 +36,9 @@
         <i class="ti-cross-inverted" @click="expanded = false" />
       </div>
 
-      <slot />
+      <div class="tc-magic-card--content">
+        <slot />
+      </div>
     </div>
   </div>
 </template>
@@ -111,6 +113,9 @@ export default class TCMagicCard extends Mixins(TCComponent) {
 .tc-magic-card {
   position: relative;
 
+  .tc-magic-card--content {
+    // padding-bottom: env(safe-area-inset-bottom);
+  }
   .tc-magic-card--thumbnail {
     user-select: none;
     cursor: pointer;
@@ -206,13 +211,11 @@ export default class TCMagicCard extends Mixins(TCComponent) {
         transform: scale(1);
       }
       @media #{$isMobile} {
-        // border-radius: $border-radius $border-radius 0px 0px;
+        border-radius: 20px;
         top: calc(70px + env(safe-area-inset-top));
         transform: scale(1);
         left: env(safe-area-inset-left);
-        max-height: calc(
-          100% - 70px - env(safe-area-inset-top) - env(safe-area-inset-bottom)
-        );
+        max-height: calc(100% - 70px - env(safe-area-inset-top));
         max-width: calc(
           100% - env(safe-area-inset-left) - env(safe-area-inset-right)
         );

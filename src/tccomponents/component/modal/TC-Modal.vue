@@ -123,7 +123,8 @@ $time: 0.3s;
   @media only screen and(min-width: 650px) {
     top: 50%;
     left: 50%;
-    border-radius: $border-radius;
+    border-radius: 20px;
+
     transform: translate(-50%, -50%) scale(0);
     &.tc-modal__opened {
       transform: translate(-50%, -50%) scale(1);
@@ -132,15 +133,16 @@ $time: 0.3s;
     max-width: calc(
       100vw - env(safe-area-inset-left) - env(safe-area-inset-right) - 40px
     );
+    .tc-modal--content.tc-modal--content__no-footer,
+    .tc-modal--footer {
+      padding-bottom: 20px;
+    }
   }
   @media only screen and(max-width: 649px) {
     bottom: 0;
     left: 0;
     right: 0;
-    border-top: {
-      left-radius: #{2 * $border-radius};
-      right-radius: #{2 * $border-radius};
-    }
+    border-radius: 20px 20px 0 0;
     max-height: calc(100vh - env(safe-area-inset-top) - 60px);
 
     transform: translateY(100%);
@@ -176,7 +178,7 @@ $time: 0.3s;
 
   .tc-modal--head {
     position: sticky;
-    padding: 20px 5vw;
+    padding: 30px 5vw 20px;
     top: 0;
     z-index: 10;
     &.tc-modal--head__prestyled {

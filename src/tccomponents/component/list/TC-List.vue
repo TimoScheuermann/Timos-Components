@@ -7,7 +7,10 @@
     <div class="tc-list--title" v-if="title">
       {{ title }}
     </div>
-    <slot />
+    <transition-group v-if="transition" name="list-items">
+      <slot />
+    </transition-group>
+    <slot v-else />
   </div>
 </template>
 
@@ -18,6 +21,7 @@ import TCComponent from '@/tccomponents/TC-Component.mixin';
 @Component
 export default class TCList extends Mixins(TCComponent) {
   @Prop() title!: string;
+  @Prop() transition!: boolean;
 
   get styles(): string {
     return `--tc-list__color: ${this.getChosenColor(
@@ -51,5 +55,20 @@ export default class TCList extends Mixins(TCComponent) {
       bottom: 0;
     }
   }
+}
+
+.list-item-move {
+  transition: transform 0.5s;
+}
+.list-item-item {
+  transition: all 0.5s;
+}
+.list-item-enter,
+.list-item-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.list-item-leave-active {
+  position: absolute;
 }
 </style>

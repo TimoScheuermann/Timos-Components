@@ -1,9 +1,9 @@
 <template>
-  <transition name="fade">
-    <div class="tc-segment-item" v-if="tcSegmentItemShow">
-      <slot />
-    </div>
-  </transition>
+  <!-- <transition name="fade" mode="in-out"> -->
+  <div class="tc-segment-item" v-if="tcSegmentItemShow">
+    <slot />
+  </div>
+  <!-- </transition> -->
 </template>
 
 <script lang="ts">
@@ -26,12 +26,12 @@ export default class TCSegmentItem extends Mixins(TCComponent) {
 </script>
 
 <style lang="scss" scoped>
-.fade-enter-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: all 0.3s ease;
 }
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
-  height: 0px;
 }
 </style>

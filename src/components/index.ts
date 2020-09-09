@@ -1164,6 +1164,12 @@ const tcComponents: TCComponentGroup[] = [
             name: 'title',
             type: 'string',
             description: 'Adds a prestyled title on top of the list'
+          },
+          {
+            name: 'transition',
+            type: 'booleam',
+            description:
+              'Enables an animation if list-items change. Requires list-items to be keyed.'
           }
         ],
         children: [
