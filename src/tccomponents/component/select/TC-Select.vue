@@ -230,6 +230,7 @@ export default class TCSelect extends Mixins(TCComponent) {
 
 .tc-select {
   user-select: none;
+  position: relative;
   &.tc-select__container .tc-select-container {
     @include tc-container__light();
   }
@@ -320,7 +321,7 @@ export default class TCSelect extends Mixins(TCComponent) {
   }
 
   .tc-select-item-container {
-    position: fixed;
+    position: absolute;
     z-index: 100;
     top: var(--tc-select__x);
     left: var(--tc-select__y);
