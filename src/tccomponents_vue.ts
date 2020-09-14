@@ -27,6 +27,7 @@ export { default as tcRevealer } from './tccomponents/component/revealer/TC-Reve
 export { default as tcScrollUp } from './tccomponents/component/scrollup/TC-Scroll-Up.vue';
 export { default as tcSegmentItem } from './tccomponents/component/segments/TC-Segment-Item.vue';
 export { default as tcSegments } from './tccomponents/component/segments/TC-Segments.vue';
+export { default as tcSelectItem } from './tccomponents/component/select/TC-Select-Item.vue';
 export { default as tcSelect } from './tccomponents/component/select/TC-Select.vue';
 export { default as tcSidebarGroup } from './tccomponents/component/sidebar/TC-Sidebar-Group.vue';
 export { default as tcSidebarItem } from './tccomponents/component/sidebar/TC-Sidebar-Item.vue';
