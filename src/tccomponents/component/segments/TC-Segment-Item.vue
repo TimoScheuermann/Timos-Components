@@ -1,9 +1,7 @@
 <template>
-  <!-- <transition name="fade" mode="in-out"> -->
   <div class="tc-segment-item" v-if="tcSegmentItemShow">
     <slot />
   </div>
-  <!-- </transition> -->
 </template>
 
 <script lang="ts">

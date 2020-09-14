@@ -70,7 +70,7 @@ export default class TCNavbar extends Mixins(TCAutoBackground) {
 <style lang="scss" scoped>
 .tc-navbar {
   position: fixed;
-  z-index: 999;
+  z-index: 950;
   top: 0;
   left: 0;
   right: 0;

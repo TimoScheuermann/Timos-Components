@@ -3,6 +3,49 @@
     <tccomponents-subpage-hero subtitle="Playground" />
 
     <div content>
+      <h1>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati
+        cumque impedit quis iusto est totam fugiat quod. Deserunt, similique
+        nisi praesentium nam, ab cum, optio sunt repudiandae dolorum quae
+        libero! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non
+        architecto at, perferendis exercitationem laborum ullam unde dolorum
+        corporis sed, ipsa, accusamus quos facilis! Consequatur soluta eum rem
+        non cupiditate eos.
+      </h1>
+      <h1>TC Select 2</h1>
+      <!-- <tc-select title="Wähle">
+        <tc-select-item title="FitnessHub" />
+        <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
+        <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
+      </tc-select> -->
+      <div style="text-align: right">
+        <tc-select :showSelection="false" :onlyIcon="true" variant="filled">
+          <tc-select-item title="FitnessHub" />
+          <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
+          <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
+          <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
+          <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
+          <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
+          <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
+          <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
+          <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
+        </tc-select>
+      </div>
+      <!-- <tc-select title="Wähle" variant="filled">
+        <tc-select-item title="FitnessHub" />
+        <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
+        <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
+      </tc-select> -->
+      <!-- <tc-select title="Wähle" variant="border">
+        <tc-select-item title="FitnessHub" />
+        <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
+        <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
+      </tc-select>
+      <tc-select title="Wähle" variant="opaque">
+        <tc-select-item title="FitnessHub" />
+        <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
+        <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
+      </tc-select> -->
       <h1>TC Image</h1>
       <tc-image
         src="https://images.unsplash.com/photo-1597606781340-e2661f37b5b3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=752&q=80"
@@ -94,6 +137,8 @@ import TCSidebarGroup from '@/tccomponents/component/sidebar/TC-Sidebar-Group.vu
 import TCSidebarItem from '@/tccomponents/component/sidebar/TC-Sidebar-Item.vue';
 import TCMagicCard from '@/tccomponents/component/magic-card/TC-Magic-Card.vue';
 import TCImage2 from '@/tccomponents/component/image/TC-Image.vue';
+import TCSelect2 from '@/tccomponents/component/select/TC-Select.vue';
+import TCSelectItem from '@/tccomponents/component/select/TC-Select-Item.vue';
 
 @Component({
   components: {
@@ -102,7 +147,9 @@ import TCImage2 from '@/tccomponents/component/image/TC-Image.vue';
     'tc-sidebar-group': TCSidebarGroup,
     'tc-sidebar-item': TCSidebarItem,
     'tc-magic-card': TCMagicCard,
-    'tc-image': TCImage2
+    'tc-image': TCImage2,
+    'tc-select': TCSelect2,
+    'tc-select-item': TCSelectItem
   }
 })
 export default class TCComponentsPlayground extends Vue {}

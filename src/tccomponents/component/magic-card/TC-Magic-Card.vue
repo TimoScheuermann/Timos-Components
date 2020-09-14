@@ -172,13 +172,13 @@ export default class TCMagicCard extends Mixins(TCComponent) {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 1000;
+    z-index: 975;
     background: rgba(#000, 0.5);
   }
 
   .tc-magic-card--card {
     position: fixed;
-    z-index: 1001;
+    z-index: 976;
     background: rgba(var(--tc-magic-card__background), 1);
     color: rgba(var(--tc-magic-card__color), 1);
 

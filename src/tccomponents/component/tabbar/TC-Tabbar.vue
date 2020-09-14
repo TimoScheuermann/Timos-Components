@@ -34,7 +34,7 @@ export default class TCTabbar extends Mixins(TCAutoBackground) {
   bottom: 0;
   right: 0;
   left: 0px;
-  z-index: 999;
+  z-index: 950;
   height: 50px;
   padding: 0 2.5px {
     bottom: env(safe-area-inset-bottom);

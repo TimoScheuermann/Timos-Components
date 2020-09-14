@@ -503,6 +503,12 @@ const tcComponents: TCComponentGroup[] = [
             name: 'value',
             description: 'Determines the state of the modal'
           },
+          {
+            ...apiBoolean,
+            name: 'closable',
+            default: true,
+            description: 'Determines if the user can close the modal'
+          },
           { ...apiBoolean, name: 'v-model', description: '' },
           {
             name: '@close',
@@ -1098,7 +1104,6 @@ const tcComponents: TCComponentGroup[] = [
         name: 'Select',
         icon: 'list',
         api: [
-          { name: 'title', type: 'string', description: '' },
           { ...apiIcon, default: 'list' },
           apiFrosted,
           apiDark,
@@ -1114,20 +1119,31 @@ const tcComponents: TCComponentGroup[] = [
             description: 'Will be displayed if no item is selected'
           },
           {
-            name: 'value',
-            type: 'any | any[]',
+            ...apiBoolean,
+            name: 'disabled',
+            description: 'Determines if the select is disabled'
+          },
+          {
+            ...apiBoolean,
+            name: 'showSelection',
             description:
-              'An item or a list of items that are currently selected'
+              'Determines if the placeholder value should be overwritten by the current selection'
           },
           {
-            name: 'values',
-            type: 'any[]',
-            description: 'Possible items the user can select'
+            ...apiBoolean,
+            name: 'onlyIcon',
+            description: 'Determines if the placeholder is visible'
           },
           {
-            name: 'v-model',
-            type: 'any | any[]',
-            description: ''
+            type: 'string',
+            parameters: ['container', 'filled', 'border', 'opaque'],
+            name: 'variant',
+            description: 'Determines the style of TC-Select'
+          },
+          {
+            type: 'string[]',
+            name: '@select',
+            description: "Returns the current selection of items (item's title)"
           }
         ],
         slots: []

@@ -132,7 +132,7 @@ export default class TCHeader extends Mixins(TCAutoBackground) {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 999;
+  z-index: 950;
 
   transition: color 0.1s ease-in-out, background 0.3s ease-in-out;
   color: rgba(var(--tc-header__color), 1);

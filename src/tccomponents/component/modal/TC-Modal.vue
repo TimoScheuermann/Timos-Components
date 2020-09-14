@@ -4,6 +4,9 @@
       class="tc-modal-background"
       :class="{ show: opened, hide: !opened }"
       @click="close"
+      @scroll.passive="preventDefault"
+      @touchmove.passive="preventDefault"
+      ref="modalBackground"
     />
     <div
       class="tc-modal"
@@ -12,13 +15,14 @@
         'tc-modal__frosted': frosted,
         'tc-modal__opened': opened
       }"
-      @click.prevent
+      @click.capture.prevent
+      ref="modalContainer"
     >
       <div
         class="tc-modal--head"
         :class="{ 'tc-modal--head__prestyled': !$slots.header }"
       >
-        <div class="tc-modal--close" @click="close">
+        <div class="tc-modal--close" v-if="closable" @click="close">
           <tf-icon icon="cross-inverted" />
         </div>
         <slot name="header" />
@@ -54,29 +58,68 @@ import TCComponent from '@/tccomponents/TC-Component.mixin';
 export default class TCModal extends Mixins(TCComponent) {
   @Prop() title!: string;
   @Prop() subtitle!: string;
+  @Prop({ default: true }) closable!: boolean;
 
   @Prop({ default: false }) value!: boolean;
   public opened: boolean = this.value;
 
+  mounted() {
+    this.contEl.addEventListener('touchmove', this.stopPropagation);
+  }
+  beforeDestroy() {
+    this.contEl.removeEventListener('touchmove', this.stopPropagation);
+    this.removeVisibleListener();
+  }
+
   @Watch('value')
   public valueChanged() {
     this.opened = this.value;
-    document.body.classList.remove('tc-modal--opened');
+    this.removeVisibleListener();
     if (this.opened) {
       document.body.classList.add('tc-modal--opened');
+      this.bgEl.addEventListener('touchmove', this.preventDefault, {
+        passive: false
+      });
+      this.bgEl.addEventListener('scroll', this.preventDefault, {
+        passive: false
+      });
     }
   }
 
+  public removeVisibleListener(): void {
+    document.body.classList.remove('tc-modal--opened');
+    this.bgEl.removeEventListener('touchmove', this.preventDefault);
+    this.bgEl.removeEventListener('scroll', this.preventDefault);
+  }
+
+  get bgEl(): HTMLElement {
+    return this.$refs['modalBackground'] as HTMLElement;
+  }
+  get contEl(): HTMLElement {
+    return this.$refs['modalContainer'] as HTMLElement;
+  }
+
   public close() {
-    this.opened = false;
-    this.$emit('input', this.opened);
-    this.$emit('close');
+    if (this.closable) {
+      this.opened = false;
+      this.$emit('input', this.opened);
+      this.$emit('close');
+    }
+  }
+
+  public preventDefault(e: Event) {
+    e.preventDefault();
+  }
+  public stopPropagation(e: Event) {
+    e.stopPropagation();
+    e.stopImmediatePropagation();
   }
 }
 </script>
 <style lang="scss">
 body.tc-modal--opened {
   overflow: hidden;
+  user-select: none;
 }
 </style>
 <style lang="scss" scoped>
@@ -101,7 +144,7 @@ $time: 0.3s;
   right: 0;
   bottom: 0;
   background: #000;
-  z-index: 1001;
+  z-index: 1000;
 
   &.hide {
     transform: scale(0);
@@ -110,15 +153,16 @@ $time: 0.3s;
   }
   &.show {
     transform: scale(1);
-    opacity: 0.2;
+    opacity: 0.5;
     transition: opacity $time ease-in-out, 0s transform 0s;
   }
 }
 .tc-modal {
   position: fixed;
-  z-index: 1002;
+  z-index: 1001;
 
   overflow: auto;
+  user-select: all;
   transition: transform $time ease-in-out;
   @media only screen and(min-width: 650px) {
     top: 50%;
@@ -180,7 +224,7 @@ $time: 0.3s;
     position: sticky;
     padding: 30px 5vw 20px;
     top: 0;
-    z-index: 10;
+    z-index: 1002;
     &.tc-modal--head__prestyled {
       text-align: center;
       .tc-modal--title {
@@ -203,6 +247,8 @@ $time: 0.3s;
     position: sticky;
     bottom: 0;
     padding: 20px 5vw;
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
+    z-index: 1002;
   }
 }
 </style>

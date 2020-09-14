@@ -150,6 +150,7 @@
       v-model="modalFooter"
       title="With Footer"
       subtitle="Buttons added to footer"
+      :closable="false"
     >
       <p><b>Open Dev-Tools for a mobile demo</b></p>
       <p>

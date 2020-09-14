@@ -1,306 +1,338 @@
 <template>
-  <div
-    class="tc-select"
-    :class="{
-      'tc-select__dark': darkmode,
-      'tc-select__frosted': frosted,
-      'tc-select__fit-content': isFitContent,
-      'tc-select__hasHead': title || placeholder
-    }"
-    :id="id"
-    @click="expanded = !expanded"
-  >
-    <div :id="id + 't'" class="tc-select--title" v-if="title">{{ title }}</div>
-    <div :id="id + 'tt'" class="tc-select--tooltip" v-if="tooltip">
-      <tc-tooltip :tooltip="tooltip">
-        <i class="ti-question-circle"></i>
-      </tc-tooltip>
+  <div class="tc-select" :class="classes" :style="styles" :id="uuid">
+    <div
+      class="tc-select-container"
+      @click.capture="open"
+      :id="uuid + 'c'"
+      ref="select-cont"
+      :class="{ 'tc-select-container__has-title': !onlyIcon && title }"
+    >
+      <div class="tc-select-container--icon" @click.stop>
+        <i :class="'ti-' + icon" />
+      </div>
+      <div class="tc-select-container--title" v-if="!onlyIcon">
+        {{ title }}
+      </div>
     </div>
     <div
-      :id="id + 'i'"
-      v-if="icon"
-      class="tc-select--indicator indicator__icon"
+      class="tc-select-item-container"
+      :class="{
+        'tc-select-item-container__opened': opened
+      }"
+      :style="itemContainerStyles"
+      ref="item-container"
+      :id="uuid + 'i'"
     >
-      <tf-icon :id="id + 'ii'" :icon="icon" />
-    </div>
-    <div :id="id + 's'" class="tc-select--selected" v-if="display">
-      {{ display }}
-    </div>
-    <div :id="id + 'p'" class="tc-select--placeholder" v-else>
-      {{ placeholder }}
-    </div>
-
-    <div
-      @click.stop
-      class="tc-select--container"
-      :class="{ container__expanded: expanded }"
-    >
-      <div class="container--head" v-if="title || placeholder">
-        {{ title || placeholder }}<span>--</span>
-      </div>
-      <div class="container--items">
-        <template v-for="v in innerValues">
-          <div
-            class="container--items__icon"
-            :key="v + 'i'"
-            @click.stop="toggle(v)"
-          >
-            <i class="ti-dot" v-if="!isSelected(v)" />
-            <i class="ti-checkmark" v-else />
-          </div>
-          <div class="container--items__item" :key="v" @click.stop="toggle(v)">
-            {{ v }}
-          </div>
-        </template>
-      </div>
+      <slot />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
+import { Component, Prop, Mixins } from 'vue-property-decorator';
 import TCComponent from '@/tccomponents/TC-Component.mixin';
-import TCTooltip from '@/tccomponents/component/tooltip/TC-Tooltip.vue';
 import TFIcon from '@/tccomponents/fundamental/icon/TF-Icon.vue';
 
-type TValues = string | number | boolean;
+interface TCSelected {
+  uuid: string;
+  title: string;
+  state: boolean;
+}
 
 @Component({
   components: {
-    'tc-tooltip': TCTooltip,
     'tf-icon': TFIcon
   }
 })
 export default class TCSelect extends Mixins(TCComponent) {
-  @Prop() title!: string;
-  @Prop() tooltip!: string;
   @Prop() frosted!: boolean;
-  @Prop() width!: string;
   @Prop({ default: 'list' }) icon!: string;
   @Prop({ default: false }) multiple!: boolean;
   @Prop({ default: 'Select one' }) placeholder!: string;
-  @Prop() value!: TValues | TValues[];
-  @Prop() values!: TValues[];
+  @Prop({ default: 'container' }) variant!: string;
+  @Prop() disabled!: boolean;
+  @Prop({ default: true }) showSelection!: boolean;
+  @Prop({ default: false }) onlyIcon!: boolean;
 
-  public expanded = false;
-  public innerValue: TValues | TValues[] = this.value
-    ? this.value
-    : this.multiple
-    ? []
-    : '';
-  public innerValues: TValues[] = this.values ? this.values : [];
+  public selected: TCSelected[] = [];
+  public opened = false;
+  public itemContainerStyles = '';
 
-  @Watch('values')
-  valuesChanged(): void {
-    this.innerValues = this.values ? this.values : [];
+  mounted() {
+    this.$children.forEach(el => el.$emit('update'));
+    this.$on('select', this.handleSelect);
   }
 
-  @Watch('value')
-  valueChanged(): void {
-    this.innerValue = this.value;
-  }
-
-  @Watch('innerValue')
-  update(): void {
-    this.$emit('input', this.innerValue);
-  }
-
-  get isFitContent(): boolean {
-    return this.width == 'fit-content';
-  }
-
-  mounted(): void {
+  beforeMount() {
+    document.querySelectorAll('.tl-sidebar--content').forEach(elem => {
+      elem.addEventListener('scroll', this.reposition, { passive: false });
+    });
+    window.addEventListener('scroll', this.reposition, { passive: false });
+    window.addEventListener('resize', this.reposition);
     window.addEventListener('click', this.clicked);
   }
-  beforeDestroy(): void {
+
+  beforeDestroy() {
+    this.selected = [];
+    document.querySelectorAll('.tl-sidebar--content').forEach(elem => {
+      elem.removeEventListener('scroll', this.reposition);
+    });
+    window.removeEventListener('scroll', this.reposition);
+    window.removeEventListener('resize', this.reposition);
     window.removeEventListener('click', this.clicked);
+  }
+
+  get title(): string {
+    if (this.showSelection) {
+      const selection = this.selected
+        .filter(x => x.state)
+        .map(x => x.title)
+        .join(', ');
+      if (selection.length > 0) return selection;
+    }
+    return this.placeholder;
+  }
+
+  get selectedVariant(): string {
+    switch (this.variant.toLowerCase()) {
+      case 'filled':
+        return 'filled';
+      case 'opaque':
+        return 'opaque';
+      case 'border':
+        return 'border';
+      default:
+        return 'container';
+    }
+  }
+
+  get classes(): Record<string, boolean> {
+    const classes: Record<string, boolean> = {
+      'tc-select__dark': this.darkmode,
+      'tc-select__frosted': this.frosted,
+      'tc-select__disabled': this.disabled
+    };
+    classes['tc-select__' + this.selectedVariant] = true;
+    return classes;
+  }
+
+  get styles(): string {
+    return `--tc-select__color: ${this.getChosenColor(
+      'colorDark'
+    )}; --tc-select__background: ${this.getChosenBackground('primary')};`;
   }
 
   public clicked(e: MouseEvent): void {
     if (e.target) {
-      const id: string = (e.target as HTMLElement).id;
-      if (!id.startsWith(this.id)) {
-        this.expanded = false;
-      }
-    }
-  }
-
-  public toggle(value: TValues): void {
-    if (!this.multiple) {
-      if (this.isSelected(value)) {
-        this.innerValue = '';
-      } else {
-        this.innerValue = value;
-        this.expanded = false;
-      }
-    } else {
-      if (this.isSelected(value)) {
-        const index = (this.innerValue as TValues[]).indexOf(value);
-        if (index > -1) {
-          (this.innerValue as TValues[]).splice(index, 1);
+      const parent = (e.target as HTMLElement).parentElement;
+      if (parent) {
+        const id: string = parent.id;
+        if (!id.startsWith(this.uuid || '')) {
+          this.opened = false;
         }
-      } else {
-        (this.innerValue as TValues[]).push(value);
       }
     }
   }
 
-  public isSelected(value: TValues) {
-    if (this.multiple) {
-      return (this.innerValue as TValues[]).includes(value);
+  public handleSelect(selected: TCSelected) {
+    if (!this.multiple) {
+      this.opened = false;
+      this.$children.forEach(el => el.$emit('unselect', selected.uuid));
+    }
+    let matched = false;
+    this.selected = this.selected.map(x => {
+      if (x.uuid === selected.uuid) {
+        matched = true;
+        return selected;
+      }
+      if (!this.multiple) {
+        return {
+          ...x,
+          state: false
+        };
+      }
+      return x;
+    });
+    if (!matched) this.selected.push(selected);
+    this.$emit(
+      'select',
+      this.selected.filter(x => x.state).map(x => x.title)
+    );
+  }
+
+  public reposition(): void {
+    this.itemContainerStyles = '';
+    const container: HTMLElement = this.$refs['select-cont'] as HTMLElement;
+    const rect = container.getBoundingClientRect();
+    const rectBody = document.body.getBoundingClientRect();
+    const aboveTopHalf = rectBody.height / 2 > rect.top - rect.height / 2;
+    const aboveRightHalf = rectBody.width / 2 > rect.left - rect.width / 2;
+
+    let x = '0px';
+    let y = '0px';
+    let moveY = '0%';
+    let moveX = '0%';
+
+    if (aboveRightHalf) {
+      y = container.offsetLeft + 'px';
     } else {
-      return this.innerValue === value;
+      y = container.offsetLeft + container.offsetWidth + 'px';
+      moveX = '-100%';
     }
+    if (aboveTopHalf) {
+      x = container.offsetTop + container.offsetHeight + 3 + 'px';
+    } else {
+      x = container.offsetTop - 3 + 'px';
+      moveY = '-100%';
+    }
+
+    this.itemContainerStyles = [
+      '--tc-select__x: ' + x,
+      '--tc-select__y: ' + y,
+      '--tc-select__mY: ' + moveY,
+      '--tc-select__mX: ' + moveX
+    ].join(';');
   }
 
-  get id() {
-    return 'tc-select_' + this.uuid_;
-  }
-
-  get display() {
-    if (this.multiple) {
-      const vals: TValues[] = this.innerValue as TValues[];
-      if (vals.length == 1) return vals[0];
-      else if (vals.length > 1) return vals.length + 'x Items';
-      return this.placeholder;
-    }
-    return this.innerValue;
+  public open() {
+    this.opened = !this.opened;
+    if (this.opened) this.reposition();
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@mixin tc-select--container($c, $bg) {
-  background: $bg;
-  color: $c;
-  .container--head {
-    @include backdrop-blur(darken($bg, 10%));
+@mixin custom-select {
+  display: inline-flex;
+  margin: 3px;
+  .tc-select-container {
+    padding: 5px;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .tc-select-container--icon {
+      width: 16px;
+      height: 16px;
+    }
+    &.tc-select-container__has-title {
+      border-radius: $border-radius;
+      .tc-select-container--icon {
+        width: unset;
+        height: unset;
+        margin-right: 5px;
+        padding-right: 5px;
+        border-right: 1px solid currentColor;
+      }
+    }
   }
 }
 
 .tc-select {
-  @include tc-container__light();
-  .tc-select--container {
-    @include custom-scrollbar__light();
-    @include tc-select--container($color, $paragraph);
-  }
-
-  &.tc-select__frosted {
-    &,
-    .tc-select--container {
-      @include backdrop-blur(darken($paragraph, 10%));
-    }
-  }
-  &.tc-select__dark {
-    @include tc-container__dark();
-    .tc-select--container {
-      @include custom-scrollbar__dark();
-      @include tc-select--container($color_dark, $paragraph_dark);
-    }
-    &.tc-select__frosted {
-      &,
-      .tc-select--container {
-        @include backdrop-blur(lighten($paragraph_dark, 10%));
-      }
-    }
-  }
-  &.tc-select__fit-content {
-    width: fit-content;
-  }
-  &.tc-select__hasHead {
-    margin-top: 30px;
-  }
-  position: relative;
   user-select: none;
-  .tc-select--title {
-    @include tc-container--title();
+  &.tc-select__container .tc-select-container {
+    @include tc-container__light();
   }
-  .tc-select--tooltip {
-    @include tc-container--title();
-    overflow: hidden;
-    right: 5px;
+  &.tc-select__frosted.tc-select__container .tc-select-container {
+    @include backdrop-blur(darken($paragraph, 10%));
+    color: #fff;
   }
-  .tc-select--indicator {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    &.indicator__icon {
-      @include tc-container--indicator__icon();
-    }
+  &.tc-select__container.tc-select__dark .tc-select-container {
+    @include tc-container__dark();
   }
-  .tc-select--placeholder {
-    opacity: 0.8;
-    white-space: nowrap;
+  &.tc-select__frosted.tc-select__darktc-select__container
+    .tc-select-container {
+    @include backdrop-blur(lighten($color, 10%));
   }
-  .tc-select--container {
-    max-height: 0px;
-    transition: max-height 0.3s ease-in-out;
-    &.container__expanded {
-      max-height: 200px;
-    }
 
-    position: absolute;
-    top: 35px;
-    left: 50%;
-    transform: translateX(-50%);
-    flex-direction: column;
-    overflow: {
-      y: auto;
-      x: hidden;
+  &.tc-select__container .tc-select-container {
+    .tc-select-container--icon {
+      margin-right: 5px;
+      padding-right: 5px;
+      border-right: 1px solid currentColor;
     }
-    border-radius: $border-radius;
+  }
 
-    box-shadow: $shadow;
-    height: auto;
-    max-width: 100vw;
-    width: fit-content;
+  .tc-select-container {
+    .tc-select-container--title {
+      max-width: 200px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+
+  &.tc-select__opaque {
+    @include custom-select();
+    .tc-select-container {
+      margin: 5px;
+      border: 1px solid transparent;
+      color: rgba(var(--tc-select__background), 1);
+      background: rgba(var(--tc-select__background), 0.3);
+    }
+  }
+
+  &.tc-select__filled {
+    @include custom-select();
+    .tc-select-container {
+      color: rgba(var(--tc-select__color), 1);
+      border: 1px solid rgba(var(--tc-select__background), 1);
+      background: rgba(var(--tc-select__background), 1);
+    }
+  }
+
+  &.tc-select__border {
+    @include custom-select();
+    .tc-select-container {
+      border: 1px solid rgba(var(--tc-select__background), 1);
+      color: rgba(var(--tc-select__background), 1);
+    }
+  }
+
+  &:not(.tc-select__disabled) {
+    cursor: pointer;
+    &:active .tc-select-container {
+      filter: brightness(120%);
+    }
+    &:hover {
+      &.tc-select__filled .tc-select-container {
+        box-shadow: 2px 4px 8px rgba(var(--tc-select__background), 0.3);
+      }
+      &.tc-select__border .tc-select-container {
+        color: rgba(var(--tc-select__color), 1);
+        background: rgba(var(--tc-select__background), 1);
+      }
+      &.tc-select__opaque .tc-select-container {
+        color: rgba(var(--tc-select__color), 1);
+        background: rgba(var(--tc-select__background), 0.75);
+      }
+    }
+  }
+  & .tc-select-item-container {
+    @include backdrop-blur(darken($container, 20%));
+    @include custom-scrollbar__light();
+    color: $color;
+  }
+  &.tc-select__dark .tc-select-item-container {
+    @include backdrop-blur(lighten($container_dark, 20%));
+    @include custom-scrollbar__dark();
+    color: $color_dark;
+  }
+
+  .tc-select-item-container {
+    position: fixed;
     z-index: 100;
-    .container--head {
-      width: 100%;
-      text-align: center;
-      padding: 5px;
-      font-weight: 500;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      span {
-        user-select: none;
-        opacity: 0;
-      }
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: -1px;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: currentColor;
-        opacity: 0.6;
-      }
-    }
-    .container--items {
-      margin: 5px 10px;
-      display: grid;
-      grid-template-columns: 20px 1fr;
-      position: relative;
-      i {
-        line-height: 26px;
-        &.ti-checkmark {
-          font-size: 14px;
-        }
-      }
-      .container--items__item {
-        white-space: nowrap;
-        line-height: 26px;
-        transition: all 0.2s ease-in-out;
-        border-radius: $border-radius;
-        padding: 0 5px;
-        opacity: 0.7;
-        &:hover {
-          transform: scale(1.085);
-          opacity: 1;
-        }
-      }
+    top: var(--tc-select__x);
+    left: var(--tc-select__y);
+    max-height: 0px;
+    border-radius: $border-radius;
+    transform: translate(var(--tc-select__mX), var(--tc-select__mY));
+    transition: max-height 0.2s ease-in-out;
+    overflow: hidden;
+    &.tc-select-item-container__opened {
+      max-height: 200px;
+      overflow: auto;
+      transform: translate(var(--tc-select__mX), var(--tc-select__mY));
     }
   }
 }

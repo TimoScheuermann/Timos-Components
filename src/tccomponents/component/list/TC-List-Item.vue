@@ -74,7 +74,7 @@ $size: 40px;
       background: rgba(lighten($paragraph_dark, 20%), 0.5);
     }
     .tc-switch label .container {
-      background: $container_dark;
+      background: $container_dark !important;
     }
   }
 }
