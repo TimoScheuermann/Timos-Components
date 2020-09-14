@@ -52,7 +52,7 @@ export default class TCSelectItem extends Mixins(TCComponent) {
   }
 
   public update(): void {
-    this.$parent.$emit('itemSelected', {
+    this.$parent.$emit('itemSelect', {
       uuid: this.uuid,
       title: this.title,
       state: this.selected
