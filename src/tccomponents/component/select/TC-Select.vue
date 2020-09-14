@@ -59,8 +59,8 @@ export default class TCSelect extends Mixins(TCComponent) {
   public itemContainerStyles = '';
 
   mounted() {
-    this.$children.forEach(el => el.$emit('update'));
-    this.$on('select', this.handleSelect);
+    this.$children.forEach(el => el.$emit('registerItem'));
+    this.$on('itemSelect', this.handleSelect);
   }
 
   beforeMount() {
@@ -137,7 +137,7 @@ export default class TCSelect extends Mixins(TCComponent) {
   public handleSelect(selected: TCSelected) {
     if (!this.multiple) {
       this.opened = false;
-      this.$children.forEach(el => el.$emit('unselect', selected.uuid));
+      this.$children.forEach(el => el.$emit('deselectExcept', selected.uuid));
     }
     let matched = false;
     this.selected = this.selected.map(x => {
@@ -146,16 +146,13 @@ export default class TCSelect extends Mixins(TCComponent) {
         return selected;
       }
       if (!this.multiple) {
-        return {
-          ...x,
-          state: false
-        };
+        x.state = false;
       }
       return x;
     });
     if (!matched) this.selected.push(selected);
     this.$emit(
-      'select',
+      'selectedItems',
       this.selected.filter(x => x.state).map(x => x.title)
     );
   }

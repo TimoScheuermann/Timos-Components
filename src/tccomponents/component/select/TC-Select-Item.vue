@@ -37,8 +37,8 @@ export default class TCSelectItem extends Mixins(TCComponent) {
 
   mounted() {
     this.update();
-    this.$on('update', this.update);
-    this.$on('unselect', (uuid: string) => {
+    this.$on('registerItem', this.update);
+    this.$on('deselectExcept', (uuid: string) => {
       if (uuid !== this.uuid) this.selected = false;
     });
     setTimeout(() => {
@@ -52,7 +52,7 @@ export default class TCSelectItem extends Mixins(TCComponent) {
   }
 
   public update(): void {
-    this.$parent.$emit('select', {
+    this.$parent.$emit('itemSelected', {
       uuid: this.uuid,
       title: this.title,
       state: this.selected

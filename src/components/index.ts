@@ -1142,7 +1142,7 @@ const tcComponents: TCComponentGroup[] = [
           },
           {
             type: 'string[]',
-            name: '@select',
+            name: '@selectedItems',
             description: "Returns the current selection of items (item's title)"
           }
         ],
