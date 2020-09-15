@@ -135,7 +135,7 @@ export default class TCSelect extends Mixins(TCComponent) {
   }
 
   public handleSelect(selected: TCSelected) {
-    if (!this.multiple) {
+    if (!this.multiple && selected.state) {
       this.opened = false;
       this.$children.forEach(el => el.$emit('deselectExcept', selected.uuid));
     }
