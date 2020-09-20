@@ -15,7 +15,7 @@
         {{ title }}
       </div>
       <div v-if="isInput" class="tc-list-item--switch">
-        <tc-switch v-model="innerValue" />
+        <tc-switch v-model="innerValue" :dark="dark" />
       </div>
       <div v-else-if="description" class="tc-list-item--description">
         {{ description }}
@@ -54,11 +54,11 @@ export default class TCListItem extends Mixins(TCComponent, TCURLComponent) {
   }
 
   get isInput(): boolean {
-    return ('' + this.value).length > 3;
+    return typeof this.value === 'boolean';
   }
 
   public handleClickLocal(e: MouseEvent): void {
-    if (this.value) {
+    if (this.isInput) {
       this.innerValue = !this.innerValue;
       this.$emit('input', this.innerValue);
       e.preventDefault();

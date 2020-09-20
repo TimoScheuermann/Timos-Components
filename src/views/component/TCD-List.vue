@@ -14,7 +14,7 @@
           <tc-list>
             <tc-list-item title="Users" icon="users" />
             <tc-list-item title="Menu" routeName="TC-list" icon="settings" />
-            <tc-list-item title="Swich" value="true" icon="toggle" />
+            <tc-list-item title="Swich" :value="true" icon="toggle" />
             <tc-list-item
               title="Description"
               description="Hello world"
@@ -28,7 +28,7 @@
             <tc-list title="Title" :frosted="true">
               <tc-list-item title="Users" icon="users" />
               <tc-list-item title="Menu" routeName="TC-list" icon="settings" />
-              <tc-list-item title="Swich" value="true" icon="toggle" />
+              <tc-list-item title="Swich" :value="true" icon="toggle" />
               <tc-list-item
                 title="Description"
                 description="Hello world"
@@ -44,7 +44,7 @@
 &lt;tc-list>
   &lt;tc-list-item title="Users" icon="users" />
   &lt;tc-list-item title="Menu" routeName="TC-list" icon="settings" />
-  &lt;tc-list-item title="Swich" value="true" icon="toggle" />
+  &lt;tc-list-item title="Swich" :value="true" icon="toggle" />
   &lt;tc-list-item
     title="Description"
     description="Hello world"
@@ -54,7 +54,7 @@
 &lt;tc-list title="Title" :frosted="true">
   &lt;tc-list-item title="Users" icon="users" />
   &lt;tc-list-item title="Menu" routeName="TC-list" icon="settings" />
-  &lt;tc-list-item title="Swich" value="true" icon="toggle" />
+  &lt;tc-list-item title="Swich" :value="true" icon="toggle" />
   &lt;tc-list-item
     title="Description"
     description="Hello world"
