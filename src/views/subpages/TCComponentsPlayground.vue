@@ -3,54 +3,21 @@
     <tccomponents-subpage-hero subtitle="Playground" />
 
     <div content>
-      <h1>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati
-        cumque impedit quis iusto est totam fugiat quod. Deserunt, similique
-        nisi praesentium nam, ab cum, optio sunt repudiandae dolorum quae
-        libero! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non
-        architecto at, perferendis exercitationem laborum ullam unde dolorum
-        corporis sed, ipsa, accusamus quos facilis! Consequatur soluta eum rem
-        non cupiditate eos.
-      </h1>
-      <h1>TC Select 2</h1>
-      <!-- <tc-select title="Wähle">
-        <tc-select-item title="FitnessHub" />
-        <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
-        <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
-      </tc-select> -->
-      <div style="text-align: right">
-        <tc-select :showSelection="false" :onlyIcon="true" variant="filled">
-          <tc-select-item title="FitnessHub" />
-          <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
-          <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
-          <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
-          <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
-          <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
-          <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
-          <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
-          <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
-        </tc-select>
-      </div>
-      <!-- <tc-select title="Wähle" variant="filled">
-        <tc-select-item title="FitnessHub" />
-        <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
-        <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
-      </tc-select> -->
-      <!-- <tc-select title="Wähle" variant="border">
-        <tc-select-item title="FitnessHub" />
-        <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
+      <tc-select variant="filled">
+        <tc-select-item :defaultSelected="true" title="FitnessHub" icon="gym" />
+        <tc-select-item
+          :defaultSelected="true"
+          title="YouTube"
+          icon="youtube"
+        />
+        <tc-select-item
+          :defaultSelected="true"
+          title="Instagram"
+          icon="instagram"
+        />
         <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
       </tc-select>
-      <tc-select title="Wähle" variant="opaque">
-        <tc-select-item title="FitnessHub" />
-        <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
-        <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
-      </tc-select> -->
-      <h1>TC Image</h1>
-      <tc-image
-        src="https://images.unsplash.com/photo-1597606781340-e2661f37b5b3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=752&q=80"
-      >
-      </tc-image>
+
       <h1>TC Magic Card</h1>
       <div class="exgrid">
         <tc-magic-card

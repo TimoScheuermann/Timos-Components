@@ -52,9 +52,9 @@ import Vue from 'vue'
 import "tccomponents_vue/lib/tccomponents_vue.css";
 import { tcButton, tcTable, tcAvatar } from "tccomponents_vue";
 
-Vue.use(tcButton);
-Vue.use(tcTable);
-Vue.use(tcavatar);</pre
+Vue.component("tc-button", tcButton);
+Vue.component("tc-table", tcTable);
+Vue.component("tc-avatar", tcAvatar);</pre
         >
       </tc-code-example>
     </div>

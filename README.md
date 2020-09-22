@@ -4,6 +4,7 @@
 
 ## Demos
 
+- [FitnessHub](https://fitnesshub.app)
 - [Timos Icons (Icon Library)](https://icons.timos.design)
 - [TC Components (Docs)](https://components.timos.design)
 - [Timos Newsroom](https://newsroom.timos.design)
@@ -98,9 +99,9 @@ import Vue from 'vue';
 import 'tccomponents_vue/lib/tccomponents_vue.css';
 import { tcButton, tcTable, tcAvatar } from 'tccomponents_vue';
 
-Vue.use(tcButton);
-Vue.use(tcTable);
-Vue.use(tcavatar);
+Vue.component('tc-button', tcButton);
+Vue.component('tc-table', tcTable);
+Vue.component('tc-avatar', tcAvatar);
 ```
 
 ## Component Designer

@@ -101,6 +101,10 @@ export default class TCStepItem extends Mixins(TCComponent) {
     background: $success;
     transform: translateY(-50%);
   }
+  .tc-step-item--title,
+  .tc-step-item--description {
+    font-size: 16px;
+  }
 
   &.tc-step-item__done {
     .tc-step-item--indicator {

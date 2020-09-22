@@ -136,21 +136,19 @@ export default class TCSelect extends Mixins(TCComponent) {
 
   public handleSelect(selected: TCSelected) {
     if (!this.multiple && selected.state) {
-      this.opened = false;
-      this.$children.forEach(el => el.$emit('deselectExcept', selected.uuid));
+      if (selected.state) {
+        this.opened = false;
+        this.selected = [selected];
+        this.$children.forEach(el => el.$emit('deselectExcept', selected.uuid));
+      }
+    } else if (!selected.state) {
+      this.selected = this.selected.filter(x => x.uuid !== selected.uuid);
+    } else if (
+      this.selected.filter(x => x.uuid === selected.uuid).length === 0
+    ) {
+      this.selected.push(selected);
     }
-    let matched = false;
-    this.selected = this.selected.map(x => {
-      if (x.uuid === selected.uuid) {
-        matched = true;
-        return selected;
-      }
-      if (!this.multiple) {
-        x.state = false;
-      }
-      return x;
-    });
-    if (!matched) this.selected.push(selected);
+
     this.$emit(
       'selectedItems',
       this.selected.filter(x => x.state).map(x => x.title)
