@@ -1385,6 +1385,32 @@ const tcComponents: TCComponentGroup[] = [
           { name: 'wrap', type: 'string', description: '' }
         ], // TODO:
         slots: []
+      },
+      {
+        name: 'Action',
+        icon: 'dots-vertical',
+        api: [apiDark],
+        children: [
+          {
+            name: 'action item',
+            icon: 'dot',
+            api: [
+              {
+                name: 'title',
+                type: 'string',
+                description: 'Determines the actions title'
+              },
+              apiIcon
+            ],
+            slots: []
+          }
+        ],
+        slots: [
+          {
+            name: 'default',
+            description: 'Place your tc-action-items here'
+          }
+        ]
       }
     ].sort((a, b) => a.name.localeCompare(b.name))
   },

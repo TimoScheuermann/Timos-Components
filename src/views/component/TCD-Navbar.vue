@@ -10,7 +10,7 @@
 
     <tc-card :rounded="true" :shadow="false">
       <h2>Simple Navbar</h2>
-      <tc-navbar>
+      <tc-navbar :dark="$store.getters.dark">
         <tc-navbar-item icon="house" name="Home" />
         <tc-navbar-item
           icon="file-code"
@@ -34,7 +34,7 @@
 
     <tc-card :rounded="true" :shadow="false">
       <h2>Navbar & Logo</h2>
-      <tc-navbar>
+      <tc-navbar :dark="$store.getters.dark">
         <b slot="logo"><i class="ti-tccomponents-tc" /> Components</b>
         <tc-navbar-item icon="house" name="Home" />
         <tc-navbar-item icon="gears" name="Settings" />
@@ -52,7 +52,7 @@
 
     <tc-card :rounded="true" :shadow="false">
       <h2>Navbar & Logo & Actions</h2>
-      <tc-navbar>
+      <tc-navbar :dark="$store.getters.dark">
         <b slot="logo"><i class="ti-tccomponents-tc" /> Components</b>
         <tc-navbar-item icon="house" name="Home" />
         <tc-navbar-item icon="gears" name="Settings" />

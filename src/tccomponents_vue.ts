@@ -2,6 +2,8 @@ import { VueConstructor } from 'vue/types/umd';
 import { Store } from 'vuex';
 import { tcStore } from './tccomponents/TC-Store';
 
+export { default as tcActionItem } from './tccomponents/component/action/TC-Action-Item.vue';
+export { default as tcAction } from './tccomponents/component/action/TC-Action.vue';
 export { default as tcAvatar } from './tccomponents/component/avatar/TC-Avatar.vue';
 export { default as tcBadge } from './tccomponents/component/badge/TC-Badge.vue';
 export { default as tcButton } from './tccomponents/component/button/TC-Button.vue';
@@ -51,7 +53,6 @@ export { default as tlFlow } from './tccomponents/layout/flow/TL-Flow.vue';
 export { default as tlGrid } from './tccomponents/layout/grid/TL-Grid.vue';
 export { default as tlModal } from './tccomponents/layout/modal/TL-Modal.vue';
 export { default as tlSidebar } from './tccomponents/layout/sidebar/TL-Sidebar.vue';
-
 export interface TCOptions {
   primaryColor?: string;
   store?: Store<any>;

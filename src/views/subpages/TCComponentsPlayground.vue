@@ -18,6 +18,12 @@
         <tc-select-item title="Gastro Assistant" icon="gastro-assistant" />
       </tc-select>
 
+      <tc-action>
+        <tc-action-item title="Was geht" icon="house" />
+        <tc-action-item title="Was geht" icon="house" />
+        <tc-action-item title="Was geht" icon="house" />
+      </tc-action>
+
       <h1>TC Magic Card</h1>
       <div class="exgrid">
         <tc-magic-card
@@ -106,6 +112,8 @@ import TCMagicCard from '@/tccomponents/component/magic-card/TC-Magic-Card.vue';
 import TCImage2 from '@/tccomponents/component/image/TC-Image.vue';
 import TCSelect2 from '@/tccomponents/component/select/TC-Select.vue';
 import TCSelectItem from '@/tccomponents/component/select/TC-Select-Item.vue';
+import TCActionItem from '@/tccomponents/component/action/TC-Action-Item.vue';
+import TCAction from '@/tccomponents/component/action/TC-Action.vue';
 
 @Component({
   components: {
@@ -116,7 +124,9 @@ import TCSelectItem from '@/tccomponents/component/select/TC-Select-Item.vue';
     'tc-magic-card': TCMagicCard,
     'tc-image': TCImage2,
     'tc-select': TCSelect2,
-    'tc-select-item': TCSelectItem
+    'tc-select-item': TCSelectItem,
+    'tc-action-item': TCActionItem,
+    'tc-action': TCAction
   }
 })
 export default class TCComponentsPlayground extends Vue {}

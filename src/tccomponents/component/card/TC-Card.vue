@@ -86,7 +86,7 @@ export default class TCCard extends Mixins(TCComponent) {
 <style lang="scss" scoped>
 .tc-card {
   text-align: center;
-  overflow: hidden;
+  // overflow: hidden;
   display: flex;
   flex-direction: column;
   color: rgba(var(--tc-card__color), 1);

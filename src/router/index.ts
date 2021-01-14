@@ -284,6 +284,12 @@ const router = new VueRouter({
           meta: { title: prefix + 'TC Textarea' }
         },
         {
+          path: 'Action',
+          name: 'TC-action',
+          component: () => import('@/views/component/TCD-Action.vue'),
+          meta: { title: prefix + 'TC Action' }
+        },
+        {
           path: '',
           redirect: { name: 'home' }
         },
