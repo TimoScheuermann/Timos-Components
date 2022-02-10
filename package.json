@@ -15,7 +15,7 @@
   "types": "lib/tccomponents_vue.d.ts",
   "dependencies": {
     "core-js": "^3.6.5",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "register-service-worker": "^1.7.1",
     "simple-color-converter": "^2.1.5",
     "uuid": "^8.3.0",
